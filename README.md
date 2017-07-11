@@ -21,4 +21,7 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* Heroku
+
+heroku create minsuco --region eu --buildpack https://github.com/heroku/heroku-buildpack-ruby.git --remote production
+

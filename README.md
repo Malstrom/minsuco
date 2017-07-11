@@ -1,12 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Skeleton app in rails 5 with: Angle admin template, devise, omniauth, payola payments with subscription.
 
 Things you may want to cover:
 
 * Ruby version
-
+  2.4.1
+  
 * System dependencies
 
 * Configuration

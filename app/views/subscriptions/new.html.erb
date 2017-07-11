@@ -1,0 +1,28 @@
+<!-- this header can go in <head> or at the bottom of <body> -->
+<%= render 'payola/transactions/stripe_header' %>
+
+<%= form_tag('/subscriptions',
+             class: 'payola-onestep-subscription-form',
+             'data-payola-base-path' => '/payola',
+             'data-payola-plan-type' => @plan.plan_class,
+             'data-payola-plan-id' => @plan.id
+    ) do |f| %>
+
+  <input type="hidden" name="plan_id" value="1" /><br>
+  <span class="payola-payment-error"></span>
+  Email: <%= @plan %><br>
+  <input type="email" name="stripeEmail" data-payola="email"/><br>
+  Card Number<br>
+  <input type="text" name="number" data-stripe="number"/><br>
+  Exp Month<br>
+  <input type="text" name="exp_month" data-stripe="exp_month"/><br>
+  Exp Year<br>
+  <input type="text" name="exp_year" data-stripe="exp_year"/><br>
+  CVC<br>
+  <input type="text" name="cvc" data-stripe="cvc"/><br>
+
+  <input type="submit"/>
+
+
+<% end %>
+

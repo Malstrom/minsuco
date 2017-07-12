@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :subscriptions
+  resources :after_register
+  get '/create-first-contest', to: 'main#index', as: 'domain_root'
 
   # defaults to dashboard
   root :to => redirect('/dashboard/dashboard_v1')

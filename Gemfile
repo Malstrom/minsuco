@@ -19,6 +19,10 @@ gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
+gem "slim-rails"
+
+# gem 'rails-translate-routes'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.1'
 # Use Uglifier as compressor for JavaScript assets
@@ -65,6 +69,10 @@ gem 'devise'
 gem 'omniauth-facebook'
 
 gem 'payola-payments', git: 'https://github.com/alekseenko/payola'
+
+# ----
+
+gem 'wicked'
 
 
 # gem 'paper_trail' # Track changes to your models' data. Good for auditing or versioning.

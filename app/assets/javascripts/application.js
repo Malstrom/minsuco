@@ -2,6 +2,8 @@
 // listed below.
 //
 
-//--- Angle
+//= require after_register
 //= require payola
+
+//--- Angle
 //= require_tree ./angle/

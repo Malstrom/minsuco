@@ -5,9 +5,20 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :subscriptions
-  resources :after_register
-  get '/create-first-contest', to: 'main#index', as: 'domain_root'
 
+  resources :onboarding, :path => '/on-boarding' do
+    collection do
+      get 'new-contest', to: 'main#new_contest', as: 'new_contest'
+      get 'joi-contest', to: 'main#join_contest', as: 'joi_contest'
+    end
+  end
+
+
+
+
+
+
+  # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard
   root :to => redirect('/dashboard/dashboard_v1')
 

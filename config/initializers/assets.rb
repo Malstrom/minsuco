@@ -15,4 +15,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 
 
-Rails.application.config.assets.precompile += %w( subscriptions.css subscriptions.js after_register.css.scss after_register.js )
+Rails.application.config.assets.precompile += %w( subscriptions.css subscriptions.js onboarding.css onboarding.js )

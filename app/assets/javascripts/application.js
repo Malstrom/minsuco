@@ -2,7 +2,7 @@
 // listed below.
 //
 
-//= require after_register
+//= require onboarding.js
 //= require payola
 
 //--- Angle

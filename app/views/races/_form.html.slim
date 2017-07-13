@@ -1,0 +1,42 @@
+= form_for @race do |f|
+  - if @race.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@race.errors.count, "error")} prohibited this race from being saved:"
+      ul
+        - @race.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :owner
+    = f.number_field :owner
+  .field
+    = f.label :max_attendees
+    = f.number_field :max_attendees
+  .field
+    = f.label :category
+    = f.text_field :category
+  .field
+    = f.label :compensation_amount
+    = f.text_field :compensation_amount
+  .field
+    = f.label :compensation_kind
+    = f.number_field :compensation_kind
+  .field
+    = f.label :pieces_amount
+    = f.number_field :pieces_amount
+  .field
+    = f.label :compensation_start_amount
+    = f.text_field :compensation_start_amount
+  .field
+    = f.label :recipients
+    = f.text_field :recipients
+  .field
+    = f.label :race_value
+    = f.text_field :race_value
+  .field
+    = f.label :category
+    = f.text_field :category
+  .actions = f.submit

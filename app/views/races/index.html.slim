@@ -1,0 +1,41 @@
+h1 Listing races
+
+table
+  thead
+    tr
+      th Name
+      th Owner
+      th Max attendees
+      th Category
+      th Compensation amount
+      th Compensation kind
+      th Pieces amount
+      th Compensation start amount
+      th Recipients
+      th Race value
+      th Category
+      th
+      th
+      th
+
+  tbody
+    - @races.each do |race|
+      tr
+        td = race.name
+        td = race.owner
+        td = race.max_attendees
+        td = race.category
+        td = race.compensation_amount
+        td = race.compensation_kind
+        td = race.pieces_amount
+        td = race.compensation_start_amount
+        td = race.recipients
+        td = race.race_value
+        td = race.category
+        td = link_to 'Show', race
+        td = link_to 'Edit', edit_race_path(race)
+        td = link_to 'Destroy', race, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Race', new_race_path

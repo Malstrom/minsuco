@@ -1,0 +1,39 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @race.name
+p
+  strong Owner:
+  = @race.owner
+p
+  strong Max attendees:
+  = @race.max_attendees
+p
+  strong Category:
+  = @race.category
+p
+  strong Compensation amount:
+  = @race.compensation_amount
+p
+  strong Compensation kind:
+  = @race.compensation_kind
+p
+  strong Pieces amount:
+  = @race.pieces_amount
+p
+  strong Compensation start amount:
+  = @race.compensation_start_amount
+p
+  strong Recipients:
+  = @race.recipients
+p
+  strong Race value:
+  = @race.race_value
+p
+  strong Category:
+  = @race.category
+
+= link_to 'Edit', edit_race_path(@race)
+'  |
+= link_to 'Back', races_path

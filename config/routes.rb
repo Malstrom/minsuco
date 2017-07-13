@@ -8,24 +8,23 @@ Rails.application.routes.draw do
 
   resources :onboarding, :path => '/on-boarding' do
     collection do
-      get 'new-contest', to: 'main#new_contest', as: 'new_contest'
-      get 'joi-contest', to: 'main#join_contest', as: 'joi_contest'
+      get 'new-contest', to: 'onboarding#new_contest', as: 'new_contest'
+      get 'joi-contest', to: 'onboarding#join_contest', as: 'joi_contest'
     end
   end
 
 
 
 
-
-
   # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard
-  root :to => redirect('/dashboard/dashboard_v1')
+  root :to => redirect('/dashboard/dashboard')
 
   # view routes
   get '/widgets' => 'widgets#index'
   get '/documentation' => 'documentation#index'
 
+  get 'dashboard/dashboard'
   get 'dashboard/dashboard_v1'
   get 'dashboard/dashboard_v2'
   get 'dashboard/dashboard_v3'

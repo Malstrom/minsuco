@@ -8,14 +8,11 @@
     .text-bold.text-lg.mb-lg
       | Cosa desideri fare?
     p.lead
-      a.btn.btn-primary.btn-xl.btn-group[type="button"]
-        | Creare una mia gara è pubblicarla
+      = link_to 'Creare una mia gara è pubblicarla', new_contest_onboarding_index_path, class: "btn btn-primary btn-xl btn-group"
     p.lead.m0
       | oppure
     br
-    a.btn.btn-primary.btn-xl.btn-group[type="button"]
-      | Partecipare a gare gia esitenti
-    br
+      = link_to 'Partecipare a gare gia esitenti', new_contest_onboarding_index_path, class: "btn btn-primary btn-xl btn-group"
     br
     p.lead.m0
       | Potrai sempre cambiare idea

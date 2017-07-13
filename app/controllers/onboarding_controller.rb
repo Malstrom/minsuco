@@ -5,11 +5,9 @@ class OnboardingController < ApplicationController
   end
 
   def new_contest
-
   end
 
   def join_contest
-
   end
 
 end

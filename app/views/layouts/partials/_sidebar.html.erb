@@ -10,13 +10,13 @@
                   <!-- User picture-->
                   <div class="user-block-picture">
                      <div class="user-block-status">
-                        <img src="<%= image_path('angle/user/02.jpg') %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
+                        <img src="<%= image_path(current_user.image) %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
                         <div class="circle circle-success circle-lg"></div>
                      </div>
                   </div>
                   <!-- Name and Job-->
                   <div class="user-block-info">
-                     <span class="user-block-name">Hello, Mike</span>
+                     <span class="user-block-name">Hello, <%= current_user.name %></span>
                      <span class="user-block-role">Designer</span>
                   </div>
                </div>
@@ -27,7 +27,38 @@
          <li class="nav-heading">
             <span>Main Navigation</span>
          </li>
-         <li class="<%= 'active' if controller?('dashboard')%>">
+        <li class="">
+          <a href="#menu" title="menu" data-toggle="collapse">
+            <!--<div class="label label-info pull-right">3</div>-->
+            <em class="icon-speedometer"></em>
+            <span data-localize="sidebar.nav.MENU">Menu</span>
+          </a>
+          <ul id="menu" class="nav sidebar-subnav collapse">
+            <li class="sidebar-subnav-header">Menu</li>
+            <li class="">
+              <a href="/extras/projects" title="projects">
+                <span>Le mie gare di produzione</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/extras/projects" title="projects">
+                <span>Gare sul portale</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/extras/contacts" title="contacts">
+                <span>Persone</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/extras/contacts" title="contacts">
+                <span>Dashboard</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="<%= 'active' if controller?('dashboard')%>">
             <a href="#dashboard" title="Dashboard" data-toggle="collapse">
                <div class="label label-info pull-right">3</div>
                <em class="icon-speedometer"></em>

@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :races
+  has_many :attendees
+  has_many :races, :through => :attendees
   has_many :authorizations
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: Payola::Subscription, foreign_key: :owner_idx
 

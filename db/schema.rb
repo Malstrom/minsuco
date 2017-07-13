@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713135143) do
+ActiveRecord::Schema.define(version: 20170713162530) do
+
+  create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "race_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["race_id"], name: "index_attendees_on_race_id"
+    t.index ["user_id"], name: "index_attendees_on_user_id"
+  end
 
   create_table "authorizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "provider"
@@ -20,6 +29,22 @@ ActiveRecord::Schema.define(version: 20170713135143) do
     t.string "secret"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "highlighted_races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "race_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["race_id"], name: "index_highlighted_races_on_race_id"
   end
 
   create_table "payola_affiliates", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -162,12 +187,13 @@ ActiveRecord::Schema.define(version: 20170713135143) do
     t.string "name"
     t.text "image"
     t.bigint "plan_id"
-    t.integer "role"
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["plan_id"], name: "index_users_on_plan_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "highlighted_races", "races"
   add_foreign_key "races", "users", column: "users_id"
   add_foreign_key "users", "plans"
 end

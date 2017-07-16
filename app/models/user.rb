@@ -1,26 +1,34 @@
 class User < ApplicationRecord
+
+  belongs_to    :plan
+  has_many      :authorizations
+  has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: Payola::Subscription, foreign_key: :owner_idx
+
+
+  has_many :races, :foreign_key => "owner_id"
+  has_many :attendees, :foreign_key => "attendee_id"
+
+  enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise]
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
-  has_many :attendees
-  has_many :races, :through => :attendees
-  has_many :authorizations
-  has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: Payola::Subscription, foreign_key: :owner_idx
 
-  enum role: [:user, :admin, :silver, :gold, :platinum]
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_plan, :if => :new_record?
   # after_create :sign_up_for_mailing_list
 
-  belongs_to :plan
+
   validates_associated :plan
+  validates :email, uniqueness: true
 
   def set_default_role
-    self.role ||= :user
+    self.role ||= :basic
   end
 
   def set_default_plan
@@ -63,5 +71,27 @@ class User < ApplicationRecord
     authorization.save
     authorization.user
   end
+
+  def self.from_omniauth_google(auth)
+    authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s).first_or_initialize
+    authorization.token = auth.credentials.token
+    if authorization.user.blank?
+      user = User.where('email = ?', auth["info"]["email"]).first
+      if user.blank?
+        user = User.new
+        user.password = Devise.friendly_token[0,10]
+        user.email = auth.info.email
+        user.name = auth.info.name   # assuming the user model has a name
+        user.image = auth.info.image # assuming the user model has an image
+
+        user.save
+      end
+      authorization.user_id = user.id
+    end
+    authorization.save
+    authorization.user
+  end
+
+
 
 end

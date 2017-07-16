@@ -10,13 +10,13 @@
                   <!-- User picture-->
                   <div class="user-block-picture">
                      <div class="user-block-status">
-                        <img src="<%= image_path(current_user.image) %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
+                        <img src="<%# image_path(current_user.image) %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
                         <div class="circle circle-success circle-lg"></div>
                      </div>
                   </div>
                   <!-- Name and Job-->
                   <div class="user-block-info">
-                     <span class="user-block-name">Hello, <%= current_user.name %></span>
+                     <span class="user-block-name">Hello, <%# current_user.name %></span>
                      <span class="user-block-role">Designer</span>
                   </div>
                </div>

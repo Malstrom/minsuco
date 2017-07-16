@@ -13,12 +13,13 @@
 ActiveRecord::Schema.define(version: 20170713162530) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
+    t.bigint "attendee_id"
     t.bigint "race_id"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["attendee_id"], name: "index_attendees_on_attendee_id"
     t.index ["race_id"], name: "index_attendees_on_race_id"
-    t.index ["user_id"], name: "index_attendees_on_user_id"
   end
 
   create_table "authorizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -154,9 +155,10 @@ ActiveRecord::Schema.define(version: 20170713162530) do
   end
 
   create_table "races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "users_id"
+    t.bigint "owner_id"
     t.string "name"
-    t.string "category"
+    t.text "description"
+    t.bigint "category_id"
     t.string "recipients"
     t.decimal "race_value", precision: 10
     t.decimal "compensation_amount", precision: 10
@@ -166,7 +168,8 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.integer "max_attendees"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_races_on_users_id"
+    t.index ["category_id"], name: "index_races_on_category_id"
+    t.index ["owner_id"], name: "index_races_on_owner_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -193,7 +196,8 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendees", "users", column: "attendee_id"
   add_foreign_key "highlighted_races", "races"
-  add_foreign_key "races", "users", column: "users_id"
+  add_foreign_key "races", "users", column: "owner_id"
   add_foreign_key "users", "plans"
 end

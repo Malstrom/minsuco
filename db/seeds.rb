@@ -48,20 +48,31 @@ end
   user.image = Faker::Avatar.image
   user.role = 'basic'
 
+
   user.save
 
 # --== Generate Sample Races
   race = user.races.build
 
+
+  portafoglio = 100
+
+
+  race_values = %W(10000 50000 100000 75000 25000)
+  race_comp_kinds = %w(0 1)
+  race_attendees = rand(10..50)
+  compensation_start_amounts = %W(0 0 0 0 500 1000)
+
   race.name = Faker::Space.star
   race.description = Faker::Matz.quote
   race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
-  race.race_value = 100000
-  race.compensation_amount = 10000
-  race.compensation_kind = 'money'
+  race.race_value = race_values.sample
+  race.compensation_kind = race_comp_kinds.sample
   race.pieces_amount = 10
-  race.compensation_start_amount = 0
-  race.max_attendees = 10
+  race.compensation_start_amount = compensation_start_amounts.sample
+  race.max_attendees = race_attendees
+  # race.compensation_amount = race.race_value / race.max_attendees
+
 
   race.save
 end
@@ -79,8 +90,10 @@ end
   user_attendee.image = Faker::Avatar.image
   user_attendee.role = 'basic'
 
+
   user_attendee.save
 
-  Attendee.find_or_create_by(attendee:user_attendee, race:Race.all.order("RAND()").first)
-
+  rand(1..5).times do
+    Attendee.create(attendee:user_attendee, race:Race.all.order("RAND()").first)
+  end
 end

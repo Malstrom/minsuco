@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20170713162530) do
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "attendee_id"
     t.bigint "race_id"
-    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["attendee_id"], name: "index_attendees_on_attendee_id"

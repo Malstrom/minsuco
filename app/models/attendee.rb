@@ -22,8 +22,9 @@ class Attendee < ApplicationRecord
   end
 
   def unique_join
-    if Attendee.where(attendee: self.attendee, race:self.race)
+    if Attendee.exists?(attendee: self.attendee, race: self.race)
       errors.add(:self_join, "User must join only one time")
     end
   end
+
 end

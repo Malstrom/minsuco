@@ -63,6 +63,10 @@ end
   race_attendees = rand(10..50)
   compensation_start_amounts = %W(0 0 0 0 500 1000)
 
+  def time_rand from = 0.0, to = Time.now
+    Time.at(from + rand * (to.to_f - from.to_f))
+  end
+
   race.name = Faker::Space.star
   race.description = Faker::Matz.quote
   race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
@@ -71,7 +75,10 @@ end
   race.pieces_amount = 10
   race.compensation_start_amount = compensation_start_amounts.sample
   race.max_attendees = race_attendees
-  # race.compensation_amount = race.race_value / race.max_attendees
+  race.starts_at = rand(Date.civil(2017, 1, 1)..Date.civil(2017, 12, 31))
+  race.ends_at = rand(race.starts_at..Date.civil(2017, 12, 31))
+
+# race.compensation_amount = race.race_value / race.max_attendees
 
 
   race.save

@@ -17,13 +17,13 @@ class Attendee < ApplicationRecord
 
   def max_attendee
     if self.race.attendees.count >= self.race.max_attendees
-      errors.add(:self_join, "Race reach max attedee")
+      errors.add(:max_attendee, "Race reach max attedee")
     end
   end
 
   def unique_join
     if Attendee.exists?(attendee: self.attendee, race: self.race)
-      errors.add(:self_join, "User must join only one time")
+      errors.add(:unique_join, "User must join only one time")
     end
   end
 

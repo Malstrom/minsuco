@@ -165,6 +165,8 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.integer "pieces_amount"
     t.decimal "compensation_start_amount", precision: 10
     t.integer "max_attendees"
+    t.date "starts_at"
+    t.date "ends_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_races_on_category_id"

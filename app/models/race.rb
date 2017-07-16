@@ -5,4 +5,5 @@ class Race < ApplicationRecord
 
   has_many :attendees
   has_many :owners, :class_name => "User", :through => "attendees", :foreign_key => "attendee_id"
+
 end

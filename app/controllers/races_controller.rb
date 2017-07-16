@@ -1,4 +1,6 @@
 class RacesController < ApplicationController
+  layout 'application-main'
+
   before_action :set_race, only: [:show, :edit, :update, :destroy]
 
   # GET /races

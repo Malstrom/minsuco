@@ -44,6 +44,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'cancancan', '~> 2.0'
 
 group :development, :test do
+  gem 'faker'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -65,6 +66,7 @@ gem "bower-rails", "~> 0.9.2"
 
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 gem 'payola-payments', git: 'https://github.com/alekseenko/payola'
 

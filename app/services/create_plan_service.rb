@@ -1,28 +1,34 @@
 class CreatePlanService
   def call
-    p1 = Plan.where(name: 'Platinum').first_or_initialize do |p|
+    p1 = Plan.where(name: 'Enterprise').first_or_initialize do |p|
       p.amount = 2900
       p.interval = 'month'
-      p.stripe_id = 'platinum'
+      p.stripe_id = 'enterprise'
     end
     p1.save!(:validate => false)
-    p2 = Plan.where(name: 'Gold').first_or_initialize do |p|
+    p2 = Plan.where(name: 'Premium').first_or_initialize do |p|
       p.amount = 1900
       p.interval = 'month'
-      p.stripe_id = 'gold'
+      p.stripe_id = 'premium'
     end
     p2.save!(:validate => false)
-    p3 = Plan.where(name: 'Silver').first_or_initialize do |p|
+    p3 = Plan.where(name: 'Pro-creator').first_or_initialize do |p|
       p.amount = 900
       p.interval = 'month'
-      p.stripe_id = 'silver'
+      p.stripe_id = 'pro_creator'
     end
     p3.save!(:validate => false)
-    p4 = Plan.where(name: 'Free').first_or_initialize do |p|
+    p4 = Plan.where(name: 'Pro-attendee').first_or_initialize do |p|
       p.amount = 0
       p.interval = 'month'
-      p.stripe_id = 'free'
+      p.stripe_id = 'pro_attendee'
     end
     p4.save!(:validate => false)
+    p5 = Plan.where(name: 'Basic').first_or_initialize do |p|
+      p.amount = 0
+      p.interval = 'month'
+      p.stripe_id = 'Basic'
+    end
+    p5.save!(:validate => false)
   end
 end

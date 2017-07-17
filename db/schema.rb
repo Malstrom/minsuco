@@ -159,11 +159,11 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.text "description"
     t.bigint "category_id"
     t.string "recipients"
-    t.decimal "race_value", precision: 10
+    t.decimal "race_value", precision: 8, scale: 2
     t.decimal "compensation_amount", precision: 10
     t.integer "compensation_kind"
     t.integer "pieces_amount"
-    t.decimal "compensation_start_amount", precision: 10
+    t.decimal "compensation_start_amount", precision: 8, scale: 2
     t.integer "max_attendees"
     t.date "starts_at"
     t.date "ends_at"

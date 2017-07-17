@@ -20,8 +20,6 @@ gem 'puma', '~> 3.7'
 
 gem "slim-rails"
 
-gem 'sprockets', '~> 3.0'
-
 # gem 'rails-translate-routes'
 
 # Use SCSS for stylesheets

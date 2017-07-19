@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713162530) do
+ActiveRecord::Schema.define(version: 20170719144558) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "attendee_id"
@@ -165,7 +165,8 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.integer "pieces_amount"
     t.decimal "compensation_start_amount", precision: 8, scale: 2
     t.integer "max_attendees"
-    t.string "kind"
+    t.integer "kind"
+    t.integer "status"
     t.date "starts_at"
     t.date "ends_at"
     t.datetime "created_at", null: false
@@ -192,7 +193,8 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.string "name"
     t.text "image"
     t.bigint "plan_id"
-    t.string "role"
+    t.integer "role"
+    t.integer "kind"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["plan_id"], name: "index_users_on_plan_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -45,7 +45,8 @@ end
   user.password = Faker::Internet.password(8)
   user.password_confirmation = user.password
   user.image = Faker::Avatar.image
-  user.role = 'basic'
+  user.role = %w(pro_creator premium).sample
+  user.kind = %w(broker agent).sample
 
 
   user.save
@@ -80,8 +81,8 @@ end
     race.starts_at = rand(Date.civil(2017, 7, 1)..Date.civil(2017, 8, 1))
     race.ends_at = rand(race.starts_at..Date.civil(2017, 12, 31))
     race.compensation_amount = rand(5..50)
-    race.kind = rand(0..1)
-
+    race.kind = %w(pay_for_publish pay_for_join).sample
+    race.status = 'started'
 
     race_saved = race.save
   end
@@ -98,8 +99,8 @@ end
   user_attendee.password = Faker::Internet.password(8)
   user_attendee.password_confirmation = user_attendee.password
   user_attendee.image = Faker::Avatar.image
-  user_attendee.role = 'basic'
-
+  user_attendee.role = %w(basic pro_attendee).sample
+  user_attendee.kind = %w(broker agent).sample
 
   user_attendee.save
 
@@ -120,3 +121,4 @@ races_to_highlight.each do |race|
 
   race_to_highlight.save
 end
+

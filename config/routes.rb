@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :races do
     get :start
     get :pause
+    get :pay_for_publish
+    get :pay_for_join
   end
 
   resources :onboarding, :path => '/on-boarding' do

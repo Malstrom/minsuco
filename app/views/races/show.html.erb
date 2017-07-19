@@ -98,22 +98,15 @@
       </div>
       <% if @race.owner == current_user %>
       <div class="panel-body bb">
-        <div class="clearfix">
-          <div class="pull-left">
-              <button type="button" class="btn btn-success btn-oval">
-                <!--<em class="fa fa-play fa-fw text-muted"></em>-->
-                <span>Metti in evidenza sul portale</span>
-              </button><br><br>
-
-              <button type="button" class="btn btn-success btn-oval">
-                <!--<em class="fa fa-play fa-fw text-muted"></em>-->
-                <span>Crea una pagina per trovare i clienti</span>
-              </button><br><br>
-
-              <button type="button" class="btn btn-success btn-oval">
-                <!--<em class="fa fa-pause fa-fw text-muted"></em>-->
-                <span>Rendi partecipabile da tutti</span>
-              </button>
+        <div class="clearfix text-center">
+          <div class="btn-group-vertical">
+            <%= link_to 'Metti in evidenza', race_pay_for_publish_path(@race), class: 'btn btn-info' %>
+            <%= link_to 'Crea una pagina per trovare i clienti', race_pay_for_publish_path(@race), class: 'btn btn-info btn-lg' %>
+            <% if @race.kind == 'pay_for_join' %>
+              <%= link_to 'Rendi partecipabile da tutti', race_pay_for_publish_path(@race), class: 'btn btn-info btn-lg' %>
+            <% else %>
+              <%= link_to 'Rendi la gara privata', race_pay_for_join_path(@race), class: 'btn btn-warning btn-lg' %>
+            <% end %>
           </div>
         </div>
       </div>

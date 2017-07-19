@@ -1,7 +1,7 @@
 class RacesController < ApplicationController
   layout 'application-main'
 
-  before_action :set_race, only: [:show, :edit, :update, :destroy, :start, :pause]
+  before_action :set_race, only: [:show, :edit, :update, :destroy, :start, :pause, :pay_for_join, :pay_for_publish]
 
   # GET /races
   # GET /races.json
@@ -75,6 +75,20 @@ class RacesController < ApplicationController
   # pause race
   def pause
     @race.update_attribute :status, 'paused'
+
+    redirect_to @race
+  end
+
+  def pay_for_publish
+
+    @race.update_attribute :kind, 'pay_for_publish'
+
+    redirect_to @race
+  end
+
+  def pay_for_join
+
+    @race.update_attribute :kind, 'pay_for_join'
 
     redirect_to @race
   end

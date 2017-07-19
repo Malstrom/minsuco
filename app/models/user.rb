@@ -8,7 +8,11 @@ class User < ApplicationRecord
   has_many :races, :foreign_key => "owner_id"
   has_many :attendees, :foreign_key => "attendee_id"
 
-  enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise]
+  enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned]
+
+  enum kind: [:broker, :agent]
+
+  #enum business: [:individual, :company]
 
 
   # Include default devise modules. Others available are:

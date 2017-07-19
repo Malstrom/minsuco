@@ -1,13 +1,13 @@
 class RacesController < ApplicationController
   layout 'application-main'
 
-  before_action :set_race, only: [:show, :edit, :update, :destroy]
+  before_action :set_race, only: [:show, :edit, :update, :destroy, :start, :pause]
 
   # GET /races
   # GET /races.json
   def index
-    @races = Race.where("starts_at <= ? AND ends_at >= ?", DateTime.now, DateTime.now)
-    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ?", DateTime.now, DateTime.now)
+    @races = Race.where("starts_at <= ? AND ends_at >= ? AND status = ?", DateTime.now, DateTime.now, 'started').order('kind ASC')
+    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ?", DateTime.now, DateTime.now, 'started').order('races.kind ASC')
   end
 
   # GET /races/1
@@ -64,10 +64,29 @@ class RacesController < ApplicationController
     end
   end
 
+
+  # start race
+  def start
+    @race.update_attribute :status, 'started'
+
+    redirect_to @race
+  end
+
+  # pause race
+  def pause
+    @race.update_attribute :status, 'paused'
+
+    redirect_to @race
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_race
-      @race = Race.find(params[:id])
+      if params[:id]
+        @race = Race.find(params[:id])
+      else
+        @race = Race.find(params[:race_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

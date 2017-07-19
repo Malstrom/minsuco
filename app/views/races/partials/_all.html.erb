@@ -1,16 +1,13 @@
 <% @races.each do |race| %>
-
   <div class="col-lg-4 col-md-6" style="">
     <div class="panel b">
       <div class="panel-heading">
         <div class="pull-right">
-          <% race.featured_races.each do |adv| %>
-            <% if adv.active? %>
-              <div class="label label-success">Adv</div>
-            <% end %>
+          <% if race.kind == 'pay_for_publish' %>
+            <div class="label label-info">Pubblica</div>
+          <% elsif race.kind == 'pay_for_join' %>
+            <div class="label label-warning">Privata</div>
           <% end %>
-          <div class="label label-info">Pubblica</div>
-          <div class="label label-warning">Privata</div>
         </div>
         <h4 class="m0"><%= race.name %></h4>
         <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->

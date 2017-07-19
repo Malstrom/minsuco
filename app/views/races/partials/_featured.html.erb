@@ -4,8 +4,11 @@
       <div class="panel-heading">
         <div class="pull-right">
           <div class="label label-success">Adv</div>
-          <div class="label label-info">Pubblica</div>
-          <div class="label label-warning">Privata</div>
+          <% if race.kind == 'pay_for_publish' %>
+            <div class="label label-info">Pubblica</div>
+          <% elsif race.kind == 'pay_for_join' %>
+            <div class="label label-warning">Privata</div>
+          <% end %>
         </div>
         <h4 class="m0"><%= race.name %></h4>
         <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->

@@ -26,39 +26,39 @@
       <div class="panel-body">
         <h4>Description</h4>
         <p><%= @race.description %></p>
-        <p class="text-right">
-          <button type="button" class="btn btn-default">View all documents</button>
-        </p>
+        <!--<p class="text-right">-->
+          <!--<button type="button" class="btn btn-default">View all documents</button>-->
+        <!--</p>-->
       </div>
-      <div class="panel-body">
-        <p>
-          <h4 class="pull-left">Pezzi</h4>
-        <div data-sparkline="" data-type="line" data-height="100" data-width="100%" data-line-width="3" data-line-color="#23b7e5" data-chart-range-min="0" data-spot-color="#888" data-min-spot-color="#23b7e5" data-max-spot-color="#23b7e5"
-             data-fill-color="#e5f2fa" data-highlight-line-color="#fff" data-spot-radius="5" values="2,4,5,6,10,7,8,5,7,7,11,8,6,9,11,9,13,14,12,16" data-resize="true" class="sparkline text-center"></div>
-        </p>
-      </div>
-      <div class="panel-body">
-        <div class="row text-center">
-          <div class="col-xs-4">
-            <div class="inline">
-              <div data-sparkline="" values="20,80" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#23b7e5&quot;]" class="sparkline"></div>
-            </div>
-            <p class="mt-lg">Completati</p>
-          </div>
-          <div class="col-xs-4">
-            <div class="inline">
-              <div data-sparkline="" values="60,40" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#27c24c&quot;]" class="sparkline"></div>
-            </div>
-            <p class="mt-lg">Disponibili</p>
-          </div>
-          <div class="col-xs-4">
-            <div class="inline">
-              <div data-sparkline="" values="90,10" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#ff902b&quot;]" class="sparkline"></div>
-            </div>
-            <p class="mt-lg">Assegnati</p>
-          </div>
-        </div>
-      </div>
+      <!--<div class="panel-body">-->
+        <!--<p>-->
+          <!--<h4 class="pull-left">Pezzi</h4>-->
+        <!--<div data-sparkline="" data-type="line" data-height="100" data-width="100%" data-line-width="3" data-line-color="#23b7e5" data-chart-range-min="0" data-spot-color="#888" data-min-spot-color="#23b7e5" data-max-spot-color="#23b7e5"-->
+             <!--data-fill-color="#e5f2fa" data-highlight-line-color="#fff" data-spot-radius="5" values="2,4,5,6,10,7,8,5,7,7,11,8,6,9,11,9,13,14,12,16" data-resize="true" class="sparkline text-center"></div>-->
+        <!--</p>-->
+      <!--</div>-->
+      <!--<div class="panel-body">-->
+        <!--<div class="row text-center">-->
+          <!--<div class="col-xs-4">-->
+            <!--<div class="inline">-->
+              <!--<div data-sparkline="" values="20,80" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#23b7e5&quot;]" class="sparkline"></div>-->
+            <!--</div>-->
+            <!--<p class="mt-lg">Completati</p>-->
+          <!--</div>-->
+          <!--<div class="col-xs-4">-->
+            <!--<div class="inline">-->
+              <!--<div data-sparkline="" values="60,40" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#27c24c&quot;]" class="sparkline"></div>-->
+            <!--</div>-->
+            <!--<p class="mt-lg">Disponibili</p>-->
+          <!--</div>-->
+          <!--<div class="col-xs-4">-->
+            <!--<div class="inline">-->
+              <!--<div data-sparkline="" values="90,10" data-type="pie" data-height="60" data-slice-colors="[&quot;#edf1f2&quot;, &quot;#ff902b&quot;]" class="sparkline"></div>-->
+            <!--</div>-->
+            <!--<p class="mt-lg">Assegnati</p>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
     <!-- End Main panel-->
     <!-- End Team messages-->
@@ -69,75 +69,120 @@
       <div class="panel-body bb">
         <div class="clearfix">
           <div class="pull-left">
-            <button type="button" class="btn btn-default btn-oval">
-              <em class="fa fa-play fa-fw text-muted"></em>
-              <span>Start</span>
-            </button>
+            <% if @race.owner == current_user %>
+              <% if @race.status == 'paused' %>
+                <%= link_to race_start_path @race do %>
+                  <button type="button" class="btn btn-success btn-oval btn-outline">
+                    <em class="fa fa-play fa-fw text-muted text-success"></em>
+                    <span>Start</span>
+                  </button>
+                <% end %>
+              <% else %>
+                <%= link_to race_pause_path @race do %>
+                  <button type="button" class="btn btn-warning btn-oval btn-outline">
+                    <em class="fa fa-pause fa-fw text-muted text-warning"></em>
+                    <span>Pause</span>
+                  </button>
+                <% end %>
+              <% end %>
 
-            <button type="button" class="btn btn-default btn-oval">
-              <em class="fa fa-play fa-fw text-muted"></em>
-              <span>Partecipa</span>
-            </button>
 
-            <button type="button" class="btn btn-default btn-oval">
-              <em class="fa fa-pause fa-fw text-muted"></em>
-              <span>Pause</span>
-            </button>
+            <% elsif @race.owner != current_user %>
+              <button type="button" class="btn btn-info btn-oval btn-outline">
+                <em class="fa fa-plus fa-fw text-muted text-info"></em>
+                <span>Partecipa</span>
+              </button>
+            <% end %>
           </div>
         </div>
       </div>
+      <% if @race.owner == current_user %>
       <div class="panel-body bb">
         <div class="clearfix">
           <div class="pull-left">
-            <button type="button" class="btn btn-default btn-oval">
-              <!--<em class="fa fa-play fa-fw text-muted"></em>-->
-              <span>Evidenzia</span>
-            </button>
+              <button type="button" class="btn btn-success btn-oval">
+                <!--<em class="fa fa-play fa-fw text-muted"></em>-->
+                <span>Metti in evidenza sul portale</span>
+              </button><br><br>
 
-            <button type="button" class="btn btn-default btn-oval">
-              <!--<em class="fa fa-play fa-fw text-muted"></em>-->
-              <span>Trova clienti</span>
-            </button>
+              <button type="button" class="btn btn-success btn-oval">
+                <!--<em class="fa fa-play fa-fw text-muted"></em>-->
+                <span>Crea una pagina per trovare i clienti</span>
+              </button><br><br>
 
-            <button type="button" class="btn btn-default btn-oval">
-              <!--<em class="fa fa-pause fa-fw text-muted"></em>-->
-              <span>Gara aperta</span>
-            </button>
+              <button type="button" class="btn btn-success btn-oval">
+                <!--<em class="fa fa-pause fa-fw text-muted"></em>-->
+                <span>Rendi partecipabile da tutti</span>
+              </button>
           </div>
         </div>
       </div>
       <div class="panel-body">
         <ul class="list-inline mv">
+          <% if @race.kind == 'pay_for_publish'%>
+            <li>
+              <div class="badge p-sm bg-info">Pubblica</div>
+            </li>
+          <% elsif @race.kind == 'pay_for_join'%>
+            <li>
+              <div class="badge p-sm bg-info">Privata</div>
+            </li>
+          <% end %>
+
+          <% if @race.featured? %>
+            <li>
+              <div class="badge p-sm bg-info">Evidenziata</div>
+            </li>
+          <% end %>
           <li>
-            <div class="badge p-sm bg-warning">Pubbilcato</div>
-          </li>
-          <li>
-            <div class="badge p-sm bg-gray">Bozza</div>
-          </li>
-          <li>
-            <div class="badge p-sm bg-gray">stand-by</div>
-          </li>
-          <li>
-            <div class="badge p-sm bg-gray">in evidenza</div>
-          </li>
-          <li>
-            <div class="badge p-sm bg-gray">landing page</div>
+            <div class="badge p-sm bg-info">landing page</div>
           </li>
         </ul>
       </div>
+      <% end %>
       <table class="table bb">
         <tbody>
         <tr>
           <td>
-            <strong>Start date</strong>
+            <strong>Creatore</strong>
           </td>
-          <td><%= @race.starts_at.strftime('%d/%m/%Y') %></td>
+          <td><%= @race.owner.name %></td>
         </tr>
         <tr>
           <td>
-            <strong>End date</strong>
+            <strong>Ramo rischio</strong>
           </td>
-          <td><%= @race.ends_at.strftime('%d/%m/%Y') %></td>
+          <td><%= @race.category.name.capitalize %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Destinatari</strong>
+          </td>
+          <td><%= @race.recipients %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Numero di pezzi</strong>
+          </td>
+          <td><%= @race.pieces_amount %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Fisso per pezzo</strong>
+          </td>
+          <td><%= number_to_currency @race.compensation_start_amount, unit: '€' %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Partecipanti/Massimo</strong>
+          </td>
+          <td><%= @race.attendees.count %> / <%= @race.max_attendees %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Iniziata / Termina</strong>
+          </td>
+          <td><%= @race.starts_at.strftime('%d/%m/%Y') %> - <%= @race.ends_at.strftime('%d/%m/%Y') %></td>
         </tr>
         <!--<tr>-->
           <!--<td>-->

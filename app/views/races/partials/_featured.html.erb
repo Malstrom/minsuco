@@ -1,0 +1,90 @@
+<% @featured_races.each do |race| %>
+  <div class="col-lg-4 col-md-6" style="">
+    <div class="panel b">
+      <div class="panel-heading">
+        <div class="pull-right">
+          <div class="label label-success">Adv</div>
+          <div class="label label-info">Pubblica</div>
+          <div class="label label-warning">Privata</div>
+        </div>
+        <h4 class="m0"><%= race.name %></h4>
+        <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->
+      </div>
+      <div class="panel-body">
+        <div class="table-grid table-grid-align-middle">
+          <div class="col">
+            <p style="height: 42px;">
+              <%= race.description.truncate_words(12) %>
+            </p>
+          </div>
+          <!--<div class="col wd-xxs text-right hidden-xs hidden-sm">-->
+          <!--<div class="text-bold text-muted">22%</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>
+            <strong>Valore gara</strong>
+          </td>
+          <td><%= number_to_currency(race.race_value, unit:'€', precision: 0) %></td>
+        </tr>
+        <tr>
+        <tr>
+          <td>
+            <strong>Percentuale per pezzo</strong>
+          </td>
+          <td><%= race.compensation_amount %>%</td>
+        </tr>
+        <tr>
+        <tr>
+          <td>
+            <strong>Premio fisso per pezzo</strong>
+          </td>
+          <td><%= number_to_currency(race.compensation_start_amount, unit:'€', precision: 0) %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Data di inizio</strong>
+          </td>
+          <td><%= race.starts_at.strftime('%d/%m/%Y') %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Data conclusione della gara</strong>
+          </td>
+          <td><%= race.ends_at.strftime('%d/%m/%Y') %></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Partecipanti / max</strong>
+          </td>
+          <td>
+            <a href="#" class="inline">
+              <strong><%= race.attendees.count %></strong>
+              /
+              <strong><%= race.max_attendees %></strong>
+            </a>
+          </td>
+        </tr>
+        <!--<tr>-->
+        <!--<td>-->
+        <!--<strong>Pezzi conclusi/assegnati/liberi</strong>-->
+        <!--</td>-->
+        <!--<td>-->
+        <!--<div data-sparkline="" values="20,80" data-type="pie" data-height="24" data-slice-colors='["#edf1f2", "#23b7e5"]' class="sparkline inline mr"></div>-->
+        <!--<div data-sparkline="" values="60,40" data-type="pie" data-height="24" data-slice-colors='["#edf1f2", "#27c24c"]' class="sparkline inline mr"></div>-->
+        <!--<div data-sparkline="" values="90,10" data-type="pie" data-height="24" data-slice-colors='["#edf1f2", "#ff902b"]' class="sparkline inline"></div>-->
+        <!--</td>-->
+        <!--</tr>-->
+        </tbody>
+      </table>
+      <div class="panel-footer text-center">
+        <%= link_to(race_path(race)) do %>
+          <button type="button" class="btn btn-info">Maggiori informazioni</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

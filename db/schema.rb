@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "highlighted_races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "featured_races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "race_id"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["race_id"], name: "index_highlighted_races_on_race_id"
+    t.index ["race_id"], name: "index_featured_races_on_race_id"
   end
 
   create_table "payola_affiliates", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 20170713162530) do
   end
 
   add_foreign_key "attendees", "users", column: "attendee_id"
-  add_foreign_key "highlighted_races", "races"
+  add_foreign_key "featured_races", "races"
   add_foreign_key "races", "users", column: "owner_id"
   add_foreign_key "users", "plans"
 end

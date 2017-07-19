@@ -6,7 +6,8 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    @races = Race.all
+    @races = Race.where("starts_at <= ? AND ends_at >= ?", DateTime.now, DateTime.now)
+    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ?", DateTime.now, DateTime.now)
   end
 
   # GET /races/1

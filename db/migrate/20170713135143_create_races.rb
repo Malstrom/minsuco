@@ -12,6 +12,7 @@ class CreateRaces < ActiveRecord::Migration[5.1]
       t.integer :pieces_amount
       t.decimal :compensation_start_amount, :precision => 8, :scale => 2
       t.integer :max_attendees
+      t.string  :kind
       t.date :starts_at
       t.date :ends_at
       t.timestamps

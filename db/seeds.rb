@@ -12,7 +12,6 @@
 # CreatePlanService.new.call
 # puts 'CREATED PLANS'
 
-
 # Categories
 
 $categories = {
@@ -67,20 +66,27 @@ end
     Time.at(from + rand * (to.to_f - from.to_f))
   end
 
-  race.name = Faker::Space.star
-  race.description = Faker::Matz.quote
-  race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
-  race.race_value = race_values.sample
-  race.compensation_kind = race_comp_kinds.sample
-  race.pieces_amount = rand(5..50)
-  race.compensation_start_amount = compensation_start_amounts.sample
-  race.max_attendees = race_attendees
-  race.starts_at = rand(Date.civil(2017, 1, 1)..Date.civil(2017, 12, 31))
-  race.ends_at = rand(race.starts_at..Date.civil(2017, 12, 31))
-  race.compensation_amount = rand(5..50)
+  race_saved = false
+  until race_saved
+
+    race.name = Faker::Space.star
+    race.description = Faker::Matz.quote
+    race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
+    race.race_value = race_values.sample
+    race.compensation_kind = race_comp_kinds.sample
+    race.pieces_amount = rand(5..50)
+    race.compensation_start_amount = compensation_start_amounts.sample
+    race.max_attendees = race_attendees
+    race.starts_at = rand(Date.civil(2017, 7, 1)..Date.civil(2017, 8, 1))
+    race.ends_at = rand(race.starts_at..Date.civil(2017, 12, 31))
+    race.compensation_amount = rand(5..50)
+    race.type = rand(0..1)
 
 
-  race.save
+    race_saved = race.save
+  end
+
+
 end
 
 # --== Generate Sample User Attendees
@@ -102,4 +108,17 @@ end
   rand(1..5).times do
     Attendee.create(attendee:user_attendee, race:Race.all.order("RAND()").first)
   end
+end
+
+# --== Highlight some races
+
+races_to_highlight = Race.order("RAND()").limit(5)
+
+races_to_highlight.each do |race|
+  race_to_highlight = race.featured_races.build
+
+  race_to_highlight.starts_at = rand(race.starts_at.to_datetime..rand(race.starts_at.to_datetime + 0.days..race.starts_at.to_datetime + 20.days))
+  race_to_highlight.ends_at = rand(race_to_highlight.starts_at..rand(race_to_highlight.starts_at + 2.days..race_to_highlight.starts_at + 30.days))
+
+  race_to_highlight.save
 end

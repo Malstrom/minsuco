@@ -73,25 +73,36 @@
               <em class="fa fa-play fa-fw text-muted"></em>
               <span>Start</span>
             </button>
+
+            <button type="button" class="btn btn-default btn-oval">
+              <em class="fa fa-play fa-fw text-muted"></em>
+              <span>Partecipa</span>
+            </button>
+
             <button type="button" class="btn btn-default btn-oval">
               <em class="fa fa-pause fa-fw text-muted"></em>
               <span>Pause</span>
             </button>
           </div>
-          <div class="pull-right">
-            <button type="button" class="btn btn-danger btn-oval">Cancel</button>
-          </div>
         </div>
       </div>
       <div class="panel-body bb">
-        <div class="table-grid table-grid-align-middle mv">
-          <div class="col">
-            <div class="progress progress-xs m0">
-              <div class="progress-bar progress-bar-info" style="width:48%"></div>
-            </div>
-          </div>
-          <div class="col wd-xxs text-right">
-            <div class="text-bold text-muted">48%</div>
+        <div class="clearfix">
+          <div class="pull-left">
+            <button type="button" class="btn btn-default btn-oval">
+              <!--<em class="fa fa-play fa-fw text-muted"></em>-->
+              <span>Evidenzia</span>
+            </button>
+
+            <button type="button" class="btn btn-default btn-oval">
+              <!--<em class="fa fa-play fa-fw text-muted"></em>-->
+              <span>Trova clienti</span>
+            </button>
+
+            <button type="button" class="btn btn-default btn-oval">
+              <!--<em class="fa fa-pause fa-fw text-muted"></em>-->
+              <span>Gara aperta</span>
+            </button>
           </div>
         </div>
       </div>
@@ -128,96 +139,94 @@
           </td>
           <td><%= @race.ends_at.strftime('%d/%m/%Y') %></td>
         </tr>
-        <tr>
-          <td>
-            <strong>Commits</strong>
-          </td>
-          <td>140</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Issues</strong>
-          </td>
-          <td>39</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Files</strong>
-          </td>
-          <td>87</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Members</strong>
-          </td>
-          <td>
-            <p>Tara Sanders</p>
-            <p>Alan Smith</p>
-            <p>Priscilla Peters</p>
-            <p>Madison Willis</p>
-            <p>Lesa Marshall</p>
-            <p>Kylie Freeman</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Recent files</strong>
-          </td>
-          <td>
-            <div data-height="120" data-scrollable="" class="list-group">
-              <table class="table table-bordered bg-transparent">
-                <tbody>
-                <tr>
-                  <td>
-                    <em class="fa fa-lg fa-file-code-o"></em>
-                  </td>
-                  <td><a href="#" class="text-muted">database.controller.js</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <em class="fa fa-lg fa-file-image-o"></em>
-                  </td>
-                  <td><a href="#" class="text-muted">baground-lg.png</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <em class="fa fa-lg fa-file-code-o"></em>
-                  </td>
-                  <td><a href="#" class="text-muted">picture.controller.js</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <em class="fa fa-lg fa-file-word-o"></em>
-                  </td>
-                  <td><a href="#" class="text-muted">applicat-diagrams.docx</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <em class="fa fa-lg fa-file-code-o"></em>
-                  </td>
-                  <td><a href="#" class="text-muted">database.controller.js</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <em class="fa fa-lg fa-file-code-o"></em>
-                  </td>
-                  <td><a href="#" class="text-muted">database.controller.js</a>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
+        <!--<tr>-->
+          <!--<td>-->
+            <!--<strong>Commits</strong>-->
+          <!--</td>-->
+          <!--<td>140</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>-->
+            <!--<strong>Issues</strong>-->
+          <!--</td>-->
+          <!--<td>39</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>-->
+            <!--<strong>Files</strong>-->
+          <!--</td>-->
+          <!--<td>87</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>-->
+            <!--<strong>Members</strong>-->
+          <!--</td>-->
+          <!--<td>-->
+            <!--<p>Tara Sanders</p>-->
+            <!--<p>Alan Smith</p>-->
+            <!--<p>Priscilla Peters</p>-->
+            <!--<p>Madison Willis</p>-->
+            <!--<p>Lesa Marshall</p>-->
+            <!--<p>Kylie Freeman</p>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>-->
+            <!--<strong>Recent files</strong>-->
+          <!--</td>-->
+          <!--<td>-->
+            <!--<div data-height="120" data-scrollable="" class="list-group">-->
+              <!--<table class="table table-bordered bg-transparent">-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                  <!--<td>-->
+                    <!--<em class="fa fa-lg fa-file-code-o"></em>-->
+                  <!--</td>-->
+                  <!--<td><a href="#" class="text-muted">database.controller.js</a>-->
+                  <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td>-->
+                    <!--<em class="fa fa-lg fa-file-image-o"></em>-->
+                  <!--</td>-->
+                  <!--<td><a href="#" class="text-muted">baground-lg.png</a>-->
+                  <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td>-->
+                    <!--<em class="fa fa-lg fa-file-code-o"></em>-->
+                  <!--</td>-->
+                  <!--<td><a href="#" class="text-muted">picture.controller.js</a>-->
+                  <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td>-->
+                    <!--<em class="fa fa-lg fa-file-word-o"></em>-->
+                  <!--</td>-->
+                  <!--<td><a href="#" class="text-muted">applicat-diagrams.docx</a>-->
+                  <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td>-->
+                    <!--<em class="fa fa-lg fa-file-code-o"></em>-->
+                  <!--</td>-->
+                  <!--<td><a href="#" class="text-muted">database.controller.js</a>-->
+                  <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td>-->
+                    <!--<em class="fa fa-lg fa-file-code-o"></em>-->
+                  <!--</td>-->
+                  <!--<td><a href="#" class="text-muted">database.controller.js</a>-->
+                  <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+              <!--</table>-->
+            <!--</div>-->
+          <!--</td>-->
+        <!--</tr>-->
         </tbody>
       </table>
-      <p class="text-right"><a href="#" class="btn btn-link">Open repository</a>
-      </p>
     </div>
     <!-- end Aside panel-->
   </div>

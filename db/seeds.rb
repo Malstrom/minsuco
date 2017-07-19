@@ -80,13 +80,11 @@ end
     race.starts_at = rand(Date.civil(2017, 7, 1)..Date.civil(2017, 8, 1))
     race.ends_at = rand(race.starts_at..Date.civil(2017, 12, 31))
     race.compensation_amount = rand(5..50)
-    race.type = rand(0..1)
+    race.kind = rand(0..1)
 
 
     race_saved = race.save
   end
-
-
 end
 
 # --== Generate Sample User Attendees

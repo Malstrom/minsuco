@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20170713162530) do
     t.integer "pieces_amount"
     t.decimal "compensation_start_amount", precision: 8, scale: 2
     t.integer "max_attendees"
+    t.string "kind"
     t.date "starts_at"
     t.date "ends_at"
     t.datetime "created_at", null: false

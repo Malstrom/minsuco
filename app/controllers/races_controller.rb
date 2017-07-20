@@ -1,7 +1,10 @@
 class RacesController < ApplicationController
   layout 'application-main'
 
-  before_action :set_race, only: [:show, :edit, :update, :destroy, :start, :pause, :pay_for_join, :pay_for_publish]
+  before_action :set_race, only: [:show, :edit, :update, :destroy, :start, :pause, :pay_for_join, :pay_for_publish, :join, :leave]
+
+  # create avitvity for custom actions
+  after_action :set_activity, only: [:start, :pause, :pay_for_join, :pay_for_publish, :join, :leave], if: -> { @race }
 
   # GET /races
   # GET /races.json
@@ -93,15 +96,34 @@ class RacesController < ApplicationController
     redirect_to @race
   end
 
+  def join
+    @attendee = @race.attendees.build
+
+    @attendee.attendee = current_user
+
+    @attendee.save
+
+    redirect_to @race
+  end
+
+  def leave
+    @attendee = @race.attendees.where(attendee:current_user).first
+
+    @attendee.destroy
+
+    redirect_to @race
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_race
-      if params[:id]
-        @race = Race.find(params[:id])
-      else
-        @race = Race.find(params[:race_id])
-      end
+      @race = Race.find(params[:id])
     end
+
+    def set_activity
+      @race.create_activity action: action_name, owner: @race.owner, recipient: @attendee.attendee if @attendee
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def race_params

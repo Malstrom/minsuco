@@ -56,6 +56,17 @@ class User < ApplicationRecord
   #   end
   # end
 
+  # check if user have permission to join the race (subscription, kind of race, free join token, ecc...)
+  def joinable?
+
+  end
+
+
+  def joined?(race)
+    false
+    true if self.attendees.where(race:race).first
+  end
+
   def self.from_omniauth(auth)
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s).first_or_initialize
     authorization.token = auth.credentials.token
@@ -95,7 +106,5 @@ class User < ApplicationRecord
     authorization.save
     authorization.user
   end
-
-
 
 end

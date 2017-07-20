@@ -7,10 +7,15 @@ Rails.application.routes.draw do
 
   resources :subscriptions
   resources :races do
-    get :start
-    get :pause
-    get :pay_for_publish
-    get :pay_for_join
+    member do
+      get :start
+      get :pause
+      get :pay_for_publish
+      get :pay_for_join
+      get :join
+      get :leave
+    end
+
   end
 
   resources :onboarding, :path => '/on-boarding' do

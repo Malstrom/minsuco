@@ -1,0 +1,159 @@
+<%= form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
+  <div>
+    <h4>Descrizione
+      <br>
+      <!--<small>Nam egestas, leo eu gravida tincidunt</small>-->
+    </h4>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :name, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :name, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :category, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.grouped_collection_select(:category_id, Category.find(1).children, :children, :name, :id ,:name, {},{:class=>'chosen-select input-md form-control input-lg m-b'} ) -%>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :recipients, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.select(:recipients, options_for_select([['Agenti', 'Agenti'], ['Broker', 'Broker'], ['Tutti', 'Tutti'] ]), {},{:class=>'chosen-select input-md form-control m-b'}) %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_area :description, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+    </fieldset>
+
+
+
+    <h4>Remunerazione
+      <br>
+      <!--<small>Nam egestas, leo eu gravida tincidunt</small>-->
+    </h4>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :race_value, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :race_value, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :compensation_amount, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :compensation_amount, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :compensation_kind, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :compensation_kind, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :compensation_start_amount, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :compensation_start_amount, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :max_attendees, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :max_attendees, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :pieces_amount, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :pieces_amount, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+    </fieldset>
+
+    <h4>Pubblicazione
+      <br>
+      <!--<small>Nam egestas, leo eu gravida tincidunt</small>-->
+    </h4>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :starts_at, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.text_field :starts_at, class:'form-control input-lg m-b input-group date', id: 'dae'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+        <div class="col-sm-4">
+          <code>required</code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :ends_at, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-6">
+          <%= f.date_select :ends_at, class:'form-control input-lg m-b'  %>
+          <span class="help-block m-b-none"></span>
+        </div>
+      </div>
+    </fieldset>
+    <h4>Riepilogo
+      <br>
+      <!--<small>Nam egestas, leo eu gravida tincidunt</small>-->
+    </h4>
+    <fieldset></fieldset>
+  </div>
+
+
+<% end %>

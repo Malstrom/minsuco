@@ -1,4 +1,6 @@
 class RacesController < ApplicationController
+  include Wicked::Wizard
+
   layout 'application-main'
 
   before_action :set_race, only: [:show, :edit, :update, :destroy, :start, :pause, :pay_for_join, :pay_for_publish, :join, :leave]
@@ -18,9 +20,23 @@ class RacesController < ApplicationController
   def show
   end
 
+   steps :first_step, :second_step, :third_step
+
   # GET /races/new
   def new
     @race = Race.new
+    # @user = current_user
+    #
+    # case step
+    #   when :template_choose
+    #     @templates = Template.all
+    #     @entity = @user
+    #   when :contact_information
+    #     @entity = @user
+    #   when :location_information
+    #     @entity = Office.new
+    # end
+    # render_wizard
   end
 
   # GET /races/1/edit
@@ -66,6 +82,8 @@ class RacesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
 
   # start race

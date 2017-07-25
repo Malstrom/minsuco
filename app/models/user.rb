@@ -1,19 +1,18 @@
 class User < ApplicationRecord
 
+
   belongs_to    :plan
-  has_many      :authorizations
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: Payola::Subscription, foreign_key: :owner_idx
 
-
-  has_many :races, :foreign_key => "owner_id"
-  has_many :attendees, :foreign_key => "attendee_id"
+  has_many      :authorizations
+  has_many      :races, :foreign_key => "owner_id"
+  has_many      :attendees, :foreign_key => "attendee_id"
 
   enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
 
   enum kind: [:broker, :agent]
 
   #enum business: [:individual, :company]
-
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -26,7 +25,6 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_plan, :if => :new_record?
   # after_create :sign_up_for_mailing_list
-
 
   validates_associated :plan
   validates :email, uniqueness: true
@@ -47,20 +45,10 @@ class User < ApplicationRecord
     end
   end
 
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0,20]
-  #     user.name = auth.info.name   # assuming the user model has a name
-  #     user.image = auth.info.image # assuming the user model has an image
-  #   end
-  # end
-
   # check if user have permission to join the race (subscription, kind of race, free join token, ecc...)
   def joinable?
 
   end
-
 
   def joined?(race)
     false

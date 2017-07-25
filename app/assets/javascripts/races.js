@@ -65,34 +65,27 @@
 //= require select2/dist/js/select2
 
 
-var form = $("#new_race");
-form.validate({
-  errorPlacement: function errorPlacement(error, element) { element.before(error); },
-  rules: {
-    confirm: {
-      equalTo: "#password"
-    }
-  }
-});
-form.children("div").steps({
-  headerTag: "h4",
-  bodyTag: "fieldset",
-  transitionEffect: "slideLeft",
-  onStepChanging: function (event, currentIndex, newIndex)
-  {
-    form.validate().settings.ignore = ":disabled,:hidden";
-    return form.valid();
-  },
-  onFinishing: function (event, currentIndex)
-  {
-    form.validate().settings.ignore = ":disabled";
-    return form.valid();
-  },
-  onFinished: function (event, currentIndex)
-  {
-    alert("Submitted!");
+$("#replace_money_1").hide();
 
-    // Submit form
-    $(this).submit();
-  }
+$('#perc').click(function(){
+  $( "#replace_money_1" ).hide();
+  $( "#replace_money_2" ).replaceWith( "<span id=\"replace_perc_2\" class=\"input-group-addon\">%</span>" );
+});
+
+$('#money').click(function(){
+  $( "#replace_money_1" ).show();
+  $( "#replace_perc_2" ).replaceWith( "<span id=\"replace_money_2\" class=\"input-group-addon\">.00</span>" );
+});
+
+
+$('#pay_for_publish').click(function(){
+  $( ".pay_for_publish" ).show();
+  $( ".pay_for_join" ).hide();
+  $( ".payola-checkout-button" ).show();
+});
+
+$('#pay_for_join').click(function(){
+  $( ".pay_for_publish" ).hide();
+  $( ".pay_for_join" ).show();
+  $( ".payola-checkout-button" ).hide();
 });

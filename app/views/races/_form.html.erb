@@ -1,11 +1,26 @@
-<%= form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
+<% if @race.errors.any? %>
+  <div id="error_explanation">
+    <h2 class="text-center"><%= pluralize(@race.errors.count, "error") %> Per i seguenti motivi non è stato possibile salvara la gara</h2>
 
+    <ul>
+        <% @race.errors.full_messages.each do |message| %>
+        <div class="well well-sm">
+          <h4 class="text-danger"><%= message %></h4>
+        </div>
+        <% end %>
+
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
   <div class="panel-body">
   <h4>Descrizione Gara</h4><br><br>
   <fieldset>
     <div class="form-group">
       <%= f.label :name, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <%= f.text_field :name, class:'form-control'  %>
       </div>
       <div class="col-sm-4">
@@ -16,10 +31,10 @@
   <fieldset>
     <div class="form-group">
       <%= f.label :description, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-6">
-        <%= f.text_area :name, class:'form-control'  %>
+      <div class="col-sm-8">
+        <%= f.text_area :description, class:'form-control', rows: "5"  %>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-2">
         <code>data-parsley-type="email"</code>
       </div>
     </div>
@@ -27,22 +42,25 @@
   <fieldset>
     <div class="form-group">
       <%= f.label :category, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <%= f.grouped_collection_select(:category_id, Category.find(1).children, :children, :name, :id ,:name, {},{:class=>'chosen-select input-md form-control input-lg m-b'} ) -%>
       </div>
-      <div class="col-sm-4">
-        <code>data-parsley-type="number"</code>
+      <%= f.label :recipients, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-3">
+        <%= f.select(:recipients, options_for_select([['Agenti', 'Agenti'], ['Broker', 'Broker'], ['Tutti', 'Tutti'] ]), {},{:class=>'chosen-select input-md form-control m-b'}) %>
       </div>
     </div>
   </fieldset>
+
   <fieldset>
     <div class="form-group">
-      <%= f.label :recipients, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-6">
-        <%= f.select(:recipients, options_for_select([['Agenti', 'Agenti'], ['Broker', 'Broker'], ['Tutti', 'Tutti'] ]), {},{:class=>'chosen-select input-md form-control m-b'}) %>
+      <%= f.label :starts_at, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-3">
+        <%= f.text_field :starts_at, class:'form-control input-group date datetimepicker' %>
       </div>
-      <div class="col-sm-4">
-        <code>data-parsley-type="integer"</code>
+      <%= f.label :ends_at, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-3">
+        <%= f.text_field :ends_at, class:'form-control input-group date datetimepicker'  %>
       </div>
     </div>
   </fieldset>
@@ -52,10 +70,10 @@
   <fieldset>
     <div class="form-group">
       <%= f.label :race_value, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-6 ">
+      <div class="col-sm-3 ">
         <div class="input-group m-b">
-          <span class="input-group-addon">$</span>
-          <%= f.text_field :race_value, class:'form-control'  %>
+          <span class="input-group-addon">€</span>
+          <%= f.text_field :race_value, class:'form-control'%>
           <span class="input-group-addon">.00</span>
         </div>
       </div>
@@ -64,93 +82,52 @@
       </div>
     </div>
   </fieldset>
+
     <fieldset>
       <div class="form-group">
         <%= f.label :compensation_amount, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-6 ">
+        <div class="col-sm-3">
           <div class="input-group m-b">
-            <span class="input-group-addon">$</span>
+            <span id="replace_money_1" class="input-group-addon">€</span>
             <%= f.text_field :compensation_amount, class:'form-control'  %>
-            <span class="input-group-addon">.00</span>
+            <span id="replace_money_2" class="input-group-addon">%</span>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div data-toggle="buttons" class="btn-group">
+            <%= label_tag :compensation_kind, "percentuale", class:'btn btn-primary btn-outline active', id: 'perc' do  %>
+              <%= f.radio_button :compensation_kind, 'perc', :checked => true %>
+              Percentuale
+            <% end %>
+            <%= label_tag :compensation_kind, "monetario", class:'btn btn-primary btn-outline', id: 'money' do  %>
+              <%= f.radio_button :compensation_kind, 'money' %>
+              Monetario
+            <% end %>
           </div>
         </div>
         <div class="col-sm-4">
-          <code>data-parsley-type="digits"</code>
+          <code>data-parsley-type="url"</code>
         </div>
       </div>
     </fieldset>
-  <fieldset>
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Url</label>
-      <div class="col-sm-6">
-        <div data-toggle="buttons" class="btn-group">
-          <%= label_tag :age_child, "percentuale", class:'btn btn-primary btn-outline' do  %>
-            <%= f.radio_button :compensation_kind, value: '%' %>
-            Percentuale
-          <% end %>
-          <%= label_tag :age_child, "monetario", class:'btn btn-primary btn-outline' do  %>
-            <%= f.radio_button :compensation_kind, value: '€' %>
-            Monetario
-          <% end %>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <code>data-parsley-type="url"</code>
-      </div>
-    </div>
-  </fieldset>
+
+
     <fieldset>
       <div class="form-group">
         <%= f.label :max_attendees, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-6">
+        <div class="col-sm-2">
           <%= f.number_field :max_attendees, class:'form-control input-lg m-b'  %>
         </div>
-        <div class="col-sm-4">
-          <code>data-parsley-type="email"</code>
+        <%= f.label :pieces_amount, class: 'col-lg-2 control-label' %>
+        <div class="col-sm-2">
+          <%= f.number_field :pieces_amount, class:'form-control input-lg m-b'  %>
         </div>
       </div>
     </fieldset>
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :pieces_amount, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-6">
-        <%= f.text_field :pieces_amount, class:'form-control input-lg m-b'  %>
-      </div>
-      <div class="col-sm-4">
-        <code>data-parsley-type="email"</code>
-      </div>
-    </div>
-  </fieldset>
-
-  <br><h4>Pubblicazione</h4><br><br>
-
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :starts_at, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-6">
-        <%= f.text_field :starts_at, class:'form-control input-lg m-b input-group date', id: 'starts_at_race'  %>
-      </div>
-      <div class="col-sm-4">
-        <code>data-parsley-type="email"</code>
-      </div>
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :ends_at, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-6">
-        <%= f.text_field :ends_at, class:'form-control input-lg m-b input-group date', id: 'ends_at_race'  %>
-      </div>
-      <div class="col-sm-4">
-        <code>data-parsley-type="email"</code>
-      </div>
-    </div>
-  </fieldset>
 
   <fieldset>
     <div class="form-group text-center">
-      <%= f.submit 'Pubblica la gara', class: 'btn btn-lg btn-success' %>
+      <%= f.submit 'Pubblica la gara', class: 'btn btn-xl btn-success' %>
     </div>
   </fieldset>
 

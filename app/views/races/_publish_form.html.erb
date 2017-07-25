@@ -1,0 +1,76 @@
+<% if @race.errors.any? %>
+  <div id="error_explanation">
+    <h2 class="text-center"><%= pluralize(@race.errors.count, "error") %> Per i seguenti motivi non è stato possibile salvara la gara</h2>
+
+    <ul>
+      <% @race.errors.full_messages.each do |message| %>
+        <div class="well well-sm">
+          <h4 class="text-danger"><%= message %></h4>
+        </div>
+      <% end %>
+
+    </ul>
+  </div>
+<% end %>
+
+<%= nested_form_for @race, url: publish_race_path do |f| %>
+<%# form_for(@race) do |f| %>
+  <div class="panel-body">
+    <h4>Rendi la partecipazione alla gara a pagamento o gratuita</h4><br><br>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :kind, class: 'col-lg-2 control-label' %>
+        <div class="col-sm-3">
+          <div data-toggle="buttons" class="btn-group">
+            <%= label_tag :kind, "public", class:'btn btn-primary btn-outline active', id: 'pay_for_publish' do  %>
+              <%= f.radio_button :kind, 'pay_for_publish', checked:true  %>
+              Gara pubblica
+            <% end %>
+            <%= label_tag :kind, "private", class:'btn btn-primary btn-outline', id: 'pay_for_join' do  %>
+              <%= f.radio_button :kind, 'pay_for_join' %>
+              Gara privata
+            <% end %>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <p class="lead pay_for_publish">29€</p>
+          <p class="lead pay_for_join" style="display: none;">0€</p>
+        </div>
+        <div class="col-sm-5">
+          <span class="help-block m-b-none pay_for_publish">Le persone potranno partecipare gratuitamente alla tua gara.</span>
+          <span style="display: none;" class="help-block m-b-none pay_for_join">Le persone dovranno pagare un o avere un account "pro" per partecipare.</span>
+        </div>
+      </div>
+    </fieldset>
+
+    <!--<h4>Metti in evidenza</h4><br><br>-->
+    <!--<%= f.fields_for :featured_races do |e| %>-->
+      <!--<fieldset>-->
+        <!--<div class="form-group">-->
+          <!--<%= e.label :starts_at, class: 'col-lg-2 control-label' %>-->
+          <!--<div class="col-sm-3">-->
+            <!--<%= e.text_field :starts_at, class:'form-control input-group date datetimepicker'  %>-->
+          <!--</div>-->
+          <!--<%= e.label :ends_at, class: 'col-lg-2 control-label' %>-->
+          <!--<div class="col-sm-3">-->
+            <!--<%= e.text_field :ends_at, class:'form-control input-group date datetimepicker' %>-->
+          <!--</div>-->
+          <!--<%= e.link_to_remove "Rimuovi questo periodo", class:'btn btn-danger btn-xs' %>-->
+        <!--</div>-->
+      <!--</fieldset>-->
+      <!--<br>-->
+      <!--<br>-->
+    <!--<% end %>-->
+    <!--<%= f.link_to_add "Aggiungi un nuovo periodo di tempo", :featured_races, class:'btn btn-success btn-lg' %>-->
+  </div>
+
+  <div class="pay_for_join text-center" style="display: none;">
+    <%= f.submit 'Pubblica la gara', class: 'btn btn-info' %>
+  </div>
+
+<% end %>
+
+<div class="text-center">
+  <%= render 'payola/transactions/checkout', sellable: @race , email:current_user.email, button_text: 'Paga e rendi la gara pubblica'%>
+</div>
+

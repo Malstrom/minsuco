@@ -6,11 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# user = CreateAdminService.new.call
-# puts 'CREATED ADMIN USER: ' << user.email
-#
-# CreatePlanService.new.call
-# puts 'CREATED PLANS'
+user = CreateAdminService.new.call
+puts 'CREATED ADMIN USER: ' << user.email
+
+CreatePlanService.new.call
+puts 'CREATED PLANS'
 
 # Categories
 
@@ -47,10 +47,12 @@ end
   user.image = Faker::Avatar.image
   user.role = %w(pro_creator premium).sample
   user.kind = %w(broker agent).sample
+  user.plan_id = [Plan.find(2),Plan.find(3)].sample()
 
 
   user.save
 
+  # p user.errors.full_messages
 # --== Generate Sample Races
   race = user.races.build
 
@@ -59,7 +61,7 @@ end
 
 
   race_values = %W(10000 50000 100000 75000 25000)
-  race_comp_kinds = %w(0)
+  race_comp_kinds = %w(perc money)
   race_attendees = rand(10..50)
   compensation_start_amounts = %W(0 0 0 0 500 1000)
 
@@ -70,7 +72,7 @@ end
   race_saved = false
   until race_saved
 
-    race.name = Faker::Space.star
+    race.name = Faker::App.name
     race.description = Faker::Matz.quote
     race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     race.race_value = race_values.sample
@@ -78,13 +80,18 @@ end
     race.pieces_amount = rand(5..50)
     race.compensation_start_amount = compensation_start_amounts.sample
     race.max_attendees = race_attendees
-    race.starts_at = rand(Date.civil(2017, 7, 1)..Date.civil(2017, 8, 1))
-    race.ends_at = rand(race.starts_at..Date.civil(2017, 12, 31))
+    race.starts_at = rand(DateTime.now - 7.days..DateTime.now + 7.days)
+    race.ends_at = race.starts_at + rand( 30..90 ).days
     race.compensation_amount = rand(5..50)
     race.kind = %w(pay_for_publish pay_for_join).sample
     race.status = 'started'
+    race.recipients = %w(brokers agents all).sample
+    race.price = 2900
+    race.permalink = race.name
 
     race_saved = race.save
+
+      p race.errors.full_messages
   end
 end
 
@@ -101,6 +108,7 @@ end
   user_attendee.image = Faker::Avatar.image
   user_attendee.role = %w(basic pro_attendee).sample
   user_attendee.kind = %w(broker agent).sample
+  user_attendee.plan_id = [Plan.find(2),Plan.find(3)].sample()
 
   user_attendee.save
 
@@ -116,7 +124,7 @@ races_to_highlight = Race.order("RAND()").limit(5)
 races_to_highlight.each do |race|
   race_to_highlight = race.featured_races.build
 
-  race_to_highlight.starts_at = rand(race.starts_at.to_datetime..rand(race.starts_at.to_datetime + 0.days..race.starts_at.to_datetime + 20.days))
+  race_to_highlight.starts_at = rand(race.starts_at..rand(race.starts_at + 0.days..race.starts_at + 20.days))
   race_to_highlight.ends_at = rand(race_to_highlight.starts_at..rand(race_to_highlight.starts_at + 2.days..race_to_highlight.starts_at + 30.days))
 
   race_to_highlight.save

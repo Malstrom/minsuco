@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :races, :foreign_key => "owner_id"
   has_many :attendees, :foreign_key => "attendee_id"
 
-  enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned]
+  enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
 
   enum kind: [:broker, :agent]
 

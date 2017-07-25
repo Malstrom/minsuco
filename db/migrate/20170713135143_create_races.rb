@@ -14,8 +14,11 @@ class CreateRaces < ActiveRecord::Migration[5.1]
       t.integer :max_attendees
       t.integer :kind
       t.integer :status
-      t.date :starts_at
-      t.date :ends_at
+      t.string  :permalink
+      t.integer :price
+      t.string  :redirect_path, :default => "/races"
+      t.datetime :starts_at
+      t.datetime :ends_at
       t.timestamps
     end
   end

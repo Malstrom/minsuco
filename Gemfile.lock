@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/alekseenko/payola
-  revision: af67b1a4601932f23d0533327557280bc5f5c756
+  remote: https://github.com/Malstrom/payola.git
+  revision: 4aeed174e5b2ddf8cbb187878b816ab30996bbc4
   specs:
     payola-payments (1.5.0)
       aasm (>= 4.0.7)
@@ -12,7 +12,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (4.12.0)
+    aasm (4.12.1)
       concurrent-ruby (~> 1.0)
     actioncable (5.1.0)
       actionpack (= 5.1.0)
@@ -130,6 +130,7 @@ GEM
     multipart-post (2.0.0)
     mysql2 (0.4.7)
     mysql2 (0.4.7-x64-mingw32)
+    nested_form (0.3.2)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
@@ -218,7 +219,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stripe (3.0.0)
+    stripe (3.0.1)
       faraday (~> 0.9)
     stripe_event (1.7.0)
       activesupport (>= 3.1)
@@ -266,6 +267,7 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.5)
   mysql2
+  nested_form
   omniauth-facebook
   omniauth-google-oauth2
   payola-payments!

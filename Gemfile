@@ -68,13 +68,15 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
-gem 'payola-payments', git: 'https://github.com/alekseenko/payola'
+gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
 
 # ----
 
 gem 'wicked'
 
 gem 'public_activity'
+
+gem "nested_form"
 
 
 # gem 'paper_trail' # Track changes to your models' data. Good for auditing or versioning.

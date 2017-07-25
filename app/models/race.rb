@@ -10,6 +10,7 @@ class Race < ApplicationRecord
   has_many :attendees
   has_many :attedees, :class_name => "User", :through => "attendees", :foreign_key => "attendee_id"
 
+  # need for nested form
   accepts_nested_attributes_for :featured_races, allow_destroy: true
 
   # difference between creator pay for make public race and all can join in the race or user must pay for join in race
@@ -49,6 +50,7 @@ class Race < ApplicationRecord
     end
   end
 
+  # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path
     update_attribute(:redirect_path, "/races/#{id}/publish_check")
   end

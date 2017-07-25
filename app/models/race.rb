@@ -1,4 +1,5 @@
 class Race < ApplicationRecord
+  include Payola::Sellable
   include PublicActivity::Model
   tracked
 
@@ -9,17 +10,25 @@ class Race < ApplicationRecord
   has_many :attendees
   has_many :attedees, :class_name => "User", :through => "attendees", :foreign_key => "attendee_id"
 
+  accepts_nested_attributes_for :featured_races, allow_destroy: true
+
   # difference between creator pay for make public race and all can join in the race or user must pay for join in race
   enum kind:   [:pay_for_publish, :pay_for_join]
 
   # start or pause a race
-  enum status: [:started, :paused]
+  enum status: [:started, :paused, :draft]
 
-  validates_presence_of :starts_at, :ends_at
+  # kind of compensation
+  enum compensation_kind: [:perc, :money]
+
+  validates_presence_of :name, :description, :max_attendees, :compensation_amount, :compensation_kind,
+                        :pieces_amount, :recipients, :race_value, :category_id,
+                        :starts_at, :ends_at, :status, :kind
 
   validate :attendees_cap
+  validate :start_in_past
 
-  # validate :start_in_past
+  after_create :set_redirect_path
 
   # return true if race already featured
   def featured?
@@ -29,15 +38,19 @@ class Race < ApplicationRecord
   private
 
   def start_in_past
-    if starts_at < Date.today
+    if starts_at and starts_at < Date.today
       errors.add(:start_in_past, "Race can't starts before today")
     end
   end
 
   def attendees_cap
-    if attendees.count > max_attendees
+    if max_attendees and attendees.count > max_attendees
       errors.add(:attendees_cap, "Race reached the max attendees")
     end
+  end
+
+  def set_redirect_path
+    update_attribute(:redirect_path, "/races/#{id}/publish_check")
   end
 
 end

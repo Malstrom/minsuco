@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       get :pay_for_join
       get :join
       get :leave
+      get :publish,  to: 'races#publish_new'
+      patch :publish, to: 'races#publish_create'
+      get :publish_check, to: 'races#publish_check'
     end
 
   end
@@ -24,9 +27,6 @@ Rails.application.routes.draw do
       get 'joi-contest', to: 'onboarding#join_contest', as: 'joi_contest'
     end
   end
-
-
-
 
   # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard

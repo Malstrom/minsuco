@@ -65,6 +65,7 @@
       });
 
       $('#starts_at_race').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
         icons: {
           time: 'fa fa-clock-o',
           date: 'fa fa-calendar',
@@ -78,6 +79,7 @@
       });
 
       $('#ends_at_race').datetimepicker({
+        format: 'DD/MM/YYYY HH:mm:ss',
         icons: {
           time: 'fa fa-clock-o',
           date: 'fa fa-calendar',

@@ -5,7 +5,23 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  # get "/invites/:provider/contact_callback" => "invites#index"
+  # get "/contacts/failure" => "invites#failure"
+
+  # get "/contacts/:importer/callback" => "onboarding#invite"
+
+  match "/contacts/:importer/callback" => "onboarding#invite", :via => [:get]
+
+  # Google
+  match "/oauth2callback" => "onboarding#invite", :via => [:get]
+
   resources :subscriptions
+
+  resources :users do
+    get :races,     to: 'races#user_races'
+    get :attendees, to: 'races#attendees'
+  end
+
   resources :races do
     member do
       get :start
@@ -18,19 +34,20 @@ Rails.application.routes.draw do
       patch :publish, to: 'races#publish_create'
       get :publish_check, to: 'races#publish_check'
     end
-
   end
 
   resources :onboarding, :path => '/on-boarding' do
     collection do
       get 'new-contest', to: 'onboarding#new_contest', as: 'new_contest'
       get 'joi-contest', to: 'onboarding#join_contest', as: 'joi_contest'
+      get 'invite',      to: 'onboarding#invite', as: 'invite'
     end
   end
 
   # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard
   root :to => redirect('/dashboard/dashboard')
+  # root :to => redirect('/on-boarding/invite')
 
   # view routes
   get '/widgets' => 'widgets#index'

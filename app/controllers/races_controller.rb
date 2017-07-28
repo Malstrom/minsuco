@@ -1,4 +1,5 @@
 class RacesController < ApplicationController
+
   layout 'application-main'
 
   before_action :set_race, only: [:show, :edit, :update, :destroy,
@@ -12,12 +13,23 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    @races = Race.where("ends_at >= ? AND status = ?", DateTime.now, 'started').order('kind ASC')
-    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ?", DateTime.now, DateTime.now, 'started').order('races.kind ASC')
+    sort = params[:sort] ? params[:sort] : 'kind'
+    verse = params[:verse] ? params[:verse] : 'ASC'
+
+    @races = Race.where("ends_at >= ? AND status = ?", DateTime.now, 'started').order("#{sort} #{verse}")
+    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ?", DateTime.now, DateTime.now, 'started').order("races.#{sort} #{verse}")
   end
 
   def user_races
-    @races = Race.where(owner_id: current_user.id)
+    sort = params[:sort] ? params[:sort] : 'kind'
+    verse = params[:verse] ? params[:verse] : 'ASC'
+
+    @races = Race.where("ends_at >= ? AND status = ? AND owner_id = ?", DateTime.now, 'started', current_user.id).order("#{sort} #{verse}")
+    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ? AND owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
+  end
+
+  def attendees
+    @attendees = current_user.attendees
   end
 
   # GET /races/1
@@ -159,7 +171,15 @@ class RacesController < ApplicationController
 
     @attendee.attendee = current_user
 
-    @attendee.save
+
+    if @attendee.save
+      flash[:success] = "Sei dentro la gara"
+    else
+      @race.errors.full_messages.each do |error|
+        flash[:danger] = "Attenzione!"
+      end
+    end
+
 
     redirect_to @race
   end

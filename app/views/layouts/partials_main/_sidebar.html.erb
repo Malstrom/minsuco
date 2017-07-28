@@ -5,19 +5,24 @@
       <ul class="nav">
          <!-- START user info-->
          <li class="has-user-block">
-            <div id="user-block" class="collapse">
+            <div id="user-block" class="">
                <div class="item user-block">
                   <!-- User picture-->
                   <div class="user-block-picture">
                      <div class="user-block-status">
-                        <img src="<%# image_path(current_user.image) %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
-                        <div class="circle circle-success circle-lg"></div>
+                       <% if current_user.image  %>
+                         <img src="<%= image_path(current_user.image)  %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
+                         <div class="circle circle-success circle-lg"></div>
+                       <% else %>
+                         <img src="" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle icon-user" />
+                         <div class="circle circle-success circle-lg"></div>
+                       <% end %>
                      </div>
                   </div>
                   <!-- Name and Job-->
                   <div class="user-block-info">
-                     <span class="user-block-name">Hello, <%# current_user.name %></span>
-                     <span class="user-block-role">Designer</span>
+                     <span class="user-block-name">Hello, <%= current_user.name if current_user %></span>
+                     <span class="user-block-role"><%= current_user.kind.capitalize %></span>
                   </div>
                </div>
             </div>
@@ -25,36 +30,71 @@
          <!-- END user info-->
          <!-- Iterates over all sidebar items-->
          <li class="nav-heading">
-            <span>Main Navigation</span>
+            <span>MENU</span>
          </li>
 
         <li class="<%= 'active' if controller?('dashboard') && action?('dashboard_v1') %>">
           <a href="/dashboard/dashboard_v1" title="Dashboard v1">
             <em class="icon-speedometer"></em>
-            <span>Centro di controllo</span>
+            <span>Dashboard default</span>
           </a>
         </li>
-        <li class="<%= 'active' if controller?('races')%>">
-          <a href="#race" title="Races" data-toggle="collapse">
-            <em class="icon-doc"></em>
-            <span data-localize="sidebar.nav.race.RACES">GARE</span>
-          </a>
-          <ul id="race" class="nav sidebar-subnav collapse">
-            <li class="sidebar-subnav-header">GARE</li>
-            <li class="<%= 'active' if controller?('races') && action?('index') %>">
-              <%= link_to(races_path) do %>
-                <span data-localize="sidebar.nav.race.INDEX">Le gare sul portale</span>
-              <% end %>
-            </li>
-            <li class="<%= 'active' if controller?('racse') && action?('index') %>">
-              <%= link_to(races_path) do %>
-                <span data-localize="sidebar.nav.race.INDEX">Le mie gare</span>
-              <% end %>
-            </li>
-          </ul>
+
+        <li class="<%= 'active' if controller?('races') && action?('index') %>">
+          <%= link_to(races_path) do %>
+            <em class="fa fa-bullseye"></em>
+            <span data-localize="sidebar.nav.race.INDEX">TUTTE LE GARE</span>
+          <% end %>
+        </li>
+
+        <li class="<%= 'active' if controller?('races') && action?('user_races') %>">
+          <%= link_to(user_races_path current_user) do %>
+            <em class="fa fa-road"></em>
+            <span data-localize="sidebar.nav.race.INDEX">LE MIE GARE</span>
+          <% end %>
+        </li>
+
+        <li class="<%= 'active' if controller?('races') && action?('user_attendee') %>">
+          <%= link_to(user_attendees_path current_user) do %>
+            <em class="fa fa-car"></em>
+            <span data-localize="sidebar.nav.race.INDEX">GARE DOVE PARTECIPO</span>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to(destroy_user_session_path, method: :delete) do %>
+            <span data-localize="sidebar.nav.race.INDEX">Logout</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(new_race_path) do %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(new_race_path) do %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(new_race_path) do %>
+          <% end %>
+        </li>
+        <li style="background-color: #0CB225">
+          <%= link_to(new_race_path) do %>
+            <em class="icon-plus"></em>
+            <span data-localize="sidebar.nav.race.INDEX">CREA UNA GARA</span>
+          <% end %>
         </li>
       </ul>
       <!-- END sidebar nav-->
+
+
    </nav>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-success btn-xl">Crea una gara</button>
+
+    </div>
+  </div>
+
 </div>
 <!-- END Sidebar (left)-->

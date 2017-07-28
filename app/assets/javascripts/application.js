@@ -10,6 +10,9 @@
 
 //= require jquery_nested_form
 
+//= require jquery
+//= require jquery_ujs
+
 
 
 $('.datetimepicker').datetimepicker({

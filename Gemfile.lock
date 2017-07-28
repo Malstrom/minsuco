@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/Diego81/omnicontacts.git
+  revision: 64a50f77ad677e19fb96c45aa19bd5bfb28b6f81
+  specs:
+    omnicontacts (0.3.9)
+      json
+      rack
+
+GIT
   remote: https://github.com/Malstrom/payola.git
   revision: 4aeed174e5b2ddf8cbb187878b816ab30996bbc4
   specs:
@@ -114,6 +122,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    json (2.1.0)
     jwt (1.5.6)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -270,6 +279,7 @@ DEPENDENCIES
   nested_form
   omniauth-facebook
   omniauth-google-oauth2
+  omnicontacts!
   payola-payments!
   public_activity
   puma (~> 3.7)

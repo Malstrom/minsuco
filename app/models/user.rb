@@ -4,10 +4,10 @@ class User < ApplicationRecord
   belongs_to    :plan
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: Payola::Subscription, foreign_key: :owner_idx
 
-  has_many      :friends
+  has_many      :friends, dependent: :destroy
   has_many      :authorizations, dependent: :destroy
   has_many      :races, :foreign_key => "owner_id"
-  has_many      :attendees, :foreign_key => "attendee_id"
+  has_many      :attendees, :foreign_key => "attendee_id", :dependent => :destroy
 
   enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
 

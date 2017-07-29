@@ -45,8 +45,8 @@ Rails.application.routes.draw do
 
   # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard
-  root 'application#after_login'
   # root :to => redirect('/on-boarding/invite')
+  root :to => redirect('dashboard/dashboard')
 
   # view routes
   get '/widgets' => 'widgets#index'

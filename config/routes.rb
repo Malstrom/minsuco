@@ -38,15 +38,14 @@ Rails.application.routes.draw do
 
   resources :onboarding, :path => '/on-boarding' do
     collection do
-      get 'new-contest', to: 'onboarding#new_contest', as: 'new_contest'
-      get 'joi-contest', to: 'onboarding#join_contest', as: 'joi_contest'
-      get 'invite',      to: 'onboarding#invite', as: 'invite'
+      get 'kind', to: 'onboarding#kind', as: 'kind'
+      get 'invite', to: 'onboarding#invite', as: 'invite'
     end
   end
 
   # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard
-  root :to => redirect('/dashboard/dashboard')
+  root 'application#after_login'
   # root :to => redirect('/on-boarding/invite')
 
   # view routes

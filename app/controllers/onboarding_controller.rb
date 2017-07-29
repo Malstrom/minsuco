@@ -1,19 +1,17 @@
 class OnboardingController < ApplicationController
   layout 'pages'
 
-  def index
-
-  end
-
-  def new_contest
-  end
-
-  def join_contest
+  def kind
   end
 
   def invite
     @contacts = request.env['omnicontacts.contacts']
-    @user = request.env['omnicontacts.user']
-  end
+    @user = current_user
 
+    unless @contacts.nil?
+      @contacts.each do |contact|
+        @user.friends.create(name:contact[:name], email:contact[:email]) if contact[:email]
+      end
+    end
+  end
 end

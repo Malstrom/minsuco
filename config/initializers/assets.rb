@@ -17,6 +17,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 Rails.application.config.assets.precompile += %w( races.css races.js
  subscriptions.css subscriptions.js
- onboarding.css onboarding.js
  devise/sessions.css devise/sessions.js
  devise/registrations.css devise/registrations.js )

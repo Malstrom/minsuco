@@ -6,9 +6,13 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
-  def dashboard
+  def after_login
+    if current_user.sign_in_count == 1
+      redirect_to kind_onboarding_index_path
+    else
+      redirect_to dashboard_dashboard_path
+    end
   end
-
 
   private
 
@@ -19,4 +23,6 @@ class ApplicationController < ActionController::Base
       "application-main"
     end
   end
+
+
 end

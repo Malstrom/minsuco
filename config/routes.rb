@@ -36,13 +36,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :onboarding, :path => '/on-boarding' do
-    collection do
-      get 'kind', to: 'onboarding#kind', as: 'kind'
-      get 'invite', to: 'onboarding#invite', as: 'invite'
-    end
-  end
-
   # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard
   # root :to => redirect('/on-boarding/invite')

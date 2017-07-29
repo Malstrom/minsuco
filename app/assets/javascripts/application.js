@@ -2,7 +2,6 @@
 // listed below.
 //
 
-//= require onboarding.js
 //= require payola
 
 //--- Angle

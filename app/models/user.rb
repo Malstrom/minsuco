@@ -1,6 +1,5 @@
 class User < ApplicationRecord
 
-
   belongs_to    :plan
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: Payola::Subscription, foreign_key: :owner_idx
 

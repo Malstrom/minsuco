@@ -14,7 +14,7 @@
                          <img src="<%= image_path(current_user.image)  %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
                          <div class="circle circle-success circle-lg"></div>
                        <% else %>
-                         <img src="" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle icon-user" />
+                         <img src="<%= image_path("default_profile.png")%>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle icon-user" />
                          <div class="circle circle-success circle-lg"></div>
                        <% end %>
                      </div>

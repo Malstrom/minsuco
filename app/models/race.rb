@@ -19,10 +19,7 @@ class Race < ApplicationRecord
   # start or pause a race
   enum status: [:started, :paused, :draft]
 
-  # kind of compensation
-  enum compensation_kind: [:perc, :money]
-
-  validates_presence_of :name, :description, :max_attendees, :compensation_amount, :compensation_kind,
+  validates_presence_of :name, :description, :max_attendees, :compensation_amount,
                         :pieces_amount, :recipients, :race_value, :category_id,
                         :starts_at, :ends_at, :status, :kind
 

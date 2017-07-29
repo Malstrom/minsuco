@@ -6,7 +6,6 @@ one:
   max_attendees: 1
   category: MyString
   compensation_amount: 9.99
-  compensation_kind: 1
   pieces_amount: 1
   compensation_start_amount: 9.99
   recipients: MyString
@@ -19,7 +18,6 @@ two:
   max_attendees: 1
   category: MyString
   compensation_amount: 9.99
-  compensation_kind: 1
   pieces_amount: 1
   compensation_start_amount: 9.99
   recipients: MyString

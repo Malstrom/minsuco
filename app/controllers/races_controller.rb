@@ -55,7 +55,6 @@ class RacesController < ApplicationController
     @race.description = Faker::Matz.quote
     @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     @race.race_value = race_values.sample
-    # @race.compensation_kind = race_comp_kinds.sample
     @race.pieces_amount = rand(5..50)
     @race.compensation_start_amount = compensation_start_amounts.sample
     @race.max_attendees = race_attendees
@@ -75,7 +74,6 @@ class RacesController < ApplicationController
     @race = current_user.races.build(race_params)
 
     @race.kind = 'pay_for_join' unless @race.kind # set race kind private by default
-    @race.compensation_kind = 'perc' unless @race.compensation_kind # set race kind private by default
     @race.price = 2900
     @race.permalink = @race.name.parameterize
     @race.status = 'draft' # set race to status draft
@@ -205,7 +203,7 @@ class RacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def race_params
-      params.require(:race).permit(:name, :description, :owner, :max_attendees, :compensation_amount, :compensation_kind,
+      params.require(:race).permit(:name, :description, :owner, :max_attendees, :compensation_amount,
                                    :pieces_amount, :compensation_start_amount, :recipients, :race_value, :category_id,
                                    :starts_at, :ends_at)
     end

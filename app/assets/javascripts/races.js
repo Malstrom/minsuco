@@ -65,17 +65,17 @@
 //= require select2/dist/js/select2
 
 
-$("#replace_money_1").hide();
-
-$('#perc').click(function(){
-  $( "#replace_money_1" ).hide();
-  $( "#replace_money_2" ).replaceWith( "<span id=\"replace_perc_2\" class=\"input-group-addon\">%</span>" );
-});
-
-$('#money').click(function(){
-  $( "#replace_money_1" ).show();
-  $( "#replace_perc_2" ).replaceWith( "<span id=\"replace_money_2\" class=\"input-group-addon\">.00</span>" );
-});
+// $("#replace_money_1").hide();
+//
+// $('#perc').click(function(){
+//   $( "#replace_money_1" ).hide();
+//   $( "#replace_money_2" ).replaceWith( "<span id=\"replace_perc_2\" class=\"input-group-addon\">%</span>" );
+// });
+//
+// $('#money').click(function(){
+//   $( "#replace_money_1" ).show();
+//   $( "#replace_perc_2" ).replaceWith( "<span id=\"replace_money_2\" class=\"input-group-addon\">.00</span>" );
+// });
 
 
 $('#pay_for_publish').click(function(){

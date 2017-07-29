@@ -83,47 +83,34 @@
     </div>
   </fieldset>
 
-    <fieldset>
-      <div class="form-group">
-        <%= f.label :compensation_amount, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-3">
-          <div class="input-group m-b">
-            <span id="replace_money_1" class="input-group-addon">€</span>
-            <%= f.text_field :compensation_amount, class:'form-control'  %>
-            <span id="replace_money_2" class="input-group-addon">%</span>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div data-toggle="buttons" class="btn-group">
-            <%= label_tag :compensation_kind, "percentuale", class:'btn btn-primary btn-outline active', id: 'perc' do  %>
-              <%= f.radio_button :compensation_kind, 'perc', :checked => true %>
-              Percentuale
-            <% end %>
-            <%= label_tag :compensation_kind, "monetario", class:'btn btn-primary btn-outline', id: 'money' do  %>
-              <%= f.radio_button :compensation_kind, 'money' %>
-              Monetario
-            <% end %>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <code>data-parsley-type="url"</code>
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :compensation_amount, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-3">
+        <div class="input-group m-b">
+          <%= f.text_field :compensation_amount, class:'form-control'  %>
+          <span id="replace_money_2" class="input-group-addon">%</span>
         </div>
       </div>
-    </fieldset>
-
-
-    <fieldset>
-      <div class="form-group">
-        <%= f.label :max_attendees, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-2">
-          <%= f.number_field :max_attendees, class:'form-control input-lg m-b'  %>
-        </div>
-        <%= f.label :pieces_amount, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-2">
-          <%= f.number_field :pieces_amount, class:'form-control input-lg m-b'  %>
-        </div>
+      <div class="col-sm-4">
+        <code>data-parsley-type="url"</code>
       </div>
-    </fieldset>
+    </div>
+  </fieldset>
+
+
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :max_attendees, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-2">
+        <%= f.number_field :max_attendees, class:'form-control input-lg m-b'  %>
+      </div>
+      <%= f.label :pieces_amount, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-2">
+        <%= f.number_field :pieces_amount, class:'form-control input-lg m-b'  %>
+      </div>
+    </div>
+  </fieldset>
 
   <fieldset>
     <div class="form-group text-center">

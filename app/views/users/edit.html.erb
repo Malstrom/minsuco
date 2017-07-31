@@ -8,8 +8,6 @@
           <a href="#tabSetting2" data-toggle="tab" class="list-group-item">Password</a>
           <a href="#tabSetting4" data-toggle="tab" class="list-group-item">Notifications</a>
           <%= link_to "Abbonamenti", plans_user_path, class:"list-group-item" %>
-          <a href="#tabSetting6" data-toggle="tab" class="list-group-item">Amici</a>
-          <a href="#tabSetting7" data-toggle="tab" class="list-group-item">Premi</a>
         </div>
       </div>
     </div>
@@ -133,125 +131,56 @@
             </div>
           </form>
         </div>
-        <div id="tabSetting5" class="tab-pane">
-          <div class="panel b">
-            <div class="panel-heading bg-gray-lighter text-bold">Applications</div>
-            <div class="panel-body">
-              <p>
-                <span>You have granted access for</span>
-                <strong>3 applications</strong>
-                <span>to your account.</span>
-              </p>
-              <ul class="list-group">
-                <li class="list-group-item clearfix">
-                  <div class="pull-left mr">
-                    <img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />
-                  </div>
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default">
-                      <strong>Revoke</strong>
-                    </button>
-                  </div>
-                  <p class="text-bold mb0">Application #1</p>
-                  <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
-                </li>
-                <li class="list-group-item clearfix">
-                  <div class="pull-left mr">
-                    <img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />
-                  </div>
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default">
-                      <strong>Revoke</strong>
-                    </button>
-                  </div>
-                  <p class="text-bold mb0">Application #2</p>
-                  <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
-                </li>
-                <li class="list-group-item clearfix">
-                  <div class="pull-left mr">
-                    <img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />
-                  </div>
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default">
-                      <strong>Revoke</strong>
-                    </button>
-                  </div>
-                  <p class="text-bold mb0">Application #3</p>
-                  <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div id="tabSetting6" class="tab-pane">
-          <div class="panel b">
-            <div class="panel-heading bg-gray-lighter text-bold">Applications</div>
-            <div class="panel-body">
-              <p>
-                <span>Invita i tuoi amici e avrai per ognuno di loro</span>
-                <strong>1 gara</strong>
-                <span>privata alla quale potrai partecipare</span>
-              </p>
-              <div class="text-center">
-                <%= link_to '/contacts/gmail', class: "btn btn-labeled btn-danger" do %>
-                  <span class="btn-label"><i class="fa fa-google"></i></span>
-                  <%= "Accedi hai contatti di google" %>
-                <% end %>
-              </div>
-              <br>
-            </div>
-          </div>
-        </div>
-        <div id="tabSetting7" class="tab-pane">
-          <div class="panel b">
-            <div class="panel-heading bg-gray-lighter text-bold">Applications</div>
-            <div class="panel-body">
-              <p>
-                <span>You have granted access for</span>
-                <strong>3 applications</strong>
-                <span>to your account.</span>
-              </p>
-              <ul class="list-group">
-                <li class="list-group-item clearfix">
-                  <div class="pull-left mr">
-                    <img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />
-                  </div>
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default">
-                      <strong>Revoke</strong>
-                    </button>
-                  </div>
-                  <p class="text-bold mb0">Application #1</p>
-                  <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
-                </li>
-                <li class="list-group-item clearfix">
-                  <div class="pull-left mr">
-                    <img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />
-                  </div>
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default">
-                      <strong>Revoke</strong>
-                    </button>
-                  </div>
-                  <p class="text-bold mb0">Application #2</p>
-                  <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
-                </li>
-                <li class="list-group-item clearfix">
-                  <div class="pull-left mr">
-                    <img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />
-                  </div>
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-default">
-                      <strong>Revoke</strong>
-                    </button>
-                  </div>
-                  <p class="text-bold mb0">Application #3</p>
-                  <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <!--<div id="tabSetting5" class="tab-pane">-->
+          <!--<div class="panel b">-->
+            <!--<div class="panel-heading bg-gray-lighter text-bold">Applications</div>-->
+            <!--<div class="panel-body">-->
+              <!--<p>-->
+                <!--<span>You have granted access for</span>-->
+                <!--<strong>3 applications</strong>-->
+                <!--<span>to your account.</span>-->
+              <!--</p>-->
+              <!--<ul class="list-group">-->
+                <!--<li class="list-group-item clearfix">-->
+                  <!--<div class="pull-left mr">-->
+                    <!--<img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />-->
+                  <!--</div>-->
+                  <!--<div class="pull-right">-->
+                    <!--<button type="button" class="btn btn-default">-->
+                      <!--<strong>Revoke</strong>-->
+                    <!--</button>-->
+                  <!--</div>-->
+                  <!--<p class="text-bold mb0">Application #1</p>-->
+                  <!--<small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>-->
+                <!--</li>-->
+                <!--<li class="list-group-item clearfix">-->
+                  <!--<div class="pull-left mr">-->
+                    <!--<img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />-->
+                  <!--</div>-->
+                  <!--<div class="pull-right">-->
+                    <!--<button type="button" class="btn btn-default">-->
+                      <!--<strong>Revoke</strong>-->
+                    <!--</button>-->
+                  <!--</div>-->
+                  <!--<p class="text-bold mb0">Application #2</p>-->
+                  <!--<small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>-->
+                <!--</li>-->
+                <!--<li class="list-group-item clearfix">-->
+                  <!--<div class="pull-left mr">-->
+                    <!--<img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />-->
+                  <!--</div>-->
+                  <!--<div class="pull-right">-->
+                    <!--<button type="button" class="btn btn-default">-->
+                      <!--<strong>Revoke</strong>-->
+                    <!--</button>-->
+                  <!--</div>-->
+                  <!--<p class="text-bold mb0">Application #3</p>-->
+                  <!--<small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
     </div>
   </div>

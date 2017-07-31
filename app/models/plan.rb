@@ -6,7 +6,7 @@ class Plan < ApplicationRecord
     validates :stripe_id, inclusion: { in: Plan.pluck('DISTINCT stripe_id'),
                                        message: "not a valid subscription plan" }
 
-    def redirect_path(subscription)
-      '/'
-    end
+    # def redirect_path(subscription)
+    #   '/'
+    # end
 end

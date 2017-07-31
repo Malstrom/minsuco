@@ -8,11 +8,11 @@ class User < ApplicationRecord
   has_many      :races, :foreign_key => "owner_id"
   has_many      :attendees, :foreign_key => "attendee_id", :dependent => :destroy
 
-  enum role: [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
+  enum role:        [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
 
-  enum kind: [:broker, :agent]
+  enum kind:        [:broker, :agente]
 
-  #enum business: [:individual, :company]
+  enum fiscal_kind: [:individual, :company]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -69,6 +69,8 @@ class User < ApplicationRecord
 
         user.save
       end
+      user.image = auth.info.image
+      user.save
       authorization.user_id = user.id
     end
     authorization.save
@@ -89,6 +91,8 @@ class User < ApplicationRecord
 
         user.save
       end
+      user.image = auth.info.image
+      user.save
       authorization.user_id = user.id
     end
     authorization.save

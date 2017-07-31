@@ -1,0 +1,53 @@
+<div class="panel b">
+  <div class="panel-heading bg-gray-lighter text-bold">Profile</div>
+  <div class="panel-body">
+    <%= form_for @user do |f| %>
+      <div class="form-group">
+        <% if @user.image %>
+          <div class="pv-lg">
+            <img src="<%= image_path(current_user.image) %>" alt="Contact" class="center-block img-responsive img-circle img-thumbnail thumb96">
+          </div>
+        <% else %>
+          <label>Carica la tua immagine di profilo dai social </label>
+          <br>
+          <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
+            <span class="btn-label"><i class="fa fa-facebook"></i></span>
+            <%= "Carica immagine di profilo da Facebook" %>
+          <% end %>
+          <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-labeled btn-danger" do %>
+            <span class="btn-label"><i class="fa fa-google"></i></span>
+            <%= "Carica immagine di profilo da Google" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name  %>
+        <%= f.text_field :name, class: 'form-control'%>
+      </div>
+      <div class="form-group">
+        <%= f.label :email  %>
+        <%= f.text_field :email, class: 'form-control'%>
+      </div>
+      <div class="form-group">
+        <%= f.label :rui  %>
+        <%= f.text_field :rui, class: 'form-control'%>
+      </div>
+      <div class="form-group">
+        <%= f.label :kind  %>
+        <%= f.select(:kind, User.kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :fiscal_kind  %>
+        <%= f.select(:fiscal_kind, User.fiscal_kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :location  %>
+        <%= f.text_field :location, class: 'form-control'%>
+      </div>
+      <%= f.submit "Aggiorna informazioni", class:"btn btn-info" %>
+      <p>
+        <small class="text-muted">Per pubblicare una gara sul portale e obbligatorio fornire un RUI valido </small>
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<h3>Invita i tuoi colleghi</h3>
+<!-- START row-->
+<div class="row" style="max-height: 100px;">
+  <div class="col-sm-4">
+    <div class="panel b">
+      <div class="panel-heading bg-gray-lighter text-bold">Collega i profili social</div>
+      <div class="panel-body">
+        <div class="text-center">
+          <%= link_to '/contacts/gmail', class: "btn btn-labeled btn-danger btn-xl" do %>
+            <span class="btn-label"><i class="fa fa-google"></i></span>
+            <%= "Google Contatti" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <div class="panel b">
+      <div class="panel-heading bg-gray-lighter text-bold">Invita con google</div>
+      <div class="panel-body">
+        <table class="table table-hover mb-mails table-striped">
+          <tbody>
+            <% unless @contacts.nil?%>
+              <% @contacts.each do |c|%>
+                <tr>
+                  <td>
+                    <img alt="Mail Avatar" src="<%= image_path('default_profile.png') %>" class="mb-mail-avatar pull-left">
+                    <div class="mb-mail-meta">
+                      <div class="pull-left">
+                        <div class="mb-mail-subject"><%= c[:name] %></div>
+                        <div class="mb-mail-from"><%= c[:email] %></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-">
+                      <%= link_to 'Invita', invite_user_path(current_user), remote:true, method: 'post', class: 'btn btn-info' %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          <!-- ngRepeat: mail in mails | filter:folder-->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END panel tab-->
+
+<!-- GOOGLE MAPS-->

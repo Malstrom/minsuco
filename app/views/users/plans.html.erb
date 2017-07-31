@@ -33,7 +33,8 @@
             <span>Crea gare pubbliche</span>
           </p>
         </div>
-        <div class="panel-body text-center"><a href="" class="btn btn-default btn-lg">Select this plan</a>
+        <div class="panel-body text-center">
+          <p class="lead">Free</p>
         </div>
       </div>
     </div>
@@ -65,7 +66,8 @@
             <span>Crea gare pubbliche</span>
           </p>
         </div>
-        <div class="panel-body text-center"><a href="" class="btn btn-danger btn-lg">Select this plan</a>
+        <div class="panel-body text-center">
+          <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_attendee').first %>
         </div>
       </div>
     </div>
@@ -97,7 +99,8 @@
             <span>Crea gare pubbliche</span>
           </p>
         </div>
-        <div class="panel-body text-center"><a href="" class="btn btn-default btn-lg">Select this plan</a>
+        <div class="panel-body text-center">
+          <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_creator').first %>
         </div>
       </div>
     </div>

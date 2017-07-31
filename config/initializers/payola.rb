@@ -29,6 +29,17 @@ Payola.configure do |payola|
   # end
   #
 
+  payola.subscribe('payola.subscription.active') do |sub|
+    user = User.find_by(email: sub.email)
+
+
+    user.update_attribute()
+
+    sub.owner = user
+    sub.save!
+  end
+
+
 
 
 

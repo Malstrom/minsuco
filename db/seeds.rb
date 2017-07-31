@@ -46,7 +46,7 @@ end
   user.password_confirmation = user.password
   user.image = Faker::Avatar.image
   user.role = %w(pro_creator premium).sample
-  user.kind = %w(broker agent).sample
+  user.kind = %w(broker agente).sample
   user.plan_id = [Plan.find(2),Plan.find(3)].sample()
 
 
@@ -106,7 +106,7 @@ end
   user_attendee.password_confirmation = user_attendee.password
   user_attendee.image = Faker::Avatar.image
   user_attendee.role = %w(basic pro_attendee).sample
-  user_attendee.kind = %w(broker agent).sample
+  user_attendee.kind = %w(broker agente).sample
   user_attendee.plan_id = [Plan.find(2),Plan.find(3)].sample()
 
   user_attendee.save

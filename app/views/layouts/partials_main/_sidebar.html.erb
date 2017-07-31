@@ -60,20 +60,24 @@
             <span data-localize="sidebar.nav.race.INDEX">GARE DOVE PARTECIPO</span>
           <% end %>
         </li>
-
+        <li>
+          <%= link_to(edit_user_path(current_user)) do %>
+            <em class="fa fa-user"></em>
+            <span data-localize="sidebar.nav.race.INDEX">IMPOSTAZIONI</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(friends_user_path(current_user)) do %>
+            <em class="fa fa-gift"></em>
+            <span data-localize="sidebar.nav.race.INDEX">PREMI</span>
+          <% end %>
+        </li>
         <li>
           <%= link_to(destroy_user_session_path, method: :delete) do %>
-            <span data-localize="sidebar.nav.race.INDEX">Logout</span>
+            <span data-localize="sidebar.nav.race.INDEX">LOGOUT</span>
           <% end %>
         </li>
-        <li>
-          <%= link_to(new_race_path) do %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to(new_race_path) do %>
-          <% end %>
-        </li>
+
         <li>
           <%= link_to(new_race_path) do %>
           <% end %>

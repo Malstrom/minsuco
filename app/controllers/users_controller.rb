@@ -61,6 +61,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def plans
+  end
+
+  def friends
+    @user = current_user
+
+    @google_contacts = request.env['omnicontacts.contacts']
+
+    unless @google_contacts.nil?
+      @google_contacts.each do |contact|
+        @user.friends.create(name:contact[:name], email:contact[:email]) if contact[:email]
+      end
+    end
+
+    @contacts = @user.friends
+  end
+
+  def invite
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -69,6 +90,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.fetch(:user, {})
+      params.require(:user).permit(:rui, :name, :password, :plan, :role, :kind, :image, :fiscal_kind, :location, :password)
+      # params.fetch(:user, {:name})
     end
 end

@@ -31,16 +31,9 @@ Payola.configure do |payola|
 
   payola.subscribe('payola.subscription.active') do |sub|
     user = User.find_by(email: sub.email)
+    user.update_attribute(:plan, Plan.find(sub.plan_id))
 
-
-    user.update_attribute()
-
-    sub.owner = user
-    sub.save!
   end
-
-
-
 
 
   # Payola.subscribe 'customer.subscription.deleted' do |event|

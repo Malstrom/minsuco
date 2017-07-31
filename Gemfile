@@ -77,7 +77,7 @@ gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
 
 gem 'wicked'
 
-gem 'public_activity'
+# gem 'public_activity'
 
 gem "nested_form"
 

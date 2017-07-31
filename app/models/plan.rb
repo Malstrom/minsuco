@@ -9,4 +9,5 @@ class Plan < ApplicationRecord
     # def redirect_path(subscription)
     #   '/'
     # end
+
 end

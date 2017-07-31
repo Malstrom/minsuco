@@ -62,6 +62,7 @@ class UsersController < ApplicationController
   end
 
   def plans
+    @user = current_user
   end
 
   def friends

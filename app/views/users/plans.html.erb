@@ -67,7 +67,14 @@
           </p>
         </div>
         <div class="panel-body text-center">
-          <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_attendee').first %>
+          <% if current_user.plan == Plan.where(stripe_id: 'pro_attendee').first %>
+            <p class="lead">
+              Iscritto
+            </p>
+          <% else %>
+            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_attendee').first %>
+          <% end %>
+          <br>
         </div>
       </div>
     </div>
@@ -100,7 +107,14 @@
           </p>
         </div>
         <div class="panel-body text-center">
-          <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_creator').first %>
+          <% if @user.plan == Plan.where(stripe_id: 'pro_creator').first %>
+            <p class="lead">
+              Iscritto
+            </p>
+          <% else %>
+            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_creator').first %>
+            <br>
+          <% end %>
         </div>
       </div>
     </div>

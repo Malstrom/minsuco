@@ -1,14 +1,9 @@
 class RacesController < ApplicationController
-
   layout 'application-main'
 
   before_action :set_race, only: [:show, :edit, :update, :destroy,
                                   :start, :pause, :pay_for_join, :pay_for_publish, :join, :leave, :publish_new,
                                   :publish_check]
-
-  # create avitvity for custom actions
-  after_action :set_activity, only: [:start, :pause, :pay_for_join, :pay_for_publish, :join, :leave, :publish_create],
-               if: -> { @race }
 
   # GET /races
   # GET /races.json
@@ -194,10 +189,6 @@ class RacesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_race
       @race = Race.find(params[:id])
-    end
-
-    def set_activity
-      @race.create_activity action: action_name, owner: @race.owner, recipient: @attendee.attendee if @attendee
     end
 
 

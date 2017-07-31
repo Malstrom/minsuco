@@ -26,9 +26,8 @@
   <% if key == 'notice' %>
     <% key = 'info' %>
   <% end%>
-  <div data-notify="" data-message="<%= value %>" data-onload="true" data-options="{&quot;status&quot;:&quot;<%= key %>&quot;}"></div>
+  <div id="notice" data-notify="" data-message="<%= value %>" data-onload="true" data-options="{&quot;status&quot;:&quot;<%= key %>&quot;}"></div>
 <% end %>
-
 
 <div class="wrapper">
   <!-- top navbar-->

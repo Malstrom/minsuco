@@ -7,7 +7,24 @@ class Attendee < ApplicationRecord
   validate :max_attendee
   validate :unique_join
 
+  after_create_commit { create_event }
+
   private
+
+  def create_event
+
+    event = Event.new
+
+    event.thing_type = 'Attendee'
+    event.thing_id = id
+    event.owner = attendee
+    event.recipient = race.owner
+    event.notifiable = true
+    event.read = false
+    event.message = "join in race"
+
+    event.save
+  end
 
   def self_join
     if self.race.owner_id == self.attendee_id

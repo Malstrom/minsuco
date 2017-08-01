@@ -21,4 +21,5 @@ Rails.application.config.assets.precompile += %w(
  devise/sessions.css devise/sessions.js
  devise/registrations.css devise/registrations.js
  devise/passwords.css devise/passwords.js
- users.css users.js )
+ users.css users.js
+ cable.js )

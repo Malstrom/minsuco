@@ -8,8 +8,6 @@ class DashboardController < ApplicationController
 
   def dashboard
     @user = current_user
-    # races
-    # user.races
   end
   
   def dashboard_v1

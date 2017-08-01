@@ -27,7 +27,7 @@ class CreatePlanService
     p5 = Plan.where(name: 'Basic').first_or_initialize do |p|
       p.amount = 0
       p.interval = 'month'
-      p.stripe_id = 'Basic'
+      p.stripe_id = 'basic'
     end
     p5.save!(:validate => false)
   end

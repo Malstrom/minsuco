@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  thing_type: MyString
+  thing_id: 1
+  owner: one
+  recipient: one
+  message: MyString
+  notifiable: false
+  read: false
+
+two:
+  thing_type: MyString
+  thing_id: 1
+  owner: two
+  recipient: two
+  message: MyString
+  notifiable: false
+  read: false

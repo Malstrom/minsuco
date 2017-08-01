@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170729155406) do
+ActiveRecord::Schema.define(version: 20170801130738) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "attendee_id"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 20170729155406) do
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "thing_type"
+    t.integer "thing_id"
+    t.bigint "owner_id"
+    t.bigint "recipient_id"
+    t.string "message"
+    t.boolean "notifiable"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_events_on_owner_id"
+    t.index ["recipient_id"], name: "index_events_on_recipient_id"
   end
 
   create_table "featured_races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -209,12 +223,15 @@ ActiveRecord::Schema.define(version: 20170729155406) do
     t.string "rui"
     t.integer "fiscal_kind"
     t.string "location"
+    t.string "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["plan_id"], name: "index_users_on_plan_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "attendees", "users", column: "attendee_id"
+  add_foreign_key "events", "users", column: "owner_id"
+  add_foreign_key "events", "users", column: "recipient_id"
   add_foreign_key "featured_races", "races"
   add_foreign_key "friends", "users"
   add_foreign_key "races", "users", column: "owner_id"

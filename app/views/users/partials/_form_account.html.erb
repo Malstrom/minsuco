@@ -2,23 +2,33 @@
   <div class="panel-heading bg-gray-lighter text-bold">Profile</div>
   <div class="panel-body">
     <%= form_for @user do |f| %>
-      <div class="form-group">
-        <% if @user.image %>
-          <div class="pv-lg">
-            <img src="<%= image_path(current_user.image) %>" alt="Contact" class="center-block img-responsive img-circle img-thumbnail thumb96">
+      <div class="panel widget">
+        <div style="background-image: url( /assets/angle/bg4-d85e6960c1af43fc45a9ccc7edbed0f99059eb8e403623b279db7c583b282f86.jpg)" class="panel-body text-center bg-center">
+          <div class="row row-table">
+            <div class="col-xs-12 text-white">
+              <% if @user.image %>
+                <img src="<%= image_path(current_user.image) %>" alt="Image" class="img-thumbnail img-circle thumb128">
+                <h3 class="m0"><%= @user.name.camelize %></h3>
+                <p class="m0">
+                  <%= @user.kind.camelize %></p>
+              <% else %>
+                <img src="<%= image_path("default_profile.png")%>" alt="Image" class="img-thumbnail img-circle thumb128">
+                <br>
+                <br>
+                <p class="m0">
+                  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
+                    <span class="btn-label"><i class="fa fa-facebook"></i></span>
+                    <%= "Carica immagine di profilo da Facebook" %>
+                  <% end %>
+                  <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-labeled btn-danger" do %>
+                    <span class="btn-label"><i class="fa fa-google"></i></span>
+                    <%= "Carica immagine di profilo da Google" %>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
           </div>
-        <% else %>
-          <label>Carica la tua immagine di profilo dai social </label>
-          <br>
-          <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
-            <span class="btn-label"><i class="fa fa-facebook"></i></span>
-            <%= "Carica immagine di profilo da Facebook" %>
-          <% end %>
-          <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-labeled btn-danger" do %>
-            <span class="btn-label"><i class="fa fa-google"></i></span>
-            <%= "Carica immagine di profilo da Google" %>
-          <% end %>
-        <% end %>
+        </div>
       </div>
       <div class="form-group">
         <%= f.label :name  %>
@@ -43,6 +53,11 @@
       <div class="form-group">
         <%= f.label :location  %>
         <%= f.text_field :location, class: 'form-control'%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :phone  %>
+        <%= f.text_field :phone, class: 'form-control'%>
       </div>
       <%= f.submit "Aggiorna informazioni", class:"btn btn-info" %>
       <p>

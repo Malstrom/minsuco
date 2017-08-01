@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+  get '/events/:id/readed', to: 'events#readed', :as => 'readed'
+
   mount Payola::Engine => '/payola', as: :payola
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -149,4 +152,7 @@ Rails.application.routes.draw do
 
   # the rest goes to root
   get '*path' => redirect('/')
+
+
+  mount ActionCable.server => '/cable'
 end

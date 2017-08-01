@@ -1,0 +1,17 @@
+<% @events.each do |event| %>
+
+  <%= link_to readed_path(event.id), class:'list-group-item' do %>
+    <div class="media-box">
+      <div class="pull-left">
+        <em class="fa fa-twitter fa-2x text-info"></em>
+      </div>
+      <div class="media-box-body clearfix">
+        <p class="m0"><%= event.message %></p>
+        <p class="m0 text-muted">
+          <small>1 new follower</small>
+        </p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+

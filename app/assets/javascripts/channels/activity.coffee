@@ -6,10 +6,12 @@ App.activity = App.cable.subscriptions.create "ActivityChannel",
     # Called when the subscription has been terminated by the server
 
   received: (event) ->
-#    alert event.content
-#    # Called when there's incoming data on the websocket for this channel
     $('#events').prepend event.message
 
+    if $('#event_counter').length == 0
+      $('#counter').append '<div id="event_counter" class="label label-danger">1</div>'
+    else
+      value = parseInt($("#event_counter").text(), 10) + 1
+      $("#event_counter").text(value)
 
-    value = parseInt($("#event_counter").text(), 10) + 1
-    $("#event_counter").text(value)
+

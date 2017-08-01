@@ -21,7 +21,7 @@
                   </div>
                   <!-- Name and Job-->
                   <div class="user-block-info">
-                     <span class="user-block-name">Hello, <%= current_user.name if current_user %></span>
+                     <span class="user-block-name">Hello, <%= current_user.name.camelize if current_user %></span>
                      <span class="user-block-role"><%= current_user.kind.capitalize %></span>
                   </div>
                </div>
@@ -82,8 +82,8 @@
           <%= link_to(new_race_path) do %>
           <% end %>
         </li>
-        <li style="background-color: #0CB225">
-          <%= link_to(new_race_path) do %>
+        <li class="new_race">
+          <%= link_to(new_race_path, class:'new_race') do %>
             <em class="icon-plus"></em>
             <span data-localize="sidebar.nav.race.INDEX">CREA UNA GARA</span>
           <% end %>

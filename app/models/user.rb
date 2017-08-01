@@ -31,15 +31,17 @@ class User < ApplicationRecord
   after_initialize :set_default_plan, :if => :new_record?
   # after_create :sign_up_for_mailing_list
 
-  validates_associated :plan
+  validates_presence_of :email
   validates :email, uniqueness: true
+
+  validates_associated :plan
 
   def set_default_role
     self.role ||= :basic
   end
 
   def set_default_plan
-    self.plan ||= Plan.last
+    self.plan ||= Plan.find_by_stripe_id('basic')
   end
 
   def self.new_with_session(params, session)

@@ -21,7 +21,7 @@
                   </div>
                   <!-- Name and Job-->
                   <div class="user-block-info">
-                     <span class="user-block-name">Hello, <%= current_user.name.camelize if current_user %></span>
+                     <span class="user-block-name">Hello, <%= current_user.name if current_user %></span>
                      <span class="user-block-role"><%= current_user.kind.capitalize %></span>
                   </div>
                </div>

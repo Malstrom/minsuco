@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :intent]
 
   layout "pages", only: [:intent]
-  layout "application-main", except: [:intent]
 
   # GET /users
   # GET /users.json

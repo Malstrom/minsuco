@@ -9,4 +9,4 @@
 
 //= require jquery_nested_form
 
-//= require cable
+////= require cable

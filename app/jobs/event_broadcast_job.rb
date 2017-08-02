@@ -2,7 +2,7 @@ class EventBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(event)
-    ActionCable.server.broadcast 'activity_channel', message: render_event(event)
+    # ActionCable.server.broadcast User.find(event.recipient_id).id, message: render_event(event)
   end
 
   private

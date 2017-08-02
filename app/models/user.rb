@@ -14,10 +14,11 @@ class User < ApplicationRecord
   has_many      :attendees, :foreign_key => "attendee_id", :dependent => :destroy
 
   enum role:        [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
-
   enum kind:        [:broker, :agente]
-
   enum fiscal_kind: [:individual, :company]
+
+  enum intent:      [:creator, :partecipator]
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -28,6 +29,7 @@ class User < ApplicationRecord
 
 
   after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_intent, :if => :new_record?
   after_initialize :set_default_plan, :if => :new_record?
   # after_create :sign_up_for_mailing_list
 
@@ -38,6 +40,10 @@ class User < ApplicationRecord
 
   def set_default_role
     self.role ||= :basic
+  end
+
+  def set_default_intent
+    self.role ||= :partecipator
   end
 
   def set_default_plan
@@ -105,5 +111,4 @@ class User < ApplicationRecord
     authorization.save
     authorization.user
   end
-
 end

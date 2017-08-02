@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get '/events/:id/readed', to: 'events#readed', :as => 'readed'
 
+  get 'users/:id/intent', to: 'users#intent', :as => 'user_intent'
+
   mount Payola::Engine => '/payola', as: :payola
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

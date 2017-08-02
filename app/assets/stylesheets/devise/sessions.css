@@ -157,3 +157,8 @@ ul.sm-wrap li#gplus-sm {
 ul.sm-wrap a{
     text-decoration: none;
 }
+
+body{
+    background-size: 100%;
+    background-image: url(/assets/login_1);
+}

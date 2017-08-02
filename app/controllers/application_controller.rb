@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!, :set_events
+  before_action :authenticate_user!, :set_events, :set_intent
 
   private
 
@@ -17,10 +17,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def set_events
     if current_user
       @events = Event.where(recipient_id: current_user.id, read: false, notifiable: true)
+    end
+  end
+
+  def set_intent
+    if params[:intent]
+      current_user.intent = params[:intent]
+      current_user.save
     end
   end
 end

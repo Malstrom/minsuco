@@ -156,5 +156,5 @@ Rails.application.routes.draw do
   get '*path' => redirect('/')
 
 
-  mount ActionCable.server => '/cable'
+  # mount ActionCable.server => '/cable'
 end

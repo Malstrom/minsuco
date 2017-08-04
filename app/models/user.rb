@@ -34,7 +34,10 @@ class User < ApplicationRecord
   # after_create :sign_up_for_mailing_list
 
   validates_presence_of :email
+
   validates :email, uniqueness: true
+
+  validates :rui, length: { minimum: 5 }
 
   validates_associated :plan
 

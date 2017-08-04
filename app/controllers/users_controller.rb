@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :intent]
 
+
   layout "pages", only: [:intent]
+
   layout "application-main", except: [:intent]
 
   # GET /users
@@ -45,11 +47,13 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to edit_user_path(@user), notice: 'Dati aggiornati' }
+        format.html { render :edit, notice: 'Dati aggiornati' }
         format.json { render :show, status: :ok, location: @user }
+        format.js   { render :status => 200 }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.js   { render :status => 500 }
       end
     end
   end

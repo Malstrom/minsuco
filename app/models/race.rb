@@ -35,6 +35,10 @@ class Race < ApplicationRecord
     false unless owner.rui.blank?
   end
 
+  def payed?
+    true if PayolaSale.find_by_product_id(id)
+  end
+
   private
 
   def start_in_past
@@ -53,5 +57,4 @@ class Race < ApplicationRecord
   def set_redirect_path
     update_attribute(:redirect_path, "/races/#{id}/publish_check")
   end
-
 end

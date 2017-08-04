@@ -41,7 +41,8 @@ Rails.application.routes.draw do
       get :join
       get :leave
       get :publish,  to: 'races#publish_new'
-      patch :publish, to: 'races#publish_create'
+      # patch :publish, to: 'races#publish_create'
+      patch :publish_check, to: 'races#publish_check'
       get :publish_check, to: 'races#publish_check'
     end
   end

@@ -15,11 +15,8 @@ Payola.configure do |payola|
 
 
   #
-  payola.subscribe 'payola.sale.finished' do |sale|
-    race = Race.find(sale.product_id)
-    race.update_attribute(:status, 'started')
-    race.update_attribute(:kind, 'pay_for_publish')
-  end
+  # payola.subscribe 'payola.sale.finished' do |sale|
+  # end
 
   #
   # payola.subscribe 'payola.race.sale.failed' do |sale|
@@ -32,7 +29,6 @@ Payola.configure do |payola|
   payola.subscribe('payola.subscription.active') do |sub|
     user = User.find_by(email: sub.email)
     user.update_attribute(:plan, Plan.find(sub.plan_id))
-
   end
 
 

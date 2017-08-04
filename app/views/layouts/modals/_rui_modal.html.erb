@@ -11,6 +11,7 @@
           <h4 id="myModalLabel" class="modal-title">Abbiamo bisogno del tuo RUI per pubblicare la GARA</h4>
         </div>
         <div class="modal-body form-horizontal">
+          <div id="errors"></div>
           <%= form_for current_user, id: 'rui-form', :html => {:class => 'form-horizontal'} do |f| %>
             <div class="form-group">
               <%= f.label :name, class: 'col-sm-2 control-label', required:true %>
@@ -47,7 +48,13 @@
         url: "/users/<%= current_user.id %>",
         method: 'patch',
         data: data,
-        success: $('#myModal').modal('hide')
+        dataType: "json",
+        success: function(){
+          $("#myModal").modal('hide');
+        },
+        error: function(data){
+          $("#errors").append("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");
+        }
       });
 
     });

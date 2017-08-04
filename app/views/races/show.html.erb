@@ -81,9 +81,9 @@
             <%= link_to 'Crea una pagina per trovare i clienti', pay_for_join_race_path(@race), class: 'btn btn-info btn-lg' %>
 
             <% if @race.kind == 'pay_for_join' %>
-              <%= link_to 'Rendi partecipabile da tutti', pay_for_publish_race_path(@race), class: 'btn btn-info btn-lg' %>
+              <%= link_to 'Rendi partecipabile da tutti', publish_race_path(@race), class: 'btn btn-info btn-lg' %>
             <% else %>
-              <%= link_to 'Rendi la gara privata', pay_for_join_race_path(@race), class: 'btn btn-warning btn-lg' %>
+              <%= link_to 'Rendi la gara privata', publish_race_path(@race), class: 'btn btn-warning btn-lg' %>
             <% end %>
           </div>
         </div>

@@ -102,5 +102,5 @@ $('#pay_for_publish').click(function(){
 $('#pay_for_join').click(function(){
   $( ".pay_for_publish" ).hide();
   $( ".pay_for_join" ).show();
-  $( ".payola-checkout-button" ).hide();
+  // $( ".payola-checkout-button" ).hide();
 });

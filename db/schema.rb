@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801165231) do
+ActiveRecord::Schema.define(version: 20170804152637) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "attendee_id"
@@ -200,6 +200,15 @@ ActiveRecord::Schema.define(version: 20170801165231) do
     t.index ["owner_id"], name: "index_races_on_owner_id"
   end
 
+  create_table "rewards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.integer "public_races"
+    t.integer "join_private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_rewards_on_user_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -236,5 +245,6 @@ ActiveRecord::Schema.define(version: 20170801165231) do
   add_foreign_key "featured_races", "races"
   add_foreign_key "friends", "users"
   add_foreign_key "races", "users", column: "owner_id"
+  add_foreign_key "rewards", "users"
   add_foreign_key "users", "plans"
 end

@@ -13,7 +13,7 @@
   </div>
 <% end %>
 
-<%= nested_form_for @race, url: publish_race_path, method: 'PATCH' do |f| %>
+<%= nested_form_for @race, url: publish_check_race_path, method: 'PATCH' do |f| %>
 <%# form_for(@race) do |f| %>
   <div class="panel-body">
     <h4>Rendi la partecipazione alla gara a pagamento o gratuita</h4><br><br>
@@ -50,11 +50,15 @@
 
 <% end %>
 
-<div class="text-center">
-  <%= render 'payola/transactions/checkout', sellable: @race ,
-             email:current_user.email,
-             button_text: 'Paga e rendi la gara pubblica'
-  %>
+<div class="text-center pay_for_publish">
+  <% if @race.payed? %>
+    <%= link_to 'Pubblica la gara', publish_check_race_path(@race), class: 'btn btn-success' %>
+  <% else %>
+      <%= render 'payola/transactions/checkout', sellable: @race ,
+                 email:current_user.email,
+                 button_text: 'Paga e rendi la gara pubblica'
+      %>
+  <% end %>
 </div>
 
 <% if current_user.rui.blank? %>

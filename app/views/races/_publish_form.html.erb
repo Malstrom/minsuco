@@ -13,7 +13,7 @@
   </div>
 <% end %>
 
-<%= nested_form_for @race, url: publish_race_path do |f| %>
+<%= nested_form_for @race, url: publish_race_path, method: 'PATCH' do |f| %>
 <%# form_for(@race) do |f| %>
   <div class="panel-body">
     <h4>Rendi la partecipazione alla gara a pagamento o gratuita</h4><br><br>
@@ -42,26 +42,6 @@
         </div>
       </div>
     </fieldset>
-
-    <!--<h4>Metti in evidenza</h4><br><br>-->
-    <!--<%= f.fields_for :featured_races do |e| %>-->
-      <!--<fieldset>-->
-        <!--<div class="form-group">-->
-          <!--<%= e.label :starts_at, class: 'col-lg-2 control-label' %>-->
-          <!--<div class="col-sm-3">-->
-            <!--<%= e.text_field :starts_at, class:'form-control input-group date datetimepicker'  %>-->
-          <!--</div>-->
-          <!--<%= e.label :ends_at, class: 'col-lg-2 control-label' %>-->
-          <!--<div class="col-sm-3">-->
-            <!--<%= e.text_field :ends_at, class:'form-control input-group date datetimepicker' %>-->
-          <!--</div>-->
-          <!--<%= e.link_to_remove "Rimuovi questo periodo", class:'btn btn-danger btn-xs' %>-->
-        <!--</div>-->
-      <!--</fieldset>-->
-      <!--<br>-->
-      <!--<br>-->
-    <!--<% end %>-->
-    <!--<%= f.link_to_add "Aggiungi un nuovo periodo di tempo", :featured_races, class:'btn btn-success btn-lg' %>-->
   </div>
 
   <div class="pay_for_join text-center" style="display: none;">
@@ -71,6 +51,13 @@
 <% end %>
 
 <div class="text-center">
-  <%= render 'payola/transactions/checkout', sellable: @race , email:current_user.email, button_text: 'Paga e rendi la gara pubblica'%>
+  <%= render 'payola/transactions/checkout', sellable: @race ,
+             email:current_user.email,
+             button_text: 'Paga e rendi la gara pubblica'
+  %>
 </div>
+
+<% if current_user.rui.blank? %>
+  <%= render partial: 'layouts/modals/rui_modal' %>
+<% end %>
 

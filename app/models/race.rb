@@ -31,6 +31,10 @@ class Race < ApplicationRecord
     true if featured_races.where("featured_races.starts_at <= ? AND featured_races.ends_at >= ?", DateTime.now, DateTime.now).first
   end
 
+  def publishable?
+    false unless owner.rui.blank?
+  end
+
   private
 
   def start_in_past

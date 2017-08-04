@@ -19,8 +19,10 @@ class RacesController < ApplicationController
     sort = params[:sort] ? params[:sort] : 'kind'
     verse = params[:verse] ? params[:verse] : 'ASC'
 
-    @races = Race.where("ends_at >= ? AND status = ? AND owner_id = ?", DateTime.now, 'started', current_user.id).order("#{sort} #{verse}")
-    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ? AND owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
+    @races = current_user.races
+
+    # @races = Race.where("ends_at >= ? AND status = ? AND owner_id = ?", DateTime.now, 'started', current_user.id).order("#{sort} #{verse}")
+    # @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ? AND owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
   end
 
   def attendees
@@ -73,7 +75,6 @@ class RacesController < ApplicationController
     @race.permalink = @race.name.parameterize
     @race.status = 'draft' # set race to status draft
 
-
     respond_to do |format|
       if @race.save!
         flash[:info] = "Gara salvata in bozza"
@@ -88,17 +89,20 @@ class RacesController < ApplicationController
   end
 
   def publish_new
-
   end
 
   def publish_create
     @race = Race.find(params[:id])
-    @race.update_attribute(:kind, params[:race][:kind])
 
-    # @featured_races = @race.featured_races.build(featured_race_params)
+    if @race.publishable?
+      @race.update_attribute(:kind, params[:race][:kind])
 
-    flash[:success] = "Gara pubblicata con successo"
-    redirect_to race_path @race
+      flash[:success] = "Gara pubblicata con successo"
+      redirect_to race_path @race
+    else
+      flash[:danger] = "La gara non puo essere pubblicata"
+      redirect_to publish_race_path(@race)
+    end
   end
 
   def publish_check

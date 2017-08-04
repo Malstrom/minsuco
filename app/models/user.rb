@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many      :races, :foreign_key => "owner_id"
   has_many      :attendees, :foreign_key => "attendee_id", :dependent => :destroy
 
+  has_one :reward
+
   enum role:        [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
   enum kind:        [:broker, :agente]
   enum fiscal_kind: [:individual, :company]

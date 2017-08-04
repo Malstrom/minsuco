@@ -72,7 +72,7 @@ class RacesController < ApplicationController
 
     @race.kind = 'pay_for_join' unless @race.kind # set race kind private by default
     @race.price = 2900
-    @race.permalink = @race.name.parameterize
+    @race.permalink = "#{Time.now.to_i}-#{@race.name.parameterize}"
     @race.status = 'draft' # set race to status draft
 
     respond_to do |format|
@@ -91,23 +91,17 @@ class RacesController < ApplicationController
   def publish_new
   end
 
-  def publish_create
-    @race = Race.find(params[:id])
-
+  def publish_check
     if @race.publishable?
-      @race.update_attribute(:kind, params[:race][:kind])
+      @race.update_attributes(kind:params[:race][:kind], status: 'started')
 
-      flash[:success] = "Gara pubblicata con successo"
-      redirect_to race_path @race
+      flash[:success] = "Pagamento avvenuto con successo" if @race.kind == 'pay_for_publish'
+      flash[:success] = "Gara Pubblicata"
+      redirect_to race_path(@race)
     else
-      flash[:danger] = "La gara non puo essere pubblicata"
+      flash[:danger] = "Gara non pubblicata, RUI Mancante"
       redirect_to publish_race_path(@race)
     end
-  end
-
-  def publish_check
-    flash[:success] = "Pagamento avvenuto con successo, Gara pubblicata"
-    redirect_to race_path @race
   end
 
   # PATCH/PUT /races/1

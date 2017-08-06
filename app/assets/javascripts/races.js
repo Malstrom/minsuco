@@ -104,3 +104,7 @@ $('#pay_for_join').click(function(){
   $( ".pay_for_join" ).show();
   // $( ".payola-checkout-button" ).hide();
 });
+
+$('#payed_submit').click(function(){
+  $('form').submit();
+});

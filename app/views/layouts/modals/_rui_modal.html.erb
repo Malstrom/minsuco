@@ -53,7 +53,7 @@
           $("#myModal").modal('hide');
         },
         error: function(data){
-          $("#errors").append("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");
+          $("#errors").html("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");
         }
       });
 

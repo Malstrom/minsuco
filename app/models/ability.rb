@@ -5,23 +5,25 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
       user ||= User.new # guest user (not logged in)
-      if user.admin?
+      if user
         can :manage, :all
-      elsif user.pro_attendee?
-        can :read, Race
-        can :new, Race
-        can :create, Race
-        can :attendees, Race
-        can :user_races, Race
-        can :publish_new, Race
-        can :publish_check, Race, Race do |race|
-          if race.kind == 'pay_for_publish'
-            true if current_user.pro_creator? or race.owner.have_reward?('public_publish')
-          else
-            true
-          end
-        end
       end
+
+      # elsif user.pro_attendee?
+      #   can :read, Race
+      #   can :new, Race
+      #   can :create, Race
+      #   can :attendees, Race
+      #   can :user_races, Race
+      #   can :publish_new, Race
+      #   can :publish_check, Race, Race do |race|
+      #     if race.kind == 'pay_for_publish'
+      #       true if current_user.pro_creator? or race.owner.have_reward?('public_publish')
+      #     else
+      #       true
+      #     end
+      #   end
+      # end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

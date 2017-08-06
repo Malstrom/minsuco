@@ -10,3 +10,4 @@
 //= require jquery_nested_form
 
 ////= require cable
+//= require jquery-ui

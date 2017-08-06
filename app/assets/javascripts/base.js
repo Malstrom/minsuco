@@ -2,6 +2,7 @@
 // listed below.
 
 //--- Modernizr
+//= require modernizr/modernizr.custom
 //--- jQuery
 //= require jquery/dist/jquery
 //--- Bootstrap

@@ -47,10 +47,12 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { render :edit, notice: 'Dati aggiornati' }
+        flash[:info] = "Dati aggiornati"
+        format.html { render :edit}
         format.json { render :show, status: :ok, location: @user }
         format.js   { render :status => 200 }
       else
+        flash[:danger] = "Riprova, dati non salvati"
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
         format.js   { render :status => 500 }

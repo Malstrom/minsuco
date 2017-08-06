@@ -1,4 +1,6 @@
 class RacesController < ApplicationController
+  load_and_authorize_resource
+
   layout 'application-main'
 
   before_action :set_race, only: [:show, :edit, :update, :destroy,
@@ -91,19 +93,6 @@ class RacesController < ApplicationController
   def publish_new
   end
 
-  def publish_check
-    if @race.publishable?
-      @race.update_attributes(kind:params[:race][:kind], status: 'started')
-
-      flash[:success] = "Pagamento avvenuto con successo" if @race.kind == 'pay_for_publish'
-      flash[:success] = "Gara Pubblicata"
-      redirect_to race_path(@race)
-    else
-      flash[:danger] = "Gara non pubblicata, RUI Mancante"
-      redirect_to publish_race_path(@race)
-    end
-  end
-
   # PATCH/PUT /races/1
   # PATCH/PUT /races/1.json
   def update
@@ -113,6 +102,19 @@ class RacesController < ApplicationController
         format.json { render :show, status: :ok, location: @race }
       else
         format.html { render :edit }
+        format.json { render json: @race.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def publish_check
+    respond_to do |format|
+      if @race.update_attributes(kind:params[:race][:kind], status: 'started')
+        raise
+        format.html { redirect_to @race, notice: ('La gara è stata pubblicata correttemente') }
+        format.json { render :show, status: :ok, location: @race }
+      else
+        format.html { redirect_to publish_race_path(@race), alert: 'Non è stato possibile pubblicare la gara' }
         format.json { render json: @race.errors, status: :unprocessable_entity }
       end
     end

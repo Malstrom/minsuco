@@ -46,9 +46,11 @@ test: &test
 # You can use this database configuration with:
 #
 production:
+ adapter: mysql2
  url: <%= ENV['CLEARDB_DATABASE_URL'] %>
 
 staging:
+ adapter: mysql2
  url: <%= ENV['CLEARDB_DATABASE_URL'] %>
 
 cucumber:

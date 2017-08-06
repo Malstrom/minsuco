@@ -21,7 +21,6 @@ class User < ApplicationRecord
 
   enum intent:      [:creator, :partecipator]
 
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,19 +28,31 @@ class User < ApplicationRecord
 
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
-
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_intent, :if => :new_record?
   after_initialize :set_default_plan, :if => :new_record?
   # after_create :sign_up_for_mailing_list
 
+  after_create :create_reward
+
   validates_presence_of :email
 
   validates :email, uniqueness: true
-
-  validates :rui, length: { minimum: 5 }
+  validates :rui, length: { minimum: 5 }, on: :update
 
   validates_associated :plan
+
+
+
+  def have_reward?(kind)
+    false
+
+    if kind == 'public_publish'
+      true if reward.public_races > 0
+    elsif reward == 'private_join'
+      true if reward.join_private > 0
+    end
+  end
 
   def set_default_role
     self.role ||= :basic
@@ -53,6 +64,11 @@ class User < ApplicationRecord
 
   def set_default_plan
     self.plan ||= Plan.find_by_stripe_id('basic')
+  end
+
+  # create related reward with 3 free reward for each cat
+  def create_reward
+    build_reward.save
   end
 
   def self.new_with_session(params, session)

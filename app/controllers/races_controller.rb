@@ -110,7 +110,6 @@ class RacesController < ApplicationController
   def publish_check
     respond_to do |format|
       if @race.update_attributes(kind:params[:race][:kind], status: 'started')
-        raise
         format.html { redirect_to @race, notice: ('La gara è stata pubblicata correttemente') }
         format.json { render :show, status: :ok, location: @race }
       else

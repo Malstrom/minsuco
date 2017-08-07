@@ -41,7 +41,8 @@ end
 
 # --== Generate Sample Users creator
 
-20.times do
+
+10.times do
   user = User.new
 
   user.name = Faker::Name.name
@@ -101,7 +102,7 @@ end
 
 # --== Generate Sample User Attendees
 
-80.times do
+40.times do
 
   user_attendee = User.new
 
@@ -117,21 +118,21 @@ end
 
   user_attendee.save
 
-  rand(1..5).times do
+  rand(1..3).times do
     Attendee.create(attendee:user_attendee, race:Race.all.order("RAND()").first)
   end
 end
 
-# --== Highlight some races
-
-races_to_highlight = Race.order("RAND()").limit(5)
-
-races_to_highlight.each do |race|
-  race_to_highlight = race.featured_races.build
-
-  race_to_highlight.starts_at = rand(race.starts_at..rand(race.starts_at + 0.days..race.starts_at + 20.days))
-  race_to_highlight.ends_at = rand(race_to_highlight.starts_at..rand(race_to_highlight.starts_at + 2.days..race_to_highlight.starts_at + 30.days))
-
-  race_to_highlight.save
-end
+# # --== Highlight some races
+#
+# races_to_highlight = Race.order("RAND()").limit(2)
+#
+# races_to_highlight.each do |race|
+#   race_to_highlight = race.featured_races.build
+#
+#   race_to_highlight.starts_at = rand(race.starts_at..rand(race.starts_at + 0.days..race.starts_at + 20.days))
+#   race_to_highlight.ends_at = rand(race_to_highlight.starts_at..rand(race_to_highlight.starts_at + 2.days..race_to_highlight.starts_at + 30.days))
+#
+#   race_to_highlight.save
+# end
 

@@ -44,7 +44,6 @@ class User < ApplicationRecord
   validates_associated :plan
 
 
-
   def have_reward?(kind)
     false
 
@@ -53,6 +52,10 @@ class User < ApplicationRecord
     elsif reward == 'private_join'
       true if reward.join_private > 0
     end
+  end
+
+  def have_rui?
+    owner.rui.blank? ? true : false
   end
 
   def set_default_role

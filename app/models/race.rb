@@ -26,17 +26,15 @@ class Race < ApplicationRecord
 
   after_create :set_redirect_path
 
-  before_update :rui_present, :if => :kind_changed?
+  before_update :publishable?, :if => :status_changed?
 
   # return true if race already featured
   def featured?
     true if featured_races.where("featured_races.starts_at <= ? AND featured_races.ends_at >= ?", DateTime.now, DateTime.now).first
   end
 
-  def rui_present
-    if owner.rui.blank?
-      errors.add(:publishable, "RUI del creatore della gara è mancante.")
-    end
+  def publishable?
+    owner.have_rui?
   end
 
   def payed?

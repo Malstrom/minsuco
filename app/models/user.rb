@@ -38,19 +38,25 @@ class User < ApplicationRecord
   validates_presence_of :email
 
   validates :email, uniqueness: true
-
   validates :rui, length: { minimum: 5 }, on: :update
 
   validates_associated :plan
 
+  def has_plan_for_join?
+    if plan == Plan.find_by_stripe_id('pro_attendee') or plan == Plan.find_by_stripe_id('premium')
+      true
+    else
+      false
+    end
+  end
 
-  def have_reward?(kind)
-    false
-
-    if kind == 'public_publish'
+  def has_reward?(kind)
+    if kind == 'pay_for_publish'
       true if reward.public_races > 0
-    elsif reward == 'private_join'
+    elsif kind == 'pay_for_join'
       true if reward.join_private > 0
+    else
+      false
     end
   end
 
@@ -81,11 +87,6 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
-  end
-
-  # check if user have permission to join the race (subscription, kind of race, free join token, ecc...)
-  def joinable?
-
   end
 
   def joined?(race)

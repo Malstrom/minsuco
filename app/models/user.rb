@@ -50,6 +50,14 @@ class User < ApplicationRecord
     end
   end
 
+  def has_plan_for_publish?
+    if plan == Plan.find_by_stripe_id('pro_creator') or plan == Plan.find_by_stripe_id('premium')
+      true
+    else
+      false
+    end
+  end
+
   def has_reward?(kind)
     if kind == 'pay_for_publish'
       true if reward.public_races > 0

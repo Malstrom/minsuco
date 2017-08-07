@@ -40,7 +40,7 @@ class Race < ApplicationRecord
   end
 
   def payed?
-    false unless PayolaSale.find_by_product_id(id)
+    PayolaSale.find_by_product_id(id) ? true : false
   end
 
   private
@@ -59,6 +59,6 @@ class Race < ApplicationRecord
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path
-    update_attribute(:redirect_path, "/races/#{id}/publish_check")
+    update_attribute(:redirect_path, "/races/#{id}/publish_check?kind=pay_for_publish")
   end
 end

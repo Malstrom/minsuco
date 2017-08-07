@@ -55,7 +55,7 @@ class User < ApplicationRecord
   end
 
   def have_rui?
-    owner.rui.blank? ? true : false
+    rui.blank? ? false : true
   end
 
   def set_default_role

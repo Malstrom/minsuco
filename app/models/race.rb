@@ -34,7 +34,7 @@ class Race < ApplicationRecord
   end
 
   def publishable?
-    owner.have_rui?
+    owner.have_rui? ? true : false
   end
 
   def payed?

@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'database_cleaner'
+
+DatabaseCleaner.clean_with(:truncation)
+
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
@@ -47,7 +51,7 @@ end
   user.image = Faker::Avatar.image
   user.role = %w(pro_creator premium).sample
   user.kind = %w(broker agente).sample
-  user.plan = [Plan.find(2),Plan.find(3)].sample()
+  user.plan = [Plan.find_by_stripe_id('pro_creator'),Plan.find_by_stripe_id('premium')].sample()
   user.rui = 777777
 
 
@@ -108,7 +112,7 @@ end
   user_attendee.image = Faker::Avatar.image
   user_attendee.role = %w(basic pro_attendee).sample
   user_attendee.kind = %w(broker agente).sample
-  user_attendee.plan = [Plan.find(5),Plan.find(4)].sample()
+  user_attendee.plan = [Plan.find_by_stripe_id('pro_attendee'),Plan.find_by_stripe_id('premium')].sample()
   user_attendee.rui = 777777
 
   user_attendee.save

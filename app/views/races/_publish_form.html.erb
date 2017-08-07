@@ -51,7 +51,7 @@
 <% end %>
 
 <div class="text-center pay_for_publish">
-  <% if @race.payed? or can? :publish_check, @race %>
+  <% if @race.payed? %>
     <button id="payed_submit" class="btn btn-info">Pubblica la gara</button>
     <%# link_to 'Pubblica la gara', publish_check_race_path(@race), class: 'btn btn-success' %>
   <% else %>

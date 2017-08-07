@@ -40,7 +40,7 @@ class Race < ApplicationRecord
   end
 
   def payed?
-    true if PayolaSale.find_by_product_id(id)
+    false unless PayolaSale.find_by_product_id(id)
   end
 
   private

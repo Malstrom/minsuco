@@ -161,18 +161,15 @@ class RacesController < ApplicationController
 
   def join
     @attendee = @race.attendees.build
-
     @attendee.attendee = current_user
-
 
     if @attendee.save
       flash[:success] = "Sei dentro la gara"
     else
-      @race.errors.full_messages.each do |error|
-        flash[:danger] = "Attenzione!"
+      @attendee.errors.full_messages.each do |error|
+        flash[:danger] = "Attenzione! #{error}"
       end
     end
-
 
     redirect_to @race
   end

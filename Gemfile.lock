@@ -280,6 +280,7 @@ DEPENDENCIES
   payola-payments!
   puma (~> 3.7)
   rails (= 5.1.0)
+  responders
   sass-rails (~> 5.0.1)
   selenium-webdriver
   slim-rails

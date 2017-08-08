@@ -38,7 +38,7 @@ class Race < ApplicationRecord
   end
 
   def payed?
-    PayolaSale.find_by_product_id(id) ? true : false
+    (PayolaSale.find_by_product_id(id) or owner.has_plan_for_publish?) ? true : false
   end
 
   private

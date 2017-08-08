@@ -62,7 +62,7 @@
   <% end %>
 </div>
 
-<% if current_user.rui.blank? %>
+<% unless @race.owner.have_rui? %>
   <%= render partial: 'layouts/modals/rui_modal' %>
 <% end %>
 

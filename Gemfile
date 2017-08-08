@@ -48,9 +48,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'cucumber'
-  gem 'capybara', '~> 2.13.0'
-  gem 'selenium-webdriver'
 end
 
 gem 'faker'
@@ -61,6 +58,15 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem "better_errors"
   gem "binding_of_caller"
+end
+
+group :test do
+  gem 'cucumber-rails'
+  gem 'capybara', '~> 2.13.0'
+  gem 'selenium-webdriver'
+  gem "factory_girl_rails"
+  gem 'simplecov'
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

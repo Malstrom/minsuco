@@ -1,5 +1,13 @@
 Given(/^I logged in as a "([^"]*)"$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+  visit('/users/sign_up')
+
+  fill_in('user_email', with: 'TestUser')
+  fill_in('user_password', with: '1234567')
+  check('agreed')
+
+  click_on('Sign up')
+
+  expect(page).to have_content 'Success'
 end
 
 Then(/^I should see "([^"]*)" page$/) do |arg1|

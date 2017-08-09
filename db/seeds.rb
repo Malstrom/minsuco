@@ -6,10 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-require 'database_cleaner'
-
-DatabaseCleaner.clean_with(:truncation)
-
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 

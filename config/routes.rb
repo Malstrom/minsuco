@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     get :attendees, to: 'races#attendees'
   end
 
+  resources :attendees
+
   resources :races do
     member do
       get :start

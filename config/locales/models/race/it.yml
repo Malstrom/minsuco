@@ -1,0 +1,21 @@
+it:
+  activerecord:
+    errors:
+      models:
+        race:
+          start_in_past: "La gara non puo iniziare nel passato"
+          attendees_cap: "Ha raggiunto il massimo dei partecipanti"
+    models:
+      race: Gara
+    attributes:
+      race:
+        name: Nome
+        description: Descrizione
+        category: Dategoria
+        recipients: Destinatari
+        starts_at: Inizia
+        ends_at: Finisce
+        race_value: Valore della gara
+        compensation_amount: Ricompensa
+        max_attendees: Numero massimo di partecipanti
+        numero di pezzi: Numero di pezzi

@@ -2,20 +2,20 @@ class Race < ApplicationRecord
   include Payola::Sellable
 
   belongs_to :category
-  belongs_to :owner, :class_name => "User"
+  belongs_to :owner, class_name: 'User'
 
   has_many :featured_races
   has_many :attendees
-  has_many :attedees, :class_name => "User", :through => "attendees", :foreign_key => "attendee_id"
+  has_many :attedees, class_name: 'User', through: 'attendees', foreign_key: 'attendee_id'
 
   # need for nested form
   accepts_nested_attributes_for :featured_races, allow_destroy: true
 
   # difference between creator pay for make public race and all can join in the race or user must pay for join in race
-  enum kind:   [:pay_for_publish, :pay_for_join]
+  enum kind:   %i[pay_for_publish pay_for_join]
 
   # start or pause a race
-  enum status: [:started, :paused, :draft]
+  enum status: %i[started paused draft]
 
   validates_presence_of :name, :description, :max_attendees, :compensation_amount,
                         :pieces_amount, :recipients, :race_value, :category_id,
@@ -26,11 +26,11 @@ class Race < ApplicationRecord
 
   after_create :set_redirect_path
 
-  before_update :publishable?, :if => :status_changed?
+  # before_update :publishable?, if: :saved_change_to_status?
 
   # return true if race already featured
   def featured?
-    true if featured_races.where("featured_races.starts_at <= ? AND featured_races.ends_at >= ?", DateTime.now, DateTime.now).first
+    true if featured_races.where('featured_races.starts_at <= ? AND featured_races.ends_at >= ?', DateTime.now, DateTime.now).first
   end
 
   def publishable?
@@ -38,20 +38,20 @@ class Race < ApplicationRecord
   end
 
   def payed?
-    (PayolaSale.find_by_product_id(id) or owner.has_plan_for_publish?) ? true : false
+    PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish? ? true : false
   end
 
   private
 
   def start_in_past
-    if starts_at and starts_at < Date.today
-      errors.add(:start_in_past, "Race can't starts before today")
+    if starts_at && starts_at < Date.today
+      errors.add(:start_in_past, I18n.t('activerecord.errors.models.race.start_in_past'))
     end
   end
 
   def attendees_cap
-    if max_attendees and attendees.count > max_attendees
-      errors.add(:attendees_cap, "Race reached the max attendees")
+    if max_attendees && attendees.count > max_attendees
+      errors.add(:attendees_cap, I18n.t('activerecord.errors.models.race.attendees_cap'))
     end
   end
 

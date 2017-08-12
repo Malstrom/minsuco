@@ -1,0 +1,29 @@
+it:
+  activerecord:
+    errors:
+      models:
+        attendee:
+          max_attendees: "La gara ha raggiunto il massimo dei partecipanti"
+    models:
+      attendee: Partecipante
+    attributes:
+      user:
+        email: Email
+        name: Nome
+        password: Password
+        kind: Tipologia agente
+        fiscale_kind: "Fatturazione"
+        location: "Città"
+        phone: "Telefono"
+
+      race:
+        name: Nome
+        description: Descrizione
+        category: Dategoria
+        recipients: Destinatari
+        starts_at: Inizia
+        ends_at: Finisce
+        race_value: Valore della gara
+        compensation_amount: Ricompensa
+        max_attendees: Numero massimo di partecipanti
+        numero di pezzi: Numero di pezzi

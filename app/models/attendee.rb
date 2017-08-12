@@ -12,7 +12,7 @@ class Attendee < ApplicationRecord
   # check if attendee has permission to join the race (subscription, kind of race, free join token, ecc...)
   def joinable
     unless attendee.has_plan_for_join? or attendee.has_reward?('pay_for_join')
-      errors.add(:joinable, "Non è possibile partecipare alla gara, controlla se il tuo abbonamento lo prevede")
+      errors.add(:joinable, "Attenzione non è possibile partecipare alla gara")
     end
   end
 
@@ -24,7 +24,7 @@ class Attendee < ApplicationRecord
 
   def max_attendee
     if race.attendees.count >= race.max_attendees
-      errors.add(:max_attendee, "Race reach max attedee")
+      errors.add(:max_attendee, I18n.t('activerecord.errors.models.attendee.max_attendees'))
     end
   end
 

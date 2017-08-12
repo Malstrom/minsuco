@@ -1,0 +1,16 @@
+it:
+  activerecord:
+    errors:
+      models:
+        user:
+    models:
+      user: Utente
+    attributes:
+      user:
+        email: Email
+        name: Nome
+        password: Password
+        kind: Tipologia agente
+        fiscale_kind: "Fatturazione"
+        location: "Città"
+        phone: "Telefono"

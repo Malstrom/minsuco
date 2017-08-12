@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  public_races: 1
-  join_private: 1
-
-two:
-  user: two
-  public_races: 1
-  join_private: 1
+#one:
+#  user: one
+#  public_races: 1
+#  join_private: 1
+#
+#two:
+#  user: two
+#  public_races: 1
+#  join_private: 1

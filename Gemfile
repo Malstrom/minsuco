@@ -47,11 +47,11 @@ gem "responders" # flash messages via i18n
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_girl_rails'
   # Adds support for Capybara system testing and selenium driver
 end
 
 gem 'faker'
-# gem 'database_cleaner'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -61,17 +61,18 @@ group :development do
 end
 
 group :test do
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
   gem 'cucumber-rails'
-  gem 'capybara', '~> 2.13.0'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  gem "factory_girl_rails"
   gem 'simplecov'
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'rspec'
+  gem 'chromedriver-helper'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 
 gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
 
@@ -85,3 +86,6 @@ gem "nested_form"
 
 # gem 'paper_trail' # Track changes to your models' data. Good for auditing or versioning.
 # gem 'active_admin' # elegant backends for website administration
+
+
+gem "slim-rails"

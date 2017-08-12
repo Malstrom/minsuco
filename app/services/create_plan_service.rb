@@ -5,7 +5,7 @@ class CreatePlanService
       p.interval = 'month'
       p.stripe_id = 'enterprise'
     end
-    p1.save!(:validate => false)
+    p1.save!
     p2 = Plan.where(name: 'Premium').first_or_initialize do |p|
       p.amount = 1900
       p.interval = 'month'

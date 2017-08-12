@@ -3,18 +3,35 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+require 'simplecov'
+
+SimpleCov.start 'rails'
+
 
 
 require 'cucumber/rails'
+include Warden::Test::Helpers
 
-require 'simplecov'
-SimpleCov.start
+World(FactoryGirl::Syntax::Methods)
+
 
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
 # Capybara.default_selector = :xpath
+# Capybara.javascript_driver
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
+Capybara.javascript_driver = :chrome
+Capybara.default_max_wait_time = 10
+
+Before '@javascript' do
+  page.driver.browser.manage.window.resize_to(1440,1266)
+end
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how
@@ -35,13 +52,12 @@ ActionController::Base.allow_rescue = false
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
-# begin
-#   DatabaseCleaner.strategy = :transaction
-# rescue NameError
-#   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-# end
-#
+begin
+  DatabaseCleaner.strategy = :truncation, {:except => %w[plans categories]}
 
+rescue NameError
+  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
@@ -56,10 +72,41 @@ ActionController::Base.allow_rescue = false
 #   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
 #     DatabaseCleaner.strategy = :transaction
 #   end
-# #
+#
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
+Cucumber::Rails::Database.javascript_strategy = :truncation, {:except => %w[plans categories]}
 
+# module FixtureAccess
+#   def self.extended(base)
+#     ActiveRecord::FixtureSet.reset_cache
+#     fixtures_folder = File.join(Rails.root, 'test', 'fixtures')
+#     fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+#     fixtures += Dir[File.join(fixtures_folder, '*.csv')].map {|f| File.basename(f, '.csv') }
+#
+#     ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)    # This will populate the test database tables
+#
+#     (class << base; self; end).class_eval do
+#       @@fixture_cache = {}
+#       fixtures.each do |table_name|
+#         table_name = table_name.to_s.tr('.', '_')
+#         define_method(table_name) do |*fixture_symbols|
+#           @@fixture_cache[table_name] ||= {}
+#
+#           instances = fixture_symbols.map do |fixture_symbol|
+#             if fix = ActiveRecord::FixtureSet.cached_fixtures(ActiveRecord::Base.connection, table_name).first.fixtures[fixture_symbol.to_s]
+#               @@fixture_cache[table_name][fixture_symbol] ||= fix.find  # find model.find's the instance
+#             else
+#               raise StandardError, "No fixture with name '#{fixture_symbol}' found for table '#{table_name}'"
+#             end
+#           end
+#           instances.size == 1 ? instances.first : instances
+#         end
+#       end
+#     end
+#   end
+# end
+#
+# World(FixtureAccess)

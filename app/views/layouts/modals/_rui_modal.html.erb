@@ -5,7 +5,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+          <button id="closeMyModal" type="button" data-dismiss="modal" aria-label="Close" class="close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h4 id="myModalLabel" class="modal-title">Abbiamo bisogno del tuo RUI per pubblicare la GARA</h4>
@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="form-group">
-              <%= f.label :rui, class: 'col-sm-2 control-label', required:true %>
+              <%= f.label :rui, class: 'col-sm-2 control-label', id:'rui' , required:true %>
               <div class="col-sm-6">
                 <%= f.text_field :rui, class:'form-control'  %>
               </div>

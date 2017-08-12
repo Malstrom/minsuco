@@ -1,5 +1,12 @@
 class User < ApplicationRecord
 
+  # @return [Array<Array>]
+  def self.gender_attributes_for_select
+    genders.map do |gender, _|
+      [I18n.t("activerecord.attributes.#{model_name.i18n_key}.genders.#{gender}"), gender]
+    end
+  end
+
   belongs_to    :plan
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: 'Payola::Subscription', foreign_key: :owner_idx
 

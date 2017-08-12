@@ -24,9 +24,15 @@
     </div>
   </div>
 </h3>
-<div class="row ">
+<div class="row text">
 
   <!--ALl Races-->
-  <%= render partial: "races/partials/all" %>
+  <% if @races.empty? %>
+    <div class="text-center">
+      <p class="lead">Non hai ancora creato un gara!</p>
+    </div>
+  <% else %>
+    <%= render partial: "races/partials/all" %>
+  <% end %>
 
 </div>

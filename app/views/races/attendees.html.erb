@@ -23,5 +23,12 @@
 </h3>
 <div class="row ">
   <!--ALl Races-->
-  <%= render partial: "races/partials/attendees_races" %>
+  <% if @attendees.empty? %>
+    <div class="text-center">
+      <p class="lead">Non hai ancora partecipato a nessuna gara!</p>
+    </div>
+  <% else %>
+    <%= render partial: "races/partials/attendees_races" %>
+  <% end %>
+
 </div>

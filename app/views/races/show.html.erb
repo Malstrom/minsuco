@@ -40,16 +40,16 @@
             <% if @race.owner == current_user %>
               <% if @race.status == 'paused' %>
                 <%= link_to start_race_path @race do %>
-                  <button type="button" class="btn btn-success btn-oval btn-outline">
+                  <button type="button" class="btn btn-success btn-oval btn-outline" id="start_button">
                     <em class="fa fa-play fa-fw text-muted text-success"></em>
                     <span>Start</span>
                   </button>
                 <% end %>
               <% else %>
                 <%= link_to pause_race_path @race do %>
-                  <button type="button" class="btn btn-warning btn-oval btn-outline">
+                  <button type="button" class="btn btn-warning btn-oval btn-outline" id="stop_button">
                     <em class="fa fa-pause fa-fw text-muted text-warning"></em>
-                    <span>Pause</span>
+                    <span>Stoppa</span>
                   </button>
                 <% end %>
               <% end %>
@@ -63,7 +63,7 @@
                 <% end %>
               <% else %>
                 <%= link_to join_race_path @race do %>
-                  <button type="button" class="btn btn-success btn-oval btn-outline">
+                  <button id="<%= @race.name %>" type="button" class="btn btn-success btn-oval btn-outline">
                     <em class="fa fa-plus fa-fw text-muted text-success"></em>
                     <span>Partecipa</span>
                   </button>
@@ -123,7 +123,7 @@
           <td>
             <strong>Ramo rischio</strong>
           </td>
-          <td><%= @race.category.name.capitalize %></td>
+          <td><%= @race.category.name %></td>
         </tr>
         <tr>
           <td>

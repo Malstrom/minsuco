@@ -4,6 +4,18 @@ assicurazioni:
   name: assicurazioni
   parent_id:
 
-two:
-  name: MyString
-  parent_id: two
+altro:
+  name: altro
+  parent_id: 1
+
+vita:
+  name: altro
+  parent_id: 1
+
+casa:
+  name: casa
+  parent_id: 2
+
+mista:
+  name: mista
+  parent_id: 4

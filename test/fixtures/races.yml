@@ -1,20 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  owner: 1
-  max_attendees: 1
-  category: MyString
-  compensation_amount: 9.99
-  pieces_amount: 1
-  compensation_start_amount: 9.99
-  recipients: MyString
-  race_value: 9.99
-  category: MyString
-
-two:
-  name: MyString
-  owner: 1
+  name: TestRace
+  owner: 2
   max_attendees: 1
   category: MyString
   compensation_amount: 9.99

@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, :set_events, :set_intent
 
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      flash[:danger] = "Non sei autorizzato ad accedere a questa pagina"
+      format.json { head :forbidden, content_type: 'text/html' }
+      format.html { redirect_to main_app.root_url}
+      format.js   { head :forbidden, content_type: 'text/html' }
+    end
+  end
+
   private
 
   def layout_by_resource

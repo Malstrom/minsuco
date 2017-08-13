@@ -64,7 +64,7 @@ Feature: Create race
     And I publish race as "private"
     Then I should see "La gara è stata pubblicata correttemente"
 
-  @javascript
+  @javascript @current
   Scenario: User without RUI should be able to pay race but not publish it
     Given I sign up
     When I click to "Creare una mia gara è pubblicarla"

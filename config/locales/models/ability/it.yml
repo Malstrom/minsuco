@@ -1,0 +1,4 @@
+en:
+  unauthorized:
+    manage:
+      user: "Non sei autorizzato ad accedere a questa pagina"

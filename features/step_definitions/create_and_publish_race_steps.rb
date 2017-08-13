@@ -16,7 +16,7 @@ When(/^I fill race form$/) do
   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
   fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
 
-  select('auto', from: 'race_category_id', visible:false)
+  # select('auto', from: 'race_category_id', visible:false)
   # select('Tutti', from: 'race_recipients', visible:false)
 
   click_on('Pubblica la gara')
@@ -32,7 +32,7 @@ When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
   fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
 
-  select('auto', from: 'race_category_id', visible:false)
+  # select('auto', from: 'race_category_id', visible:false)
   # select('Tutti', from: 'race_recipients', visible:false)
 
   fill_in arg1, :with => arg2 if arg1 and arg2

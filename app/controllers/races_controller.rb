@@ -23,8 +23,8 @@ class RacesController < ApplicationController
 
     @races = current_user.races
 
-    # @races = Race.where("ends_at >= ? AND status = ? AND owner_id = ?", DateTime.now, 'started', current_user.id).order("#{sort} #{verse}")
-    # @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ? AND owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
+    @races = Race.where("ends_at >= ? AND status = ? AND owner_id = ?", DateTime.now, 'started', current_user.id).order("#{sort} #{verse}")
+    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ? AND owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
   end
 
   def attendees
@@ -41,18 +41,17 @@ class RacesController < ApplicationController
   def new
     @race = Race.new
 
-    # @race.name = Faker::Space.star
-    # @race.description = Faker::Matz.quote
-    # # @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
-    # # @race.category = Category.find_by_name(:casa)
-    # @race.race_value = %W(10000 50000 100000 75000 25000).sample
-    # @race.pieces_amount = rand(5..50)
-    # @race.compensation_start_amount = %W(0 0 0 0 500 1000).sample
-    # @race.max_attendees = rand(10..50)
-    # @race.compensation_amount = rand(5..50)
-    # @race.kind = %w(pay_for_publish pay_for_join).sample
-    # @race.status = 'started'
-    # @race.recipients = %w(brokers agents all).sample
+    @race.name = Faker::Space.star
+    @race.description = Faker::Matz.quote
+    @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
+    @race.race_value = %W(10000 50000 100000 75000 25000).sample
+    @race.pieces_amount = rand(5..50)
+    @race.compensation_start_amount = %W(0 0 0 0 500 1000).sample
+    @race.max_attendees = rand(10..50)
+    @race.compensation_amount = rand(5..50)
+    @race.kind = %w(pay_for_publish pay_for_join).sample
+    @race.status = 'started'
+    @race.recipients = %w(brokers agents all).sample
   end
 
   # GET /races/1/edit
@@ -115,17 +114,6 @@ class RacesController < ApplicationController
       end
     end
   end
-
-  # DELETE /races/1
-  # DELETE /races/1.json
-  def destroy
-    @race.destroy
-    respond_to do |format|
-      format.html { redirect_to races_url, notice: 'Race was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
 
   # start race
   def start

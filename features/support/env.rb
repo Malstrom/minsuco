@@ -3,13 +3,17 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
-require 'simplecov'
 
+require 'simplecov'
 SimpleCov.start 'rails'
 
-
-
 require 'cucumber/rails'
+
+# require "webrat"
+# Webrat.configure do |config|
+#   config.mode = :rails
+# end
+
 include Warden::Test::Helpers
 
 World(FactoryGirl::Syntax::Methods)

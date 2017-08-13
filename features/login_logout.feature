@@ -1,3 +1,4 @@
+@user @login_logout
 Feature: Login and registration for users
 
   Scenario: New user should be see intent page after registration

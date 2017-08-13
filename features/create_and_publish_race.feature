@@ -1,3 +1,4 @@
+@race @create_publish @javascript
 Feature: Create race
   Race should not be created without RUI
   Public race should not be published if user have finish its rewards

@@ -1,3 +1,4 @@
+@race
 Feature: See all lists of races and interact with this list
 
   Scenario: New user should see see empty list of its created races

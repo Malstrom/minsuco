@@ -1,3 +1,4 @@
+@race @join_leave
 Feature: Join in race
   New user should be able to join for max 3 times using rewards
   User with pro attendee plan should partecipate to unlimited races

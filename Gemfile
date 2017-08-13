@@ -63,12 +63,14 @@ end
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem "cucumber"
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'rspec'
   gem 'chromedriver-helper'
+  gem 'webrat'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

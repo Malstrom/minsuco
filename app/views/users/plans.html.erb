@@ -69,10 +69,13 @@
         <div class="panel-body text-center">
           <% if current_user.plan == Plan.where(stripe_id: 'pro_attendee').first %>
             <p class="lead">
-              Iscritto
+              Iscritto al piano Pro partecipanti
             </p>
           <% else %>
-            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_attendee').first %>
+            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_attendee').first,
+                       email:current_user.email,
+                       button_text: "Passa a un piano Pro Partecipanti"
+            %>
           <% end %>
           <br>
         </div>
@@ -109,10 +112,13 @@
         <div class="panel-body text-center">
           <% if @user.plan == Plan.where(stripe_id: 'pro_creator').first %>
             <p class="lead">
-              Iscritto
+              Iscritto al piano Pro creatori
             </p>
           <% else %>
-            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_creator').first %>
+            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_creator').first,
+                       email:current_user.email,
+                       button_text: "Passa a un piano Pro Creatori"
+            %>
             <br>
           <% end %>
         </div>

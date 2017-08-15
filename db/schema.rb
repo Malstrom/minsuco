@@ -187,10 +187,10 @@ ActiveRecord::Schema.define(version: 20170804152637) do
     t.integer "pieces_amount"
     t.decimal "compensation_start_amount", precision: 8, scale: 2
     t.integer "max_attendees"
-    t.integer "kind"
-    t.integer "status"
+    t.integer "kind", default: 1
+    t.integer "status", default: 2
     t.string "permalink"
-    t.integer "price"
+    t.integer "price", default: 2900
     t.string "redirect_path", default: "/races"
     t.datetime "starts_at"
     t.datetime "ends_at"

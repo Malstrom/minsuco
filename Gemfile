@@ -47,7 +47,7 @@ gem "responders" # flash messages via i18n
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_girl_rails'
+
   # Adds support for Capybara system testing and selenium driver
 end
 
@@ -64,13 +64,14 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem "cucumber"
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'rspec'
   gem 'chromedriver-helper'
   gem 'webrat'
+  gem 'factory_girl_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -91,3 +92,5 @@ gem "nested_form"
 
 
 gem "slim-rails"
+
+# gem 'flash-dance', :git => 'https://github.com/MunkiPhD/flash-dance.git'

@@ -3,9 +3,8 @@ class RacesController < ApplicationController
 
   layout 'application-main'
 
-  before_action :set_race, only: [:show, :edit, :update, :destroy,
-                                  :start, :pause, :pay_for_join, :pay_for_publish, :join, :leave, :publish_new,
-                                  :publish_check]
+  before_action :set_race, only: [:show, :edit, :update,
+                                  :publish, :publish_check]
 
   # GET /races
   # GET /races.json
@@ -23,8 +22,8 @@ class RacesController < ApplicationController
 
     @races = current_user.races
 
-    @races = Race.where("ends_at >= ? AND status = ? AND owner_id = ?", DateTime.now, 'started', current_user.id).order("#{sort} #{verse}")
-    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ? AND owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
+    @races = Race.where("owner_id = ?", current_user.id).order("#{sort} #{verse}")
+    # @featured_races = Race.joins(:featured_races).where("owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
   end
 
   def attendees
@@ -54,6 +53,9 @@ class RacesController < ApplicationController
     @race.recipients = %w(brokers agents all).sample
   end
 
+  def publish
+  end
+
   # GET /races/1/edit
   def edit
   end
@@ -63,128 +65,52 @@ class RacesController < ApplicationController
   def create
     @race = current_user.races.build(race_params)
 
-    @race.kind = 'pay_for_join' unless @race.kind # set race kind private by default
-    @race.price = 2900
-    @race.permalink = "#{Time.now.to_i}-#{@race.name.parameterize}"
-    @race.status = 'draft' # set race to status draft
-
     respond_to do |format|
       if @race.save
-        flash[:info] = "Gara salvata in bozza"
-        format.html { redirect_to publish_race_path(@race) }
+        format.html {redirect_to publish_race_path(@race), notice: I18n.t('flash.races.create.notice')}
         format.json { render :show, status: :created, location: @race }
       else
-        flash[:danger] = "Gara non salvata"
         format.html { render :new }
         format.json { render json: @race.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def publish_new
+  def publish_check
+    if @race.update(kind: params[:race] ? params[:race][:kind] : params[:kind])
+      flash[:notice] = I18n.t('flash.races.publish_check.notice')
+    else
+      flash[:alert] = I18n.t('flash.races.publish_check.alert')
+    end
+    redirect_to race_path(@race)
   end
 
   # PATCH/PUT /races/1
   # PATCH/PUT /races/1.json
   def update
-    respond_to do |format|
-      if @race.update(race_params)
-        format.html { redirect_to @race, notice: 'Race was successfully updated.' }
-        format.json { render :show, status: :ok, location: @race }
-      else
-        format.html { render :edit }
-        format.json { render json: @race.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def publish_check
-    kind = params[:race] ? params[:race][:kind] : params[:kind]
-
-    respond_to do |format|
-      if @race.update_attribute(:kind,kind)
-        if @race.publishable?
-          @race.update_attribute(:status,'started')
-        end
-        format.html { redirect_to @race, notice: ('La gara è stata pubblicata correttemente') }
-        format.json { render :show, status: :ok, location: @race }
-      else
-        format.html { redirect_to publish_race_path(@race), alert: 'Non è stato possibile pubblicare la gara' }
-        format.json { render json: @race.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # start race
-  def start
-    @race.update_attribute :status, 'started'
-
-    flash[:info] = "Gara ripartita"
-    redirect_to @race
-  end
-
-  # pause race
-  def pause
-    @race.update_attribute :status, 'paused'
-
-    flash[:info] = "Gara stoppata"
-    redirect_to @race
-  end
-
-  def pay_for_publish
-
-    @race.update_attribute :kind, 'pay_for_publish'
-
-    redirect_to @race
-  end
-
-  def pay_for_join
-
-    @race.update_attribute :kind, 'pay_for_join'
-
-    redirect_to @race
-  end
-
-  def join
-    @attendee = @race.attendees.build
-    @attendee.attendee = current_user
-
-    if @attendee.save
-      @attendee.attendee.reward.update_attribute(:join_private,  @attendee.attendee.reward.join_private - 1)
-      flash[:success] = "Sei dentro la gara"
+    if @race.update(race_params)
+      flash[:notice] = I18n.t('flash.races.update.notice')
     else
-      @attendee.errors.full_messages.each do |error|
-        flash[:danger] = "Attenzione! #{error}"
-      end
+      flash[:alert] = I18n.t('flash.races.update.alert')
     end
-
-    redirect_to @race
+    redirect_to race_path(@race)
   end
-
-  def leave
-    @attendee = @race.attendees.where(attendee:current_user).first
-
-    @attendee.destroy
-
-    redirect_to @race
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_race
-      @race = Race.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_race
+    @race = Race.find(params[:id])
+  end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def race_params
+    params.require(:race).permit(:name, :description, :owner, :max_attendees, :compensation_amount,
+                                 :pieces_amount, :compensation_start_amount, :recipients, :race_value, :category_id,
+                                 :starts_at, :ends_at, :status)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def race_params
-      params.require(:race).permit(:name, :description, :owner, :max_attendees, :compensation_amount,
-                                   :pieces_amount, :compensation_start_amount, :recipients, :race_value, :category_id,
-                                   :starts_at, :ends_at)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def featured_race_params
+    params.require(:featured_race).permit(:race, :starts_at, :ends_at)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def featured_race_params
-      params.require(:featured_race).permit(:race, :starts_at, :ends_at)
-    end
 end

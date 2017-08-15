@@ -4,7 +4,7 @@ class AttendeesController < ApplicationController
   # GET /attendees
   # GET /attendees.json
   def index
-    @attendees = Attendee.all
+    @attendees = current_user.attendees
   end
 
   # GET /attendees/1
@@ -24,14 +24,14 @@ class AttendeesController < ApplicationController
   # POST /attendees
   # POST /attendees.json
   def create
-    @attendee = Attendee.new(attendee_params)
+    @attendee = Race.find(params[:race_id]).attendees.build(attendee:current_user)
 
     respond_to do |format|
       if @attendee.save
-        format.html { redirect_to @attendee, notice: 'Attendee was successfully created.' }
+        format.html { redirect_to race_path(@attendee.race), notice: I18n.t('flash.attendees.create.notice') }
         format.json { render :show, status: :created, location: @attendee }
       else
-        format.html { render :new }
+        format.html { redirect_to race_path(@attendee.race), alert: @attendee.errors.each {|attr,msg| flash[:alert] = msg } }
         format.json { render json: @attendee.errors, status: :unprocessable_entity }
       end
     end
@@ -40,25 +40,19 @@ class AttendeesController < ApplicationController
   # PATCH/PUT /attendees/1
   # PATCH/PUT /attendees/1.json
   def update
-    respond_to do |format|
-      if @attendee.update(attendee_params)
-        format.html { redirect_to @attendee, notice: 'Attendee was successfully updated.' }
-        format.json { render :show, status: :ok, location: @attendee }
-      else
-        format.html { render :edit }
-        format.json { render json: @attendee.errors, status: :unprocessable_entity }
-      end
-    end
+    @attendee.update(attendee_params)
+    respond_with @attendee , location: -> { race_path(@attendee.race) }
   end
 
   # DELETE /attendees/1
   # DELETE /attendees/1.json
   def destroy
-    @attendee.destroy
-    respond_to do |format|
-      format.html { redirect_to attendees_url, notice: 'Attendee was successfully destroyed.' }
-      format.json { head :no_content }
+    if @attendee.destroy
+      flash[:info] = I18n.t('flash.attendees.delete.notice')
+    else
+      @attendee.errors.each {|attr,msg| flash[:alert] = msg }
     end
+    redirect_to race_path(@attendee.race)
   end
 
   private

@@ -3,22 +3,31 @@ class Attendee < ApplicationRecord
   belongs_to :attendee, :class_name => 'User'
   belongs_to :race
 
-  validate :max_attendee, :unique_join, :joinable, :self_join
+  validate :max_attendee, :unique_join, :not_joinable, :self_join
+
+  after_create :decrement_rewards
 
   after_create_commit { create_event }
 
   private
 
+  def decrement_rewards
+    attendee.reward.decrement_join_private unless attendee.plan.stripe_id == "pro_attendee"
+  end
+
   # check if attendee has permission to join the race (subscription, kind of race, free join token, ecc...)
-  def joinable
-    unless attendee.has_plan_for_join? or attendee.has_reward?('pay_for_join')
-      errors.add(:joinable, "Attenzione non è possibile partecipare alla gara")
+  def not_joinable
+    unless attendee.has_plan_for_join?
+      unless attendee.has_reward?('pay_for_join')
+        errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.invalid_plan'))
+        errors.add(:not_joinable, I18n.t('activerecord.errors.models.attendee.no_reward'))
+      end
     end
   end
 
   def self_join
     if race.owner_id == attendee_id
-      errors.add(:self_join, "A user cannot be an attendee of its race")
+      errors.add(:self_join, I18n.t('activerecord.errors.models.attendee.self_join'))
     end
   end
 

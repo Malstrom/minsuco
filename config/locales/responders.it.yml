@@ -1,0 +1,26 @@
+it:
+  flash:
+    users:
+      update:
+        notice: "Profilo aggiornato"
+        alert: "Non è possibile aggironare il profilo"
+    races:
+      create:
+        notice: "La gara è stata creata."
+        alert: "La gara non è stata creata, ricontrolla i dati inseriti"
+      update:
+        notice: "La gara è stata aggiornata."
+        alert: "La gara non è stata aggiornata"
+      publish_check:
+        notice: "Gara pubblicata sul portale"
+        alert: "Gara non pubblicata sul portale"
+    attendees:
+      update:
+        notice: "Partecipazione avvenuta con successo"
+        alert: "Partecipazione fallita"
+      create:
+        notice: "Partecipazione avvenuta con successo"
+        alert: "Partecipazione non avvenuta"
+      delete:
+        notice: "Partecipazione cancellata"
+        alert: "Non è possibile uscire dalla gara"

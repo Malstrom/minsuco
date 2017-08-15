@@ -3,7 +3,11 @@ it:
     errors:
       models:
         attendee:
+          self_join: "non puoi partecipare alle tue gare"
           max_attendees: "La gara ha raggiunto il massimo dei partecipanti"
+          not_joinable: "Devi avere un account Pro per partecipanti per accedere alla gara"
+          invalid_plan: "Il tuo piano non ti permette di partecipare a questa gara"
+          no_reward: "Non hai più gare gratuite"
     models:
       attendee: Partecipante
     attributes:

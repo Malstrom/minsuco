@@ -5,6 +5,8 @@ it:
         race:
           start_in_past: "La gara non puo iniziare nel passato"
           attendees_cap: "Ha raggiunto il massimo dei partecipanti"
+          no_rui: "RUI non presente"
+          not_publishable: "Gara non pubblicabile"
     models:
       race: Gara
     attributes:
@@ -19,3 +21,7 @@ it:
         compensation_amount: Ricompensa
         max_attendees: Numero massimo di partecipanti
         numero di pezzi: Numero di pezzi
+  flash:
+    users:
+      delete:
+        notice: "Utente eliminato"

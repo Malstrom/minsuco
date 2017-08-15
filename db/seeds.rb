@@ -115,7 +115,7 @@ end
   user_attendee.save
 
   rand(1..3).times do
-    Attendee.create(attendee:user_attendee, race:Race.all.order("RAND()").first)
+    Attendee.create(user:user_attendee, race:Race.all.order("RAND()").first, join_value:rand(1000..10000))
   end
 end
 

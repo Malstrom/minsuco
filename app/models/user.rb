@@ -17,8 +17,11 @@ class User < ApplicationRecord
 
   has_many      :authorizations, dependent: :destroy
 
+
+  has_many      :attendees
+  has_many      :races, class_name: 'Race', through: :attendees
   has_many      :races, :foreign_key => "owner_id"
-  has_many      :attendees, :foreign_key => "attendee_id", :dependent => :destroy
+  # has_many      :attendees, :foreign_key => "user_id", :dependent => :destroy
 
   has_one :reward
 

@@ -26,7 +26,7 @@ Feature: Join in race
     Given I sign up
     When I visit "/races"
     And I join to public race for 4 times
-    Then I should see "Partecipazione non avvenuta"
+    Then I should see "Non hai più gare gratuite"
 
   Scenario: Pro attendee join in 4 races
     Given I logged in as a "pro attendee user"
@@ -44,8 +44,9 @@ Feature: Join in race
     Given I logged in as a "pro creator user"
     When I visit "/races"
     And I join to public race for 4 times
-    Then I should see "Partecipazione non avvenuta"
+    Then I should see "Non hai più gare gratuite"
 
+  @current
   Scenario: User should not join in race when race reached max attendees cap
     Given I sign up
     When I visit "/races"

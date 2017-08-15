@@ -80,11 +80,15 @@ When(/^I join in a full race$/) do
 
   10.times do
     user = create(:user, email: Faker::Internet.free_email)
-    create(:attendee, race:race, attendee:user)
+    create(:attendee, race:race, user:user)
   end
 
   visit "/races"
   find("#test_private_race").click
   find("#test_private_race").click
+
+  fill_in "join_value", :with => '1000'
+
+  find("#join").click
 end
 

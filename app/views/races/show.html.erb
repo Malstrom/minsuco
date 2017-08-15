@@ -50,19 +50,17 @@
 
             <% elsif @race.owner != current_user %>
               <% if current_user.joined?(@race) %>
-                <%= form_for([@race, Attendee.where(race:@race, attendee:current_user).first], method: :delete) do |f| %>
+                <%= form_for([@race, Attendee.where(race:@race, user:current_user).first], method: :delete) do |f| %>
                   <button id="<%= @race.name %>" type="submit" class="btn btn-warning btn-oval btn-outline">
                     <em class="fa fa-minus fa-fw text-muted text-warning"></em>
                     <span>Lascia gara</span>
                   </button>
                 <% end %>
               <% else %>
-                <%= form_for([@race, @race.attendees.build]) do |f| %>
-                  <button id="<%= @race.name %>" type="submit" class="btn btn-success btn-oval btn-outline">
-                    <em class="fa fa-plus fa-fw text-muted text-success"></em>
-                    <span>Partecipa</span>
-                  </button>
-                <% end %>
+                <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-oval btn-outline" >
+                  <em class="fa fa-plus fa-fw text-muted text-success"></em>
+                  <span>Partecipa</span>
+                </button>
               <% end %>
             <% end %>
           </div>
@@ -148,5 +146,8 @@
     <!-- end Aside panel-->
   </div>
 </div>
+
+
+<%= render partial: 'attendees/partials/modal_join' %>
 
 <%# render partial: 'layouts/modals/pay_for_publish_modal' %>

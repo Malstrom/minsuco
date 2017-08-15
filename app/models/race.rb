@@ -5,8 +5,9 @@ class Race < ApplicationRecord
   belongs_to :owner, class_name: 'User'
 
   has_many :featured_races
+
   has_many :attendees
-  has_many :attedees, class_name: 'User', through: 'attendees', foreign_key: 'attendee_id'
+  has_many :users, class_name: 'User', through: :attendees
 
   # need for nested form
   accepts_nested_attributes_for :featured_races, allow_destroy: true

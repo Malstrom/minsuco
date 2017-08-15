@@ -1,6 +1,6 @@
 class Attendee < ApplicationRecord
 
-  belongs_to :attendee, :class_name => 'User'
+  belongs_to :user
   belongs_to :race
 
   validate :max_attendee, :unique_join, :not_joinable, :self_join
@@ -12,13 +12,13 @@ class Attendee < ApplicationRecord
   private
 
   def decrement_rewards
-    attendee.reward.decrement_join_private unless attendee.plan.stripe_id == "pro_attendee"
+    user.reward.decrement_join_private unless user.plan.stripe_id == "pro_attendee"
   end
 
   # check if attendee has permission to join the race (subscription, kind of race, free join token, ecc...)
   def not_joinable
-    unless attendee.has_plan_for_join?
-      unless attendee.has_reward?('pay_for_join')
+    unless user.has_plan_for_join?
+      unless user.has_reward?('pay_for_join')
         errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.invalid_plan'))
         errors.add(:not_joinable, I18n.t('activerecord.errors.models.attendee.no_reward'))
       end
@@ -26,7 +26,7 @@ class Attendee < ApplicationRecord
   end
 
   def self_join
-    if race.owner_id == attendee_id
+    if race.owner_id == user_id
       errors.add(:self_join, I18n.t('activerecord.errors.models.attendee.self_join'))
     end
   end
@@ -38,7 +38,7 @@ class Attendee < ApplicationRecord
   end
 
   def unique_join
-    if Attendee.exists?(attendee: attendee, race: race)
+    if Attendee.exists?(user: user, race: race)
       errors.add(:unique_join, "User must join only one time")
     end
   end
@@ -46,7 +46,7 @@ class Attendee < ApplicationRecord
   # create event every type create attendee
   def create_event
     Event.create(thing_type: 'Attendee', thing_id:id, message:'join in race',
-                 owner: attendee, recipient: race.owner,
+                 owner: user, recipient: race.owner,
                  notifiable: true, read: false
     )
   end

@@ -24,7 +24,7 @@ class AttendeesController < ApplicationController
   # POST /attendees
   # POST /attendees.json
   def create
-    @attendee = Race.find(params[:race_id]).attendees.build(attendee:current_user)
+    @attendee = Race.find(params[:race_id]).attendees.build(user:current_user)
 
     respond_to do |format|
       if @attendee.save
@@ -63,6 +63,7 @@ class AttendeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendee_params
-      params.fetch(:attendee, {})
+      params.require(:attendee).permit(:join_value)
+      # params.fetch(:attendee, {:join_value})
     end
 end

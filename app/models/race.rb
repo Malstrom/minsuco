@@ -15,26 +15,22 @@ class Race < ApplicationRecord
   enum kind:   %i[pay_for_publish pay_for_join]
 
   # start or pause a race
-  enum status: %i[started paused draft]
+  enum status: %i[started paused draft achieved]
+
+  before_validation :set_permalink, on: :create
 
   validates_presence_of :name, :description, :max_attendees, :compensation_amount,
                         :pieces_amount, :recipients, :race_value, :category_id,
                         :starts_at, :ends_at, :status, :kind
-
   validate :attendees_cap
-  validate :start_in_past
+  validate :start_in_past, on: :create
+  validate :publishable?, if: :saved_change_to_status?, on: :update
 
   after_create :set_redirect_path
-
-  # before_update :publishable?, if: :saved_change_to_status?
 
   # return true if race already featured
   def featured?
     true if featured_races.where('featured_races.starts_at <= ? AND featured_races.ends_at >= ?', DateTime.now, DateTime.now).first
-  end
-
-  def publishable?
-    owner.have_rui? ? true : false
   end
 
   def payed?
@@ -42,6 +38,12 @@ class Race < ApplicationRecord
   end
 
   private
+
+  def publishable?
+    unless owner.have_rui? and status == 'started'
+      errors.add(:not_publishable, I18n.t('activerecord.errors.models.race.not_publishable'))
+    end
+  end
 
   def start_in_past
     if starts_at && starts_at < Date.today
@@ -57,6 +59,10 @@ class Race < ApplicationRecord
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path
-    update_attribute(:redirect_path, "/races/#{id}/publish_check?kind=pay_for_publish")
+    update(redirect_path: "/races/#{id}/publish_check?kind=pay_for_publish")
+  end
+
+  def set_permalink
+    self.permalink = "#{Time.now.to_i}-#{name.parameterize}"
   end
 end

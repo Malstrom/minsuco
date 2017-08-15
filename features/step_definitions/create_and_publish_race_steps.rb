@@ -76,7 +76,7 @@ When(/^I close rui modal$/) do
 end
 
 When(/^I join in a full race$/) do
-  race = create(:race, name: "test_private_race")
+  race = create(:race, name: "test_private_race", max_attendees: 10)
 
   10.times do
     user = create(:user, email: Faker::Internet.free_email)

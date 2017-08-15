@@ -28,7 +28,7 @@ Feature: Create race
     When I visit "/races/new"
     And I fill race form
     And I publish race as "public_basic_user"
-    Then I should see "La gara è stata pubblicata correttemente"
+    Then I should see "Gara pubblicata sul portale"
 
   @javascript
   Scenario: Basic user should be able to publish race as a private
@@ -36,7 +36,7 @@ Feature: Create race
     When I visit "/races/new"
     And I fill race form
     And I publish race as "private"
-    Then I should see "La gara è stata pubblicata correttemente"
+    Then I should see "Gara pubblicata sul portale"
 
   @javascript
   Scenario: Pro creator user should be able to publish race as a private
@@ -44,7 +44,7 @@ Feature: Create race
     When I visit "/races/new"
     And I fill race form
     And I publish race as "public"
-    Then I should see "La gara è stata pubblicata correttemente"
+    Then I should see "Gara pubblicata sul portale"
 
   @javascript
   Scenario: New user should be able to publish race as a public
@@ -53,7 +53,7 @@ Feature: Create race
     And I fill race form
     And I fill rui with "487562348759234"
     And I publish race as "public_basic_user"
-    Then I should see "La gara è stata pubblicata correttemente"
+    Then I should see "Gara pubblicata sul portale"
 
   @javascript
   Scenario: New user should be able to publish race as a private
@@ -62,33 +62,33 @@ Feature: Create race
     And I fill race form
     And I fill rui with "487562348759234"
     And I publish race as "private"
-    Then I should see "La gara è stata pubblicata correttemente"
+    Then I should see "Gara pubblicata sul portale"
 
-  @javascript @current
+  @javascript
   Scenario: User without RUI should be able to pay race but not publish it
     Given I sign up
     When I click to "Creare una mia gara è pubblicarla"
     And I fill race form
     And I close rui modal
     And I publish race as "public_basic_user"
-    Then I should see "La gara non pubblicata, inserisci il tuo RUI per pubblicarla"
+    Then I should see "draft"
 
   @javascript
   Scenario: User should be pause its race
     Given I logged in as a "basic user"
     And I create public race name "test_race"
     When I visit "test_race" race page
+    And I start race
     And I stop race
-    Then I should see "Gara stoppata"
+    Then I should see "La gara è stata aggiornata"
 
   @javascript
   Scenario: User should be restart its race
     Given I logged in as a "basic user"
     And I create public race name "test_race"
     When I visit "test_race" race page
-    And I stop race
     And I start race
-    Then I should see "Gara ripartita"
+    Then I should see "La gara è stata aggiornata"
 
 
   Scenario: Race should be disappear when he it's finished

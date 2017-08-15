@@ -22,6 +22,10 @@ When(/^I join to public race for (\d+) times$/) do |arg1|
     visit "/races"
     find("#test_private_race_#{count}").click
     find("#test_private_race_#{count}").click
+
+    fill_in "amount", :with => '1000'
+
+    find("#join").click
     count += 1
   end
 end

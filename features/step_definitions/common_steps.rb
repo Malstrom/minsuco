@@ -1,5 +1,3 @@
-
-
 When(/^I click to "([^"]*)"$/) do |arg|
   click_on(arg)
 end
@@ -9,7 +7,8 @@ When(/^I visit "([^"]*)"$/) do |arg1|
 end
 
 When(/^I visit my races page$/) do
-  visit("/users/#{$user.id}/races")
+  user = User.find_email("new_user@test.com")
+  visit("/users/#{user.id}/races")
 end
 
 When(/^I visit "([^"]*)" race page$/) do |arg|

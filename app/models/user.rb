@@ -105,7 +105,6 @@ class User < ApplicationRecord
   end
 
   def joined?(race)
-    false
     true if self.attendees.where(race:race).first
   end
 

@@ -54,8 +54,8 @@
           <% end %>
         </li>
 
-        <li class="<%= 'active' if controller?('races') && action?('user_attendee') %>">
-          <%= link_to(user_attendees_path current_user) do %>
+        <li class="<%= 'active' if controller?('attendees') && action?('index') %>">
+          <%= link_to(user_attendees_path(current_user)) do %>
             <em class="fa fa-car"></em>
             <span data-localize="sidebar.nav.race.INDEX">GARE DOVE PARTECIPO</span>
           <% end %>

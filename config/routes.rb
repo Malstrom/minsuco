@@ -23,30 +23,24 @@ Rails.application.routes.draw do
   resources :subscriptions
 
   resources :users do
+    resources :attendees
     member do
      get :plans
      get :friends
      post :invite
     end
     get :races,     to: 'races#user_races'
-    get :attendees, to: 'races#attendees'
   end
-
-  resources :attendees
 
   resources :races do
     member do
       get :start
       get :pause
-      get :pay_for_publish
-      get :pay_for_join
-      get :join
-      get :leave
-      get :publish,  to: 'races#publish_new'
-      # patch :publish, to: 'races#publish_create'
-      patch :publish_check, to: 'races#publish_check'
+      get :publish, to: 'races#publish'
       get :publish_check, to: 'races#publish_check'
+      patch :publish_check, to: 'races#publish_check'
     end
+    resources :attendees
   end
 
   # Angle routes --- they be removed at the end of 1.0 project

@@ -2,44 +2,15 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   before_action :set_user, only: [:show, :edit, :update, :destroy, :intent]
-
-
   layout "application-main"
-
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  end
 
   # GET /users/1
   # GET /users/1.json
   def show
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
   # GET /users/1/edit
   def edit
-  end
-
-  # POST /users
-  # POST /users.json
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /users/1
@@ -47,15 +18,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        flash[:info] = "Dati aggiornati"
-        format.html { render :edit}
+        format.html {redirect_to edit_user_path(@user), notice: I18n.t('flash.users.update.notice')}
         format.json { render :show, status: :ok, location: @user }
-        format.js   { render :status => 200 }
       else
-        flash[:danger] = "Riprova, dati non salvati"
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-        format.js   { render :status => 500 }
       end
     end
   end
@@ -65,7 +32,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html {redirect_to root_path, notice: I18n.t('flash.users.delete.notice')}
       format.json { head :no_content }
     end
   end
@@ -106,4 +73,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:rui, :name, :password, :plan, :role, :kind, :image, :fiscal_kind, :location, :password, :phone)
       # params.fetch(:user, {:name})
     end
+
+  def flash_interpolation_options
+    {resource_name: @user.name}
+  end
 end

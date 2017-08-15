@@ -46,12 +46,17 @@ Feature: Join in race
     And I join to public race for 4 times
     Then I should see "Non hai più gare gratuite"
 
-  @current
   Scenario: User should not join in race when race reached max attendees cap
     Given I sign up
     When I visit "/races"
     And I join in a full race
     Then I should see "La gara ha raggiunto il massimo dei partecipanti"
+
+  Scenario: User should not join in race whi join_value over value of race
+    Given I sign up
+    When I visit "/races"
+    And I join with "10000" in a race with value "1000"
+    Then I should see "Non puoi partecipare a questa gara con questo importo"
 
 
   Scenario: User should not be able to join to its race

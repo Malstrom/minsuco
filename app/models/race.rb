@@ -29,6 +29,10 @@ class Race < ApplicationRecord
 
   after_create :set_redirect_path
 
+  def value_coverage
+    Attendee.where(race_id:self.id).sum(:join_value)
+  end
+
   # return true if race already featured
   def featured?
     true if featured_races.where('featured_races.starts_at <= ? AND featured_races.ends_at >= ?', DateTime.now, DateTime.now).first

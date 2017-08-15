@@ -19,7 +19,7 @@
           <h4 class="inline pull-right">% remunerazione</h4>
         </div>
         <div>
-          <h4 class="inline"><%= number_to_currency @race.race_value, unit: '€' %></h4>
+          <h4 class="inline"><%= number_to_currency @race.value_coverage, unit: '€' %> / <%= number_to_currency @race.race_value, unit: '€' %></h4>
           <h4 class="inline pull-right"><%= @race.compensation_amount %>%</h4>
         </div>
       </div>

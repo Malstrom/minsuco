@@ -29,3 +29,16 @@ When(/^I join to public race for (\d+) times$/) do |arg1|
     count += 1
   end
 end
+
+And(/^I join with "([^"]*)" in a race with value "([^"]*)"$/) do |arg1, arg2|
+  user = create(:user, email:"test_email@test.com")
+  create(:race, name:"test_private_race", kind: 'pay_for_join', owner: user, race_value:arg2)
+
+  visit "/races"
+  find("#test_private_race").click
+  find("#test_private_race").click
+
+  fill_in "join_value", :with => arg1
+
+  find("#join").click
+end

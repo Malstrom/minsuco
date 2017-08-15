@@ -3,7 +3,7 @@ class Attendee < ApplicationRecord
   belongs_to :user
   belongs_to :race
 
-  validate :max_attendee, :unique_join, :not_joinable, :self_join
+  validate :max_attendee, :unique_join, :not_joinable, :self_join, :race_value_cap
 
   after_create :decrement_rewards
 
@@ -40,6 +40,12 @@ class Attendee < ApplicationRecord
   def unique_join
     if Attendee.exists?(user: user, race: race)
       errors.add(:unique_join, "User must join only one time")
+    end
+  end
+
+  def race_value_cap
+    if race.value_coverage + join_value > race.race_value
+      errors.add(:race_value_cap, I18n.t('activerecord.errors.models.attendee.race_value_cap'))
     end
   end
 

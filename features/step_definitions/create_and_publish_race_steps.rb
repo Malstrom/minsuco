@@ -1,9 +1,9 @@
 When(/^I create private race name "([^"]*)"$/) do |arg1|
-  create(:race, name: arg1, kind: "pay_for_join")
+  create(:race, name: arg1, kind: "pay_for_join", owner: User.first)
 end
 
 When(/^I create public race name "([^"]*)"$/) do |arg1|
-  create(:race, name: arg1, kind: "pay_for_publish")
+  create(:race, name: arg1, kind: "pay_for_publish", owner: User.first)
 end
 
 When(/^I fill race form$/) do

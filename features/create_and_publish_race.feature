@@ -73,20 +73,12 @@ Feature: Create race
     And I publish race as "public_basic_user"
     Then I should see "draft"
 
-  @javascript
-  Scenario: User should be pause its race
+  @javascript @current
+  Scenario: User should start and stop its races
     Given I logged in as a "basic user"
     And I create public race name "test_race"
     When I visit "test_race" race page
-    And I start race
     And I stop race
-    Then I should see "La gara è stata aggiornata"
-
-  @javascript
-  Scenario: User should be restart its race
-    Given I logged in as a "basic user"
-    And I create public race name "test_race"
-    When I visit "test_race" race page
     And I start race
     Then I should see "La gara è stata aggiornata"
 

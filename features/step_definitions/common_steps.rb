@@ -7,7 +7,7 @@ When(/^I visit "([^"]*)"$/) do |arg1|
 end
 
 When(/^I visit my races page$/) do
-  user = User.find__by_email("new_user@test.com")
+  user = User.find_by_email("new_user@test.com")
   visit("/users/#{user.id}/races")
 end
 

@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="form-group">
-              <%= f.label :rui, class: 'col-sm-2 control-label', id:'rui' , required:true %>
+              <%= f.label :rui, class: 'col-sm-2 control-label', id:'rui', required:true %>
               <div class="col-sm-6">
                 <%= f.text_field :rui, class:'form-control'  %>
               </div>
@@ -42,7 +42,6 @@
     $('#save').click(function(){
 
       data = $('form').serialize();
-      console.log( data );
 
       $.ajax({
         url: "/users/<%= current_user.id %>",

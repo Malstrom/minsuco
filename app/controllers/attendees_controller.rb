@@ -24,7 +24,7 @@ class AttendeesController < ApplicationController
   # POST /attendees
   # POST /attendees.json
   def create
-    @attendee = Race.find(params[:race_id]).attendees.build(user:current_user)
+    @attendee = Race.find(params[:race_id]).attendees.build(user:current_user, join_value:params[:attendee][:join_value])
 
     respond_to do |format|
       if @attendee.save

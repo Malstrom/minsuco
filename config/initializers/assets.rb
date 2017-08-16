@@ -23,4 +23,5 @@ Rails.application.config.assets.precompile += %w(
  devise/passwords.css devise/passwords.js
  users.css users.js
  attendees.css attendees.js
+ Chart.bundle.js chartkick.js
  cable.js )

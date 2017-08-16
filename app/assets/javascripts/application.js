@@ -2,10 +2,13 @@
 // listed below.
 //
 //= require payola
+//= require Chart.bundle
 
 //--- Angle
 //= require_tree ./angle/
 
 //= require jquery_nested_form
 
+
+Chartkick.configure({language: "it"});
 ////= require cable

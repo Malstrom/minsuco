@@ -58,6 +58,8 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem "better_errors"
   gem "binding_of_caller"
+  # gem 'brakeman', :require => false
+  gem 'rails-erd', require: false
 end
 
 group :test do
@@ -90,7 +92,13 @@ gem "nested_form"
 # gem 'paper_trail' # Track changes to your models' data. Good for auditing or versioning.
 # gem 'active_admin' # elegant backends for website administration
 
-
 gem "slim-rails"
 
-# gem 'flash-dance', :git => 'https://github.com/MunkiPhD/flash-dance.git'
+
+# new gems to test
+
+# gem 'ransack', github: 'activerecord-hackery/ransack' #search
+# gem 'searchkick #search #elasticsearch
+# gem "slack-notifier"
+gem "chartkick"
+gem 'groupdate'

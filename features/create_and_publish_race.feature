@@ -11,20 +11,20 @@ Feature: Create race
     Then I should see "Nuova gara"
 
   Scenario: User should create new race
-    Given I logged in as a "basic user"
+    Given I logged in as a "basic"
     When I visit "/races/new"
     And I fill race form
     Then I should see "Come vuoi pubblicare la gara sul portale?"
 
   Scenario: User should not create race with start date before today
-    Given I logged in as a "basic user"
+    Given I logged in as a "basic"
     When I visit "/races/new"
     And I fill race attribute "start_date" with "10/08/2017"
     Then I should see "La gara non puo iniziare nel passato"
 
   @javascript
   Scenario: Basic user should be able to publish race as public after payment trought
-    Given I logged in as a "basic user"
+    Given I logged in as a "basic"
     When I visit "/races/new"
     And I fill race form
     And I publish race as "public_basic_user"
@@ -32,15 +32,15 @@ Feature: Create race
 
   @javascript
   Scenario: Basic user should be able to publish race as a private
-    Given I logged in as a "basic user"
+    Given I logged in as a "basic"
     When I visit "/races/new"
     And I fill race form
     And I publish race as "private"
     Then I should see "Gara pubblicata sul portale"
 
   @javascript
-  Scenario: Pro creator user should be able to publish race as a private
-    Given I logged in as a "pro creator user"
+  Scenario: creator should be able to publish race as a private
+    Given I logged in as a "creator"
     When I visit "/races/new"
     And I fill race form
     And I publish race as "public"
@@ -75,15 +75,13 @@ Feature: Create race
 
   @javascript
   Scenario: User should start and stop its races
-    Given I logged in as a "basic user"
+    Given I logged in as a "basic"
     And I create public race name "test_race"
     When I visit "test_race" race page
     And I stop race
     And I start race
     Then I should see "La gara è stata aggiornata"
 
-
-  Scenario: Race should be disappear when he it's finished
 
 
 

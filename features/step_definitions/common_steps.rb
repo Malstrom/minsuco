@@ -28,3 +28,12 @@ end
 And(/^I sleep "([^"]*)" seconds$/) do |arg1|
   sleep arg1.to_i
 end
+
+Then(/^I click on notifications$/) do
+  visit '/'
+  find('#notification').click
+end
+
+Then(/^I "([^"]*)" join$/) do |arg|
+  find('#confirm_toggle').click
+end

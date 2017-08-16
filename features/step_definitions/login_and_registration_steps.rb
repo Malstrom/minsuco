@@ -12,10 +12,11 @@ end
 
 Given(/^I logged in as a "([^"]*)"$/) do |arg|
   user = User.find_by_name arg
+
   unless user
-    if arg == 'basic user'
+    if arg == 'basic'
       $user = create(:user, name: arg, plan: Plan.find_by_stripe_id('basic'), email:'basic_user_test@email.com')
-    elsif arg == 'pro attendee user'
+    elsif arg == 'attendee'
       $user = create(:user, name: arg, plan: Plan.find_by_stripe_id('pro_attendee'), email:'pro_attendee_test@email.com')
     elsif arg == 'creator'
       $user = create(:user, name: arg, plan: Plan.find_by_stripe_id('pro_creator'), email:'pro_creator_test@email.com')

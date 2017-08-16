@@ -75,20 +75,12 @@ When(/^I close rui modal$/) do
   find("#closeMyModal").click
 end
 
-When(/^I join in a full race$/) do
-  race = create(:race, name: "test_private_race", max_attendees: 10)
 
-  10.times do
-    user = create(:user, email: Faker::Internet.free_email)
-    create(:attendee, race:race, user:user)
+When(/^([^I]+) request to join in "([^"]*)" race$/) do |arg1,arg2|
+  create(:user, name: arg1, plan: Plan.find_by_stripe_id('basic'), email:'basic_user_test@email.com')
+
+  using_session(arg1) do
+    step %{I logged in as a "#{arg1}"}
+    step %{I join with "#{arg2}" in a race with value "1000"}
   end
-
-  visit "/races"
-  find("#test_private_race").click
-  find("#test_private_race").click
-
-  fill_in "join_value", :with => '1000'
-
-  find("#join").click
 end
-

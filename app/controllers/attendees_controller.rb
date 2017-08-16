@@ -1,25 +1,5 @@
 class AttendeesController < ApplicationController
-  before_action :set_attendee, only: [:show, :edit, :update, :destroy]
-
-  # GET /attendees
-  # GET /attendees.json
-  def index
-    @attendees = current_user.attendees
-  end
-
-  # GET /attendees/1
-  # GET /attendees/1.json
-  def show
-  end
-
-  # GET /attendees/new
-  def new
-    @attendee = Attendee.new
-  end
-
-  # GET /attendees/1/edit
-  def edit
-  end
+  before_action :set_attendee, only: [:confirm ,:update, :destroy]
 
   # POST /attendees
   # POST /attendees.json
@@ -40,8 +20,12 @@ class AttendeesController < ApplicationController
   # PATCH/PUT /attendees/1
   # PATCH/PUT /attendees/1.json
   def update
-    @attendee.update(attendee_params)
-    respond_with @attendee , location: -> { race_path(@attendee.race) }
+    if @attendee.update!(attendee_params)
+      flash[:notice] = I18n.t('flash.attendees.update.notice')
+    else
+      flash[:alert] = I18n.t('flash.attendees.update.alert')
+    end
+    redirect_to race_path(@attendee.race)
   end
 
   # DELETE /attendees/1
@@ -63,7 +47,7 @@ class AttendeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendee_params
-      params.require(:attendee).permit(:join_value)
+      params.require(:attendee).permit(:join_value, :status)
       # params.fetch(:attendee, {:join_value})
     end
 end

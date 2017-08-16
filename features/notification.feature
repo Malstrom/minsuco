@@ -1,12 +1,13 @@
-@notifications @javascript @current
+@notifications @javascript
 Feature: Notifications
   User should receive notifications in app and via email
   and active/deactive notifications email
 
-
-  Scenario: Chat
+  Background:
     Given a user named "creator" is online
-    When I create public race name "public_race"
-    Given I logged in as a "basic user"
+    And I create public race name "public_race"
+
+  Scenario: User should see notification when someone join in its race
+    Given I logged in as a "basic"
     When I join in "public_race" with "1000" euro
     Then creator should see notification "join in race"

@@ -30,7 +30,7 @@ class Race < ApplicationRecord
   after_create :set_redirect_path
 
   def value_coverage
-    Attendee.where(race_id:self.id).sum(:join_value)
+    Attendee.where(race_id:self.id, status: 'confirmed').sum(:join_value)
   end
 
   # return true if race already featured

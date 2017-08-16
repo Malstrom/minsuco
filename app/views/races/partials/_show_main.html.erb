@@ -1,0 +1,26 @@
+<!-- Main panel-->
+<div class="panel b">
+  <div class="panel-heading">
+    <div class="pull-right mt">
+      <div class="label label-info">started</div>
+    </div>
+    <h4 class="mv">
+      <span><%= @race.name %></span>
+    </h4>
+  </div>
+  <div class="panel-body bb bt">
+    <div>
+      <h4 class="inline">Valore della gara</h4>
+      <h4 class="inline pull-right">% remunerazione</h4>
+    </div>
+    <div>
+      <h4 class="inline"><%= number_to_currency @race.value_coverage, unit: '€' %> / <%= number_to_currency @race.race_value, unit: '€' %></h4>
+      <h4 class="inline pull-right"><%= @race.compensation_amount %>%</h4>
+    </div>
+  </div>
+  <div class="panel-body">
+    <h4>Description</h4>
+    <p><%= @race.description %></p>
+  </div>
+</div>
+<!-- End Main panel-->

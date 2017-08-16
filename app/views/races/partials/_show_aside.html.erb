@@ -1,0 +1,112 @@
+<!-- Aside panel-->
+<div class="panel b">
+  <div class="panel-body bb">
+    <div class="clearfix">
+      <div class="pull-left">
+        <% if @race.owner == current_user %>
+          <%= form_for @race do |f| %>
+            <% if @race.status == 'started' %>
+              <%= f.hidden_field :status, :value => "paused" %>
+              <%= f.submit 'Stop', class:'btn btn-warning btn-oval btn-outline', id:"stop_button" %>
+            <% else %>
+              <%= f.hidden_field :status, :value => "started" %>
+              <%= f.submit 'Start', class:'btn btn-success btn-oval btn-outline', id:"start_button" %>
+            <% end %>
+          <% end %>
+
+        <% elsif @race.owner != current_user %>
+          <% if current_user.joined?(@race) %>
+            <%= form_for([@race, Attendee.where(race:@race, user:current_user).first], method: :delete) do |f| %>
+              <button id="<%= @race.name %>" type="submit" class="btn btn-warning btn-oval btn-outline">
+                <em class="fa fa-minus fa-fw text-muted text-warning"></em>
+                <span>Lascia gara</span>
+              </button>
+            <% end %>
+          <% else %>
+            <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-oval btn-outline" >
+              <em class="fa fa-plus fa-fw text-muted text-success"></em>
+              <span>Partecipa</span>
+            </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if @race.owner == current_user %>
+    <div class="panel-body bb">
+      <div class="clearfix text-center">
+        <div class="btn-group-vertical">
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <ul class="list-inline mv">
+        <% if @race.kind == 'pay_for_publish'%>
+          <li>
+            <div class="badge p-sm bg-info">Pubblica</div>
+          </li>
+        <% elsif @race.kind == 'pay_for_join'%>
+          <li>
+            <div class="badge p-sm bg-info">Privata</div>
+          </li>
+        <% end %>
+
+        <% if @race.featured? %>
+          <li>
+            <div class="badge p-sm bg-info">Evidenziata</div>
+          </li>
+        <% end %>
+        <li>
+          <div class="badge p-sm bg-info"><%= @race.status %></div>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+  <table class="table bb">
+    <tbody>
+    <tr>
+      <td>
+        <strong>Creatore</strong>
+      </td>
+      <td><%= @race.owner.name %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Ramo rischio</strong>
+      </td>
+      <td><%= @race.category.name %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Destinatari</strong>
+      </td>
+      <td><%= @race.recipients %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Numero di pezzi</strong>
+      </td>
+      <td><%= @race.pieces_amount %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Fisso per pezzo</strong>
+      </td>
+      <td><%= number_to_currency @race.compensation_start_amount, unit: '€' %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Partecipanti/Massimo</strong>
+      </td>
+      <td><%= @race.attendees.count %> / <%= @race.max_attendees %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Iniziata / Termina</strong>
+      </td>
+      <td><%= @race.starts_at.strftime('%d/%m/%Y') %> - <%= @race.ends_at.strftime('%d/%m/%Y') %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- end Aside panel-->

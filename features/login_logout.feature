@@ -6,15 +6,15 @@ Feature: Login and registration for users
     Then  I should see "Cosa desideri fare?"
 
   Scenario: User with basic account should see its Dashboard
-    Given I logged in as a "basic user"
+    Given I logged in as a "basic"
     Then  I should see "La mia Dashboard"
 
   Scenario: User with pro attendee account should see its Dashboard
-    Given I logged in as a "pro attendee user"
+    Given I logged in as a "attendee"
     Then  I should see "La mia Dashboard"
 
   Scenario: User with pro creator account should see its Dashboard
-    Given I logged in as a "pro creator user"
+    Given I logged in as a "creator"
     Then  I should see "La mia Dashboard"
 
   # log in with Google

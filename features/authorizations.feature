@@ -4,6 +4,6 @@ Feature: App Authorizations
 
 
   Scenario: User should not see setting page to another user
-    Given I logged in as a "basic user"
+    Given I logged in as a "basic"
     When I visit edit page of another user
     Then I should see "Non sei autorizzato ad accedere a questa pagina"

@@ -16,8 +16,8 @@ it:
         alert: "Gara non pubblicata sul portale"
     attendees:
       update:
-        notice: "Partecipazione avvenuta con successo"
-        alert: "Partecipazione fallita"
+        notice: "Partecipazione aggiornata"
+        alert: "Partecipaziona non aggiornata"
       create:
         notice: "Partecipazione avvenuta con successo"
         alert: "Partecipazione non avvenuta"

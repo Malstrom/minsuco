@@ -115,7 +115,10 @@ end
   user_attendee.save
 
   rand(1..3).times do
-    attende = Attendee.create(user:user_attendee, race:Race.all.order("RAND()").first, join_value:rand(1000..10000))
+    Attendee.create(user:user_attendee,
+                    race:Race.all.order("RAND()").first,
+                    join_value:rand(1000..10000),
+                    status: :confirmed)
   end
 end
 

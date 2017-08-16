@@ -11,8 +11,8 @@ When(/^I join to public race for (\d+) times$/) do |arg1|
   arg1 = arg1.to_i
 
   count = 1
+  user = create(:user, email:"test_email_#{count}@test.com")
   arg1.times do
-    user = create(:user, email:"test_email_#{count}@test.com")
     create(:race, name:"test_private_race_#{count}", kind: 'pay_for_join', owner: user, permalink: count)
     count += 1
   end
@@ -50,6 +50,23 @@ When(/^I join in "([^"]*)" with "([^"]*)" euro$/) do |arg1, arg2|
   find("##{arg1}").click
 
   fill_in "join_value", :with => arg2
+
+  find("#join").click
+end
+
+When(/^I join in a full race$/) do
+  race = create(:race, name: "test_private_race", max_attendees: 10)
+
+  10.times do
+    user = create(:user, email: Faker::Internet.free_email)
+    create(:attendee, race:race, user:user)
+  end
+
+  visit "/races"
+  find("#test_private_race").click
+  find("#test_private_race").click
+
+  fill_in "join_value", :with => '1000'
 
   find("#join").click
 end

@@ -102,3 +102,4 @@ gem "slim-rails"
 # gem "slack-notifier"
 gem "chartkick"
 gem 'groupdate'
+# gem 'pickle'

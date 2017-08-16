@@ -73,7 +73,7 @@ Feature: Create race
     And I publish race as "public_basic_user"
     Then I should see "draft"
 
-  @javascript @current
+  @javascript
   Scenario: User should start and stop its races
     Given I logged in as a "basic user"
     And I create public race name "test_race"

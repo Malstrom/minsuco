@@ -42,3 +42,14 @@ And(/^I join with "([^"]*)" in a race with value "([^"]*)"$/) do |arg1, arg2|
 
   find("#join").click
 end
+
+When(/^I join in "([^"]*)" with "([^"]*)" euro$/) do |arg1, arg2|
+  visit "/races"
+
+  find("##{arg1}").click
+  find("##{arg1}").click
+
+  fill_in "join_value", :with => arg2
+
+  find("#join").click
+end

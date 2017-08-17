@@ -84,3 +84,15 @@ When(/^([^I]+) request to join in "([^"]*)" race$/) do |arg1,arg2|
     step %{I join with "#{arg2}" in a race with value "1000"}
   end
 end
+
+
+Given(/^User "([^"]*)" join in "([^"]*)" race$/) do |user_name, race_name|
+  create :attendee,
+         user: create(:user, name:user_name, email: "#{user_name}@test.com"),
+         race: Race.find_by_name(race_name)
+end
+
+
+When(/^I ban "([^"]*)"$/) do |arg1|
+  find('#ban_toggle').click
+end

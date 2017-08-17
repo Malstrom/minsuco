@@ -1,70 +1,88 @@
-<div class="panel b">
-  <div class="panel-heading">
-    <div class="pull-right label label-danger">5</div>
-    <div class="pull-right label label-success">12</div>
-    <div class="panel-title">Partecipazioni</div>
-  </div>
-  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 180px;"><div data-height="180" data-scrollable="true" class="list-group" style="overflow: hidden; width: auto; height: 180px;">
-    <% @race.attendees.each do |attendee| %>
-      <a href="#" class="list-group-item">
-        <div class="media-box">
-          <div class="pull-left">
-            <img src="<%= attendee.user.image %>" alt="Image" class="media-box-object img-circle thumb32">
-          </div>
-          <div class="media-box-body clearfix">
-            <%= form_for([@race, attendee], method: :put) do |f| %>
+<div class="panel panel-default">
 
+  <div class="panel-heading">
+    <div class="pull-right label label-success"><%= Attendee.where(race:@race, status: :confirmed).count %></div>
+    <div class="pull-right label label-danger"><%= Attendee.where(race:@race, status: :deny).count %></div>
+    Partecipanti
+  </div>
+  <!-- START table-responsive-->
+  <div class="table-responsive">
+    <table id="attendee-table" class="table table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Partecipate</th>
+        <th>Stato</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @race.attendees.each do |attendee| %>
+        <tr>
+          <td>
+            <div class="media">
+              <a href="#" class="pull-left">
+                <img src="<%= attendee.user.image %>" alt="" class="media-object img-responsive img-circle">
+              </a>
+              <div class="media-body">
+                <div class="pull-right badge bg-info">
+                  <%= number_to_currency attendee.join_value, unit:"€" %></div>
+                <h4 class="media-heading"><%= attendee.user.name %></h4>
+                <p>
+                  <%= attendee.user.kind %> /
+                  Telefono: <%= attendee.user.phone %> /
+                  Località: <%= attendee.user.location %>
+                </p>
+              </div>
+            </div>
+          </td>
+          <td class="text-center">
+            <%= form_for([@race, attendee], method: :put) do |f| %>
               <% if attendee.status == 'confirmed' %>
                 <%= f.hidden_field :status, value: :deny %>
-                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success pull-right">
-                  <em class="fa fa-check"></em>
-                </button>
-                <%= form_for([@race, attendee], method: :put) do |f| %>
-                  <%= f.hidden_field :status, value: :waiting %>
-                  <button id="ban_toggle" type="submit" class="btn btn-sm btn-success pull-right">
-                    unban
-                  </button>
-                <% end %>
-              <% elsif attendee.status == 'banned' %>
-                <%= f.hidden_field :status, value: :waiting %>
-                <button id="ban_toggle" type="submit" class="btn btn-sm btn-success pull-right">
-                  unban
-                </button>
-              <% else %>
-                <%= f.hidden_field :status, value: :confirmed %>
                 <button id="confirm_toggle" type="submit" class="btn btn-sm btn-danger pull-right">
                   <em class="fa fa-close"></em>
                 </button>
+              <% else %>
+                <%= f.hidden_field :status, value: :confirmed %>
+                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success pull-right">
+                  <em class="fa fa-check"></em>
+                </button>
               <% end %>
             <% end %>
-
-            <!--<small class="pull-right">2h</small>-->
-            <strong class="media-box-heading text-primary">
-              <span class="circle circle-success circle-lg text-left"></span><%= attendee.user.name %> / <%= attendee.user.kind %></strong>
-            <p class="mb-sm">
-
-              <small><%= number_to_currency attendee.join_value, unit:"€" %></small>
-            </p>
-          </div>
-        </div>
-      </a>
-    <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
-    <div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 76px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 104.18px;">
+  <!-- END table-responsive-->
+  <div class="panel-footer">
+    <div class="row">
+      <!--<div class="col-lg-2">-->
+        <!--<div class="input-group pull-right">-->
+          <!--<select class="input-sm form-control">-->
+            <!--<option value="0">Bulk action</option>-->
+            <!--<option value="1">Delete</option>-->
+            <!--<option value="2">Clone</option>-->
+            <!--<option value="3">Export</option>-->
+          <!--</select>-->
+          <!--<span class="input-group-btn">-->
+                  <!--<button class="btn btn-sm btn-default">Apply</button>-->
+               <!--</span>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="col-lg-8"></div>
+      <div class="col-lg- text-right">
+        <ul class="pagination pagination-sm">
+          <li class="active"><a href="#">1</a>
+          </li>
+          <li><a href="#">2</a>
+          </li>
+          <li><a href="#">3</a>
+          </li>
+          <li><a href="#">»</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
   </div>
-  </div>
-  <!-- END list group-->
-  <!-- START panel footer-->
-  <div class="panel-footer clearfix">
-    <div class="input-group">
-      <input type="text" placeholder="Type message .." class="form-control input-sm">
-      <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-paperclip"></i>
-                  </button>
-               </span>
-    </div>
-  </div>
-  <!-- END panel-footer-->
 </div>

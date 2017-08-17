@@ -82,6 +82,12 @@ Feature: Create race
     And I start race
     Then I should see "La gara è stata aggiornata"
 
+  Scenario: Owner of race should see join list
+    Given I logged in as a "creator"
+    And I create public race name "test_race"
+    When I visit "test_race" race page
+    Then I should see "Partecipanti"
+
 
 
 

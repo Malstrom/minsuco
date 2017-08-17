@@ -70,3 +70,18 @@ When(/^I join in a full race$/) do
 
   find("#join").click
 end
+
+
+Given(/^Someone join in a race named "([^"]*)"$/) do |arg1|
+  race = create(:race, name: "test_private_race", max_attendees: 10)
+
+
+
+  visit "/races"
+  find("#test_private_race").click
+  find("#test_private_race").click
+
+  fill_in "join_value", :with => '1000'
+
+  find("#join").click
+end

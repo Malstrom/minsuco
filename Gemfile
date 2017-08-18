@@ -42,7 +42,10 @@ gem 'omnicontacts', :git => 'https://github.com/Diego81/omnicontacts.git'
 
 gem 'cancancan', '~> 2.0'
 
-gem "responders" # flash messages via i18n
+# gem "responders" # flash messages via i18n
+
+# gem 'sendgrid-rails', '~> 2.0'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

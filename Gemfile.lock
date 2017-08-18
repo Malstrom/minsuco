@@ -183,6 +183,7 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mustermann (1.0.0)
     mysql2 (0.4.7)
     mysql2 (0.4.7-x64-mingw32)
     nested_form (0.3.2)
@@ -214,6 +215,8 @@ GEM
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.1)
+    rack-protection (2.0.0)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.1.0)
@@ -262,6 +265,7 @@ GEM
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
     ruby-graphviz (1.2.3)
+    ruby_http_client (3.1.0)
     rubyzip (1.2.1)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -274,11 +278,19 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sendgrid-ruby (5.0.0)
+      ruby_http_client (~> 3.0)
+      sinatra (>= 1.4.7, < 3)
     simplecov (0.14.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.1)
+    sinatra (2.0.0)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0)
+      tilt (~> 2.0)
     slim (3.0.8)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
@@ -362,10 +374,10 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (= 5.1.0)
   rails-erd
-  responders
   rspec
   sass-rails (~> 5.0.1)
   selenium-webdriver
+  sendgrid-ruby
   simplecov
   slim-rails
   tzinfo-data

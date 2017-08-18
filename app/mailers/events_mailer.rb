@@ -1,4 +1,5 @@
 class EventsMailer < ApplicationMailer
+  default :from => 'events@minusco.com'
 
   # arrive all requests
   def event_mailer(event)
@@ -10,11 +11,7 @@ class EventsMailer < ApplicationMailer
   # send requests
   def new_request(event, recipient)
     event_params(event, recipient)
-
-    mail(from: 'event@myinsurencecontest.com',
-         to: recipient.email,
-         subject: t("email.events.#{event.message}.subject")
-    )
+    mail(to: recipient.email, subject: t("email.events.#{event.message}.subject"))
   end
 
   #pass json for transactional email

@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   private
 
   def broadcast_event
-    EventsMailer.deliver_event_mailer
+    EventsMailer.event_mailer(self).deliver_later
     # EventBroadcastJob.perform_late self
   end
 end

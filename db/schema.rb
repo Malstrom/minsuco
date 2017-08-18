@@ -43,7 +43,8 @@ ActiveRecord::Schema.define(version: 20170818025444) do
   create_table "channel_subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "channel_id"
-    t.boolean "muted"
+    t.boolean "email_muted", default: false
+    t.boolean "in_app_muted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["channel_id"], name: "index_channel_subscriptions_on_channel_id"

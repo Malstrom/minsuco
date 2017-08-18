@@ -1,0 +1,6 @@
+it:
+  flash:
+    channel_subscriptions:
+      update:
+        notice: "Inscrizione aggiornata"
+        alert: "Inscrizione non aggiornata"

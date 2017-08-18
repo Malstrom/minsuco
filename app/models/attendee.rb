@@ -22,7 +22,9 @@ class Attendee < ApplicationRecord
   private
 
   def decrement_rewards
-    user.reward.decrement_join_private unless user.plan.stripe_id == "pro_attendee"
+    unless user.plan.stripe_id == "pro_attendee" or race.kind == 'pay_for_publish'
+      user.reward.decrement_join_private
+    end
   end
 
   # check if attendee has permission to join the race (subscription, kind of race, free join token, ecc...)

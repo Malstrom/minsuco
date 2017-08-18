@@ -22,14 +22,26 @@ class Race < ApplicationRecord
 
   validates_presence_of :name, :description, :max_attendees, :compensation_amount,
                         :pieces_amount, :recipients, :race_value, :category_id,
-                        :starts_at, :ends_at, :status, :kind
+                        :starts_at, :ends_at, :kind
+
   validate :attendees_cap
   validate :start_in_past, on: :create
-  validate :publishable?, if: :saved_change_to_status?, on: :update
+  validate :publishable, if: :saved_change_to_status?, on: :update
 
+  validates_associated :owner
+
+  before_create :set_status
   after_create :set_redirect_path
 
   after_create_commit :subscribe_owner
+
+  def set_status
+    if publishable?
+      self.status = 'started'
+    else
+      self.status = 'started'
+    end
+  end
 
   def value_coverage
     Attendee.where(race_id:self.id, status: 'confirmed').sum(:join_value)
@@ -44,10 +56,14 @@ class Race < ApplicationRecord
     PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish? ? true : false
   end
 
+  def publishable?
+    false unless owner.have_rui?
+  end
+
   private
 
-  def publishable?
-    unless owner.have_rui? and status == 'started'
+  def publishable
+    unless publishable?
       errors.add(:not_publishable, I18n.t('activerecord.errors.models.race.not_publishable'))
     end
   end

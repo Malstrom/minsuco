@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170818025444) do
   create_table "channel_subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "channel_id"
+    t.boolean "muted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["channel_id"], name: "index_channel_subscriptions_on_channel_id"
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 20170818025444) do
     t.string "previous"
     t.string "now"
     t.boolean "notifiable"
+    t.boolean "emailable"
     t.boolean "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -207,7 +209,7 @@ ActiveRecord::Schema.define(version: 20170818025444) do
     t.decimal "compensation_start_amount", precision: 8, scale: 2
     t.integer "max_attendees"
     t.integer "kind", default: 1
-    t.integer "status", default: 2
+    t.integer "status"
     t.string "permalink"
     t.integer "price", default: 2900
     t.string "redirect_path", default: "/races"

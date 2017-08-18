@@ -12,7 +12,7 @@ class CreateRaces < ActiveRecord::Migration[5.1]
       t.decimal :compensation_start_amount, :precision => 8, :scale => 2
       t.integer :max_attendees
       t.integer :kind, :default => 1
-      t.integer :status, :default => 2
+      t.integer :status
       t.string  :permalink
       t.integer :price, :default => 2900
       t.string  :redirect_path, :default => "/races"

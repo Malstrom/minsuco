@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816155207) do
+ActiveRecord::Schema.define(version: 20170817160346) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -40,18 +40,33 @@ ActiveRecord::Schema.define(version: 20170816155207) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "channel_subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "channel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_channel_subscriptions_on_channel_id"
+    t.index ["user_id"], name: "index_channel_subscriptions_on_user_id"
+  end
+
+  create_table "channels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+  end
+
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "thing_type"
     t.integer "thing_id"
-    t.bigint "owner_id"
-    t.bigint "recipient_id"
+    t.bigint "who_did_id"
+    t.bigint "channel_id"
     t.string "message"
+    t.string "previous"
+    t.string "now"
     t.boolean "notifiable"
     t.boolean "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_events_on_owner_id"
-    t.index ["recipient_id"], name: "index_events_on_recipient_id"
+    t.index ["channel_id"], name: "index_events_on_channel_id"
+    t.index ["who_did_id"], name: "index_events_on_who_did_id"
   end
 
   create_table "featured_races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -241,8 +256,9 @@ ActiveRecord::Schema.define(version: 20170816155207) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "events", "users", column: "owner_id"
-  add_foreign_key "events", "users", column: "recipient_id"
+  add_foreign_key "channel_subscriptions", "channels"
+  add_foreign_key "channel_subscriptions", "users"
+  add_foreign_key "events", "users", column: "who_did_id"
   add_foreign_key "featured_races", "races"
   add_foreign_key "friends", "users"
   add_foreign_key "races", "users", column: "owner_id"

@@ -29,6 +29,8 @@ class Race < ApplicationRecord
 
   after_create :set_redirect_path
 
+  after_create_commit :subscribe_owner
+
   def value_coverage
     Attendee.where(race_id:self.id, status: 'confirmed').sum(:join_value)
   end
@@ -69,5 +71,11 @@ class Race < ApplicationRecord
 
   def set_permalink
     self.permalink = "#{Time.now.to_i}-#{name.parameterize}"
+  end
+
+  #create channel and subscription owner for receive notifications
+  def subscribe_owner
+    channel = Channel.create(name: "#{id}_race_channel")
+    ChannelSubscription.create user:owner, channel: channel
   end
 end

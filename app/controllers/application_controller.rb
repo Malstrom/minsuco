@@ -27,12 +27,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_events
-    if current_user
-      @events = Event.where(recipient_id: current_user.id, read: false, notifiable: true)
-    end
-  end
-
   def set_intent
     if params[:intent]
       current_user.intent = params[:intent]
@@ -40,5 +34,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def set_events
+    if current_user
+      @events = current_user.unread_events
+    end
+  end
 end

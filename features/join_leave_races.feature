@@ -4,10 +4,11 @@ Feature: Join in race
   User with pro attendee plan should partecipate to unlimited races
   creator should not join to race without rewards
 
+  @current
   Scenario: User should see no not be able to partecipate a race if its join amount it's over available partecipation
     Given I logged in as a "basic"
     When I create public race name "public_race"
-    Then I join in "public_race" with "600000" euro
+    Then Someone join in a race named "public_race" with "1000"
     Then I should see "supera il limite"
 
   Scenario: New user should able to join in 3 races

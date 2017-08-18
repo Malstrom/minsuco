@@ -10,18 +10,19 @@ class User < ApplicationRecord
   belongs_to    :plan
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: 'Payola::Subscription', foreign_key: :owner_idx
 
-  has_many      :events, :foreign_key => "owner_id", dependent: :destroy
-  has_many      :events, :foreign_key => "recipient_id", dependent: :destroy
+  # has_many      :events, :foreign_key => "who_did_id", dependent: :destroy
+  # has_many      :events, :foreign_key => "recipient_id", dependent: :destroy
 
   has_many      :friends, dependent: :destroy
 
   has_many      :authorizations, dependent: :destroy
-
-
   has_many      :attendees
   has_many      :races, class_name: 'Race', through: :attendees
   has_many      :races, :foreign_key => "owner_id"
   # has_many      :attendees, :foreign_key => "user_id", :dependent => :destroy
+
+  has_many      :channel_subscriptions
+  has_many      :channels, class_name: 'Channel', through: :channel_subscriptions
 
   has_one :reward
 
@@ -41,6 +42,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_intent, :if => :new_record?
   after_initialize :set_default_plan, :if => :new_record?
+  # after_initialize :set_default_channels, :if => :new_record?
   # after_create :sign_up_for_mailing_list
 
   after_create :create_reward
@@ -51,6 +53,9 @@ class User < ApplicationRecord
   validates :rui, length: { minimum: 5 }, on: :update
 
   validates_associated :plan
+
+  after_create_commit :create_default_channels
+
 
   def has_plan_for_join?
     if plan == Plan.find_by_stripe_id('pro_attendee') or plan == Plan.find_by_stripe_id('premium')
@@ -92,6 +97,11 @@ class User < ApplicationRecord
 
   def set_default_plan
     self.plan ||= Plan.find_by_stripe_id('basic')
+  end
+
+  def create_default_channels
+    ChannelSubscription.create user_id:self.id, channel: Channel.find_or_create_by(name:"#{self.id}_user_channel")
+    # ChannelSubscription.create user:self.id, channel: Channel.find_or_create_by(name:"general_channel")
   end
 
   # create related reward with 3 free reward for each cat
@@ -153,5 +163,9 @@ class User < ApplicationRecord
     end
     authorization.save
     authorization.user
+  end
+
+  def unread_events
+    @events = Event.where(read:false, channel:channels)
   end
 end

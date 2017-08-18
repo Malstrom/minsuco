@@ -10,4 +10,4 @@ Feature: Notifications
   Scenario: User should see notification when someone join in its race
     Given I logged in as a "basic"
     When I join in "public_race" with "1000" euro
-    Then creator should see notification "join in race"
+    Then creator should see notification "ha partecipato alla gara"

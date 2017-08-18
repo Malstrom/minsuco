@@ -54,7 +54,7 @@
         <li id="notification" class="dropdown dropdown-list">
           <a href="#" data-toggle="dropdown" id="counter">
             <em class="icon-bell"></em>
-            <% if @events.count > 0 %>
+            <% if @events and  @events.count > 0 %>
               <div id="event_counter" class="label label-danger"><%= @events.count %></div>
             <% else %>
             <% end %>
@@ -64,7 +64,9 @@
             <li>
               <!-- START list group-->
               <div class="list-group" id="events">
-                <%= render partial: 'events/event_default'%>
+                <% if @events %>
+                  <%= render partial: 'events/event_default' %>
+                <% end  %>
                 <!-- last list item -->
                 <!--<a href="#" class="list-group-item">-->
                   <!--<small>More notifications</small>-->

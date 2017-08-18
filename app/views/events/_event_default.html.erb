@@ -1,17 +1,63 @@
-<% @events.each do |event| %>
 
+<% @events.each do |event| %>
   <%= link_to readed_path(event.id), class:'list-group-item' do %>
-    <div class="media-box">
-      <div class="pull-left">
-        <em class="fa fa-twitter fa-2x text-info"></em>
+    <% if event.message == "join_in_race" %>
+      <div class="media-box">
+        <div class="pull-left">
+          <em class="icon-user-follow fa-2x text-success"></em>
+        </div>
+        <div class="media-box-body clearfix">
+          <p class="m0"></p>
+          <p class="m0 text-muted">
+            <small>
+              <%= I18n.t("messages.join_in_race", username:event.who_did.name, race_name: Attendee.find(event.thing_id).race.name) %>
+            </small>
+          </p>
+        </div>
       </div>
-      <div class="media-box-body clearfix">
-        <p class="m0"><%= event.message %></p>
-        <p class="m0 text-muted">
-          <small>1 new follower</small>
-        </p>
+    <% elsif event.message == "leave_from_race" %>
+      <div class="media-box">
+        <div class="pull-left">
+          <em class="icon-user-unfollow fa-2x text-danger"></em>
+        </div>
+        <div class="media-box-body clearfix">
+          <p class="m0"></p>
+          <p class="m0 text-muted">
+            <small>
+              <%= I18n.t("messages.leave_from_race", username:event.who_did.name, race_name: Attendee.find(event.thing_id).race.name) %>
+            </small>
+          </p>
+        </div>
       </div>
-    </div>
+    <% elsif event.message == "change_status" %>
+      <div class="media-box">
+        <div class="pull-left">
+          <em class="icon-refresh fa-2x text-info"></em>
+        </div>
+        <div class="media-box-body clearfix">
+          <p class="m0"></p>
+          <p class="m0 text-muted">
+            <small>
+              <%= I18n.t("messages.leave_from_race", username:event.who_did.name, race_name: Attendee.find(event.thing_id).race.name) %>
+            </small>
+          </p>
+        </div>
+      </div>
+    <% elsif event.message == "change_join_value" %>
+      <div class="media-box">
+        <div class="pull-left">
+          <em class="icon-refresh fa-2x text-info"></em>
+        </div>
+        <div class="media-box-body clearfix">
+          <p class="m0"></p>
+          <p class="m0 text-muted">
+            <small>
+              <%= I18n.t("messages.change_join_value", username:event.who_did.name, race_name: Attendee.find(event.thing_id).race.name) %>
+            </small>
+          </p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
 

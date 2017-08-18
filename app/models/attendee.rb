@@ -15,7 +15,9 @@ class Attendee < ApplicationRecord
 
   after_create :decrement_rewards
 
-  after_create_commit { create_event }
+  after_create_commit   :join_in_race_event
+  after_update_commit	  :update_race_event
+  after_destroy_commit	:leave_from_race_event
 
   private
 
@@ -67,11 +69,32 @@ class Attendee < ApplicationRecord
     end
   end
 
-  # create event every type create attendee
-  def create_event
-    Event.create(thing_type: 'Attendee', thing_id:id, message:'join in race',
-                 owner: user, recipient: race.owner,
-                 notifiable: true, read: false
-    )
+  # create event every time create attendee
+  def join_in_race_event
+    ChannelSubscription.create user:user, channel: Channel.find_or_create_by(name:"#{race.id}_race_channel")
+    create_attendee_event(user,"#{race.owner.id}_user_channel",'join_in_race', true)
+  end
+
+  # create event every time attendee leave from race
+  def leave_from_race_event
+    create_attendee_event(user,"#{race.owner.id}_user_channel",'leave_from_race', true)
+    ChannelSubscription.where(user:user, channel: Channel.find_by_name("#{race.id}_race_channel")).first.destroy
+  end
+
+  # create event every time attendee: update status, update join_value
+  def update_race_event
+    if previous_changes['status']
+      prev_status = previous_changes['status'][0]
+      create_attendee_event(race.owner,"#{user.id}_user_channel","change_status", true, prev_status, status, )
+    elsif previous_changes['join_value']
+      prev_join_value = previous_changes['join_value'][0]
+      create_attendee_event( user,"#{race.owner.id}_user_channel", "change_join_value", true, prev_join_value)
+    end
+  end
+
+  def create_attendee_event(who_did, channel, message, notifiable, previous = nil, now = nil)
+    Event.create(thing_type: 'Attendee', thing_id:id, message:message, who_did: who_did,
+                 channel: Channel.find_or_initialize_by(name:channel),
+                 previous: previous, now: now, notifiable: notifiable, read: false)
   end
 end

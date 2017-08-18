@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+start = Time.now
+# code to time
+
+
+
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
@@ -135,3 +140,8 @@ end
 #   race_to_highlight.save
 # end
 
+finish = Time.now
+
+diff = finish - start
+
+p "execute in #{diff}"

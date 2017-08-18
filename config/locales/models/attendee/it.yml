@@ -10,25 +10,7 @@ it:
           no_reward: "Non hai più gare gratuite"
           race_value_cap: "Non puoi partecipare a questa gara con questo importo."
           can_leave: "Non puoi lasciare una gara dalla quale sei stato bannato"
-    models:
-      attendee: Partecipante
+          attendee: Partecipante
     attributes:
-      user:
-        email: Email
-        name: Nome
-        password: Password
-        kind: Tipologia agente
-        fiscale_kind: "Fatturazione"
-        location: "Città"
-        phone: "Telefono"
-      race:
-        name: Nome
-        description: Descrizione
-        category: Dategoria
-        recipients: Destinatari
-        starts_at: Inizia
-        ends_at: Finisce
-        race_value: Valore della gara
-        compensation_amount: Ricompensa
-        max_attendees: Numero massimo di partecipanti
-        numero di pezzi: Numero di pezzi
+      attendee:
+        join_value: Valora partecipazione

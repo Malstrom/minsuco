@@ -1,0 +1,14 @@
+it:
+  messages:
+    join_in_race: "%{username} ha partecipato alla gara %{race_name}"
+    leave_from_race: "%{username} è uscito dalla gara %{race_name}"
+    change_status: "%{username} ha cambaito il tuo stato in%{status}"
+    change_join_value: "%{username} ha cambiato il premio per il quale partecipa %{race_name}"
+  activerecord:
+    errors:
+      models:
+        event: Eventi
+    models:
+      event: Eventi
+    attributes:
+      user:

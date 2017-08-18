@@ -9,6 +9,7 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.string :previous
       t.string :now
       t.boolean :notifiable
+      t.boolean :emailable
       t.boolean :read
 
       t.timestamps

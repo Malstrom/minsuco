@@ -1,0 +1,5 @@
+it:
+  email:
+    events:
+      join_in_race:
+        subject: "L'utente %{who_did}, ha partecipato ad una tua gara."

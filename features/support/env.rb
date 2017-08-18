@@ -3,6 +3,9 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+require 'email_spec' # add this line if you use spork
+require 'email_spec/cucumber'
+
 
 require 'simplecov'
 SimpleCov.start 'rails'
@@ -114,3 +117,5 @@ Cucumber::Rails::Database.javascript_strategy = :truncation, {:except => %w[plan
 # end
 #
 # World(FixtureAccess)
+
+

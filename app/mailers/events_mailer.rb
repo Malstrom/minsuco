@@ -1,37 +1,28 @@
 class EventsMailer < ApplicationMailer
 
-  def self.event(event)
-
-    emails.each do |email|
-      new_request(email).deliver_now
-      # or
-      #new_request(email,row).deliver_later
-
+  # arrive all requests
+  def event_mailer(event)
+    event.channel.users.each do |recipient|
+      new_request(event, recipient)
     end
   end
 
-  def new_request(event)
-    event_params(event)
+  # send requests
+  def new_request(event, recipient)
+    event_params(event, recipient)
 
-    mail(from: 'notice@test.com',
-         to: user.email,
-         subject: "#{patient.name.capitalize} would like to have appointment with you")
+    mail(from: 'event@myinsurencecontest.com',
+         to: recipient.email,
+         subject: t("email.events.#{event.message}.subject")
+    )
   end
 
-  def event_params(event)
+  #pass json for transactional email
+  def event_params(event, recipient)
     headers "X-SMTPAPI" => {
-        "to"=> [ user.email ],
+        "to"=> [ recipient.email ],
         "sub"=> {
-            "%Name%" => ["#{user.fullname}"],
-            "%patient_name%" => ["#{patient.name}"],
-            "%message%" => ["#{event.description}"],
-            "%phone%" => ["#{patient.phone}"],
-            "%email%" => ["#{patient.email}"],
-            "%date%" => ["#{event.start.to_date.strftime("%m/%d/%Y")}"],
-            "%time%" => ["#{event.start.to_time.strftime("%l:%M")}"],
-            "%user_id%" => ["#{user.id}"],
-            "%event_id%" => ["#{event.id}"],
-            "%token%" => ["#{token}"]
+            "%who_did%" => ["#{event.who_did}"],
         },
         "filters"=> {
             "templates"=> {

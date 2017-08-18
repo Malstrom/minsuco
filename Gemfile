@@ -74,6 +74,8 @@ group :test do
   gem 'chromedriver-helper'
   gem 'webrat'
   gem 'factory_girl_rails'
+  gem 'email_spec'
+  gem 'action_mailer_cache_delivery'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

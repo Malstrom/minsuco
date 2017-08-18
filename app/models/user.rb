@@ -49,6 +49,8 @@ class User < ApplicationRecord
 
   validates_presence_of :email
 
+  validates_presence_of :name, :location, :phone, on: :update
+
   validates :email, uniqueness: true
   validates :rui, length: { minimum: 5 }, on: :update
 

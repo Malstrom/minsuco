@@ -1,9 +1,9 @@
 it:
   messages:
-    join_in_race: "%{username} ha partecipato alla gara %{race_name}"
-    leave_from_race: "%{username} è uscito dalla gara %{race_name}"
-    change_status: "%{username} ha cambaito il tuo stato in%{status}"
-    change_join_value: "%{username} ha cambiato il premio per il quale partecipa %{race_name}"
+    join_in_race: "%{who_did} ha partecipato alla gara %{race_name}"
+    leave_from_race: "%{who_did} è uscito dalla gara %{race_name}"
+    change_status: "%{who_did} ha cambaito il tuo stato in%{status}"
+    change_join_value: "%{who_did} ha cambiato il premio per il quale partecipa %{race_name}"
   activerecord:
     errors:
       models:

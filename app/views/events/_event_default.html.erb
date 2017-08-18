@@ -10,7 +10,7 @@
           <p class="m0"></p>
           <p class="m0 text-muted">
             <small>
-              <%= I18n.t("messages.join_in_race", username:event.who_did.name, race_name: Attendee.find(event.thing_id).race.name) %>
+              <%= I18n.t("messages.join_in_race", who_did:event.who_did.name, race_name: Attendee.find(event.thing_id).race.name) %>
             </small>
           </p>
         </div>

@@ -3,6 +3,7 @@ class InviteMailer < ApplicationMailer
 
   # arrive all requests
   def invite_friends(mails)
+    mails = JSON.parse(mails)
     mails.each do |email|
       friend = Friend.find_by_email email
       new_request(friend)
@@ -11,16 +12,16 @@ class InviteMailer < ApplicationMailer
 
   # send requests
   def new_request(friend)
-    event_params(event, recipient)
+    invite_params(friend)
     mail(to: friend.email, subject: t('email.invite.in_my_race.subject'))
   end
 
   # pass json for transactional email
-  def event_params(event, recipient)
+  def invite_params(friend)
     headers 'X-SMTPAPI' => {
-      'to' => [recipient.email],
+      'to' => [friend],
       'sub' => {
-        '%who_did%' => [event.who_did.to_s]
+        '%who_did%' => [friend]
       },
       'filters' => {
         'templates' => {

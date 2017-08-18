@@ -56,9 +56,11 @@ class UsersController < ApplicationController
   end
 
   def invite
-    InviteMailer.invite_friends(params[:emails]).deliver_later
+    emails = params[:emails]
+    InviteMailer.invite_friends(emails.to_json).deliver_later
 
-    render status: 200
+    redirect_to root_path
+    # render status: 200
   end
 
   def intent

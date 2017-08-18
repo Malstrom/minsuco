@@ -20,6 +20,18 @@
               </div>
             </div>
             <div class="form-group">
+              <%= f.label :location, class: 'col-sm-2 control-label', required:true %>
+              <div class="col-sm-6">
+                <%= f.text_field :location, class:'form-control'  %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label :phone, class: 'col-sm-2 control-label', required:true %>
+              <div class="col-sm-6">
+                <%= f.text_field :phone, class:'form-control'  %>
+              </div>
+            </div>
+            <div class="form-group">
               <%= f.label :rui, class: 'col-sm-2 control-label', id:'rui', required:true %>
               <div class="col-sm-6">
                 <%= f.text_field :rui, class:'form-control'  %>

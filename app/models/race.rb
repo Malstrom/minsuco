@@ -28,7 +28,7 @@ class Race < ApplicationRecord
   validate :start_in_past, on: :create
   validate :publishable, if: :saved_change_to_status?, on: :update
 
-  validates_associated :owner
+  # validates_associated :owner
 
   before_create :set_status
   after_create :set_redirect_path

@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   validates_presence_of :email
 
-  validates_presence_of :name, :location, :phone, on: :update
+  # validates_presence_of :name, :location, :phone, on: :update
 
   validates :email, uniqueness: true
   validates :rui, length: { minimum: 5 }, on: :update
@@ -58,6 +58,8 @@ class User < ApplicationRecord
 
   after_create_commit :create_default_channels
 
+  scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
+  scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
 
   def has_plan_for_join?
     if plan == Plan.find_by_stripe_id('pro_attendee') or plan == Plan.find_by_stripe_id('premium')

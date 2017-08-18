@@ -3,7 +3,8 @@ class EventsMailer < ApplicationMailer
 
   # arrive all requests
   def event_mailer(event)
-    event.channel.users.each do |recipient|
+
+    event.channel.users.who_receive_notifications_via_mail.each do |recipient|
       new_request(event, recipient)
     end
   end

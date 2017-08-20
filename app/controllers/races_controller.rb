@@ -26,10 +26,6 @@ class RacesController < ApplicationController
     # @featured_races = Race.joins(:featured_races).where("owner_id = ?", DateTime.now, DateTime.now, 'started', current_user.id).order("races.#{sort} #{verse}")
   end
 
-  def attendees
-    @attendees = current_user.attendees
-  end
-
   # GET /races/1
   # GET /races/1.json
   def show
@@ -106,7 +102,7 @@ class RacesController < ApplicationController
   def race_params
     params.require(:race).permit(:name, :description, :owner, :max_attendees, :compensation_amount,
                                  :pieces_amount, :compensation_start_amount, :recipients, :race_value, :category_id,
-                                 :starts_at, :ends_at, :status)
+                                 :starts_at, :ends_at, :status, :kind)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

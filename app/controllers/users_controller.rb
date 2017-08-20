@@ -41,28 +41,6 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def friends
-    @user = current_user
-
-    @google_contacts = request.env['omnicontacts.contacts']
-
-    unless @google_contacts.nil?
-      @google_contacts.each do |contact|
-        @user.friends.create(name:contact[:name], email:contact[:email]) if contact[:email]
-      end
-    end
-
-    @contacts = @user.friends
-  end
-
-  def invite
-    emails = params[:emails]
-    InviteMailer.invite_friends(emails.to_json).deliver_later
-
-    redirect_to root_path
-    # render status: 200
-  end
-
   def intent
   end
 
@@ -75,10 +53,5 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:rui, :name, :password, :plan, :role, :kind, :image, :fiscal_kind, :location, :password, :phone)
-      # params.fetch(:user, {:name})
     end
-
-  def flash_interpolation_options
-    {resource_name: @user.name}
-  end
 end

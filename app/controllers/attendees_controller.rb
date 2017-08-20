@@ -1,6 +1,11 @@
 class AttendeesController < ApplicationController
   before_action :set_attendee, only: [:confirm ,:update, :destroy]
 
+
+  def index
+    @attendees = current_user.attendees
+  end
+
   # POST /attendees
   # POST /attendees.json
   def create

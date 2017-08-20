@@ -1,7 +1,6 @@
 <div class="panel panel-default">
 
   <div class="panel-heading">
-    <button type="button" data-toggle="modal" data-target="#friends_modal" class="btn btn-primary btn-lg">Invita amici</button>
     <div class="pull-right label label-success"><%= Attendee.where(race:@race, status: :confirmed).count %></div>
     <div class="pull-right label label-danger"><%= Attendee.where(race:@race, status: :deny).count %></div>
     Partecipanti
@@ -89,4 +88,3 @@
 </div>
 
 
-<%= render partial: 'layouts/modals/invite_friends_modal' %>

@@ -1,0 +1,20 @@
+<div class="content-heading">
+  Gara
+  <div class="pull-right">
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <%= render partial: 'races/partials/race/owner_partials/show_owner_main' %>
+    <%= render partial: 'races/partials/race/owner_partials/attendees_list' %>
+  </div>
+  <div class="col-lg-4">
+    <%= render partial: 'races/partials/race/owner_partials/owner_actions' %>
+    <%= render partial: 'races/partials/race/owner_partials/show_owner_details' %>
+    <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>
+  </div>
+</div>
+
+<% content_for :body_area do %>
+  <%= render partial: 'layouts/modals/invite_friends_modal' %>
+<% end %>

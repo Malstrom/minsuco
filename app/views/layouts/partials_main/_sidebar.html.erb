@@ -74,8 +74,8 @@
             <span data-localize="sidebar.nav.race.INDEX">IMPOSTAZIONI</span>
           <% end %>
         </li>
-        <li>
-          <%= link_to(friends_user_path(current_user)) do %>
+        <li class="<%= 'active' if controller?('friends') && action?('index') %>">
+          <%= link_to(user_friends_path(current_user)) do %>
             <em class="fa fa-gift"></em>
             <span data-localize="sidebar.nav.race.INDEX">PREMI</span>
           <% end %>

@@ -1,0 +1,78 @@
+<!-- Main panel-->
+<div class="panel b">
+  <div class="panel-heading">
+    <div class="pull-right mt">
+    </div>
+    <h4 class="mv">
+      <span><%= @race.name %></span>
+    </h4>
+  </div>
+  <div class="panel-body bb bt">
+
+    <div class="panel widget">
+      <div class="row row-table row-flush">
+        <div class="col-xs-6 bb br">
+          <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-danger">
+              <em class="fa fa-music fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+              <div class="panel-body text-center">
+                <h4 class="mt0"><%= number_to_currency @race.race_value - @race.value_coverage , unit: '€' %></h4>
+                <p class="mb0 text-muted">Premio rimanente</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-xs-6 bb">
+          <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-danger">
+              <em class="fa fa-music fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+              <div class="panel-body text-center">
+                <h4 class="mt0"><%= @race.compensation_amount %>%</h4>
+                <p class="mb0 text-muted">Provvigione</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-table row-flush">
+        <div class="col-xs-6 br">
+          <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-info">
+              <em class="fa fa-users fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+              <div class="panel-body text-center">
+                <h4 class="mt0"><%= @race.category.name.humanize %></h4>
+                <p class="mb0 text-muted">Ramo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="row row-table row-flush">
+            <div class="col-xs-4 text-center text-danger">
+              <em class="fa fa-music fa-2x"></em>
+            </div>
+            <div class="col-xs-8">
+              <div class="panel-body text-center">
+                <h4 class="mt0"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %></h4>
+                <p class="mb0 text-muted">al termine</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="panel-body">
+    <h4>Descrizione della gara</h4>
+    <p><%= @race.description %></p>
+  </div>
+</div>
+<!-- End Main panel-->

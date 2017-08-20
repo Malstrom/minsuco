@@ -1,0 +1,17 @@
+<div class="panel b text-center">
+  <div class="panel-body">
+    <% if current_user.joined?(@race) %>
+      <%= form_for([@race, Attendee.where(race:@race, user:current_user).first], method: :delete) do |f| %>
+        <button id="<%= @race.name %>" type="submit" class="btn btn-warning btn-xl">
+          <em class="fa fa-minus fa-fw text-muted text-white"></em>
+          <span>Lascia gara</span>
+        </button>
+      <% end %>
+    <% else %>
+      <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-xl" >
+        <em class="fa fa-plus fa-fw text-muted text-white"></em>
+        <span>Partecipa</span>
+      </button>
+    <% end %>
+  </div>
+</div>

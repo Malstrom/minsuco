@@ -1,0 +1,23 @@
+<div class="content-heading">
+  <%= @race.name %>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <%= render partial: 'races/partials/race/attendees_partials/show_attendees_main' %>
+  </div>
+  <div class="col-lg-4">
+    <%= render partial: 'races/partials/race/attendees_partials/attendees_actions' %>
+
+    <% if current_user.participate?(@race) %>
+      <%= render partial: 'races/partials/race/attendees_partials/owner_profile' %>
+    <% else %>
+      <%= render partial: 'races/partials/race/attendees_partials/owner_hidden' %>
+    <% end %>
+
+  </div>
+</div>
+
+
+<% content_for :body_area do %>
+  <%= render partial: 'attendees/partials/modal_join' %>
+<% end %>

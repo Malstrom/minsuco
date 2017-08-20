@@ -1,0 +1,76 @@
+<% @races.each do |race| %>
+  <div class="col-lg-4 col-md-6">
+    <div class="panel b">
+      <% if race.kind == 'pay_for_publish' %>
+        <div class="panel-heading bg-info">
+          <div class="pull-right">
+            <div class="label label-sucess">Pubblica</div>
+          </div>
+          <h4 class="m0"><%= race.name %></h4>
+          <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->
+        </div>
+    <% else %>
+        <div class="panel-heading bg-warning">
+          <div class="pull-right">
+            <div class="label label-warning">Privata</div>
+          </div>
+          <h4 class="m0"><%= race.name %></h4>
+          <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->
+        </div>
+    <% end %>
+      <div class="panel-body">
+        <div class="row row-table row-flush">
+          <div class="col-xs-6 bb br">
+            <div class="row row-table row-flush">
+              <div class="col-xs-12">
+                <div class="panel-body text-center">
+                  <h4 class="mt0"><%= number_to_currency race.race_value - race.value_coverage, precision: 0 %></h4>
+                  <p class="mb0 text-muted">Rimanente</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-xs-6 bb">
+            <div class="row row-table row-flush">
+              <div class="col-xs-12">
+                <div class="panel-body text-center">
+                  <h4 class="mt0"><%= race.compensation_amount %>%</h4>
+                  <p class="mb0 text-muted">Provvigione</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-table row-flush">
+          <div class="col-xs-6 br">
+            <div class="row row-table row-flush">
+              <div class="col-xs-12">
+                <div class="panel-body text-center">
+                  <h4 class="mt0"><%= race.category.name.humanize %></h4>
+                  <p class="mb0 text-muted">Ramo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="row row-table row-flush">
+              <div class="col-xs-12">
+                <div class="panel-body text-center">
+                  <h4 class="mt0"><%= distance_of_time_in_words(Time.now, race.ends_at)  %></h4>
+                  <p class="mb0 text-muted">al termine</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer text-center">
+        <%= link_to(race_path(race)) do %>
+          <button type="button" class="btn btn-info" id="<%= race.name %>">Maggiori informazioni</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

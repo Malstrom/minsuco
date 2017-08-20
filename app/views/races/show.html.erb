@@ -1,18 +1,6 @@
-<h3>Ecco la gara <%= @race.name %>
-  <!--<small>In lacinia tellus vitae nisl consectetur pellentesque.</small>-->
-</h3>
-<div class="row">
-  <div class="col-lg-8">
-    <%= render partial: 'races/partials/show_main' %>
 
-    <%= render partial: 'races/partials/race_attendees' %>
-  </div>
-  <div class="col-lg-4">
-    <%= render partial: 'races/partials/show_aside' %>
-  </div>
-</div>
-
-
-<%= render partial: 'attendees/partials/modal_join' %>
-
-<%# render partial: 'layouts/modals/pay_for_publish_modal' %>
+<% if @race.owner == current_user %>
+  <%= render partial: 'races/partials/race/owner_show' %>
+<% else %>
+  <%= render partial: 'races/partials/race/attendees_show' %>
+<% end %>

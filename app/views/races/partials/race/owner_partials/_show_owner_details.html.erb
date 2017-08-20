@@ -1,0 +1,46 @@
+<!-- Aside panel-->
+<div class="panel b">
+  <table class="table bb">
+    <tbody>
+    <tr>
+      <td>
+        <strong>Dettagli</strong>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Ramo rischio</strong>
+      </td>
+      <td><%= @race.category.name %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Destinatari</strong>
+      </td>
+      <td><%= @race.recipients %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Numero di pezzi</strong>
+      </td>
+      <td><%= @race.pieces_amount %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Fisso per pezzo</strong>
+      </td>
+      <td><%= number_to_currency @race.compensation_start_amount, unit: '€' %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Iniziata / Termina</strong>
+      </td>
+      <td><%= @race.starts_at.strftime('%d/%m/%Y') %> - <%= @race.ends_at.strftime('%d/%m/%Y') %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- end Aside panel-->
+
+

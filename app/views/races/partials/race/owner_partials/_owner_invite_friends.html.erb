@@ -1,0 +1,26 @@
+<div class="panel b text-center bg-purple">
+  <div class="panel-body">
+    <p class="h4 text-bold mb0">Invita i tuoi amici</p>
+  </div>
+  <div class="panel-body">
+    <div class="text-center">
+      <%= form_for [current_user, Friend.new] do |f| %>
+        <div class="input-group">
+          <%= f.text_field :email, class: "form-control" %>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">Invita</button>
+          </span>
+        </div>
+      <% end %>
+      <br>
+      <% if current_user.friends  %>
+        <button type="button" data-toggle="modal" data-target="#friends_modal" class="btn btn-lg btn-default">Miei contatti</button>
+      <% else %>
+        <%= link_to '/contacts/gmail', class: "btn btn-labeled btn-danger btn-lg" do %>
+          <span class="btn-label"><i class="fa fa-google"></i></span>
+          Importa da google
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

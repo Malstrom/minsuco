@@ -4,23 +4,12 @@
 </div>
 <h3>
   <div class="row">
-    <div class="col-md-12">
-      Ecco le gare le tutte le tue gare che sono sul portale
-    </div>
-    <br>
-    <br>
     <div class="col-md-2">
       Filtra le gare per:
     </div>
-    <div class="col-md-7">
+    <div class="col-md-10">
       <%= link_to 'Pubbliche', races_path(sort:'kind', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
       <%= link_to 'Private', races_path(sort:'kind', verse:'DESC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'Maggior guadagni', races_path(sort:'compensation_amount', verse:'DESC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'In scadenza', races_path(sort:'ends_at', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'Appena iniziate', races_path(sort:'starts_at', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
-    </div>
-    <div class="col-md-3">
-      <%= link_to 'Crea una gara', new_race_path(@race), class: 'btn btn-success btn-lg text-md pull-right' %>
     </div>
   </div>
 </h3>
@@ -32,7 +21,7 @@
       <p class="lead">Non hai ancora creato un gara!</p>
     </div>
   <% else %>
-    <%= render partial: "races/partials/all" %>
+    <%= render partial: "races/partials/races/all" %>
   <% end %>
 
 </div>

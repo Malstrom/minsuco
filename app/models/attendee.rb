@@ -22,7 +22,7 @@ class Attendee < ApplicationRecord
   private
 
   def decrement_rewards
-    unless user.plan.stripe_id == "pro_attendee" or race.kind == 'pay_for_publish'
+    unless user.plan.stripe_id == "pro_attendee" or race.kind == 'pay_for_publish' or race.kind == "pay_for_publish"
       user.reward.decrement_join_private
     end
   end

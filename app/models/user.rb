@@ -91,6 +91,10 @@ class User < ApplicationRecord
     rui.blank? ? false : true
   end
 
+  def participate?(race)
+    true if Attendee.where(user:self, race:race).first
+  end
+
   def set_default_role
     self.role ||= :basic
   end

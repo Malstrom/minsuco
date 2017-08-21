@@ -34,17 +34,9 @@
          </li>
 
         <li class="<%= 'active' if controller?('dashboard') && action?('dashboard_v1') %>">
-          <a href="/dashboard/dashboard_v1" title="Dashboard v1">
-            <em class="icon-speedometer"></em>
-            <span>Dashboard default
-            </span>
-          </a>
-        </li>
-
-        <li class="<%= 'active' if controller?('dashboard') && action?('dashboard_v1') %>">
           <a href="/dashboard/dashboard" title="Dashboard v1">
             <em class="icon-speedometer"></em>
-            <span>Dashboard della applicazione</span>
+            <span>DASHBOARD</span>
           </a>
         </li>
 
@@ -82,6 +74,7 @@
         </li>
         <li>
           <%= link_to(destroy_user_session_path, method: :delete) do %>
+            <em class="icon-logout"></em>
             <span data-localize="sidebar.nav.race.INDEX">LOGOUT</span>
           <% end %>
         </li>

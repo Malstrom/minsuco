@@ -212,6 +212,9 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    pickle (0.5.3)
+      cucumber (>= 0.8)
+      rake
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.1)
@@ -371,6 +374,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omnicontacts!
   payola-payments!
+  pickle
   puma (~> 3.7)
   rails (= 5.1.0)
   rails-erd

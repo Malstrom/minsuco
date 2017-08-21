@@ -79,6 +79,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'email_spec'
   gem 'action_mailer_cache_delivery'
+  gem 'pickle'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -107,4 +108,3 @@ gem "slim-rails"
 # gem "slack-notifier"
 gem "chartkick"
 gem 'groupdate'
-# gem 'pickle'

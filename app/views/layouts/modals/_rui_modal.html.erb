@@ -1,7 +1,7 @@
 <% content_for :body_area do %>
 
   <!-- Modal-->
-  <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+  <div id="userDataModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -49,7 +49,7 @@
 
 
   <script>
-    $('#myModal').modal('show').css("display", "block").addClass( "in" );
+    $('#userDataModal').modal('show').css("display", "block").addClass( "in" );
 
     $('#save').click(function(){
 
@@ -61,7 +61,7 @@
         data: data,
         dataType: "json",
         success: function(){
-          $("#myModal").modal('hide');
+          $("#userDataModal").modal('hide');
         },
         error: function(data){
           $("#errors").html("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");

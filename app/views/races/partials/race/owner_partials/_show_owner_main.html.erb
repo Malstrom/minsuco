@@ -5,7 +5,7 @@
       <% if @race.started? %>
         <div class="label label-info">Attiva</div>
       <% else %>
-        <div class="label label-warning">Spenta</div>
+        <div class="label label-warning"><%= t("activerecord.enum.statuses.#{@race.status}") %></div>
       <% end %>
 
       <% if @race.pay_for_publish? %>

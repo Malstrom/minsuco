@@ -15,21 +15,25 @@ Rails.application.routes.draw do
 
   # get "/contacts/:importer/callback" => "onboarding#invite"
 
-  match "/contacts/:importer/callback" => "users#friends", :via => [:get]
+  match "/contacts/:importer/callback" => "friends#import", :via => [:get]
 
   # Google
-  match "/oauth2callback" => "users#friends", :via => [:get]
+  match "/oauth2callback" => "friends#import", :via => [:get]
 
   resources :subscriptions
 
   resources :users do
-    resources :attendees
     member do
      get :plans
-     get :friends
-     post :invite
     end
     get :races,     to: 'races#user_races'
+    resources :attendees
+    resources :friends do
+      collection do
+        post :invites
+        get :import
+      end
+    end
   end
 
   resources :races do

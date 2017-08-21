@@ -3,8 +3,12 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+require 'active_support'
+require 'active_support/core_ext'
+require "action_mailer"
 require 'email_spec' # add this line if you use spork
 require 'email_spec/cucumber'
+
 
 
 require 'simplecov'

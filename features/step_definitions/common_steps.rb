@@ -21,7 +21,7 @@ When(/^I visit attendees page$/) do
 end
 
 
-Then(/^I should see "([^"]*)"/) do |arg1|
+Then(/^I should see "([^"]*)"$/) do |arg1|
   expect(page).to have_content arg1
 end
 
@@ -36,4 +36,16 @@ end
 
 Then(/^I "([^"]*)" join$/) do |arg|
   find('#confirm_toggle').click
+end
+
+And(/^I visit user setting page$/) do
+  visit 'users/1/edit'
+end
+
+Then(/^I should have '([^']*)' free public race$/) do |n|
+  raise User.first.reward.public_races if User.first.reward.public_races != n.to_i
+end
+
+Then(/^I should have '([^']*)' free private join/) do |n|
+  raise User.first.reward.join_private if User.first.reward.join_private != n.to_i
 end

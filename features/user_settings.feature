@@ -34,11 +34,12 @@ Feature: User settings
     And I pay via stripe
     And I visit user plan
     Then I should see "Iscritto al piano Pro partecipanti"
-
+    
   Scenario: Basic user should be able to change plan to pro creator
     When I visit user plan
     And I click to "Passa a un piano Pro Creatori"
     And I pay via stripe
+    And I sleep "1" seconds
     And I visit user plan
     Then I should see "Iscritto al piano Pro creatori"
 

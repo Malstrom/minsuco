@@ -26,7 +26,7 @@ class Race < ApplicationRecord
 
   validate :attendees_cap
   validate :start_in_past, on: :create
-  validate :publishable, if: :saved_change_to_status?, on: :update
+  # validate :publishable, if: :saved_change_to_status?, on: :update
 
   # validates_associated :owner
 
@@ -39,7 +39,7 @@ class Race < ApplicationRecord
     if publishable?
       self.status = 'started'
     else
-      self.status = 'started'
+      self.status = 'draft'
     end
   end
 
@@ -57,7 +57,7 @@ class Race < ApplicationRecord
   end
 
   def publishable?
-    false unless owner.have_rui?
+    owner.have_rui? ? true : false
   end
 
   private
@@ -82,7 +82,7 @@ class Race < ApplicationRecord
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path
-    update(redirect_path: "/races/#{id}/publish_check?kind=pay_for_publish")
+    update(redirect_path: "/races/#{self.id}/publish_check?kind=pay_for_publish")
   end
 
   def set_permalink

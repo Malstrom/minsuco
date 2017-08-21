@@ -18,6 +18,7 @@ class CreateRaces < ActiveRecord::Migration[5.1]
       t.string  :redirect_path, :default => "/races"
       t.datetime :starts_at
       t.datetime :ends_at
+
       t.timestamps
     end
   end

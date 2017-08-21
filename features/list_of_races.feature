@@ -12,13 +12,11 @@ Feature: See all lists of races and interact with this list
 #    Then I should see "Non hai ancora partecipato a nessuna gara!"
 #
 
-
-
   Scenario: Owner of the race should see list of attendee
     Given I logged in as a "creator"
-    And I create public race name "test_race"
-    When I visit "test_race" race page
-    Then I should see "Partecipazioni"
+    And I create public race
+    When I visit "public" race page
+    Then I should see "Partecipanti"
 
 #  Scenario: User should ban user from the race
 #    Given I logged in as a "creator"

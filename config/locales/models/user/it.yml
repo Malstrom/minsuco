@@ -14,3 +14,8 @@ it:
         fiscale_kind: "Fatturazione"
         location: "Città"
         phone: "Telefono"
+    enum:
+      statuses:
+        paused: "Ferma"
+        started: "Attiva"
+        draft: "Non pubblicata"

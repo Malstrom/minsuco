@@ -46,12 +46,11 @@ Feature: Create race
     And I publish race as "public"
     Then I should see "Gara pubblicata sul portale"
 
-  @javascript
   Scenario: New user should be able to publish race as a public
     Given I sign up
     When I visit "/races/new"
     And I fill race form
-    And I fill rui with "487562348759234"
+    And I fill data in rui modal 'user_rui' value '12345'
     And I publish race as "public_basic_user"
     Then I should see "Gara pubblicata sul portale"
 
@@ -60,32 +59,31 @@ Feature: Create race
     Given I sign up
     When I visit "/races/new"
     And I fill race form
-    And I fill rui with "487562348759234"
+    And I fill data in rui modal 'user_rui' value '12345'
     And I publish race as "private"
     Then I should see "Gara pubblicata sul portale"
 
-  @javascript
   Scenario: User without RUI should be able to pay race but not publish it
     Given I sign up
     When I click to "Creare una mia gara è pubblicarla"
     And I fill race form
     And I close rui modal
     And I publish race as "public_basic_user"
-    Then I should see "draft"
+    Then I should see "Non pubblicata"
 
   @javascript
   Scenario: User should start and stop its races
     Given I logged in as a "basic"
-    And I create public race name "test_race"
-    When I visit "test_race" race page
+    And I create private race
+    When I visit "private" race page
     And I stop race
     And I start race
     Then I should see "La gara è stata aggiornata"
 
   Scenario: Owner of race should see join list
     Given I logged in as a "creator"
-    And I create public race name "test_race"
-    When I visit "test_race" race page
+    And I create public race
+    When I visit "public" race page
     Then I should see "Partecipanti"
 
 

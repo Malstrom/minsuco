@@ -4,42 +4,25 @@ Feature: Join in race
   User with pro attendee plan should partecipate to unlimited races
   creator should not join to race without rewards
 
-  @current
-  Scenario: User should see no not be able to partecipate a race if its join amount it's over available partecipation
-    Given I logged in as a "basic"
-    When I create public race name "public_race"
-    Then Someone join in a race named "public_race" with "1000"
-    Then I should see "supera il limite"
-
   Scenario: New user should able to join in 3 races
     Given I sign up
     When I visit "/races"
-    And I join to public race for 3 times
+    And I join in a public race
     Then I should see "Partecipazione avvenuta con successo"
 
-  Scenario: New user should not be able to join to 4 race
+  Scenario: New user should join in private race spending reward
     Given I sign up
+    And I have '1' rewards for join
     When I visit "/races"
-    And I join to public race for 4 times
-    Then I should see "Non hai più gare gratuite"
+    And I join in a private race
+    Then I should have '0' free private join
 
-  Scenario: Pro attendee join in 4 races
-    Given I logged in as a "attendee"
+  Scenario: New user should join in public race without spending reward
+    Given I sign up
+    And I have '1' rewards for join
     When I visit "/races"
-    And I join to public race for 4 times
-    Then I should see "Partecipazione avvenuta con successo"
-
-  Scenario: Pro creator join in 4 races
-    Given I logged in as a "creator"
-    When I visit "/races"
-    And I join to public race for 3 times
-    Then I should see "Partecipazione avvenuta con successo"
-
-  Scenario: Pro creator join in 4 races
-    Given I logged in as a "creator"
-    When I visit "/races"
-    And I join to public race for 4 times
-    Then I should see "Non hai più gare gratuite"
+    And I join in a public race
+    Then I should have '1' free private join
 
   Scenario: User should not join in race when race reached max attendees cap
     Given I sign up
@@ -49,15 +32,8 @@ Feature: Join in race
 
   Scenario: User should not join in race whi join_value over value of race
     Given I sign up
-    When I visit "/races"
-    And I join with "10000" in a race with value "1000"
+    When I join in a race with 10001 join value where race value is 1000
     Then I should see "Non puoi partecipare a questa gara con questo importo"
 
-  Scenario: User should confirm and deny joining in its races
-    Given a user named "creator" is online
-    And I create public race name "public_race"
-    Given I logged in as a "basic"
-    When I join in "public_race" with "1000" euro
-    Then creator should "confirm" join race "public_race"
 
 

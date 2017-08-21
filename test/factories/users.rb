@@ -5,6 +5,8 @@ FactoryGirl.define do
     password "basic_user"
     intent "creator"
     rui "39857342905"
+    phone '35342535'
+    location 'Test_location'
     plan Plan.find_by_stripe_id('basic')
   end
 end

@@ -1,18 +1,13 @@
-@user @settings
-Feature: User settings
-  User should be able to update its data
-  User should be able to change ita plan
-  User should be reset its password
-  User should be able to toggle notification
 
-  @current
-  Scenario:Test pickle
-    Given a user exists
-    And another user exists with email: "igor@gm.com"
-    Then a user should exist with email: "igor@gm.com"
+Feature: New feature
 
-  Scenario: User should be able to turn off all notifications
-  Scenario: User should be able to turn off email notifications
-  Scenario: User should be able to turn on all notifications
-  Scenario: User should be able to turn on email notifications
-#
+  Scenario:Race should draft if user have no valid rui
+    Given a user: "john" exists with email: "test@usergmail.com", rui: "1234", name: "john"
+    And a race exists with name: "test_race", kind: "pay_for_publish", owner: user "john"
+    Then a race: "test_race" should exist with status: "draft"
+
+  Scenario: Race should strated if user have valid rui
+    Given a user: "john" exists with email: "test@usergmail.com", rui: "12345", name: "john"
+    And a race exists with name: "test_race", kind: "pay_for_publish", owner: user "john"
+    Then a race: "test_race" should exist with status: "draft"
+

@@ -88,7 +88,7 @@ end
     race.max_attendees = race_attendees
     race.starts_at = rand(DateTime.now - 7.days..DateTime.now + 7.days)
     race.ends_at = race.starts_at + rand( 30..90 ).days
-    race.compensation_amount = rand(5..50)
+    race.commission = rand(5..50)
     race.kind = %w(pay_for_publish pay_for_join).sample
     race.status = 'started'
     race.recipients = %w(brokers agents all).sample

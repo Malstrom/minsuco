@@ -15,7 +15,7 @@
     <div class="col-md-7">
       <%= link_to 'Pubbliche', user_attendees_path(sort:'kind', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
       <%= link_to 'Private', user_attendees_path(sort:'kind', verse:'DESC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'Maggior guadagni', user_attendees_path(sort:'compensation_amount', verse:'DESC'), class: 'btn btn-info btn-outline btn-lg' %>
+      <%= link_to 'Maggior guadagni', user_attendees_path(sort:'commission', verse:'DESC'), class: 'btn btn-info btn-outline btn-lg' %>
       <%= link_to 'In scadenza', user_attendees_path(sort:'ends_at', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
       <%= link_to 'Appena iniziate', user_attendees_path(current_user,sort:'starts_at', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
     </div>

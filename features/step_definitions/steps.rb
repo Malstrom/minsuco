@@ -60,7 +60,7 @@
 #   fill_in "race_value", :with => '100000'
 #   fill_in "pieces_amount", :with => '50'
 #   fill_in "max_attendees", :with => '50'
-#   fill_in "compensation_amount", :with => '20'
+#   fill_in "commission", :with => '20'
 #   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
 #   fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
 #
@@ -75,7 +75,7 @@
 #   fill_in "race_value", :with => '100000'
 #   fill_in "pieces_amount", :with => '50'
 #   fill_in "max_attendees", :with => '50'
-#   fill_in "compensation_amount", :with => '20'
+#   fill_in "commission", :with => '20'
 #   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
 #   fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
 #

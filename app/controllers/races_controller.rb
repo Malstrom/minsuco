@@ -43,7 +43,7 @@ class RacesController < ApplicationController
     @race.pieces_amount = rand(5..50)
     @race.compensation_start_amount = %W(0 0 0 0 500 1000).sample
     @race.max_attendees = rand(10..50)
-    @race.compensation_amount = rand(5..50)
+    @race.commission = rand(5..50)
     @race.kind = %w(pay_for_publish pay_for_join).sample
     @race.status = 'started'
     @race.recipients = %w(brokers agents all).sample
@@ -100,7 +100,7 @@ class RacesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def race_params
-    params.require(:race).permit(:name, :description, :owner, :max_attendees, :compensation_amount,
+    params.require(:race).permit(:name, :description, :owner, :max_attendees, :commission,
                                  :pieces_amount, :compensation_start_amount, :recipients, :race_value, :category_id,
                                  :starts_at, :ends_at, :status, :kind)
   end

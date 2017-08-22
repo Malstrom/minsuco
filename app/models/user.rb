@@ -88,7 +88,11 @@ class User < ApplicationRecord
   end
 
   def have_rui?
-    rui.blank? ? false : true
+    if rui.blank? or rui.length < 5
+      false
+    else
+      true
+    end
   end
 
   def participate?(race)

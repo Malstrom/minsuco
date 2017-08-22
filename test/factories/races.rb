@@ -3,7 +3,7 @@ FactoryGirl.define do
     name "TestRace"
     description "Test Race description"
     max_attendees "10"
-    compensation_amount "1000"
+    commission "1000"
     pieces_amount "50"
     recipients "all"
     race_value "100000"

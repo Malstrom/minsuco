@@ -18,7 +18,7 @@ it:
         starts_at: Inizia
         ends_at: Finisce
         race_value: Valore della gara
-        compensation_amount: Ricompensa
+        commission: Ricompensa
         max_attendees: Numero massimo di partecipanti
         numero di pezzi: Numero di pezzi
   flash:

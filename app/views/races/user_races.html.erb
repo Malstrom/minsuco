@@ -18,7 +18,13 @@
   <!--ALl Races-->
   <% if @races.empty? %>
     <div class="text-center">
-      <p class="lead">Non hai ancora creato un gara!</p>
+      <p class="lead">Non hai ancora creato una gara,</p>
+      <p class="lead">cosa aspetti?</p>
+      <%= link_to(new_race_path, class:'btn btn-success btn-oval btn-xl', id:'plus_nuova_gara') do %>
+        &nbsp
+        <em class="fa fa-plus"></em>
+        &nbsp
+      <% end %>
     </div>
   <% else %>
     <%= render partial: "races/partials/races/all" %>

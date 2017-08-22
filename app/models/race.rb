@@ -20,12 +20,15 @@ class Race < ApplicationRecord
 
   before_validation :set_permalink, on: :create
 
-  validates_presence_of :name, :description, :max_attendees, :compensation_amount,
+  validates_presence_of :name, :description, :max_attendees, :commission,
                         :pieces_amount, :recipients, :race_value, :category_id,
                         :starts_at, :ends_at, :kind
 
   validate :attendees_cap
   validate :start_in_past, on: :create
+
+  validate :date_not_changed, :category_not_changed, :commission_not_changed, :on => :update
+
   # validate :publishable, if: :saved_change_to_status?, on: :update
 
   # validates_associated :owner
@@ -34,6 +37,7 @@ class Race < ApplicationRecord
   after_create :set_redirect_path
 
   after_create_commit :subscribe_owner
+
 
   def set_status
     if publishable?
@@ -61,6 +65,24 @@ class Race < ApplicationRecord
   end
 
   private
+
+  def date_not_changed
+    if starts_at_changed? or ends_at_changed? && self.persisted?
+      errors.add(:activity_id, "Change of activity_id not allowed!")
+    end
+  end
+
+  def category_not_changed
+    if category_id_changed? && self.persisted?
+      errors.add(:activity_id, "Change of activity_id not allowed!")
+    end
+  end
+
+  def commission_not_changed
+    if commission_changed? && self.persisted?
+      errors.add(:activity_id, "Change of activity_id not allowed!")
+    end
+  end
 
   def publishable
     unless publishable?

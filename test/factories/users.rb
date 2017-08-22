@@ -7,6 +7,6 @@ FactoryGirl.define do
     rui "39857342905"
     phone '35342535'
     location 'Test_location'
-    plan Plan.find_by_stripe_id('basic')
+    plan Plan.find_by_stripe_id('pro_attendee')
   end
 end

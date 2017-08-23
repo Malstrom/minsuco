@@ -99,6 +99,10 @@ class User < ApplicationRecord
     true if Attendee.where(user:self, race:race).first
   end
 
+  def participation(race)
+    Attendee.where(user:self, race:race).first
+  end
+
   def set_default_role
     self.role ||= :basic
   end

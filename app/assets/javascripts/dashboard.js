@@ -3,7 +3,6 @@
 
 
 //--- Sparklines
-//= require sparkline/index
 //--- Flot
 //= require flot/jquery.flot
 //= require flot.tooltip/js/jquery.flot.tooltip.min

@@ -9,6 +9,8 @@ class Attendee < ApplicationRecord
 
   validate :max_attendee, :unique_join, :not_joinable, :self_join, :race_value_cap, on: :create
 
+  validates :join_value, numericality: { only_integer: true }
+
   validate :can_leave?, on: :delete
 
   before_create :set_status

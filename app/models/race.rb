@@ -24,6 +24,8 @@ class Race < ApplicationRecord
                         :pieces_amount, :recipients, :race_value, :category_id,
                         :starts_at, :ends_at, :kind
 
+  validates :race_value, numericality: { only_integer: true }
+
   validate :attendees_cap
   validate :start_in_past, on: :create
 
@@ -34,7 +36,7 @@ class Race < ApplicationRecord
   # validates_associated :owner
 
   before_create :set_status
-  before_save :upcase_name
+  before_save :sanitize_data
   after_create :set_redirect_path
 
   after_create_commit :subscribe_owner
@@ -64,8 +66,9 @@ class Race < ApplicationRecord
     owner.have_rui? ? true : false
   end
 
-  def upcase_name
+  def sanitize_data
     self.name.upcase!
+    self.description.capitalize!
   end
 
   private

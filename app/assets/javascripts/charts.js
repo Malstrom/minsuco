@@ -3,7 +3,6 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
 //--- Sparklines
-//= require sparkline/index
 //--- Flot
 //= require flot/jquery.flot
 //= require flot.tooltip/js/jquery.flot.tooltip.min

@@ -108,3 +108,4 @@ $('#pay_for_join').click(function(){
 $('#payed_submit').click(function(){
   $('form').submit();
 });
+

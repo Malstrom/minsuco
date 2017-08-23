@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :races do
+    # post :races
     member do
       get :start
       get :pause

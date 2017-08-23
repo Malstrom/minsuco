@@ -9,11 +9,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    sort = params[:sort] ? params[:sort] : 'kind'
-    verse = params[:verse] ? params[:verse] : 'ASC'
-
-    @races = Race.where("ends_at >= ? AND status = ?", DateTime.now, 'started').order("#{sort} #{verse}")
-    @featured_races = Race.joins(:featured_races).where("featured_races.starts_at <= ? AND featured_races.ends_at >= ? AND races.status = ?", DateTime.now, DateTime.now, 'started').order("races.#{sort} #{verse}")
+    @races = filter_result(params)
   end
 
   def user_races
@@ -93,6 +89,31 @@ class RacesController < ApplicationController
   end
 
   private
+
+  #todo: This code sucks
+  def filter_result(params)
+    if params[:category_id] and !params[:category_id].empty?
+      @races = Race.where("ends_at >= ? AND status = ? AND category_id = ?",
+                          DateTime.now, 'started', params[:category_id])
+    elsif params[:commission] and !params[:commission].empty?
+      sort = "commission"
+      verse = params[:commission]
+      @races = Race.where("ends_at >= ? AND status = ?", DateTime.now, 'started').order("#{sort} #{verse}")
+    elsif params[:kind] and !params[:kind].empty?
+      sort = "kind"
+      verse = params[:kind]
+      @races = Race.where("ends_at >= ? AND status = ?", DateTime.now, 'started').order("#{sort} #{verse}")
+    elsif params[:ends_at] and !params[:ends_at].empty?
+      sort = "ends_at"
+      verse = params[:ends_at]
+      @races = Race.where("ends_at >= ? AND status = ?", DateTime.now, 'started').order("#{sort} #{verse}")
+    else
+      sort = "ends_at"
+      verse = "DESC"
+      @races = Race.where("ends_at >= ? AND status = ?", DateTime.now, 'started').order("#{sort} #{verse}")
+    end
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_race
     @race = Race.find(params[:id])

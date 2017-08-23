@@ -1,27 +1,19 @@
-<div class="pull-right">
-
-  <!--<button type="button" class="btn btn-info">Crea una gara</button>-->
-</div>
-<h3>
-  <div class="row">
-    <div class="col-md-12">
-      Ecco le gara alle quali hai partecipato o stai partecipando
-    </div>
-    <br>
-    <br>
-    <div class="col-md-2">
-      Filtra le gare per:
-    </div>
-    <div class="col-md-7">
-      <%= link_to 'Pubbliche', user_attendees_path(sort:'kind', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'Private', user_attendees_path(sort:'kind', verse:'DESC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'Maggior guadagni', user_attendees_path(sort:'commission', verse:'DESC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'In scadenza', user_attendees_path(sort:'ends_at', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
-      <%= link_to 'Appena iniziate', user_attendees_path(current_user,sort:'starts_at', verse:'ASC'), class: 'btn btn-info btn-outline btn-lg' %>
-    </div>
+<div class="row">
+  <div class="col-md-12 hidden-xs hidden-sm hidden-md">
+    <%= render partial: "races/partials/races/filter_desktop",
+               :locals => { :path_to_go => user_attendees_path(current_user) } %>
   </div>
-</h3>
-<div class="row ">
+  <div class="hidden-lg col-xs-12">
+    <button type="button" data-toggle="modal" data-target="#filterModal"
+            class="btn btn-primary btn-xl btn-pill-left pull-right">Filtra e ordina</button>
+    <%= content_for :body_area do %>
+      <%= render partial: "races/partials/races/filter_mobile_modal",
+                 :locals => { :path_to_go => user_attendees_path(current_user)} %>
+    <% end %>
+  </div>
+</div>
+<br class="hidden-lg">
+<div class="row">
   <!--ALl Races-->
   <% if @attendees.empty? %>
     <div class="text-center">
@@ -30,5 +22,4 @@
   <% else %>
     <%= render partial: "attendees/partials/races" %>
   <% end %>
-
 </div>

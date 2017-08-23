@@ -65,6 +65,7 @@
 //= require select2/dist/js/select2
 
 
+
 // $("#replace_money_1").hide();
 //
 // $('#perc').click(function(){

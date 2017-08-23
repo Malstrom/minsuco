@@ -1,6 +1,13 @@
 <div class="content-heading">
   <%= @race.name %>
 </div>
+<% if @race.pay_for_join? and current_user.plan.stripe_id != 'pro_attendee' %>
+  <div role="alert" class="alert alert-warning">
+    <strong>Attenzione!</strong>
+    Questa gara è privata. Puoi partecipare ancora a <%= current_user.reward.join_private %> gare private,
+    dopo sarà necessario un account per partecipanti. <%= link_to "Clicca qui per cambiare piano", plans_user_path(current_user), class: "text-white" %>
+  </div>
+<% end %>
 <div class="row">
   <div class="col-lg-8">
     <%= render partial: 'races/partials/race/attendees_partials/show_attendees_main' %>

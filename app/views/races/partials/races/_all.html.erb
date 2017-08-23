@@ -4,7 +4,9 @@
       <% if race.kind == 'pay_for_publish' %>
         <div class="panel-heading bg-info">
           <div class="pull-right">
-            <div class="label label-sucess">Pubblica</div>
+            <div class="label label-sucess" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.public_race') %>">
+              Pubblica
+            </div>
           </div>
           <h4 class="m0"><%= race.name %></h4>
           <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->
@@ -12,7 +14,9 @@
     <% else %>
         <div class="panel-heading bg-warning">
           <div class="pull-right">
-            <div class="label label-warning">Privata</div>
+            <div class="label label-warning" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
+              Privata
+            </div>
           </div>
           <h4 class="m0"><%= race.name %></h4>
           <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->

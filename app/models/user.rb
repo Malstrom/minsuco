@@ -30,6 +30,7 @@ class User < ApplicationRecord
   enum kind:        [:broker, :agente]
   enum fiscal_kind: [:individual, :company]
 
+
   enum intent:      [:creator, :partecipator]
 
   # Include default devise modules. Others available are:

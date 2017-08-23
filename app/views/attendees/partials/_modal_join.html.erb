@@ -1,5 +1,4 @@
-
-  <div id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true" class="modal fade" style="display: none;">
+<div id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true" class="modal fade" style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -10,15 +9,23 @@
       </div>
       <%= form_for([@race, @race.attendees.build]) do |f| %>
         <div class="modal-body">
-          <div class="form-group">
-            <%= f.label :join_value  %>
-            <%= f.text_field :join_value, class: 'form-control', id:'join_value', required:true %>
-          </div>
+          <fieldset>
+            <div class="form-group text-center">
+              <%= f.label :join_value, class: 'col-sm-12 control-label', id:'join_value' %>
+              <div class="col-sm-offset-3 col-sm-6">
+                <div class="input-group m-b">
+                  <span class="input-group-addon">€</span>
+                  <%= f.text_field :join_value, class: 'form-control', id:'join_value', required:true %>
+                  <span class="input-group-addon">.00</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
         </div>
         <div class="modal-footer">
-          <button type="button" data-dismiss="modal" class="btn btn-default">Chiudi</button>
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-pill-left">Chiudi</button>
 
-          <button id="join" type="submit" class="btn btn-success btn-oval btn-outline">
+          <button id="join" type="submit" class="btn btn-success btn-pill-right btn-outline">
             <em class="fa fa-plus fa-fw text-muted text-success"></em>
             <span>Partecipa</span>
           </button>
@@ -27,3 +34,18 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(function(){ // this will be called when the DOM is ready
+    $('#join_value').keyup(function(){
+      alert('ciao');
+      join_value = this.val;
+      console.log(join_value);
+    });
+  });
+  $(document).ready(function(){
+
+  });
+
+
+</script>

@@ -34,10 +34,10 @@ class Race < ApplicationRecord
   # validates_associated :owner
 
   before_create :set_status
+  before_save :upcase_name
   after_create :set_redirect_path
 
   after_create_commit :subscribe_owner
-
 
   def set_status
     if publishable?
@@ -62,6 +62,10 @@ class Race < ApplicationRecord
 
   def publishable?
     owner.have_rui? ? true : false
+  end
+
+  def upcase_name
+    self.name.upcase!
   end
 
   private

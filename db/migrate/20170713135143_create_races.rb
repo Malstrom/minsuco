@@ -6,7 +6,7 @@ class CreateRaces < ActiveRecord::Migration[5.1]
       t.text :description
       t.belongs_to :category
       t.string :recipients
-      t.decimal :race_value, :precision => 8, :scale => 2
+      t.integer :race_value
       t.decimal :commission
       t.integer :pieces_amount
       t.decimal :compensation_start_amount, :precision => 8, :scale => 2

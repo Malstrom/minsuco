@@ -111,7 +111,7 @@ class Race < ApplicationRecord
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path
-    update(redirect_path: "/races/#{self.id}/publish_check?kind=pay_for_publish")
+    update_column(:redirect_path, "/races/#{self.id}/publish_check?kind=pay_for_publish")
   end
 
   def set_permalink

@@ -1,8 +1,14 @@
 <div class="panel b text-center">
   <div class="panel-body">
     <% if current_user.joined?(@race) %>
+      <p class="lead">Valore della partecipazione
+        <br>
+        <%= number_to_currency current_user.participation(@race).join_value, unit: "€" %></p>
+      <p class="lead">Guadagno
+        <br>
+        <%= number_to_currency((current_user.participation(@race).join_value / 100 * @race.commission), unit: "€") %></p>
       <%= form_for([@race, Attendee.where(race:@race, user:current_user).first], method: :delete) do |f| %>
-        <button id="<%= @race.name %>" type="submit" class="btn btn-warning btn-xl">
+        <button id="<%= @race.name %>" type="submit" class="btn btn-warning">
           <em class="fa fa-minus fa-fw text-muted text-white"></em>
           <span>Lascia gara</span>
         </button>

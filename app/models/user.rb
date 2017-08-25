@@ -1,36 +1,37 @@
 class User < ApplicationRecord
 
-  # @return [Array<Array>]
-  def self.gender_attributes_for_select
-    genders.map do |gender, _|
-      [I18n.t("activerecord.attributes.#{model_name.i18n_key}.genders.#{gender}"), gender]
-    end
-  end
-
+  # many to one plan with one subscription on it
   belongs_to    :plan
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: 'Payola::Subscription', foreign_key: :owner_idx
 
-  # has_many      :events, :foreign_key => "who_did_id", dependent: :destroy
-  # has_many      :events, :foreign_key => "recipient_id", dependent: :destroy
-
-  has_many      :friends, dependent: :destroy
-
-  has_many      :authorizations, dependent: :destroy
+  # many to many with races using attendee
   has_many      :attendees
   has_many      :races, class_name: 'Race', through: :attendees
   has_many      :races, :foreign_key => "owner_id"
-  # has_many      :attendees, :foreign_key => "user_id", :dependent => :destroy
 
+  # many to many channels using channel_subscriptions
   has_many      :channel_subscriptions
   has_many      :channels, class_name: 'Channel', through: :channel_subscriptions
 
+  # many events as recipient and as a "who did the action"
+  has_many      :events, :foreign_key => "who_did_id", dependent: :destroy
+
+  #auth
+  has_many      :authorizations, dependent: :destroy
+
+  # many friends imported from social
+  has_many      :friends, dependent: :destroy
+
+  # rewards for using free application
   has_one :reward
 
+  # todo consider remove role and use plan only
   enum role:        [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
+
   enum kind:        [:broker, :agente]
   enum fiscal_kind: [:individual, :company]
 
-
+  # who user want to do in this app
   enum intent:      [:creator, :partecipator]
 
   # Include default devise modules. Others available are:
@@ -40,90 +41,69 @@ class User < ApplicationRecord
 
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
-  after_initialize :set_default_role, :if => :new_record?
-  after_initialize :set_default_intent, :if => :new_record?
-  after_initialize :set_default_plan, :if => :new_record?
-  # after_initialize :set_default_channels, :if => :new_record?
-  # after_create :sign_up_for_mailing_list
-
-  after_create :create_reward
+  # after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_plan,    :if => :new_record?
+  after_initialize :set_default_rewards, :if => :new_record?
 
   validates_presence_of :email
 
-  # validates_presence_of :name, :location, :phone, on: :update
-
   validates :email, uniqueness: true
-  validates :rui, length: { minimum: 5 }, on: :update
+
+  validates :rui, length: { minimum: 10 }, on: :update
 
   validates_associated :plan
 
   after_create_commit :create_default_channels
 
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
-  scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
+  scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
 
   def has_plan_for_join?
-    if plan == Plan.find_by_stripe_id('pro_attendee') or plan == Plan.find_by_stripe_id('premium')
-      true
-    else
-      false
-    end
+    (plan == Plan.find_by_stripe_id('pro_attendee') or plan == Plan.find_by_stripe_id('premium')) ? true : false
   end
 
   def has_plan_for_publish?
-    if plan == Plan.find_by_stripe_id('pro_creator') or plan == Plan.find_by_stripe_id('premium')
-      true
-    else
-      false
-    end
+    (plan == Plan.find_by_stripe_id('pro_creator') or plan == Plan.find_by_stripe_id('premium')) ? true : false
   end
 
   def has_reward?(kind)
-    if kind == 'pay_for_publish'
-      true if reward.public_races > 0
-    elsif kind == 'pay_for_join'
-      true if reward.join_private > 0
-    else
-      false
+    case kind
+      when 'pay_for_publish'
+        reward.public_races > 0 ? reward.public_races : false
+      when 'pay_for_join'
+        reward.join_private > 0 ? reward.join_private : false
+      else
+        false
     end
   end
 
-  def have_rui?
-    if rui.blank? or rui.length < 5
-      false
-    else
-      true
-    end
-  end
-
-  def participate?(race)
-    true if Attendee.where(user:self, race:race).first
+  def joined?(race)
+    attendee = Attendee.where(user: self, race: race).first
+    attendee ? attendee : false
   end
 
   def participation(race)
     Attendee.where(user:self, race:race).first
   end
 
-  def set_default_role
-    self.role ||= :basic
+  def unread_events
+    @events = Event.where(read:false, channel:channels)
   end
 
-  def set_default_intent
-    self.role ||= :partecipator
+  def create_default_channels
+    ChannelSubscription.create user_id:self.id, channel: Channel.find_or_create_by(name:"#{self.id}_user_channel")
+  end
+
+  def set_default_role
+    self.role ||= :basic
   end
 
   def set_default_plan
     self.plan ||= Plan.find_by_stripe_id('basic')
   end
 
-  def create_default_channels
-    ChannelSubscription.create user_id:self.id, channel: Channel.find_or_create_by(name:"#{self.id}_user_channel")
-    # ChannelSubscription.create user:self.id, channel: Channel.find_or_create_by(name:"general_channel")
-  end
-
-  # create related reward with 3 free reward for each cat
-  def create_reward
-    build_reward.save
+  def set_default_rewards
+    self.reward ||= Reward.create
   end
 
   def self.new_with_session(params, session)
@@ -132,10 +112,6 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
-  end
-
-  def joined?(race)
-    true if self.attendees.where(race:race).first
   end
 
   def self.from_omniauth(auth)
@@ -180,9 +156,5 @@ class User < ApplicationRecord
     end
     authorization.save
     authorization.user
-  end
-
-  def unread_events
-    @events = Event.where(read:false, channel:channels)
   end
 end

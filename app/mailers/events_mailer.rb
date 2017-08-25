@@ -20,7 +20,9 @@ class EventsMailer < ApplicationMailer
     headers "X-SMTPAPI" => {
         "to"=> [ recipient.email ],
         "sub"=> {
-            "%who_did%" => ["#{event.who_did}"],
+            "%recipient_name%"  => ["#{recipient.name}}"],
+            "%who_did%"         => ["#{event.who_did}"],
+            "%race_name%"       => ["#{Attendee.find(event.thing_id).race.name}"],
         },
         "filters"=> {
             "templates"=> {

@@ -7,12 +7,14 @@ class Reward < ApplicationRecord
     decrement!(:join_private, 1)
   end
 
+  def decrement_public_races
+    decrement!(:public_races, 1)
+  end
+
   private
 
   def set_default_rewards
     self.join_private = 10
-    self.public_races = 5
+    self.public_races = 10
   end
-
-
 end

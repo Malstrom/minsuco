@@ -88,6 +88,9 @@ class RacesController < ApplicationController
 
   def publish_check
     if @race.update(kind: params[:race] ? params[:race][:kind] : params[:kind])
+
+      current_user.reward.decrement_public_races if @race.pay_for_publish?
+
       flash[:notice] = I18n.t('flash.races.publish_check.notice')
     else
       flash[:alert] = I18n.t('flash.races.publish_check.alert')

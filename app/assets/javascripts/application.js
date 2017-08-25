@@ -7,8 +7,6 @@
 //--- Angle
 //= require_tree ./angle/
 
-//= require jquery_nested_form
-
 
 //--- Skycons
 //= require skycons/skycons

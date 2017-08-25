@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!, :set_events, :set_intent
+  before_action :authenticate_user!, :load_notifications, :set_intent
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -27,14 +27,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # set what user want to do: create races or join in race
   def set_intent
     if params[:intent]
-      current_user.intent = params[:intent]
-      current_user.save
+      current_user.update_attribute :intent, params[:intent]
     end
   end
 
-  def set_events
+  # set notifications for users
+  def load_notifications
     if current_user
       @events = current_user.unread_events
     end

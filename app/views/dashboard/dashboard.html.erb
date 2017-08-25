@@ -39,7 +39,7 @@
         Partecipazioni
       </div>
       <div class="panel-body">
-        <%= line_chart Attendee.where(user:current_user).group_by_month(:created_at).count %>
+        <%# line_chart Attendee.where(user:current_user).group_by_month(:created_at).count %>
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@
         Divisione portafoglio per categorie
       </div>
       <div class="panel-body">
-        <%= pie_chart Category.joins(:races).where('races.owner_id = ?', current_user.id).group('categories.name').count %>
+        <%# pie_chart Category.joins(:races).where('races.owner_id = ?', current_user.id).group('categories.name').count %>
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@
         Gare Iniziate/in pausa/archiviate....
       </div>
       <div class="panel-body">
-        <%= pie_chart Race.where(owner:current_user).group(:status).count %>
+        <%# pie_chart Race.where(owner:current_user).group(:status).count %>
       </div>
     </div>
   </div>

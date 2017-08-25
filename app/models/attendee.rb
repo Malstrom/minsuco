@@ -11,7 +11,7 @@ class Attendee < ApplicationRecord
 
   validates :join_value, numericality: { only_integer: true }
 
-  validate :can_leave?, on: :delete
+  validate :can_leave, on: :delete
 
   before_create :set_status
 
@@ -20,6 +20,7 @@ class Attendee < ApplicationRecord
   after_create_commit   :join_in_race_event
   after_update_commit	  :update_race_event
   after_destroy_commit	:leave_from_race_event
+
 
   private
 
@@ -58,19 +59,19 @@ class Attendee < ApplicationRecord
   end
 
   def race_value_cap
-    if race.value_coverage + join_value > race.race_value
+    if race.value_covered + join_value > race.race_value
       errors.add(:race_value_cap, I18n.t('activerecord.errors.models.attendee.race_value_cap'))
+    end
+  end
+
+  def can_leave
+    if attendee.status == 'banned'
+      errors.add(:can_leave, I18n.t('activerecord.errors.models.attendee.can_leave'))
     end
   end
 
   def set_status
     self.status = :confirmed
-  end
-
-  def can_leave?
-    if attendee.status == 'banned'
-      errors.add(:can_leave, I18n.t('activerecord.errors.models.attendee.can_leave'))
-    end
   end
 
   # create event every time create attendee

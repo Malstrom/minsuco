@@ -26,10 +26,21 @@ class EventsMailer < ApplicationMailer
             "templates"=> {
                 "settings"=> {
                     "enable"=> 1,
-                    "template_id"=> "dc5e7367-bf74-4e49-bb2e-88aa5c2522f2"
+                    "template_id"=> set_template_id(event)
                 }
             }
         }
     }.to_json
+  end
+
+  def set_template_id(event)
+    case event.message
+      when 'join_in_race'
+        "0abae4a2-45ec-4c7f-8978-faec11bb01da"
+      when 'leave_from_race'
+        "0abae4a2-45ec-4c7f-8978-faec11bb01da"
+      else
+        "0abae4a2-45ec-4c7f-8978-faec11bb01da"
+    end
   end
 end

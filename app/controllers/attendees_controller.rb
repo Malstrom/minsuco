@@ -1,6 +1,6 @@
 class AttendeesController < ApplicationController
-  before_action :set_attendee, only: [:confirm ,:update, :destroy]
 
+  before_action :set_attendee, only: [:update, :destroy]
 
   def index
     @attendees = current_user.attendees

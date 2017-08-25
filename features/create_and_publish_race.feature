@@ -7,7 +7,7 @@ Feature: Create race
 
   Scenario: New user should see new race page after intent page
     Given I sign up
-    When I click to "Creare una mia gara è pubblicarla"
+    When I click to "Creare una mia gara e pubblicarla"
     Then I should see "Nuova gara"
 
   Scenario: User should create new race
@@ -57,7 +57,7 @@ Feature: Create race
     Given I sign up
     When I visit "/races/new"
     And I fill race form
-    And I fill data in rui modal 'user_rui' value '12345'
+    And I fill data in rui modal 'user_rui' value '1234567891'
     And I publish race as "public_basic_user"
     Then I should see "Gara pubblicata sul portale"
 
@@ -66,13 +66,13 @@ Feature: Create race
     Given I sign up
     When I visit "/races/new"
     And I fill race form
-    And I fill data in rui modal 'user_rui' value '12345'
+    And I fill data in rui modal 'user_rui' value '1234567891'
     And I publish race as "private"
     Then I should see "Gara pubblicata sul portale"
 
   Scenario: User without RUI should be able to pay race but not publish it
     Given I sign up
-    When I click to "Creare una mia gara è pubblicarla"
+    When I click to "Creare una mia gara e pubblicarla"
     And I fill race form
     And I close rui modal
     And I publish race as "public_basic_user"

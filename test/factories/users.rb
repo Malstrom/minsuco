@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
     name Faker::Name.name
-    email Faker::Internet.free_email
+    email 'test@mail.com'
     password "basic_user"
     intent "creator"
     rui "39857342905"

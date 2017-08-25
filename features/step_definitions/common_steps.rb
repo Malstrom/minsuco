@@ -49,3 +49,11 @@ end
 Then(/^I should have '([^']*)' free private join/) do |n|
   raise User.first.reward.join_private if User.first.reward.join_private != n.to_i
 end
+
+And(/^I sort by category "([^"]*)"$/) do |category|
+  pending
+end
+
+And(/^I order by "([^"]*)" s "([^"]*)"$/) do |arg1, arg2|
+  pending
+end

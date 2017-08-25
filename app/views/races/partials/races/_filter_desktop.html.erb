@@ -45,7 +45,7 @@
         <div class="row row-table row-flush">
           <div class="col-xs-8">
             <div class="panel-body text-center">
-                <%= select_tag "commission",
+                <%= select_tag "sort",
                                raw("<option></option><option value='DESC'>alte</option><option value='ASC'>basse</option>"),
                                :onchange => "this.form.submit();"  %>
               <p class="mb0 text-muted">PROVVIGIONE</p>
@@ -57,7 +57,7 @@
         <div class="row row-table row-flush">
           <div class="col-xs-8">
             <div class="panel-body text-center">
-              <%= select_tag "kind",
+              <%= select_tag "sort",
                              raw("<option></option><option value='ASC'>Pubblica</option><option value='DESC'>Privata</option>"),
                              :onchange => "this.form.submit();"  %>
               <p class="mb0 text-muted">PUBBLICHE/PRIVATE</p>
@@ -69,7 +69,7 @@
         <div class="row row-table row-flush">
           <div class="col-xs-8">
             <div class="panel-body text-center">
-              <%= select_tag "ends_at",
+              <%= select_tag "sort",
                              raw("<option></option><option value='ASC'>Appena iniziate</option><option value='DESC'>In scadenza</option>"),
                              :onchange => "this.form.submit();"  %>
               <p class="mb0 text-muted">SCADENZA</p>

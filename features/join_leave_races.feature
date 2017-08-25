@@ -10,12 +10,14 @@ Feature: Join in race
     And I join in a public race
     Then I should see "Partecipazione avvenuta con successo"
 
+  @current
   Scenario: New user should join in private race spending reward
     Given I sign up
     And I have '1' rewards for join
     When I visit "/races"
     And I join in a private race
     Then I should have '0' free private join
+    And "test@mail.com" should receive an email
 
   Scenario: New user should join in public race without spending reward
     Given I sign up

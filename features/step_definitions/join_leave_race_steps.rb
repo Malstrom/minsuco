@@ -9,15 +9,8 @@ end
 When(/^I join in a (public|private|\d+) race$/) do |kind|
   kind == 'private' ? kind = 'pay_for_join' : kind = 'pay_for_publish'
 
-  create(:race, name:"test_#{kind}_race", kind: kind, owner: create(:user), permalink: kind)
-
-  visit "/races"
-  find("#test_#{kind}_race").click
-  find("#test_#{kind}_race").click
-
-  fill_in "join_value", :with => '1000'
-
-  find("#join").click
+  race = create(:race, name:"test_#{kind}_race", kind: kind, owner: create(:user), permalink: kind)
+  join_steps race
 end
 
 When(/^I join in a full race$/) do
@@ -28,25 +21,12 @@ When(/^I join in a full race$/) do
     create(:attendee, race:race, user:user)
   end
 
-  visit "/races"
-  find("#test_private_race").click
-  find("#test_private_race").click
-
-  fill_in "join_value", :with => '1000'
-
-  find("#join").click
+  join_steps race
 end
 
 When(/^I join in a race with (\d+) join value where race value is (\d+)$/) do |join_value, race_value|
   race = create(:race, name: "test_private_race", race_value: race_value)
-
-  visit "/races"
-  find("#test_private_race").click
-  find("#test_private_race").click
-
-  fill_in "join_value", :with => join_value
-
-  find("#join").click
+  join_steps race, join_value
 end
 
 When(/^I have '([^']*)' rewards for (join|publish|\d+)$/) do |n, reward|
@@ -57,12 +37,18 @@ When(/^I have '([^']*)' rewards for (join|publish|\d+)$/) do |n, reward|
   end
 end
 
-When(/^I join in race '([^']*)' named$/) do |name|
-  visit "/races"
-  find("##{name}").click
-  find("##{name}").click
+When(/^I join in race of '([^']*)' user/) do |owner|
+  race = create :race, owner: User.find_by_name(owner)
+  join_steps race
+end
 
-  fill_in "join_value", :with => 1000
+def join_steps(race,join_value=1000)
+  visit "/races"
+
+  find("##{race.name}").click
+  find("##{race.name}").click
+
+  fill_in "join_value", :with => join_value
 
   find("#join").click
 end

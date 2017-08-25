@@ -7,6 +7,12 @@ it:
           attendees_cap: "Ha raggiunto il massimo dei partecipanti"
           no_rui: "RUI non presente"
           not_publishable: "Gara non pubblicabile"
+          prohibited_name: "Non è possibile mettere il proprio dati nel nome della gara! Puo portare al ban."
+          prohibited_description: "Non è possibile inserire i dati personali nella descrizione, puo portare al ban."
+          act: "La provvigione non puo essere modificata aver creato la gara."
+          start_and_end_cant_updated: "Le date della gara non possono essere cambiate."
+          category_cant_updated: "La categoria non può essere cambiata."
+          commission_cant_updated: "La percentuale di provvigione non può essere cambiata."
     models:
       race: Gara
     attributes:

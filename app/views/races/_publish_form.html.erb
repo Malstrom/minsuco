@@ -62,7 +62,7 @@
   <% end %>
 </div>
 
-<% unless @race.owner.have_rui? %>
+<% unless @race.owner.rui? %>
   <%= render partial: 'layouts/modals/rui_modal' %>
 <% end %>
 

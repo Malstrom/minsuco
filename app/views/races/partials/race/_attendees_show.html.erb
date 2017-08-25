@@ -15,7 +15,7 @@
   <div class="col-lg-4">
     <%= render partial: 'races/partials/race/attendees_partials/attendees_actions' %>
 
-    <% if current_user.participate?(@race) %>
+    <% if current_user.joined?(@race) %>
       <%= render partial: 'races/partials/race/attendees_partials/owner_profile' %>
     <% else %>
       <%= render partial: 'races/partials/race/attendees_partials/owner_hidden' %>

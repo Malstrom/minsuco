@@ -20,7 +20,7 @@ Feature: User settings
     
   Scenario: New user should be able to change its RUI with valid RUI
     When I click to "IMPOSTAZIONI"
-    And I change my "rui" in "12345"
+    And I change my "rui" in "1234567891"
     Then I should see "Profilo aggiornato"
     
   Scenario: New user should not be able to change its RUI with invalid RUI
@@ -49,6 +49,11 @@ Feature: User settings
     And I pay via stripe
     And I visit user plan
     Then I should see "Iscritto al piano Pro creatori"
+
+  Scenario: User should be set intent
+    When I click to "Creare una mia gara e pubblicarla"
+    And I click to "DASHBOARD"
+    Then I should see "La mia Dashboard"
 
   Scenario: User should be able to turn off all notifications
   Scenario: User should be able to turn off email notifications

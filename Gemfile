@@ -5,106 +5,83 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.1.0'
-
 gem 'mysql2'
-
-gem 'acts_as_tree'
-
-# Use Puma as the app server
 gem 'puma', '~> 3.7'
-
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.1'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
+gem 'sass-rails', '~> 5.0.1'  # Use SCSS for stylesheets
+gem 'uglifier', '>= 1.3.0'    # Use Uglifier as compressor for JavaScript assets
+gem 'coffee-rails', '~> 4.2'  # Use CoffeeScript for .coffee assets and views
+gem 'jbuilder', '~> 2.5'      # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "bower-rails", "~> 0.9.2"
+gem "slim-rails"
 
-# auth/auth
+# gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
+
 gem 'devise'
-
 gem 'omniauth-facebook'
-
 gem 'omniauth-google-oauth2'
-gem 'omnicontacts', :git => 'https://github.com/Diego81/omnicontacts.git'
+
+gem 'omnicontacts', :git => 'https://github.com/Diego81/omnicontacts.git' # import google contacts
+
+gem 'acts_as_tree'  # category as tree
+
+gem 'sendgrid-ruby' # send email trough sendgrind
 
 gem 'cancancan', '~> 2.0'
 
-# gem "responders" # flash messages via i18n
+gem "chartkick"       # simply charts
+gem 'groupdate'       # with chartkick charts are very simply
 
-# gem 'sendgrid-rails', '~> 2.0'
-gem 'sendgrid-ruby'
+# gem 'paper_trail'   # Track changes to your models' data. Good for auditing or versioning.
+# gem 'active_admin'  # elegant backends for website administration
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+gem 'faker'           # fake data
 
-  # Adds support for Capybara system testing and selenium driver
-end
-
-gem 'faker'
+gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
-  gem "better_errors"
-  gem "binding_of_caller"
-  # gem 'brakeman', :require => false
-  gem 'rails-erd', require: false
+  # check security of app
+  gem 'brakeman', :require => false
+  # create entity reltional diagram
+  gem 'rails-erd', "1.5.0", require: false
 end
 
 group :test do
-  gem 'cucumber-rails', :require => false
-  gem 'database_cleaner'
+  gem 'rspec'
+
+  #test with features
   gem "cucumber"
   gem 'cucumber-rails', :require => false
   gem 'capybara'
+
+  # test with browser behavior with chrome
   gem 'selenium-webdriver'
-  gem 'simplecov'
-  gem 'rspec'
   gem 'chromedriver-helper'
-  gem 'webrat'
+
+  # Database for test
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
+
+  #code coverage
+  gem 'simplecov'
+
+  #additional steps for test email mainly
   gem 'email_spec'
-  gem 'action_mailer_cache_delivery'
   gem 'pickle'
+  gem 'action_mailer_cache_delivery'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
-
-# ----
-
-gem 'wicked'
-
-# gem 'public_activity'
-
-gem "nested_form"
-
-# gem 'paper_trail' # Track changes to your models' data. Good for auditing or versioning.
-# gem 'active_admin' # elegant backends for website administration
-
-gem "slim-rails"
-
 
 # new gems to test
 
 # gem 'ransack', github: 'activerecord-hackery/ransack' #search
 # gem 'searchkick #search #elasticsearch
 # gem "slack-notifier"
-gem "chartkick"
-gem 'groupdate'

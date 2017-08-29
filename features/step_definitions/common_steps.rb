@@ -60,3 +60,7 @@ end
 And(/^I order by "([^"]*)" s "([^"]*)"$/) do |arg1, arg2|
   pending
 end
+
+And(/^I fill "([^"]*)" in "([^"]*)" input$/) do |value, field|
+  fill_in field, :with => value
+end

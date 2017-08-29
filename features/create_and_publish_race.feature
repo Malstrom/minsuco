@@ -50,7 +50,6 @@ Feature: Create race
     And I publish race as "public"
     Then I should see "pubblica"
 
-  @current
   Scenario: New user should be able to publish race as a public
     Given I sign up
     When I visit "/races/new"
@@ -59,7 +58,6 @@ Feature: Create race
     And I publish race as "public_basic_user"
     Then I should see "Gara pubblicata sul portale"
 
-  @javascript
   Scenario: New user should be able to publish race as a private
     Given I sign up
     When I visit "/races/new"

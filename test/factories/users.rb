@@ -4,7 +4,7 @@ FactoryGirl.define do
     email 'test@mail.com'
     password "basic_user"
     intent "creator"
-    rui "39857342905"
+    rui "39857342vd905"
     phone '35342535'
     location 'Test_location'
     plan Plan.find_by_stripe_id('pro_attendee')

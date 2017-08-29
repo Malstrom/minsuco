@@ -85,3 +85,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'ransack', github: 'activerecord-hackery/ransack' #search
 # gem 'searchkick #search #elasticsearch
 # gem "slack-notifier"
+# gem 'acts-as-taggable-on', '~> 4.0'

@@ -30,7 +30,8 @@ class Race < ApplicationRecord
 
   before_save   :sanitize_data
   after_create  :set_redirect_path
-  before_update :set_status
+
+  before_update :set_status, :if => :status_is_draft?
 
   after_create_commit :subscribe_owner
 
@@ -117,7 +118,11 @@ class Race < ApplicationRecord
   end
 
   def set_status
-    publishable? ? self.status = 'started' : self.status = 'draft'
+    publishable? ? self.status = :started : self.status = :draft
+  end
+
+  def status_is_draft?
+    false unless status == :draft
   end
 
   # set redirect_path after create to redirect race after payola one time pay

@@ -32,11 +32,13 @@ class Attendee < ApplicationRecord
 
   # check if attendee has permission to join the race (subscription, kind of race, free join token, ecc...)
   def not_joinable
-    unless user.has_plan_for_join?
-      unless user.has_reward?('pay_for_join')
-        errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.invalid_plan'))
-        errors.add(:not_joinable, I18n.t('activerecord.errors.models.attendee.no_reward'))
-      end
+    if !user.rui?
+      errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.no_rui'))
+    elsif !user.has_plan_for_join? and !user.has_reward?('pay_for_join')
+      errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.invalid_plan'))
+      errors.add(:not_joinable, I18n.t('activerecord.errors.models.attendee.no_reward'))
+    else
+      true
     end
   end
 

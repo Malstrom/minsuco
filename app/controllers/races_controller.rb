@@ -74,7 +74,6 @@ class RacesController < ApplicationController
   # POST /races.json
   def create
     @race = current_user.races.build(race_params)
-
     respond_to do |format|
       if @race.save
         format.html {redirect_to publish_race_path(@race), notice: I18n.t('flash.races.create.notice')}
@@ -88,10 +87,12 @@ class RacesController < ApplicationController
 
   def publish_check
     if @race.update(kind: params[:race] ? params[:race][:kind] : params[:kind])
-
       current_user.reward.decrement_public_races if @race.pay_for_publish?
-
-      flash[:notice] = I18n.t('flash.races.publish_check.notice')
+      if @race.started?
+        flash[:notice] = I18n.t('flash.races.publish_check.notice')
+      else
+        flash[:alert] = I18n.t('flash.races.publish_check.alert')
+      end
     else
       flash[:alert] = I18n.t('flash.races.publish_check.alert')
     end

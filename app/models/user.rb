@@ -32,7 +32,7 @@ class User < ApplicationRecord
   enum fiscal_kind: [:individual, :company]
 
   # who user want to do in this app
-  enum intent:      [:creator, :partecipator]
+  enum intent:      [:creator, :attendee]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -54,6 +54,10 @@ class User < ApplicationRecord
   validates_associated :plan
 
   after_create_commit :create_default_channels
+
+
+  scope :attendee_users, -> { where("intent = ?", :attendee) }
+  scope :creator_users,  -> { where("intent = ?", :creator) }
 
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
   scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }

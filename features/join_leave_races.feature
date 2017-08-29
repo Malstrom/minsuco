@@ -4,15 +4,16 @@ Feature: Join in race
   User with pro attendee plan should partecipate to unlimited races
   creator should not join to race without rewards
 
-  Scenario: New user should able to join in 3 races
+  Scenario: New user should able to join in 3 races if its profile was complete
     Given I sign up
+    And I complete my profile
     When I visit "/races"
     And I join in a public race
     Then I should see "Partecipazione avvenuta con successo"
 
-  @current
   Scenario: New user should join in private race spending reward
     Given I sign up
+    And I complete my profile
     And I have '1' rewards for join
     When I visit "/races"
     And I join in a private race
@@ -37,5 +38,12 @@ Feature: Join in race
     When I join in a race with 10001 join value where race value is 1000
     Then I should see "Non puoi partecipare a questa gara con questo importo"
 
+  Scenario: User should leave race from race
+    Given I sign up
+    And I complete my profile
+    And I visit "/races"
+    When I join in a public race
+    And I click to "Lascia gara"
+    Then I should see "Partecipazione cancellata"
 
 

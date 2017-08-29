@@ -11,6 +11,7 @@ it:
           race_value_cap: "Non puoi partecipare a questa gara con questo importo."
           can_leave: "Non puoi lasciare una gara dalla quale sei stato bannato"
           attendee: Partecipante
+\          no_rui: "Per partecipare devi complare i tuoi dati"
     attributes:
       attendee:
         join_value: Valora partecipazione

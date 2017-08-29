@@ -20,9 +20,12 @@ When(/^I visit attendees page$/) do
   visit("/users/#{User.first.id}/attendees")
 end
 
-
 Then(/^I should see "([^"]*)"$/) do |arg1|
   expect(page).to have_content arg1
+end
+
+Then(/^I should not see "([^"]*)"$/) do |arg1|
+  expect(page).to have_no_content arg1
 end
 
 And(/^I sleep "([^"]*)" seconds$/) do |arg1|

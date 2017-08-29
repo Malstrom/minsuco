@@ -19,3 +19,14 @@ When(/^I visit user plan$/) do
   id = User.find_by_email("new_user@test.com").id
   visit "users/#{id}/plans"
 end
+
+And(/^I complete my profile$/) do
+  click_on('IMPOSTAZIONI')
+
+  fill_in 'rui', :with => "12345678910"
+  fill_in 'name', :with => 'user_test'
+  fill_in 'phone', :with => '353452435'
+  fill_in 'location', :with => 'test_location'
+
+  click_on "Aggiorna informazioni"
+end

@@ -1,5 +1,6 @@
 class ApiController < ActionController::Base
-  
+  protect_from_forgery with: :exception
+
   def documentation
     render file: "app/assets/documentation/readme.md"
   end

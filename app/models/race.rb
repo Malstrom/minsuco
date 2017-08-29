@@ -28,10 +28,9 @@ class Race < ApplicationRecord
                         :pieces_amount, :recipients, :race_value, :category_id,
                         :starts_at, :ends_at, :kind
 
-  before_create :set_status
   before_save   :sanitize_data
-
   after_create  :set_redirect_path
+  before_update :set_status
 
   after_create_commit :subscribe_owner
 
@@ -39,11 +38,11 @@ class Race < ApplicationRecord
   scope :not_expired,   -> { where("ends_at >= ?", DateTime.now)}
   scope :expired,       -> { where("ends_at <= ?", DateTime.now)}
 
-  scope :public_races,  -> { where kind: :pay_for_publish }
-  scope :private_races, -> { where kind: :pay_for_join }
+  scope :public_races,  -> { where( kind: :pay_for_publish) }
+  scope :private_races, -> { where( kind: :pay_for_join) }
 
-  scope :by_category, -> (category) { where(:category => category) }
-  scope :by_owner,    -> (owner)    { where(:owner => owner) }
+  scope :by_category, -> (category) { where( category: category ) }
+  scope :by_owner,    -> (owner)    { where( owner: owner ) }
 
   def publishable?
     owner.valid?
@@ -93,12 +92,6 @@ class Race < ApplicationRecord
   def commission_not_changed
     if commission_changed? && self.persisted?
       errors.add(:commission_cant_updated, I18n.t('activerecord.errors.models.race.commission_cant_updated'))
-    end
-  end
-
-  def publishable
-    unless publishable?
-      errors.add(:not_publishable, I18n.t('activerecord.errors.models.race.not_publishable'))
     end
   end
 

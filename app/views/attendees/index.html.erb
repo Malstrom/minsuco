@@ -18,7 +18,13 @@
   <% if @attendees.empty? %>
     <div class="text-center">
       <p class="lead">Non hai ancora partecipato a nessuna gara!</p>
+      <%= link_to(races_path, class:'btn btn-success btn-oval btn-xl', id:'plus_nuova_gara') do %>
+        &nbsp
+        <em class="fa fa-search-plus"></em>
+        &nbsp
+      <% end %>
     </div>
+
   <% else %>
     <%= render partial: "attendees/partials/races" %>
   <% end %>

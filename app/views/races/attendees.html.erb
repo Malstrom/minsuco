@@ -21,14 +21,13 @@
     </div>
   </div>
 </h3>
-<div class="row ">
+<div class="row">
   <!--ALl Races-->
   <% if @attendees.empty? %>
     <div class="text-center">
       <p class="lead">Non hai ancora partecipato a nessuna gara!</p>
     </div>
   <% else %>
-    <%= render partial: "races/partials/races/all", @race => @attendees.race %>
+    <%= render partia l: "races/partials/races/all", @race => @attendees.race %>
   <% end %>
-
 </div>

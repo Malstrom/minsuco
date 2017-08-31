@@ -31,10 +31,11 @@ class Race < ApplicationRecord
   before_save   :sanitize_data
   after_create  :set_redirect_path
 
-  before_update :set_status, :if => :status_is_draft?
+  before_update :set_status , if: Proc.new { |race| race.status.nil? or race.status == :draft }
 
   after_create_commit :subscribe_owner
 
+  # Use like this "Race.started_races"
   scope :started_races, -> { where status: :started }
   scope :not_expired,   -> { where("ends_at >= ?", DateTime.now)}
   scope :expired,       -> { where("ends_at <= ?", DateTime.now)}
@@ -45,6 +46,7 @@ class Race < ApplicationRecord
   scope :by_category, -> (category) { where( category: category ) }
   scope :by_owner,    -> (owner)    { where( owner: owner ) }
 
+  # all external validation needed for publish race
   def publishable?
     owner.valid?
   end
@@ -78,24 +80,21 @@ class Race < ApplicationRecord
 
   private
 
-  def date_not_changed
-    if starts_at_changed? or ends_at_changed? && self.persisted?
-      errors.add(:start_and_end_cant_updated, I18n.t('activerecord.errors.models.race.start_and_end_cant_updated'))
-    end
+  # SET METHOD
+  def set_status
+    publishable? ? self.status = :started : self.status = :draft
   end
 
-  def category_not_changed
-    if category_id_changed? && self.persisted?
-      errors.add(:category_cant_updated, I18n.t('activerecord.errors.models.race.category_cant_updated'))
-    end
+  # set redirect_path after create to redirect race after payola one time pay
+  def set_redirect_path
+    update_column(:redirect_path, "/races/#{self.id}/publish_check?kind=pay_for_publish")
   end
 
-  def commission_not_changed
-    if commission_changed? && self.persisted?
-      errors.add(:commission_cant_updated, I18n.t('activerecord.errors.models.race.commission_cant_updated'))
-    end
+  def set_permalink
+    self.permalink = "#{Time.now.to_i}-#{name.parameterize}"
   end
 
+  # CUSTOM VALIDATIONS
   def start_in_past
     if starts_at && starts_at < Date.today
       errors.add(:start_in_past, I18n.t('activerecord.errors.models.race.start_in_past'))
@@ -117,20 +116,24 @@ class Race < ApplicationRecord
     end
   end
 
-  def set_status
-    publishable? ? self.status = :started : self.status = :draft
+  # validation when update race
+  def date_not_changed
+    if starts_at_changed? or ends_at_changed? && self.persisted?
+      errors.add(:start_and_end_cant_updated, I18n.t('activerecord.errors.models.race.start_and_end_cant_updated'))
+    end
   end
 
-  def status_is_draft?
-    false unless status == :draft
+  # validation when update race
+  def category_not_changed
+    if category_id_changed? && self.persisted?
+      errors.add(:category_cant_updated, I18n.t('activerecord.errors.models.race.category_cant_updated'))
+    end
   end
 
-  # set redirect_path after create to redirect race after payola one time pay
-  def set_redirect_path
-    update_column(:redirect_path, "/races/#{self.id}/publish_check?kind=pay_for_publish")
-  end
-
-  def set_permalink
-    self.permalink = "#{Time.now.to_i}-#{name.parameterize}"
+  # validation when update race
+  def commission_not_changed
+    if commission_changed? && self.persisted?
+      errors.add(:commission_cant_updated, I18n.t('activerecord.errors.models.race.commission_cant_updated'))
+    end
   end
 end

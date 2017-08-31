@@ -281,4 +281,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   config.stretches = Rails.env.test? ? 1 : 10
+
+
+  config.action_mailer.default_url_options = { :host => 'minsuco.herokuapp.com' }
 end

@@ -5,6 +5,7 @@ Feature: Create race
   Public race should not be published if user not have Pro attendee plan
   New user should see Race new form after choose self intent
 
+  @current
   Scenario: New user should see new race page after intent page
     Given I sign up
     When I click to "Creare una mia gara e pubblicarla"
@@ -22,6 +23,7 @@ Feature: Create race
     And I fill race attribute "start_date" with "10/08/2017"
     Then I should see "La gara non puo iniziare nel passato"
 
+  @current
   Scenario: Basic user should be able to publish race as public after payment trought
     Given I logged in as a "basic"
     When I visit "/races/new"

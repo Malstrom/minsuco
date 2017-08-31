@@ -102,12 +102,14 @@ class RacesController < ApplicationController
   # PATCH/PUT /races/1
   # PATCH/PUT /races/1.json
   def update
-    if @race.update(race_params)
-      flash[:notice] = I18n.t('flash.races.update.notice')
-    else
-      flash[:alert] = I18n.t('flash.races.update.alert')
+    respond_to do |format|
+      if @race.update(race_params)
+        format.html {redirect_to race_path(@race), notice: I18n.t('flash.races.update.notice')}
+      else
+        format.html { render :edit }
+      end
     end
-    redirect_to race_path(@race)
+
   end
 
   private

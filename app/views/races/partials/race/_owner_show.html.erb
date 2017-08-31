@@ -3,15 +3,28 @@
   <div class="pull-right">
   </div>
 </div>
+
+<% if @race.expired? %>
+  <div role="alert" class="alert alert-warning">
+    <strong>Attenzione!</strong> Questa gara è finita il <%= @race.ends_at.strftime('%d/%m/%Y') %>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-lg-8">
     <%= render partial: 'races/partials/race/owner_partials/show_owner_main' %>
-    <%= render partial: 'races/partials/race/owner_partials/attendees_list' %>
+    <% unless @race.expired? %>
+      <%= render partial: 'races/partials/race/owner_partials/attendees_list' %>
+    <% end %>
   </div>
   <div class="col-lg-4">
-    <%= render partial: 'races/partials/race/owner_partials/owner_actions' %>
+    <% unless @race.expired? %>
+      <%= render partial: 'races/partials/race/owner_partials/owner_actions' %>
+    <% end %>
     <%= render partial: 'races/partials/race/owner_partials/show_owner_details' %>
-    <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>
+    <% unless @race.expired? %>
+      <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>
+    <% end %>
   </div>
 </div>
 

@@ -57,8 +57,10 @@
             </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= @race.attendees.count %> / <%= @race.max_attendees %></h4>
-                <p class="mb0 text-muted">Partecipanti</p>
+                <h4 class="mt0">
+                  <%= number_to_currency( @race.total_commission, unit: "€") %>
+                </h4>
+                <p class="mb0 text-muted">Provvigio da pagara</p>
               </div>
             </div>
           </div>
@@ -70,8 +72,13 @@
             </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %></h4>
-                <p class="mb0 text-muted">al termine</p>
+                <% if @race.expired? %>
+                  <h4 class="mt0">Gara finita da</h4>
+                  <p class="mb0 text-muted"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %></p>
+                <% else %>
+                  <h4 class="mt0"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %></h4>
+                  <p class="mb0 text-muted">al termine</p>
+                <% end %>
               </div>
             </div>
           </div>

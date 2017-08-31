@@ -28,6 +28,7 @@ gem 'omniauth-google-oauth2'
 gem 'omnicontacts', :git => 'https://github.com/Diego81/omnicontacts.git' # import google contacts
 
 gem 'acts_as_tree'  # category as tree
+gem 'acts-as-taggable-on', '~> 4.0' # for tag categories to users
 
 gem 'sendgrid-ruby' # send email trough sendgrind
 
@@ -85,4 +86,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'ransack', github: 'activerecord-hackery/ransack' #search
 # gem 'searchkick #search #elasticsearch
 # gem "slack-notifier"
-# gem 'acts-as-taggable-on', '~> 4.0'
+

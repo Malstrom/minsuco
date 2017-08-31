@@ -61,6 +61,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (4.0.0)
+      activerecord (>= 4.0)
     acts_as_tree (2.6.1)
       activerecord (>= 3.0.0)
     addressable (2.5.1)
@@ -74,7 +76,6 @@ GEM
     bower-rails (0.9.2)
     brakeman (3.7.0)
     builder (3.2.3)
-    byebug (9.0.6)
     cancancan (2.0.0)
     capybara (2.13.0)
       addressable
@@ -178,7 +179,6 @@ GEM
     mustermann (1.0.0)
     mysql2 (0.4.7)
     mysql2 (0.4.7-x64-mingw32)
-    nested_form (0.3.2)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
@@ -335,10 +335,10 @@ PLATFORMS
 
 DEPENDENCIES
   action_mailer_cache_delivery
+  acts-as-taggable-on (~> 4.0)
   acts_as_tree
   bower-rails (~> 0.9.2)
   brakeman
-  byebug
   cancancan (~> 2.0)
   capybara
   chartkick
@@ -354,7 +354,6 @@ DEPENDENCIES
   groupdate
   jbuilder (~> 2.5)
   mysql2
-  nested_form
   omniauth-facebook
   omniauth-google-oauth2
   omnicontacts!

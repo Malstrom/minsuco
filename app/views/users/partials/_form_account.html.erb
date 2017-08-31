@@ -55,11 +55,24 @@
         <%= f.label :location  %>
         <%= f.text_field :location, class: 'form-control', id:'location'%>
       </div>
-
       <div class="form-group">
         <%= f.label :phone  %>
         <%= f.text_field :phone, class: 'form-control', id:'phone'%>
       </div>
+
+      <div class="form-group">
+        <%= f.label :interest_list  %>
+        <%= f.grouped_collection_select(:interest_list, Category.find_by_name('assicurazioni').children,
+                                        :children, :name, :id ,:name,
+                                        {},
+                                        {:class=>'form-control',
+                                         :multiple => true,
+                                         :id => 'select2-3'}) -%>
+
+      </div>
+
+
+
       <%= f.submit "Aggiorna informazioni", class:"btn btn-info" %>
       <p>
         <small class="text-muted">Per pubblicare una gara sul portale e obbligatorio fornire un RUI valido </small>

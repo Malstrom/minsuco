@@ -54,7 +54,7 @@ end
   user.role = %w(pro_creator premium).sample
   user.kind = %w(broker agente).sample
   user.plan = [Plan.find_by_stripe_id('pro_creator'),Plan.find_by_stripe_id('premium')].sample()
-  user.rui = 777777
+  user.rui = 7774356463777
 
 
   user.save
@@ -115,7 +115,7 @@ end
   user_attendee.role = %w(basic pro_attendee).sample
   user_attendee.kind = %w(broker agente).sample
   user_attendee.plan = [Plan.find_by_stripe_id('pro_attendee'),Plan.find_by_stripe_id('premium')].sample()
-  user_attendee.rui = 777777
+  user_attendee.rui = 74356634677777
 
   user_attendee.save
 

@@ -1,5 +1,9 @@
 class User < ApplicationRecord
 
+  # need for tag users with interested categories
+  acts_as_taggable
+  acts_as_taggable_on :interests
+
   # many to one plan with one subscription on it
   belongs_to    :plan
   has_one :subscription, ->(sub) { where.not(stripe_id: nil) }, class_name: 'Payola::Subscription', foreign_key: :owner_idx

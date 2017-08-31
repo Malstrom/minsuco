@@ -37,8 +37,8 @@ class Race < ApplicationRecord
 
   # Use like this "Race.started_races"
   scope :started_races, -> { where status: :started }
-  scope :not_expired,   -> { where("ends_at >= ?", DateTime.now)}
-  scope :expired,       -> { where("ends_at <= ?", DateTime.now)}
+  scope :not_expired,   -> { where("ends_at > ?", DateTime.now)}
+  scope :expired,       -> { where("ends_at < ?", DateTime.now)}
 
   scope :public_races,  -> { where( kind: :pay_for_publish) }
   scope :private_races, -> { where( kind: :pay_for_join) }
@@ -56,6 +56,9 @@ class Race < ApplicationRecord
     PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish? ? true : false
   end
 
+  def expired?
+    ends_at < DateTime.now ? true : false
+  end
   # # return true if race already featured
   # def featured?
   #   true if featured_races.where('featured_races.starts_at <= ? AND featured_races.ends_at >= ?', DateTime.now, DateTime.now).first
@@ -64,6 +67,10 @@ class Race < ApplicationRecord
   # Sum of all attendees join_value for this race
   def value_covered
     Attendee.where(race_id:self.id, status: 'confirmed').sum(:join_value)
+  end
+
+  def total_commission
+    attendees.sum(:join_value) / 100 * commission
   end
 
   # set case and check if Owner not write prohibited data in fields like it s name or phone number

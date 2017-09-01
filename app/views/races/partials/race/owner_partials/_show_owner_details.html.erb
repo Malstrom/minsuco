@@ -12,13 +12,13 @@
       <td>
         <strong>Ramo rischio</strong>
       </td>
-      <td><%= @race.category.name %></td>
+      <td><%= @race.category.name.capitalize %></td>
     </tr>
     <tr>
       <td>
         <strong>Destinatari</strong>
       </td>
-      <td><%= @race.recipients %></td>
+      <td><%= t("activerecord.race.enum.recipients.#{@race.recipients}") %></td>
     </tr>
     <tr>
       <td>

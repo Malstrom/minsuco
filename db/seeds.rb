@@ -52,7 +52,7 @@ end
   user.password_confirmation = user.password
   user.image = Faker::Avatar.image
   user.role = %w(pro_creator premium).sample
-  user.kind = %w(broker agente).sample
+  user.kind = %w(broker agent).sample
   user.plan = [Plan.find_by_stripe_id('pro_creator'),Plan.find_by_stripe_id('premium')].sample()
   user.rui = 7774356463777
 
@@ -91,7 +91,7 @@ end
     race.commission = rand(5..50)
     race.kind = %w(pay_for_publish pay_for_join).sample
     race.status = 'started'
-    race.recipients = %w(brokers agents all).sample
+    race.recipients = %w(broker agent for_all).sample
     race.price = 2900
     race.permalink = race.name
 
@@ -113,7 +113,7 @@ end
   user_attendee.password_confirmation = user_attendee.password
   user_attendee.image = Faker::Avatar.image
   user_attendee.role = %w(basic pro_attendee).sample
-  user_attendee.kind = %w(broker agente).sample
+  user_attendee.kind = %w(broker agent).sample
   user_attendee.plan = [Plan.find_by_stripe_id('pro_attendee'),Plan.find_by_stripe_id('premium')].sample()
   user_attendee.rui = 74356634677777
 

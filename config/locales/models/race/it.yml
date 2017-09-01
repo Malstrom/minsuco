@@ -23,11 +23,11 @@ it:
         recipients: Destinatari
         starts_at: Inizia
         ends_at: Finisce
-        race_value: Valore della gara
+        race_value: Produzione richiesta
         commission: Ricompensa
         max_attendees: Numero massimo di partecipanti
         numero di pezzi: Numero di pezzi
-  flash:
-    users:
-      delete:
-        notice: "Utente eliminato"
+    race:
+      enum:
+        recipients:
+          for_all: "Per tutti"

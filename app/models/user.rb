@@ -32,7 +32,7 @@ class User < ApplicationRecord
   # todo consider remove role and use plan only
   enum role:        [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
 
-  enum kind:        [:broker, :agente]
+  enum kind:        [:broker, :agent]
   enum fiscal_kind: [:individual, :company]
 
   # who user want to do in this app

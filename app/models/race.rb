@@ -12,8 +12,9 @@ class Race < ApplicationRecord
 
   belongs_to :category
 
-  enum kind:   %i[pay_for_publish pay_for_join]
-  enum status: %i[started paused draft achieved]
+  enum kind:        [:pay_for_publish, :pay_for_join]
+  enum status:      [:started, :paused, :draft, :achieved]
+  enum recipients:  [:broker, :agent, :for_all]
 
   before_validation :set_permalink, on: :create
 
@@ -24,9 +25,8 @@ class Race < ApplicationRecord
 
   validate  :date_not_changed, :category_not_changed, :commission_not_changed, :on => :update
 
-  validates_presence_of :name, :description, :max_attendees, :commission,
-                        :pieces_amount, :recipients, :race_value, :category_id,
-                        :starts_at, :ends_at, :kind
+  validates_presence_of :name, :description, :commission, :recipients, :race_value,
+                        :category_id, :starts_at, :ends_at, :kind
 
   before_save   :sanitize_data
   after_create  :set_redirect_path
@@ -43,8 +43,9 @@ class Race < ApplicationRecord
   scope :public_races,  -> { where( kind: :pay_for_publish) }
   scope :private_races, -> { where( kind: :pay_for_join) }
 
-  scope :by_category, -> (category) { where( category: category ) }
-  scope :by_owner,    -> (owner)    { where( owner: owner ) }
+  scope :by_category,   -> (category)  { where( category: category ) }
+  scope :by_owner,      -> (owner)     { where( owner: owner ) }
+  scope :by_recipients, -> (recipient) { where( recipients: [recipient, :for_all] ) }
 
   # all external validation needed for publish race
   def publishable?

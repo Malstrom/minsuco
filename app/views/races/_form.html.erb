@@ -44,7 +44,12 @@
         </div>
         <%= f.label :recipients, class: 'col-lg-2 control-label' %>
         <div class="col-sm-3">
-          <%= f.select(:recipients, options_for_select([['Agenti', 'Agenti'], ['Broker', 'Broker'], ['Tutti', 'Tutti'] ]), {},{:class=>'chosen-select input-md form-control m-b'}) %>
+          <%= f.select(:recipients, options_for_select([['Tutti', 'for_all'],
+                                                        ['Agenti', 'agent'],
+                                                        ['Broker', 'broker']]),
+                       {},
+                       {:class=>'chosen-select input-md form-control m-b',
+                       }) %>
         </div>
       </div>
     </fieldset>
@@ -87,18 +92,18 @@
   </fieldset>
 
 
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :max_attendees, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-2">
-        <%= f.number_field :max_attendees, class:'form-control input-lg m-b', id:'max_attendees'  %>
-      </div>
-      <%= f.label :pieces_amount, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-2">
-        <%= f.number_field :pieces_amount, class:'form-control input-lg m-b', id:'pieces_amount' %>
-      </div>
-    </div>
-  </fieldset>
+  <!--<fieldset>-->
+    <!--<div class="form-group">-->
+      <!--<%# f.label :max_attendees, class: 'col-lg-2 control-label' %>-->
+      <!--<div class="col-sm-2">-->
+        <!--<%# f.number_field :max_attendees, class:'form-control input-lg m-b', id:'max_attendees'  %>-->
+      <!--</div>-->
+      <!--<%# f.label :pieces_amount, class: 'col-lg-2 control-label' %>-->
+      <!--<div class="col-sm-2">-->
+        <!--<%# f.number_field :pieces_amount, class:'form-control input-lg m-b', id:'pieces_amount' %>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</fieldset>-->
 
   <fieldset>
     <div class="form-group text-center">

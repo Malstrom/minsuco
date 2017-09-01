@@ -10,15 +10,15 @@ class RacesController < ApplicationController
   def index
     if params[:category_id] and !params[:category_id].empty?
       @races = Race.by_category(Category.find(params[:category_id]).order "ends_at ASC}")
-                   .not_expired
+                   .not_expired.by_recipients(current_user.kind)
     elsif params[:commission] and !params[:commission].empty?
-      @races = Race.not_expired.order "commission #{params[:commission]}"
+      @races = Race.not_expired.by_recipients(current_user.kind).order "commission #{params[:commission]}"
     elsif params[:kind] and !params[:kind].empty?
-      @races = Race.not_expired.order "kind #{params[:commission]}"
+      @races = Race.not_expired.by_recipients(current_user.kind).order "kind #{params[:commission]}"
     elsif params[:ends_at] and !params[:ends_at].empty?
-      @races = Race.not_expired.order "ends_at #{params[:ends_at]}"
+      @races = Race.not_expired.by_recipients(current_user.kind).order "ends_at #{params[:ends_at]}"
     else
-      @races = Race.not_expired
+      @races = Race.not_expired.by_recipients(current_user.kind)
     end
   end
 
@@ -60,7 +60,6 @@ class RacesController < ApplicationController
     @race.commission = rand(5..50)
     @race.kind = %w(pay_for_publish pay_for_join).sample
     @race.status = 'started'
-    @race.recipients = %w(brokers agents all).sample
   end
 
   def publish

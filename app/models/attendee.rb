@@ -21,7 +21,6 @@ class Attendee < ApplicationRecord
   after_update_commit	  :update_race_event
   after_destroy_commit	:leave_from_race_event
 
-
   private
 
   def decrement_rewards
@@ -36,7 +35,11 @@ class Attendee < ApplicationRecord
       errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.no_rui'))
     elsif !user.has_plan_for_join? and !user.has_reward?('pay_for_join')
       errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.invalid_plan'))
-      errors.add(:not_joinable, I18n.t('activerecord.errors.models.attendee.no_reward'))
+      errors.add(:not_reward, I18n.t('activerecord.errors.models.attendee.no_reward'))
+    elsif user.kind != race.recipients
+      unless race.recipients == 'for_all'
+        errors.add(:different_recipient, I18n.t('activerecord.errors.models.attendee.different_recipient'))
+      end
     else
       true
     end

@@ -5,7 +5,7 @@ FactoryGirl.define do
     max_attendees "10"
     commission "1000"
     pieces_amount "50"
-    recipients "all"
+    recipients "for_all"
     race_value "100000"
     category_id 5
     starts_at Time.now.strftime("%d/%m/%Y")

@@ -50,8 +50,8 @@ When(/^I fill race form$/) do
   fill_in "name", :with => 'TestRace'
   fill_in "description", :with => 'A test race'
   fill_in "race_value", :with => '100000'
-  fill_in "pieces_amount", :with => '50'
-  fill_in "max_attendees", :with => '50'
+  # fill_in "pieces_amount", :with => '50'
+  # fill_in "max_attendees", :with => '50'
   fill_in "commission", :with => '20'
   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
   fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
@@ -67,8 +67,8 @@ When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
   fill_in "name", :with => 'TestRace'
   fill_in "description", :with => 'A test race'
   fill_in "race_value", :with => '100000'
-  fill_in "pieces_amount", :with => '50'
-  fill_in "max_attendees", :with => '50'
+  # fill_in "pieces_amount", :with => '50'
+  # fill_in "max_attendees", :with => '50'
   fill_in "commission", :with => '20'
   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
   fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")

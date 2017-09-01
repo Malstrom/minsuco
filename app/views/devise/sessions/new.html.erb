@@ -7,7 +7,7 @@
       </a>
     </div>
     <div class="panel-body">
-      <p class="text-center pv">ENTRA NELLA PIATTAFORMA CON I SOCIAL</p>
+      <p class="text-center pv">ENTRA E COMINCIA A VINCERE TUTTE LE TUE GARE ASSICURATIVE.</p>
 
       <div class="text-center pv row">
         <%- if devise_mapping.omniauthable? %>
@@ -17,12 +17,12 @@
             <% if OmniAuth::Utils.camelize(provider) == 'Facebook' %>
               <%= link_to(omniauth_authorize_path(resource_name, provider), class: "btn btn-labeled btn-info btn-facebook") do  %>
                 <span class="btn-label"><i class="fa fa-facebook"></i></span>
-                <%= "Registrati con Facebook"  %>
+                <%= "Login con Facebook"  %>
               <% end %>
             <% elsif OmniAuth::Utils.camelize(provider) == 'GoogleOauth2' %>
               <%= link_to(omniauth_authorize_path(resource_name, provider), class: "btn btn-labeled btn-danger btn-lg") do  %>
                 <span class="btn-label"><i class="fa fa-google"></i></span>
-                <%= "Registrati con Google"  %>
+                <%= "Login con Google"  %>
               <% end %>
             <% end %>
             </div>
@@ -30,6 +30,9 @@
 
         <% end -%>
       </div>
+
+      <p class="text-center pv">Il tuo account è privato non pubblicheremo mai nulla senza il tuo consenso.</p>
+
 
       <p class="text-center">oppure</p>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class:'mb-lg'}) do |f| %>
@@ -49,14 +52,14 @@
             <div class="checkbox c-checkbox pull-left mt0">
               <label>
                 <%= f.check_box :remember_me %>
-                <span class="fa fa-check"></span>Remember Me</label>
+                <span class="fa fa-check"></span>Rimani collegato</label>
             </div>
-            <div class="pull-right"><a href="/pages/recover" class="text-muted">Forgot your password?</a>
+            <div class="pull-right"><a href="/pages/recover" class="text-muted">Password dimenticata?</a>
             </div>
           </div>
         <% end -%>
 
-        <%= f.submit "Log in", class:"btn btn-block btn-primary mt-lg" %>
+        <%= f.submit "ENTRA", class:"btn btn-block btn-primary mt-lg" %>
       <% end %>
 
 

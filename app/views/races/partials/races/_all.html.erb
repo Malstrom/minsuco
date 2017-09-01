@@ -14,6 +14,12 @@
     <% else %>
         <div class="panel-heading bg-warning">
           <div class="pull-right">
+            <% if race.expired? %>
+              <div class="label label-danger" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
+                Scaduta
+              </div>
+            <% end %>
+            &nbsp;
             <div class="label label-warning" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
               Privata
             </div>
@@ -61,8 +67,13 @@
             <div class="row row-table row-flush">
               <div class="col-xs-12">
                 <div class="panel-body text-center">
-                  <h4 class="mt0"><%= distance_of_time_in_words(Time.now, race.ends_at)  %></h4>
-                  <p class="mb0 text-muted">al termine</p>
+                  <% if race.expired? %>
+                    <h4 class="mt0">Gara finita da</h4>
+                    <p class="mb0 text-muted"><%= distance_of_time_in_words(Time.now, race.ends_at)  %></p>
+                  <% else %>
+                    <h4 class="mt0"><%= distance_of_time_in_words(Time.now, race.ends_at)  %></h4>
+                    <p class="mb0 text-muted">al termine</p>
+                  <% end %>
                 </div>
               </div>
             </div>

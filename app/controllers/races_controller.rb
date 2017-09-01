@@ -53,7 +53,7 @@ class RacesController < ApplicationController
     @race.description = Faker::Matz.quote
     @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     @race.race_value = %W(10000 50000 100000 75000 25000).sample
-    @race.pieces_amount = rand(5..50)
+    @race.min_pieces = rand(5..50)
     @race.compensation_start_amount = %W(0 0 0 0 500 1000).sample
     @race.max_attendees = rand(10..50)
     @race.commission = rand(5..50)
@@ -120,7 +120,7 @@ class RacesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def race_params
     params.require(:race).permit(:name, :description, :owner, :max_attendees, :commission,
-                                 :pieces_amount, :compensation_start_amount, :recipients, :race_value, :category_id,
+                                 :min_pieces, :compensation_start_amount, :recipients, :race_value, :category_id,
                                  :starts_at, :ends_at, :status, :kind)
   end
 end

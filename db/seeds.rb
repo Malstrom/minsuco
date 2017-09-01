@@ -83,7 +83,7 @@ end
     race.description = Faker::Matz.quote
     race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     race.race_value = race_values.sample
-    race.pieces_amount = rand(5..50)
+    race.min_pieces = rand(5..50)
     race.compensation_start_amount = compensation_start_amounts.sample
     race.max_attendees = race_attendees
     race.starts_at = rand(DateTime.now - 7.days..DateTime.now + 7.days)

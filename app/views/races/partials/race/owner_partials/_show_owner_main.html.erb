@@ -3,15 +3,23 @@
   <div class="panel-heading">
     <div class="pull-right mt">
       <% if @race.started? %>
-        <div class="label label-info">Attiva</div>
+        <div class="label label-info" data-toggle="tooltip" data-placement="left"
+             data-original-title="<%= I18n.t("tooltips.races.#{@race.status}") %>">
+          <%= t("activerecord.enum.statuses.#{@race.status}") %>
+        </div>
       <% else %>
-        <div class="label label-warning"><%= t("activerecord.enum.statuses.#{@race.status}") %></div>
+        <div class="label label-warning" data-toggle="tooltip" data-placement="left"
+             data-original-title="<%= I18n.t("tooltips.races.#{@race.status}") %>">
+          <%= t("activerecord.enum.statuses.#{@race.status}") %>
+        </div>
       <% end %>
-
+      &nbsp;
       <% if @race.pay_for_publish? %>
-        <div class="label label-info">Pubblica</div>
+        <div class="label label-info" data-toggle="tooltip" data-placement="right"
+             data-original-title="<%= I18n.t("tooltips.races.public_race") %>" >Pubblica</div>
       <% else %>
-        <div class="label label-warning">Privata</div>
+        <div class="label label-warning" data-toggle="tooltip" data-placement="right"
+             data-original-title="<%= I18n.t("tooltips.races.private_race") %>">Privata</div>
       <% end %>
     </div>
     <h4 class="mv">

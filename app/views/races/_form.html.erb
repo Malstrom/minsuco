@@ -82,7 +82,7 @@
       </div>
 
       <%= f.label :commission, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
         <div class="input-group m-b">
           <%= f.text_field :commission, class:'form-control', id:'commission'  %>
           <span id="replace_money_2" class="input-group-addon">%</span>
@@ -91,19 +91,21 @@
     </div>
   </fieldset>
 
+  <br><h4>Dati aggiuntivi</h4><br><br>
 
-  <!--<fieldset>-->
-    <!--<div class="form-group">-->
-      <!--<%# f.label :max_attendees, class: 'col-lg-2 control-label' %>-->
-      <!--<div class="col-sm-2">-->
-        <!--<%# f.number_field :max_attendees, class:'form-control input-lg m-b', id:'max_attendees'  %>-->
-      <!--</div>-->
-      <!--<%# f.label :pieces_amount, class: 'col-lg-2 control-label' %>-->
-      <!--<div class="col-sm-2">-->
-        <!--<%# f.number_field :pieces_amount, class:'form-control input-lg m-b', id:'pieces_amount' %>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</fieldset>-->
+
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :max_attendees, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-2">
+        <%= f.number_field :max_attendees, class:'form-control input-lg m-b', id:'max_attendees'  %>
+      </div>
+      <%= f.label :min_pieces, class: 'col-lg-2 control-label' %>
+      <div class="col-sm-2">
+        <%= f.number_field :min_pieces, class:'form-control input-lg m-b', id:'min_pieces' %>
+      </div>
+    </div>
+  </fieldset>
 
   <fieldset>
     <div class="form-group text-center">

@@ -3,10 +3,10 @@ it:
     errors:
       models:
         race:
-          start_in_past: "La gara non puo iniziare nel passato"
-          attendees_cap: "Ha raggiunto il massimo dei partecipanti"
-          no_rui: "RUI non presente"
-          not_publishable: "Gara non pubblicabile"
+          start_in_past: "La gara non puo iniziare nel passato."
+          attendees_cap: "Ha raggiunto il massimo dei partecipanti."
+          no_rui: "RUI non presente."
+          not_publishable: "Gara non pubblicabile."
           prohibited_name: "Non è possibile mettere il proprio dati nel nome della gara! Puo portare al ban."
           prohibited_description: "Non è possibile inserire i dati personali nella descrizione, puo portare al ban."
           act: "La provvigione non puo essere modificata aver creato la gara."
@@ -19,14 +19,14 @@ it:
       race:
         name: Nome
         description: Descrizione
-        category: Dategoria
+        category: Categoria
         recipients: Destinatari
         starts_at: Inizia
         ends_at: Finisce
         race_value: Produzione richiesta
         commission: Ricompensa
         max_attendees: Numero massimo di partecipanti
-        numero di pezzi: Numero di pezzi
+        min_pieces: Numero di pezzi minimo
     race:
       enum:
         recipients:

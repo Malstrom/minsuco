@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 20170831154342) do
     t.integer "recipients"
     t.integer "race_value"
     t.integer "commission"
-    t.integer "pieces_amount"
+    t.integer "min_pieces"
     t.integer "compensation_start_amount"
     t.integer "max_attendees"
     t.integer "kind", default: 1

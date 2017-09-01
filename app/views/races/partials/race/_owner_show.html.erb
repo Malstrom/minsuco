@@ -13,18 +13,24 @@
 <div class="row">
   <div class="col-lg-8">
     <%= render partial: 'races/partials/race/owner_partials/show_owner_main' %>
-    <% unless @race.expired? %>
-      <%= render partial: 'races/partials/race/owner_partials/attendees_list' %>
-    <% end %>
   </div>
   <div class="col-lg-4">
     <% unless @race.expired? %>
       <%= render partial: 'races/partials/race/owner_partials/owner_actions' %>
     <% end %>
     <%= render partial: 'races/partials/race/owner_partials/show_owner_details' %>
-    <% unless @race.expired? %>
-      <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>
-    <% end %>
+  </div>
+  <div class="col-lg-12">
+    <div class="row">
+      <% unless @race.expired? %>
+        <div class="col-md-8">
+          <%= render partial: 'races/partials/race/owner_partials/attendees_list' %>
+        </div>
+        <div class="col-md-4">
+          <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 

@@ -58,7 +58,7 @@
 #   fill_in "name", :with => 'TestRace'
 #   fill_in "description", :with => 'A test race'
 #   fill_in "race_value", :with => '100000'
-#   fill_in "pieces_amount", :with => '50'
+#   fill_in "min_pieces", :with => '50'
 #   fill_in "max_attendees", :with => '50'
 #   fill_in "commission", :with => '20'
 #   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
@@ -73,7 +73,7 @@
 #   fill_in "name", :with => 'TestRace'
 #   fill_in "description", :with => 'A test race'
 #   fill_in "race_value", :with => '100000'
-#   fill_in "pieces_amount", :with => '50'
+#   fill_in "min_pieces", :with => '50'
 #   fill_in "max_attendees", :with => '50'
 #   fill_in "commission", :with => '20'
 #   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")

@@ -27,7 +27,7 @@
               Gara pubblica
             <% end %>
             <%= label_tag :kind, "private", class:'btn btn-primary btn-outline', id: 'pay_for_join' do  %>
-              <%= f.radio_button :kind, 'pay_for_join' %>
+              <%= f.radio_button :kind, 'pay_for_join', checked:false  %>
               Gara privata
             <% end %>
           </div>

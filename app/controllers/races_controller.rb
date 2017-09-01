@@ -26,7 +26,6 @@ class RacesController < ApplicationController
     if params[:category_id] and !params[:category_id].empty?
       @races = Race.by_owner(current_user)
                    .by_category(Category.find(params[:category_id]).order("ends_at ASC}"))
-
     elsif params[:commission] and !params[:commission].empty?
       @races = Race.by_owner(current_user)
                    .order "commission #{params[:commission]}"

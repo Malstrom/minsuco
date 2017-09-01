@@ -88,7 +88,7 @@ class Race < ApplicationRecord
 
   private
 
-  # SET METHOD
+  # SETTTERS
   def set_status
     publishable? ? self.status = :started : self.status = :draft
   end

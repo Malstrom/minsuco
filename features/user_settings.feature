@@ -55,8 +55,4 @@ Feature: User settings
     And I click to "DASHBOARD"
     Then I should see "La mia Dashboard"
 
-  Scenario: User should be able to turn off all notifications
-  Scenario: User should be able to turn off email notifications
-  Scenario: User should be able to turn on all notifications
-  Scenario: User should be able to turn on email notifications
-#
+

@@ -34,6 +34,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # def set_theme
+  #   unless current_user.theme
+  #     current_user.update_attribute :theme, 'theme-g'
+  #   end
+  # end
+
   # set notifications for users
   def load_notifications
     if current_user

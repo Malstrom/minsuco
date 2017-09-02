@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :intent]
   layout "application-main"
 
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -42,6 +43,10 @@ class UsersController < ApplicationController
   end
 
   def intent
+  end
+
+  def theme
+    current_user.update_attribute :theme , params[:theme]
   end
 
   private

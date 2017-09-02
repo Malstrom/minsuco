@@ -16,7 +16,7 @@
   <%= stylesheet_link_tag 'application', media: 'all', id: "maincss" %>
 
   <!-- =============== Theme purple ===============-->
-  <%= stylesheet_link_tag 'angle/themes/theme-g', id: "autoloaded-stylesheet" %>
+  <%= stylesheet_link_tag "angle/themes/#{current_user.theme}", id: "autoloaded-stylesheet" %>
 
   <%= javascript_include_tag "chartkick.js" %>
 

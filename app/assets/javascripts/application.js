@@ -21,3 +21,20 @@
 
 Chartkick.configure({language: "it"});
 ////= require cable
+
+
+
+$(".setting-color").click(function () {
+  data = {
+    theme: $(this).attr('data-theme'),
+    authenticity_token: $( 'meta[name="csrf-token"]' ).attr( 'content' )
+  };
+  user_id = $(this).attr('data-user-id');
+
+  $.ajax({
+    url: "/users/" + user_id + "/theme",
+    method: 'patch',
+    data: data,
+    dataType: "json"
+  });
+});

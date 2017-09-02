@@ -25,8 +25,9 @@ Rails.application.routes.draw do
   resources :users do
     member do
      get :plans
+     patch :theme
     end
-    get :races,     to: 'races#user_races'
+    get :races, to: 'races#user_races'
     resources :attendees
     resources :friends do
       collection do

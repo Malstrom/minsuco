@@ -1,5 +1,4 @@
 class ChannelsController < ApplicationController
-  layout 'application-main'
 
   before_action :set_channel, only: [:update]
 

@@ -2,54 +2,70 @@
 <html lang="en">
 
 <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-   <meta name="description" content="Bootstrap Admin App + Ruby on Rails">
-   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
-   <title>Angle - Bootstrap Admin Template</title>
-   <!-- =============== VENDOR STYLES ===============-->
-   <%= stylesheet_link_tag 'base' %>
-   <!-- =============== VIEW VENDOR STYLES ===============-->
-   <%= stylesheet_link_tag params[:controller] %>
-   <!-- =============== APP STYLES ===============-->
-   <%= stylesheet_link_tag 'application', media: 'all', id: "maincss" %>
-   <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vinci le tue gare assicurative con regolarità">
+  <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+  <title>MINSUCO</title>
+  <!-- =============== VENDOR STYLES ===============-->
+  <%= stylesheet_link_tag 'base' %>
+  <!-- =============== VIEW VENDOR STYLES ===============-->
+  <%= stylesheet_link_tag params[:controller] %>
+  <!-- =============== APP STYLES ===============-->
+
+  <%= stylesheet_link_tag 'application', media: 'all', id: "maincss" %>
+
+  <!-- =============== Theme purple ===============-->
+  <%= stylesheet_link_tag "angle/themes/#{current_user.theme}", id: "autoloaded-stylesheet" %>
+
+  <%= javascript_include_tag "chartkick.js" %>
+
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+
+  <%= csrf_meta_tags %>
 </head>
 
-<body>
-   <div class="wrapper">
-      <!-- top navbar-->
-      <header class="topnavbar-wrapper">
-         <%= render partial: "layouts/partials/topnavbar" %>
-      </header>
-      <!-- sidebar-->
-      <aside class="aside">
-         <%= render partial: "layouts/partials/sidebar" %>
-      </aside>
-      <!-- offsidebar-->
-      <aside class="offsidebar hide">
-         <%= render partial: "layouts/partials/offsidebar" %>
-      </aside>
-      <!-- Main section-->
-      <section>
-         <!-- Page content-->
-         <div class="content-wrapper">
-            <%= yield %>
-         </div>
-      </section>
-      <!-- Page footer-->
-      <footer>
-         <%= render partial: "layouts/partials/footer" %>
-      </footer>
-   </div>
-   <!-- =============== VENDOR SCRIPTS ===============-->
-   <%= javascript_include_tag 'base' %>
-   <!-- =============== VIEW VENDOR SCRIPTS ===============-->
-   <%= javascript_include_tag params[:controller] %>
-   <!-- =============== APP SCRIPTS ===============-->
-   <%= javascript_include_tag 'application' %>
+<body class="layout-fixed">
 
-   <%= yield :body_area %> 
+<% flash.each do |key, value| %>
+  <% key = 'info' if key == 'notice' %>
+  <% key = 'danger' if key == 'alert' %>
+  <div id="notice" data-notify="" data-message="<%= value %>" data-onload="true" data-options="{&quot;status&quot;:&quot;<%= key %>&quot;}"></div>
+<% end %>
+
+<div class="wrapper">
+  <!-- top navbar-->
+  <header class="topnavbar-wrapper">
+    <%= render partial: "layouts/partials/topnavbar" %>
+  </header>
+  <!-- sidebar-->
+  <aside class="aside">
+    <%= render partial: "layouts/partials/sidebar" %>
+  </aside>
+  <!-- offsidebar-->
+  <aside class="offsidebar hide">
+    <%= render partial: "layouts/partials/offsidebar" %>
+  </aside>
+  <!-- Main section-->
+  <section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+      <%= yield %>
+    </div>
+  </section>
+  <!-- Page footer-->
+  <footer>
+    <%= render partial: "layouts/partials/footer" %>
+  </footer>
+</div>
+<!-- =============== VENDOR SCRIPTS ===============-->
+<%= javascript_include_tag 'base' %>
+<!-- =============== VIEW VENDOR SCRIPTS ===============-->
+<%= javascript_include_tag params[:controller] %>
+<!-- =============== APP SCRIPTS ===============-->
+<%= javascript_include_tag 'application' %>
+
+<%= yield :body_area %>
 
 </body>
 

@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   before_action :set_user, only: [:show, :edit, :update, :destroy, :intent]
-  layout "application-main"
 
 
   # GET /users/1

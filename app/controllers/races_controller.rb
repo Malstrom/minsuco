@@ -1,7 +1,6 @@
 class RacesController < ApplicationController
   # load_and_authorize_resource
 
-  layout 'application-main'
 
   before_action :set_race, only: [:show, :edit, :update, :publish, :publish_check]
 

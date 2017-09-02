@@ -8,8 +8,9 @@ class RacesController < ApplicationController
   # GET /races.json
   def index
     if params[:category_id] and !params[:category_id].empty?
-      @races = Race.by_category(Category.find(params[:category_id]).order "ends_at ASC}")
-                   .not_expired.by_recipients(current_user.kind)
+      category = Category.find(params[:category_id])
+      @races = Race.by_category(category)
+                   .not_expired.by_recipients(current_user.kind).order("ends_at ASC")
     elsif params[:commission] and !params[:commission].empty?
       @races = Race.not_expired.by_recipients(current_user.kind).order "commission #{params[:commission]}"
     elsif params[:kind] and !params[:kind].empty?

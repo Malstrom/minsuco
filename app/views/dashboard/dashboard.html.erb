@@ -39,7 +39,7 @@
         Partecipazioni
       </div>
       <div class="panel-body">
-        <%# line_chart Attendee.where(user:current_user).group_by_month(:created_at).count %>
+        <%= line_chart Attendee.where(user:current_user).group_by_month(:created_at).count %>
       </div>
     </div>
   </div>

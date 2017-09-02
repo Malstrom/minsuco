@@ -88,7 +88,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'searchkick #search #elasticsearch
 # gem "slack-notifier"
 
-
 # gem "state_machines-activerecord"
 # gem 'aasm'
 

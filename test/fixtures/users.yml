@@ -3,29 +3,3 @@
 # This model initially had no columns defined. If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-new_user:
-  name: new user
-  email: new@test_user.org
-  encrypted_password: <%= User.new.send(:password_digest, 'new_user') %>
-  intent: 0
-
-basic_user:
-  id: 2
-  name: basic user
-  email: basic@test_user.org
-  encrypted_password: <%= User.new.send(:password_digest, 'basic_user') %>
-  intent: 0
-
-pro_attendee_user:
-  name: pro attendee user
-  email: pro_attendee@test_user.org
-  encrypted_password: <%= User.new.send(:password_digest, 'attendee_user') %>
-  intent: 0
-
-pro_creator_user:
-  name: pro creator user
-  email: pro_creator@test_user.org
-  encrypted_password: <%= User.new.send(:password_digest, 'creator_user') %>
-  intent: 0
-

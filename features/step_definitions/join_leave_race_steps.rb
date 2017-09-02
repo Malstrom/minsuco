@@ -54,3 +54,11 @@ def join_steps(race_name, join_value = 1000)
 
   find("#join").click
 end
+
+When(/^I not have reward for (join|publish|\d+) race$/) do |reward|
+  if reward == 'join'
+    User.first.reward.update(join_private: 0 )
+  else
+    User.first.reward.update(pubic_races: 0 )
+  end
+end

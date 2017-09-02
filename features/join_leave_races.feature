@@ -4,21 +4,13 @@ Feature: Join in race
   User with pro attendee plan should partecipate to unlimited races
   creator should not join to race without rewards
 
-  Scenario: New user should able to join in 3 races if its profile was complete
-    Given I sign up
-    And I complete my profile
-    When I visit "/races"
-    And I join in a public race
-    Then I should see "Partecipazione avvenuta con successo"
-
-  Scenario: New user should join in private race spending reward
+  Scenario: New user should join in private race spending
     Given I sign up
     And I complete my profile
     And I have '1' rewards for join
     When I visit "/races"
     And I join in a private race
     Then I should have '0' free private join
-    And "test@mail.com" should receive an email
 
   Scenario: New user should join in public race without spending reward
     Given I sign up
@@ -26,6 +18,7 @@ Feature: Join in race
     When I visit "/races"
     And I join in a public race
     Then I should have '1' free private join
+    And "test@mail.com" should receive an email
 
   Scenario: User should not join in race when race reached max attendees cap
     Given I sign up
@@ -46,4 +39,18 @@ Feature: Join in race
     And I click to "Lascia gara"
     Then I should see "Partecipazione cancellata"
 
+  Scenario: User should not join in race if not have rui
+    Given I sign up
+    When I visit "/races"
+    And I join in a public race
+    Then I should see "Per partecipare devi complare i tuoi dati"
+
+  Scenario: User should not join in race if not have rui
+    Given I logged in as a "basic"
+    And I not have reward for join race
+    And I complete my profile
+    When I visit "/races"
+    And I join in a public race
+    Then I should see "Non hai più gare gratuite"
+    And I should see "Il tuo piano non ti permette di partecipare a questa gara"
 

@@ -16,3 +16,4 @@ Feature: New feature
     When I logged in as a "basic"
     And I visit "test_race" race page
     Then I should see "Questa gara è finita il 01/01/2017"
+

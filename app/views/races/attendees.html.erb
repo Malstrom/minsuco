@@ -28,6 +28,6 @@
       <p class="lead">Non hai ancora partecipato a nessuna gara!</p>
     </div>
   <% else %>
-    <%= render partia l: "races/partials/races/all", @race => @attendees.race %>
+    <%= render partial: "races/partials/races/all", @race => @attendees.race %>
   <% end %>
 </div>

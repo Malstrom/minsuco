@@ -87,5 +87,3 @@ pickle-email-*.html
 Gemfile.lock
 
 /bower_components/
-
-coverage

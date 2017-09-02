@@ -51,6 +51,7 @@ group :development do
   gem 'brakeman', :require => false
   # create entity reltional diagram
   gem 'rails-erd', "1.5.0", require: false
+  gem 'meta_request'
 end
 
 group :test do

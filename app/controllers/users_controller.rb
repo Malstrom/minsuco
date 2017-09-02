@@ -46,18 +46,19 @@ class UsersController < ApplicationController
   end
 
   def theme
-    current_user.update_attribute :theme , params[:theme]
+    current_user.update_attribute(:theme, params[:theme])
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:rui, :name, :password, :plan, :role, :kind, :image, :fiscal_kind, :location,
-                                   :password, :phone, { interest_list: [] })
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:rui, :name, :password, :plan, :role, :kind, :image, :fiscal_kind, :location,
+                                 :password, :phone, { interest_list: [] })
+  end
 end

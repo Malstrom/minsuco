@@ -18,7 +18,6 @@ Feature: Join in race
     When I visit "/races"
     And I join in a public race
     Then I should have '1' free private join
-    And "test@mail.com" should receive an email
 
   Scenario: User should not join in race when race reached max attendees cap
     Given I sign up
@@ -54,3 +53,10 @@ Feature: Join in race
     Then I should see "Non hai più gare gratuite"
     And I should see "Il tuo piano non ti permette di partecipare a questa gara"
 
+  Scenario: Attendee should change value of its join_value
+    Given I logged in as a "basic"
+    And I join in a public race
+    When I click to "Modifica partecipazione"
+    And I fill "5000" in "join_value" input
+    And I click to "Partecipa"
+    Then I should see "Partecipazione aggiornata"

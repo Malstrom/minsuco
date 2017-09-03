@@ -5,7 +5,11 @@
   </div>
   <div class="panel-body">
     <div class="row">
-      <% unless @race.expired? %>
+      <% if @race.expired? %>
+        <div class="col-sm-12">
+          Questa gara è finita
+        </div>
+      <% else %>
         <div class="col-sm-12">
           <%= form_for @race, :html => { :style => 'display:inline'} do |f| %>
             <% if @race.status == 'started' %>
@@ -38,10 +42,6 @@
               <span>Rendi la gara pubblica</span>
             <% end %>
           <% end %>
-        </div>
-      <% else %>
-        <div class="col-sm-12">
-          Questa gara è finita
         </div>
       <% end %>
     </div>

@@ -24,17 +24,14 @@ class RacesController < ApplicationController
 
   def user_races
     if params[:category_id] and !params[:category_id].empty?
-      @races = Race.by_owner(current_user)
-                   .by_category(Category.find(params[:category_id]).order("ends_at ASC}"))
+      category = Category.find(params[:category_id])
+      @races = Race.by_owner(current_user).by_category(category).order("ends_at ASC}")
     elsif params[:commission] and !params[:commission].empty?
-      @races = Race.by_owner(current_user)
-                   .order "commission #{params[:commission]}"
+      @races = Race.by_owner(current_user).order "commission #{params[:commission]}"
     elsif params[:kind] and !params[:kind].empty?
-      @races = Race.by_owner(current_user)
-                   .order "kind #{params[:commission]}"
+      @races = Race.by_owner(current_user).order "kind #{params[:commission]}"
     elsif params[:ends_at] and !params[:ends_at].empty?
-      @races = Race.by_owner(current_user)
-                   .order "ends_at #{params[:ends_at]}"
+      @races = Race.by_owner(current_user).order "ends_at #{params[:ends_at]}"
     else
       @races = Race.by_owner(current_user)
     end

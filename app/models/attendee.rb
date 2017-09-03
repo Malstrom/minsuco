@@ -87,8 +87,8 @@ class Attendee < ApplicationRecord
 
   # create event every time attendee leave from race
   def leave_from_race_event
-    create_attendee_event(user,"#{race.owner.id}_user_channel",'leave_from_race', true)
-    ChannelSubscription.where(user:user, channel: Channel.find_by_name("#{race.id}_race_channel")).first.destroy
+    # create_attendee_event(user,"#{race.owner.id}_user_channel",'leave_from_race', true)
+    # ChannelSubscription.where(user:user, channel: Channel.find_by_name("#{race.id}_race_channel")).first.destroy
   end
 
   # create event every time attendee: update status, update join_value

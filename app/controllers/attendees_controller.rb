@@ -6,6 +6,9 @@ class AttendeesController < ApplicationController
     @attendees = current_user.attendees
   end
 
+  def edit
+  end
+
   # POST /attendees
   # POST /attendees.json
   def create

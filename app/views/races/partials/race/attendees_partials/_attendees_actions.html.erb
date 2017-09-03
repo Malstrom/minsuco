@@ -1,23 +1,39 @@
 <div class="panel b text-center">
   <div class="panel-body">
-    <% if current_user.joined?(@race) %>
-      <p class="lead">Valore della partecipazione
-        <br>
-        <%= number_to_currency current_user.participation(@race).join_value, unit: "€" %></p>
-      <p class="lead">Guadagno
-        <br>
-        <%= number_to_currency((current_user.participation(@race).join_value / 100 * @race.commission), unit: "€") %></p>
-      <%= form_for([@race, Attendee.where(race:@race, user:current_user).first], method: :delete) do |f| %>
-        <button id="<%= @race.name %>" type="submit" class="btn btn-warning">
-          <em class="fa fa-minus fa-fw text-muted text-white"></em>
-          <span>Lascia gara</span>
-        </button>
-      <% end %>
+    <div class="row">
+      <% if current_user.joined?(@race) %>
+        <div class="col-sm-12">
+        <p class="lead">
+          Valore della partecipazion
+          <br>
+          <%= number_to_currency current_user.participation(@race).join_value, unit: "€" %>
+        </p>
+      </div>
+        <div class="col-sm-12">
+        <p class="lead">Guadagno
+          <br>
+          <%= number_to_currency((current_user.participation(@race).join_value / 100 * @race.commission), unit: "€") %>
+        </p>
+      </div>
+        <div class="col-sm-12">
+        <%= form_for([@race, current_user.participation(@race)], method: :delete, :html => {:style => 'display:inline;'}) do |f| %>
+          <button id="<%= @race.name %>" type="submit" class="btn btn-info btn-pill-left btn-warning">
+            <em class="fa fa-minus fa-fw text-muted text-white"></em>
+            <span>Lascia gara</span>
+          </button>
+        <% end %>
+          <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinEditModal" class="btn btn-info btn-pill-right" >
+            <!--<em class="fa fa-plus fa-fw text-muted text-white"></em>-->
+            <span>Modifica partecipazione</span>
+          </button>
+      </div>
+
     <% else %>
       <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-xl" >
         <em class="fa fa-plus fa-fw text-muted text-white"></em>
         <span>Partecipa</span>
       </button>
     <% end %>
+    </div>
   </div>
 </div>

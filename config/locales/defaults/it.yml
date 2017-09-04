@@ -206,7 +206,3 @@ it:
       long: "%d %B %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
-  email:
-    invite:
-      in_my_race:
-        subject: "vuole invitarti a una gara di produzione assicurativa"

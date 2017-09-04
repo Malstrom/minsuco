@@ -1,5 +1,6 @@
 class InviteMailer < ApplicationMailer
   default from: 'invitation@minusco.com'
+  layout false
 
   # arrive all requests
   def invite_friends(mails)
@@ -19,7 +20,7 @@ class InviteMailer < ApplicationMailer
   # pass json for transactional email
   def invite_params(friend)
     headers 'X-SMTPAPI' => {
-      'to' => [friend],
+      'to' => [friend.email],
       'sub' => {
         '%who_did%' => [friend]
       },

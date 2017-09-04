@@ -30,3 +30,14 @@ And(/^I complete my profile$/) do
 
   click_on "Aggiorna informazioni"
 end
+
+Then(/^'([^']*)' attribute '([^']*)' should '([^']*)'$/) do |model, attr, value|
+  klass = Object.const_get model
+  user = klass.first
+  value_saved = user.instance_eval(attr).to_s
+  raise "Different value saved: #{value_saved}, should be: #{value}" if user.instance_eval(attr).to_s != value.to_s
+end
+
+When(/^I click to '([^']*)' element$/) do |arg|
+  find("##{arg}").click
+end

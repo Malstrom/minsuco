@@ -55,4 +55,8 @@ Feature: User settings
     And I click to "DASHBOARD"
     Then I should see "La mia Dashboard"
 
-
+  Scenario: User should able to change its theme
+    When I click to "theme-options"
+    And I click to 'theme-a' element
+    And I visit "/"
+    Then 'User' attribute 'theme' should 'theme-a'

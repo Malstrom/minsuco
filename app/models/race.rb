@@ -57,13 +57,10 @@ class Race < ApplicationRecord
     PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish? ? true : false
   end
 
+  # check by date and not by datetime for exclude race expired today
   def expired?
-    ends_at < DateTime.now ? true : false
+    ends_at.to_date < Date.today ? true : false
   end
-  # # return true if race already featured
-  # def featured?
-  #   true if featured_races.where('featured_races.starts_at <= ? AND featured_races.ends_at >= ?', DateTime.now, DateTime.now).first
-  # end
 
   # Sum of all attendees join_value for this race
   def value_covered

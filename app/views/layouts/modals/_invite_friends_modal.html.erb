@@ -16,7 +16,7 @@
           <div class="text-center">
             <p class="lead">Non hai amici? Importali da Google contacts</p>
 
-            <%= link_to '/contacts/gmail', class: "btn btn-labeled btn-danger btn-xl" do %>
+            <%= link_to invite_from_google_user_friends_path(current_user, race_id:@race.id), class: "btn btn-labeled btn-danger btn-xl", id:'btnContactGoogle' do %>
               <span class="btn-label"><i class="fa fa-google"></i></span>
               <%= "Google Contatti" %>
             <% end %>

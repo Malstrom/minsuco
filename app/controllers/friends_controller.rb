@@ -33,6 +33,11 @@ class FriendsController < ApplicationController
     redirect_to root_path
   end
 
+  def invite_from_google
+    current_user.update_attribute :redirect_path, "/races/#{params[:race_id]}"
+    redirect_to "/contacts/gmail"
+  end
+
   def import
     @user = current_user
 
@@ -46,7 +51,12 @@ class FriendsController < ApplicationController
 
     @contacts = @user.friends
 
-    redirect_to root_path
+    if @user.redirect_path
+      redirect_to @user.redirect_path
+      @user.update_attribute(:redirect_path, nil)
+    else
+      redirect_to root_path
+    end
   end
 
   private

@@ -31,8 +31,9 @@ Rails.application.routes.draw do
     resources :attendees
     resources :friends do
       collection do
-        post :invites
+        get :invite_from_google
         get :import
+        post :invites
       end
     end
   end

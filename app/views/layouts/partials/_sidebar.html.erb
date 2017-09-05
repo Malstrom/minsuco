@@ -30,7 +30,7 @@
          <!-- END user info-->
          <!-- Iterates over all sidebar items-->
          <li class="nav-heading">
-            <span>MENU</span>
+            <span>SCOPRI</span>
          </li>
 
         <li class="<%= 'active' if controller?('dashboard') && action?('dashboard') %>">
@@ -43,22 +43,30 @@
         <li class="<%= 'active' if controller?('races') && action?('index') %>">
           <%= link_to(races_path) do %>
             <em class="fa fa-bullseye"></em>
-            <span data-localize="sidebar.nav.race.INDEX">TUTTE LE GARE</span>
+            <span data-localize="sidebar.nav.race.INDEX">CERCA GARE</span>
           <% end %>
+        </li>
+
+        <li class="nav-heading">
+          <span>GESTISCI</span>
         </li>
 
         <li class="<%= 'active' if controller?('races') && action?('user_races') %>">
           <%= link_to(user_races_path current_user) do %>
             <em class="fa fa-road"></em>
-            <span data-localize="sidebar.nav.race.INDEX">LE MIE GARE</span>
+            <span data-localize="sidebar.nav.race.INDEX">MIE GARE</span>
           <% end %>
         </li>
 
         <li class="<%= 'active' if controller?('attendees') && action?('index') %>">
           <%= link_to(user_attendees_path(current_user)) do %>
             <em class="fa fa-car"></em>
-            <span data-localize="sidebar.nav.race.INDEX">GARE DOVE PARTECIPO</span>
+            <span data-localize="sidebar.nav.race.INDEX">PARTECIPAZIONI</span>
           <% end %>
+        </li>
+
+        <li class="nav-heading">
+          <span>CONFIGURA</span>
         </li>
         <li class="<%= 'active' if controller?('users') && action?('edit') %>">
           <%= link_to(edit_user_path(current_user)) do %>
@@ -66,6 +74,7 @@
             <span data-localize="sidebar.nav.race.INDEX">IMPOSTAZIONI</span>
           <% end %>
         </li>
+
         <li>
           <%= link_to(destroy_user_session_path, method: :delete) do %>
             <em class="icon-logout"></em>

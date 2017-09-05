@@ -22,8 +22,6 @@
 Chartkick.configure({language: "it"});
 ////= require cable
 
-
-
 $(".setting-color").click(function () {
   data = {
     theme: $(this).attr('data-theme'),

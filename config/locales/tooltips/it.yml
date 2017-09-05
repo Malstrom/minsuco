@@ -7,6 +7,8 @@ it:
       draft: "La gara non è visibile dagli altri utenti."
       paused: "La gara non è visibile sul portale"
       achieved: "La gara è stata archiviata"
+      commission: "Percentuale di provvigione che viene pagata."
+      category: "Ramo della gara di produzione"
     attendees:
       allow_join: "Permetti a questa utente di far parte della gara."
       deny_partecipation: "Nega a questa persona di partecipare alla gara."

@@ -66,13 +66,8 @@ class User < ApplicationRecord
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
   scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
 
-
-  def owner?(race)
-    if race.owner == self
-      true
-    else
-      false
-    end
+  def attendee(race)
+    Attendee.find_by_race_id(race.id)
   end
 
   def has_plan_for_join?
@@ -92,6 +87,10 @@ class User < ApplicationRecord
       else
         false
     end
+  end
+
+  def owner?(race)
+    (race.owner == self) ? true : false
   end
 
   def joined?(race)

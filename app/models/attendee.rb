@@ -21,6 +21,10 @@ class Attendee < ApplicationRecord
   after_update_commit	  :update_race_event
   after_destroy_commit	:leave_from_race_event
 
+  def commission
+    join_value / 100 * race.commission
+  end
+
   private
 
   def decrement_rewards

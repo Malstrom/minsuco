@@ -7,15 +7,16 @@ Feature: Login and registration for users
 
   Scenario: User with basic account should see its Dashboard
     Given I logged in as a "basic"
-    Then  I should see "La mia Dashboard"
+    Then  I should see "Dashboard"
 
   Scenario: User with pro attendee account should see its Dashboard
     Given I logged in as a "attendee"
-    Then  I should see "La mia Dashboard"
+    Then  I should see "Dashboard"
 
   Scenario: User with pro creator account should see its Dashboard
     Given I logged in as a "creator"
-    Then  I should see "La mia Dashboard"
+    Then  I should see "Dashboard"
+
 
   # log in with Google
   # log in with Facebook

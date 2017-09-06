@@ -64,3 +64,45 @@ end
 And(/^I fill "([^"]*)" in "([^"]*)" input$/) do |value, field|
   fill_in field, :with => value
 end
+
+
+def select_from_chosen(item_text, options)
+  field_id = find_field(options[:from])[:id]
+  within "##{field_id}_chzn" do
+    find('a.chzn-single').click
+    input = find("div.chzn-search input").native
+    input.send_keys(item_text)
+    find('ul.chzn-results').click
+    input.send_key(:arrow_down, :return)
+    within 'a.chzn-single' do
+      page.should have_content item_text
+    end
+  end
+end
+
+def select_from_multi_chosen(item_text, options)
+  field_id = find_field(options[:from])[:id]
+  within "##{field_id}_chzn" do
+    input = find("ul.chzn-choices input").native
+    input.send_keys(item_text)
+    input.send_key(:return)
+    within 'ul.chzn-choices' do
+      page.should have_content item_text
+    end
+  end
+end
+
+Given(/^Create list of races$/) do
+  user = create :user, email:'user@email.com'
+  create :race, category: Category.find_by_name('auto'), owner: user, name: "test_race1"
+  create :race, kind: 'pay_for_publish', owner: user, name: "test_race2"
+  create :race, kind: 'pay_for_join', owner: user, name: "test_race"
+  create :race, commission: 10, owner: user, name: "test_race"
+  create :race, commission: 20, owner: user, name: "test_race"
+  create :race, ends_at: (Time.now + 100.hours).strftime("%d/%m/%Y"), owner: user, name: "test_race"
+  create :race, ends_at: (Time.now + 90.hours).strftime("%d/%m/%Y"), owner: user, name: "test_race"
+end
+
+When(/^I select '([^']*)' from chosen '([^']*)'$/) do |item_text, select|
+  select_from_chosen item_text, select
+end

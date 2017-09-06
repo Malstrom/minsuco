@@ -16,7 +16,8 @@
       <thead>
       <tr>
         <th>Dati partecipante</th>
-        <th>Valore di partecipazione</th>
+        <th>Provvigione</th>
+        <th>Valore coperto</th>
         <th>Stato</th>
       </tr>
       </thead>
@@ -32,7 +33,7 @@
                   <img src="<%= image_path("default_profile.png")%>" alt="" class="media-object img-responsive img-circle">
               <% end %>
               </a>
-              <div class="media-body">
+              <div class="">
 
                 <h4 class="media-heading"><%= attendee.user.name %></h4>
                 <p>
@@ -44,20 +45,22 @@
             </div>
           </td>
           <td>
-
+              <%= number_to_currency attendee.commission, unit:"€" %>
+          </td>
+          <td>
               <%= number_to_currency attendee.join_value, unit:"€" %>
           </td>
-          <td class="text-center">
+          <td>
             <%= form_for([@race, attendee], method: :put) do |f| %>
               <% if attendee.status == 'confirmed' %>
                 <%= f.hidden_field :status, value: :deny %>
-                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-danger pull-right" data-toggle="tooltip" data-placement="left"
+                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-danger pull-right btn-circle" data-toggle="tooltip" data-placement="left"
                         data-original-title="<%= I18n.t('tooltips.attendees.deny_partecipation') %>">
                   <em class="fa fa-close"></em>
                 </button>
               <% else %>
                 <%= f.hidden_field :status, value: :confirmed %>
-                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" data-placement="left"
+                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success pull-right " data-toggle="tooltip" data-placement="left"
                         data-original-title="<%= I18n.t('tooltips.attendees.allow_join') %>">
                   <em class="fa fa-check"></em>
                 </button>

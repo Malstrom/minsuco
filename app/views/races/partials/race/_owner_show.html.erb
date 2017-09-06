@@ -1,9 +1,3 @@
-<div class="content-heading">
-  Gara
-  <div class="pull-right">
-  </div>
-</div>
-
 <% if @race.expired? %>
   <div role="alert" class="alert alert-warning">
     <strong>Attenzione!</strong> Questa gara è finita il <%= @race.ends_at.strftime('%d/%m/%Y') %>

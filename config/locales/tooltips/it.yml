@@ -14,3 +14,7 @@ it:
       deny_partecipation: "Nega a questa persona di partecipare alla gara."
       deny_attendees: "Numero di persone alle quali hai negato la partecipazione."
       confirmed_attendees: "Numero di persone alle quali hai permesso la partecipazione."
+    sidebar:
+      race_attendees: "Tutte le gare alle quali hai partecipato."
+      user_races: "Visualiza tutte le gare che hai creato."
+      private_net: "Presto disponibile, permettera di creare gare solo per la tua rete vendite."

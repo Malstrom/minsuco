@@ -15,12 +15,12 @@
       <% end %>
       &nbsp;
       <% if @race.pay_for_publish? %>
-        <div class="label label-info" data-toggle="tooltip" data-placement="right"
+        <div class="label label-info" data-toggle="tooltip" data-placement="top"
              data-original-title="<%= I18n.t("tooltips.races.public_race") %>" >
           Pubblica
         </div>
       <% else %>
-        <div class="label label-warning" data-toggle="tooltip" data-placement="right"
+        <div class="label label-warning" data-toggle="tooltip" data-placement="top"
              data-original-title="<%= I18n.t("tooltips.races.private_race") %>">
           Privata
         </div>

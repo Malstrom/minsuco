@@ -10,9 +10,9 @@
         </p>
       </div>
         <div class="col-sm-12">
-        <p class="lead">Guadagno
+        <p class="lead">Provvigione
           <br>
-          <%= number_to_currency((current_user.participation(@race).join_value / 100 * @race.commission), unit: "€") %>
+          <%= number_to_currency(current_user.participation(@race).commission, unit: "€") %>
         </p>
       </div>
         <div class="col-sm-12">
@@ -29,7 +29,7 @@
       </div>
 
     <% else %>
-      <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-xl" >
+      <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-xl btn-oval" >
         <em class="fa fa-plus fa-fw text-muted text-white"></em>
         <span>Partecipa</span>
       </button>

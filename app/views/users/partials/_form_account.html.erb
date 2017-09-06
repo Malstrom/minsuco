@@ -16,13 +16,13 @@
                 <br>
                 <br>
                 <p class="m0">
-                  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
-                    <span class="btn-label"><i class="fa fa-facebook"></i></span>
-                    <%= "Carica immagine di profilo da Facebook" %>
-                  <% end %>
                   <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-labeled btn-danger" do %>
                     <span class="btn-label"><i class="fa fa-google"></i></span>
                     <%= "Carica immagine di profilo da Google" %>
+                  <% end %>
+                  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
+                    <span class="btn-label"><i class="fa fa-facebook"></i></span>
+                    <%= "Carica immagine di profilo da Facebook" %>
                   <% end %>
                 </p>
               <% end %>

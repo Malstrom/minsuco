@@ -1,0 +1,22 @@
+it:
+  controller:
+    dashboard:
+      action:
+        dashboard: "Dashboard"
+    races:
+      action:
+        index: "Trova gare"
+        user_races: "Mie gare"
+        show: "Dettagli della gara"
+        new: "Nuova gara"
+    attendees:
+      action:
+        index: "Partecipazioni"
+    users:
+      action:
+        edit: "Impostazioni"
+  menu:
+    section:
+      discover: "scopri"
+      other: "Altro"
+      handle: "Gestisci"

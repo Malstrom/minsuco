@@ -7,7 +7,7 @@
             <div class="panel-body text-center">
               <h4 class="mt0">Filtra</h4>
               <!--<p class="fa">-->
-                <a href="races" class="btn btn-danger btn-xs">
+                <a href="races" class="btn btn-danger btn-xs btn-oval">
                   Resetta filtri
                 </a>
               <!--</p>-->
@@ -45,7 +45,7 @@
         <div class="row row-table row-flush">
           <div class="col-xs-8">
             <div class="panel-body text-center">
-                <%= select_tag "sort",
+                <%= select_tag "commission",
                                raw("<option></option><option value='DESC'>alte</option><option value='ASC'>basse</option>"),
                                :onchange => "this.form.submit();"  %>
               <p class="mb0 text-muted">PROVVIGIONE</p>
@@ -57,7 +57,7 @@
         <div class="row row-table row-flush">
           <div class="col-xs-8">
             <div class="panel-body text-center">
-              <%= select_tag "sort",
+              <%= select_tag "kind",
                              raw("<option></option><option value='ASC'>Pubblica</option><option value='DESC'>Privata</option>"),
                              :onchange => "this.form.submit();"  %>
               <p class="mb0 text-muted">PUBBLICHE/PRIVATE</p>
@@ -69,8 +69,8 @@
         <div class="row row-table row-flush">
           <div class="col-xs-8">
             <div class="panel-body text-center">
-              <%= select_tag "sort",
-                             raw("<option></option><option value='ASC'>Appena iniziate</option><option value='DESC'>In scadenza</option>"),
+              <%= select_tag "ends_at",
+                             raw("<option></option><option value='ASC'>In scadenza</option><option value='DESC'>Appena iniziate</option>"),
                              :onchange => "this.form.submit();"  %>
               <p class="mb0 text-muted">SCADENZA</p>
             </div>

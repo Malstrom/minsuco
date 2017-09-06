@@ -22,7 +22,7 @@
 #   login_as($user, :scope => :user)
 #
 #   visit('/')
-#   expect(page).to have_content "La mia Dashboard"
+#   expect(page).to have_content "Dashboard"
 # end
 #
 # Then(/^I should see "([^"]*)"/) do |arg1|

@@ -29,49 +29,79 @@
          </li>
          <!-- END user info-->
          <!-- Iterates over all sidebar items-->
+        <li class="new_race_btn">
+          <%= link_to(new_race_path, class:'new_race_b') do %>
+            <em class="icon-plus"></em>
+            <span data-localize="sidebar.nav.race.INDEX">
+              <%= t("controller.races.action.new").upcase %>
+            </span>
+          <% end %>
+        </li>
+
          <li class="nav-heading">
-            <span>SCOPRI</span>
+            <span><%= t("menu.section.discover").upcase %></span>
          </li>
 
         <li class="<%= 'active' if controller?('dashboard') && action?('dashboard') %>">
           <a href="/dashboard/dashboard" title="Dashboard v1">
             <em class="icon-speedometer"></em>
-            <span>DASHBOARD</span>
+            <span><%= t("controller.dashboard.action.dashboard").upcase %></span>
           </a>
         </li>
 
         <li class="<%= 'active' if controller?('races') && action?('index') %>">
           <%= link_to(races_path) do %>
             <em class="fa fa-bullseye"></em>
-            <span data-localize="sidebar.nav.race.INDEX">CERCA GARE</span>
+            <span data-localize="sidebar.nav.race.INDEX">
+              <%= t("controller.races.action.index").upcase %>
+            </span>
           <% end %>
         </li>
 
         <li class="nav-heading">
-          <span>GESTISCI</span>
+          <span><%= t("menu.section.handle").upcase %></span>
         </li>
 
-        <li class="<%= 'active' if controller?('races') && action?('user_races') %>">
+        <li class="<%= 'active' if controller?('races') && action?('user_races') %>"
+            data-toggle="tooltip" data-placement="top"
+            data-original-title="<%= I18n.t("tooltips.sidebar.user_races") %>">
           <%= link_to(user_races_path current_user) do %>
             <em class="fa fa-road"></em>
-            <span data-localize="sidebar.nav.race.INDEX">MIE GARE</span>
+            <span data-localize="sidebar.nav.race.INDEX">
+              <%= t("controller.races.action.user_races").upcase %>
+            </span>
           <% end %>
         </li>
 
-        <li class="<%= 'active' if controller?('attendees') && action?('index') %>">
+        <li class="<%= 'active' if controller?('attendees') && action?('index') %>"
+            data-toggle="tooltip" data-placement="top"
+            data-original-title="<%= I18n.t("tooltips.sidebar.race_attendees") %>">
           <%= link_to(user_attendees_path(current_user)) do %>
             <em class="fa fa-car"></em>
-            <span data-localize="sidebar.nav.race.INDEX">PARTECIPAZIONI</span>
+            <span data-localize="sidebar.nav.race.INDEX">
+              <%= t("controller.attendees.action.index").upcase %>
+            </span>
+          <% end %>
+        </li>
+
+        <li class="disabled <%= 'active' if controller?('races') && action?('private_net') %>"
+            data-toggle="tooltip" data-placement="top"
+            data-original-title="<%= I18n.t("tooltips.sidebar.private_net") %>">
+          <%= link_to(root_path) do %>
+            <em class="fa fa-road"></em>
+            <span data-localize="sidebar.nav.race.INDEX">RETE VENDITA</span>
           <% end %>
         </li>
 
         <li class="nav-heading">
-          <span>CONFIGURA</span>
+          <span><%= t("menu.section.other").upcase %></span>
         </li>
         <li class="<%= 'active' if controller?('users') && action?('edit') %>">
           <%= link_to(edit_user_path(current_user)) do %>
             <em class="fa fa-user"></em>
-            <span data-localize="sidebar.nav.race.INDEX">IMPOSTAZIONI</span>
+            <span data-localize="sidebar.nav.race.INDEX">
+              <%= t("controller.users.action.edit").upcase %>
+            </span>
           <% end %>
         </li>
 
@@ -79,16 +109,6 @@
           <%= link_to(destroy_user_session_path, method: :delete) do %>
             <em class="icon-logout"></em>
             <span data-localize="sidebar.nav.race.INDEX">LOGOUT</span>
-          <% end %>
-        </li>
-        <li>
-          <br>
-          <br>
-        </li>
-        <li class="new_race_btn">
-          <%= link_to(new_race_path, class:'new_race_b') do %>
-            <em class="icon-plus"></em>
-            <span data-localize="sidebar.nav.race.INDEX">CREA UNA GARA</span>
           <% end %>
         </li>
       </ul>

@@ -40,4 +40,13 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.delivery_method = :cache
+
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+                                                                   :provider => 'google',
+                                                                   :uid => '123545'
+                                                               })
+
+  OmniAuth.config.add_mock(:facebook, {:provider => 'facebook', :uid => '12345'})
 end

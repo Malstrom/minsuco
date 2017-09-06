@@ -1,4 +1,4 @@
-@race
+@navigation
 Feature: See all lists of races and interact with this list
 
   Scenario: New user should see see empty list of its created races
@@ -11,19 +11,27 @@ Feature: See all lists of races and interact with this list
     When I visit attendees page
     Then I should see "Non hai ancora partecipato a nessuna gara!"
 
-
   Scenario: Owner of the race should see list of attendee
     Given I logged in as a "creator"
     And I create public race
     When I visit "public" race page
     Then I should see "Partecipanti"
 
+  Scenario: User should be turn back with history back icon
+    Given I logged in as a "basic"
+    And I visit "/races"
+    And I visit user setting page
+    And I visit my races page
+    And I visit attendees page
+    When I click to "back-history"
+    And I click to "back-history"
+    Then I should see "Impostazioni"
 
-#  Scenario Race filter list
-#    Given I logged in as a "Creator"
-#    And a race exist with category: "auto"
-#    And a race exist with category: "vita intera"
-#    When I visit "/races"
-#    And I sort by category "auto"
-#    And I order by "" s ""
-#    The I should see "auto"
+    @current
+  Scenario: User should be turn back with history back icon
+    Given I logged in as a "basic"
+    And I visit "/races"
+    When I click to "back-history"
+    When I click to "back-history"
+    When I click to "back-history"
+    Then I should see "Dashboard"

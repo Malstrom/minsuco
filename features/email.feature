@@ -11,8 +11,6 @@ Feature: Event email
     When I invite friend "friend@test.com"
     Then "friend@test.com" should receive an email
 
-
-    @current
   Scenario: User should invite friend from list of its friends
     Given I create public race
     And I have friend with email "friend@email.com"

@@ -33,7 +33,7 @@
           <div class="col-xs-6 bb br">
             <div class="row row-table row-flush">
               <div class="col-xs-12">
-                <div class="panel-body text-center" data-toggle="tooltip" data-placement="right"
+                <div class="panel-body text-center" data-toggle="tooltip" data-placement="top"
                      data-original-title="<%= I18n.t("tooltips.races.remain_value")%>">
                   <h4 class="mt0"><%= number_to_currency race.race_value - race.value_covered, precision: 0 %></h4>
                   <p class="mb0 text-muted">Rimanente</p>
@@ -45,7 +45,7 @@
           <div class="col-xs-6 bb">
             <div class="row row-table row-flush">
               <div class="col-xs-12">
-                <div class="panel-body text-center" data-toggle="tooltip" data-placement="right"
+                <div class="panel-body text-center" data-toggle="tooltip" data-placement="top"
                      data-original-title="<%= I18n.t("tooltips.races.commission")%>">
                   <h4 class="mt0"><%= race.commission %>%</h4>
                   <p class="mb0 text-muted">Provvigione</p>
@@ -58,7 +58,7 @@
           <div class="col-xs-6 br">
             <div class="row row-table row-flush">
               <div class="col-xs-12">
-                <div class="panel-body text-center" data-toggle="tooltip" data-placement="right"
+                <div class="panel-body text-center" data-toggle="tooltip" data-placement="top"
                      data-original-title="<%= I18n.t("tooltips.races.category")%>">
                   <h4 class="mt0"><%= race.category.name.humanize %></h4>
                   <p class="mb0 text-muted">Ramo</p>
@@ -87,9 +87,9 @@
       <div class="panel-footer text-center">
         <%= link_to(race_path(race)) do %>
           <% if current_user.owner?(race) %>
-            <button type="button" class="btn btn-info btn-outline" id="<%= race.name %>">Controlla la gara</button>
+            <button type="button" class="btn btn-info btn-oval btn-outline" id="<%= race.name %>">Controlla la gara</button>
           <% else %>
-            <button type="button" class="btn btn-info" id="<%= race.name %>">Maggiori informazioni</button>
+            <button type="button" class="btn btn-info btn-oval" id="<%= race.name %>">Scopri</button>
           <% end %>
         <% end %>
       </div>

@@ -112,15 +112,6 @@ class Race < ApplicationRecord
     end
   end
 
-  def prohibited_name_or_description
-    if name.include?(owner.name) or name.include?(owner.phone) or name.include?(owner.email)
-      errors.add(:prohibited_data, I18n.t('activerecord.errors.models.race.prohibited_name'))
-    end
-    if description.include?(owner.name) or description.include?(owner.phone) or description.include?(owner.email)
-      errors.add(:prohibited_data, I18n.t('activerecord.errors.models.race.prohibited_description'))
-    end
-  end
-
   # validation when update race
   def date_not_changed
     if starts_at_changed? or ends_at_changed? && self.persisted?

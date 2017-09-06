@@ -53,7 +53,7 @@ Feature: User settings
   Scenario: User should be set intent
     When I click to "Creare una mia gara e pubblicarla"
     And I click to "DASHBOARD"
-    Then I should see "La mia Dashboard"
+    Then I should see "Dashboard"
 
   Scenario: User should able to change its theme
     When I click to "theme-options"

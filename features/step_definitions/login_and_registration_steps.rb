@@ -25,5 +25,5 @@ Given(/^I logged in as a "([^"]*)"$/) do |arg|
   login_as($user, :scope => :user)
 
   visit('/')
-  expect(page).to have_content "La mia Dashboard"
+  expect(page).to have_content "DASHBOARD"
 end

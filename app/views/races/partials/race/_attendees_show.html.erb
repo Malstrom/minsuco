@@ -1,7 +1,3 @@
-<div class="content-heading">
-  <%= @race.name %>
-</div>
-
 <% if @race.pay_for_join? and current_user.plan.stripe_id != 'pro_attendee' and !@race.expired? %>
   <div role="alert" class="alert alert-warning">
     <strong>Attenzione!</strong>

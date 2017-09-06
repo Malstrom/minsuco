@@ -9,6 +9,8 @@ it:
         user_races: "Mie gare"
         show: "Dettagli della gara"
         new: "Nuova gara"
+        edit: "Modifica gara"
+        update: "Modifica gara"
     attendees:
       action:
         index: "Partecipazioni"

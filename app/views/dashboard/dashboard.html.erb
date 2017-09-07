@@ -10,7 +10,7 @@
           <em class="icon-cloud-upload fa-3x"></em>
         </div>
         <div class="col-xs-8 pv-lg">
-          <div class="h2 mt0"><%# number_to_currency Race.where(owner:current_user).sum(:race_value), unit: "€" %></div>
+          <div class="h2 mt0"><%= number_to_currency Race.where(owner:current_user).sum(:race_value), unit: "€" %></div>
           <div class="text-uppercase">Premi delle gare Attive</div>
         </div>
       </div>
@@ -24,7 +24,7 @@
           <em class="icon-cloud-upload fa-3x"></em>
         </div>
         <div class="col-xs-8 pv-lg">
-          <div class="h2 mt0"><%# number_to_currency Attendee.where(user:current_user).sum(:join_value), unit: "€" %></div>
+          <div class="h2 mt0"><%= number_to_currency Attendee.where(user:current_user).sum(:join_value), unit: "€" %></div>
           <div class="text-uppercase">Premi allocati gare Attive</div>
         </div>
       </div>

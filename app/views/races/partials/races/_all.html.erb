@@ -4,7 +4,7 @@
       <% if race.kind == 'pay_for_publish' %>
         <div class="panel-heading bg-info">
           <div class="pull-right">
-            <div class="label label-sucess" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.public_race') %>">
+            <div class="label label-sucess info" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.public_race') %>">
               Pubblica
             </div>
           </div>
@@ -15,12 +15,12 @@
         <div class="panel-heading bg-warning" >
           <div class="pull-right">
             <% if race.expired? %>
-              <div class="label label-danger" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
+              <div class="label label-danger info" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
                 Scaduta
               </div>
             <% end %>
             &nbsp;
-            <div class="label label-warning" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
+            <div class="label label-warning info" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
               Privata
             </div>
           </div>
@@ -37,7 +37,7 @@
                   <h4 class="mt0"><%= number_to_currency race.race_value - race.value_covered, precision: 0 %></h4>
                   <p class="mb0 text-muted">
                     Rimanente
-                    <%= tooltip(:remain_value) %>
+                    <%= tooltip_widget(:remain_value) %>
                   </p>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                   <h4 class="mt0"><%= race.commission %>%</h4>
                   <p class="mb0 text-muted">
                     Provvigione
-                    <%= tooltip(:commission) %>
+                    <%= tooltip_widget(:commission) %>
                   </p>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                   <h4 class="mt0"><%= race.category.name.humanize %></h4>
                   <p class="mb0 text-muted">
                     Ramo
-                    <%= tooltip(:category) %>
+                    <%= tooltip_widget(:category) %>
                   </p>
                 </div>
               </div>

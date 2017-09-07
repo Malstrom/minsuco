@@ -16,7 +16,6 @@ class SubscriptionsController < ApplicationController
     # call Payola::CreateSubscription
     subscription = Payola::CreateSubscription.call(params, owner)
 
-
     # Render the status json that Payola's javascript expects
     render_payola_status(subscription)
   end

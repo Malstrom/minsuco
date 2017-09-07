@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  load_and_authorize_resource
+
   def readed
     event = Event.find(params[:id])
 

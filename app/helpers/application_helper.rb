@@ -7,4 +7,23 @@ module ApplicationHelper
     action.include?(params[:action])
   end
 
+  def my_devise_error_messages!
+    return "" if resource.errors.empty?
+
+    messages = resource.errors.full_messages.map do |msg|
+      content_tag(:div, msg, class: 'alert alert-danger')
+    end.join
+
+    sentence = I18n.t("errors.messages.not_saved",
+                      count: resource.errors.count,
+                      resource: resource.class.model_name.human.downcase)
+
+    html = <<-HTML
+    <div id="error_explanation">
+      #{messages}
+    </div>
+    HTML
+
+    html.html_safe
+  end
 end

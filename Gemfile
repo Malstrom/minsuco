@@ -19,6 +19,8 @@ gem 'jbuilder', '~> 2.5'      # Build JSON APIs with ease. Read more: https://gi
 gem "bower-rails", "~> 0.9.2"
 gem "slim-rails"
 
+gem 'activerecord-session_store'
+
 # gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
 
 gem 'devise'

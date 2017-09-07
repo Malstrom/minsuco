@@ -108,7 +108,7 @@ When(/^I fill data in rui modal '([^']*)' value '([^']*)'$/) do |id,value|
   find("#userDataModal").find("#user_rui").set 121345
   find("#userDataModal").find("#user_name").set 'test_user_name'
   find("#userDataModal").find("#user_phone").set '091238478932'
-  find("#userDataModal").find("#user_location").set 'Milan'
+  find("#userDataModal").find("#user_city").set 'Milan'
   
   find("#userDataModal").find("##{id}").set value
 

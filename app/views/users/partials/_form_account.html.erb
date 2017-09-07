@@ -52,8 +52,8 @@
         <%= f.select(:fiscal_kind, User.fiscal_kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
       </div>
       <div class="form-group">
-        <%= f.label :location  %>
-        <%= f.text_field :location, class: 'form-control', id:'location'%>
+        <%= f.label :city  %>
+        <%= f.text_field :city, class: 'form-control', id:'location'%>
       </div>
       <div class="form-group">
         <%= f.label :phone  %>

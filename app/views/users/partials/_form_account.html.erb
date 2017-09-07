@@ -52,9 +52,43 @@
         <%= f.select(:fiscal_kind, User.fiscal_kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
       </div>
       <div class="form-group">
-        <%= f.label :city  %>
-        <%= f.text_field :city, class: 'form-control', id:'location'%>
+        <%= f.label :company_name  %>
+        <%= f.text_field :company_name, class: 'form-control', id:'name'%>
       </div>
+      <div class="form-group">
+        <%= f.label :fiscal_code  %>
+        <%= f.text_field :fiscal_code, class: 'form-control', id:'location'%>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group">
+            <%= f.label :city  %>
+            <%= f.text_field :city, class: 'form-control', id:'city'%>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :zip  %>
+            <%= f.text_field :zip, class: 'form-control', id:'zip'%>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <%= f.label :address  %>
+            <%= f.text_field :address, class: 'form-control', id:'address'%>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :address_num  %>
+            <%= f.text_field :address_num, class: 'form-control', id:'address_num'%>
+          </div>
+        </div>
+      </div>
+
+
+
       <div class="form-group">
         <%= f.label :phone  %>
         <%= f.text_field :phone, class: 'form-control', id:'phone'%>

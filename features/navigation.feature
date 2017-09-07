@@ -27,7 +27,6 @@ Feature: See all lists of races and interact with this list
     And I click to "back-history"
     Then I should see "Impostazioni"
 
-    @current
   Scenario: User should be turn back with history back icon
     Given I logged in as a "basic"
     And I visit "/races"

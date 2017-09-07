@@ -1,6 +1,6 @@
 And(/^I change my "([^"]*)" in "([^"]*)"$/) do |arg1, arg2|
   fill_in 'rui', :with => "12345678910"
-  fill_in arg1, :with => arg2
+  fill_in arg1, :with => arg2, :match => :prefer_exact
   click_on "Aggiorna informazioni"
 end
 
@@ -24,9 +24,9 @@ And(/^I complete my profile$/) do
   click_on('IMPOSTAZIONI')
 
   fill_in 'rui', :with => "12345678910"
-  fill_in 'name', :with => 'user_test'
+  fill_in 'name', :with => 'user_test', :match => :prefer_exact
   fill_in 'phone', :with => '353452435'
-  fill_in 'location', :with => 'test_location'
+  fill_in 'city', :with => 'test_city'
 
   click_on "Aggiorna informazioni"
 end

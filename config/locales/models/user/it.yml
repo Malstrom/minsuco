@@ -11,8 +11,13 @@ it:
         name: Nome
         password: Password
         kind: Tipologia agente
-        fiscale_kind: "Fatturazione"
-        location: "Città"
+        fiscal_kind: "Tipologia utente"
+        fiscal_code: "Codice fiscale / Partita Iva"
+        company_name: "Nome società"
+        city: "Città"
+        address: "Indirizzo"
+        address_num: "Numero"
+        zip: "Cap"
         phone: "Telefono"
         interest_list: "Categorie di interesse"
     enum:

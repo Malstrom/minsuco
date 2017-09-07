@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907073854) do
+ActiveRecord::Schema.define(version: 20170907075342) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -298,6 +298,8 @@ ActiveRecord::Schema.define(version: 20170907073854) do
     t.string "address"
     t.string "address_num"
     t.string "zip"
+    t.string "company_name"
+    t.string "fiscal_code"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["plan_id"], name: "index_users_on_plan_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -1,5 +1,5 @@
 class AttendeesController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   before_action :set_attendee, only: [:update, :destroy]
 
@@ -13,14 +13,16 @@ class AttendeesController < ApplicationController
   # POST /attendees
   # POST /attendees.json
   def create
-    @attendee = Race.find(params[:race_id]).attendees.build(user:current_user, join_value:params[:attendee][:join_value])
+    race = Race.find(params[:race_id])
+    @attendee = race.attendees.build(user:current_user, join_value:params[:attendee][:join_value])
 
     respond_to do |format|
       if @attendee.save
         format.html { redirect_to race_path(@attendee.race), notice: I18n.t('flash.attendees.create.notice') }
         format.json { render :show, status: :created, location: @attendee }
       else
-        format.html { redirect_to race_path(@attendee.race), alert: @attendee.errors.each {|attr,msg| flash[:alert] = msg } }
+        format.html { redirect_to race_path(@attendee.race),
+                                  alert:  t("activerecord.errors.models.attendee.#{@attendee.errors.first[0]}") }
         format.json { render json: @attendee.errors, status: :unprocessable_entity }
       end
     end

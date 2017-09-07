@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

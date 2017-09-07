@@ -23,8 +23,8 @@ it:
         recipients: Destinatari
         starts_at: Inizia
         ends_at: Finisce
-        race_value: Produzione richiesta
-        commission: Ricompensa
+        race_value: Obbiettivo
+        commission: Provvigione
         max_attendees: Numero massimo di partecipanti
         min_pieces: Numero di pezzi minimo
     race:

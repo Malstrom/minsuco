@@ -6,7 +6,7 @@ FactoryGirl.define do
     intent "creator"
     rui "39857342vd905"
     phone '35342535'
-    location 'Test_location'
+    city 'test_city'
     plan Plan.find_by_stripe_id('pro_attendee')
   end
 end

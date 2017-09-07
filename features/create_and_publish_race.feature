@@ -5,7 +5,6 @@ Feature: Create race
   Public race should not be published if user not have Pro attendee plan
   New user should see Race new form after choose self intent
 
-
   Scenario: New user should see new race page after intent page
     Given I sign up
     When I click to "Creare una mia gara e pubblicarla"

@@ -26,4 +26,14 @@ module ApplicationHelper
 
     html.html_safe
   end
+
+  def tooltip(message_key)
+    html = <<-HTML
+    <em class="fa fa-info-circle info" data-toggle="tooltip" data-placement="top"
+    data-original-title="#{ t("tooltips.races.#{message_key}") }"></em>
+    HTML
+
+    html.html_safe
+  end
+
 end

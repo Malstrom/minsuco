@@ -33,10 +33,12 @@
           <div class="col-xs-6 bb br">
             <div class="row row-table row-flush">
               <div class="col-xs-12">
-                <div class="panel-body text-center" data-toggle="tooltip" data-placement="top"
-                     data-original-title="<%= I18n.t("tooltips.races.remain_value")%>">
+                <div class="panel-body text-center" >
                   <h4 class="mt0"><%= number_to_currency race.race_value - race.value_covered, precision: 0 %></h4>
-                  <p class="mb0 text-muted">Rimanente</p>
+                  <p class="mb0 text-muted">
+                    Rimanente
+                    <%= tooltip(:remain_value) %>
+                  </p>
                 </div>
               </div>
 
@@ -45,10 +47,12 @@
           <div class="col-xs-6 bb">
             <div class="row row-table row-flush">
               <div class="col-xs-12">
-                <div class="panel-body text-center" data-toggle="tooltip" data-placement="top"
-                     data-original-title="<%= I18n.t("tooltips.races.commission")%>">
+                <div class="panel-body text-center">
                   <h4 class="mt0"><%= race.commission %>%</h4>
-                  <p class="mb0 text-muted">Provvigione</p>
+                  <p class="mb0 text-muted">
+                    Provvigione
+                    <%= tooltip(:commission) %>
+                  </p>
                 </div>
               </div>
             </div>
@@ -58,10 +62,12 @@
           <div class="col-xs-6 br">
             <div class="row row-table row-flush">
               <div class="col-xs-12">
-                <div class="panel-body text-center" data-toggle="tooltip" data-placement="top"
-                     data-original-title="<%= I18n.t("tooltips.races.category")%>">
+                <div class="panel-body text-center">
                   <h4 class="mt0"><%= race.category.name.humanize %></h4>
-                  <p class="mb0 text-muted">Ramo</p>
+                  <p class="mb0 text-muted">
+                    Ramo
+                    <%= tooltip(:category) %>
+                  </p>
                 </div>
               </div>
             </div>

@@ -36,3 +36,22 @@ $(".setting-color").click(function () {
     dataType: "json"
   });
 });
+
+
+
+
+
+$('.info')
+  .tooltip({ content: 'Click to close', position: { my: 'left center', at: 'right center' }, items: '*' })
+  .tooltip('open')
+  .on('mouseout focusout', function(event) {
+    event.stopImmediatePropagation();
+  })
+  .on('tooltipopen', function(e) {
+    var self = this,
+      $tooltip = $('#' + this.getAttribute('aria-describedby'));
+
+    $tooltip.on('click', function() {
+      $(self).tooltip('close');
+    })
+  });

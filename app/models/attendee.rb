@@ -57,7 +57,7 @@ class Attendee < ApplicationRecord
 
   def max_attendee
     if race.attendees.count >= race.max_attendees
-      errors.add(:max_attendee, I18n.t('activerecord.errors.models.attendee.max_attendees'))
+      errors.add(:max_attendees, I18n.t('activerecord.errors.models.attendee.max_attendees'))
     end
   end
 

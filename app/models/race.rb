@@ -23,7 +23,7 @@ class Race < ApplicationRecord
   validates :race_value, numericality: { only_integer: true }
   validate  :attendees_cap
 
-  validate  :date_not_changed, :category_not_changed, :commission_not_changed, :on => :update
+  validate  :date_not_changed, :category_not_changed, :commission_not_decrased, :on => :update
 
   validates_presence_of :name, :description, :commission, :recipients, :race_value,
                         :category_id, :starts_at, :ends_at, :kind
@@ -47,6 +47,11 @@ class Race < ApplicationRecord
   scope :by_owner,      -> (owner)     { where( owner: owner ) }
   scope :by_recipients, -> (recipient) { where( recipients: [recipient, :for_all] ) }
 
+
+  def completed_percentage
+    value_covered.to_f / race_value.to_f * 100
+  end
+
   # all external validation needed for publish race
   def publishable?
     owner.valid?
@@ -54,7 +59,7 @@ class Race < ApplicationRecord
 
   # If owner payed for the race when publish as public race
   def payed?
-    PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish? ? true : false
+    (PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish?) ? true : false
   end
 
   # check by date and not by datetime for exclude race expired today
@@ -96,7 +101,7 @@ class Race < ApplicationRecord
   end
 
   def set_permalink
-    self.permalink = "#{Time.now.to_i}-#{name.parameterize}"
+    self.permalink = "#{Time.now.to_i}"
   end
 
   # CUSTOM VALIDATIONS
@@ -127,8 +132,8 @@ class Race < ApplicationRecord
   end
 
   # validation when update race
-  def commission_not_changed
-    if commission_changed? && self.persisted?
+  def commission_not_decrased
+    if commission < commission_was
       errors.add(:commission_cant_updated, I18n.t('activerecord.errors.models.race.commission_cant_updated'))
     end
   end

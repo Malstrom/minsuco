@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def controller?(*controller)
     controller.include?(params[:controller])
   end
@@ -29,7 +30,7 @@ module ApplicationHelper
 
   def tooltip_widget(message_key)
     html = <<-HTML
-    <em class="fa fa-info-circle info" data-toggle="tooltip" data-placement="top"
+    <em class="fa fa-info-circle info text-muted" data-toggle="tooltip" data-placement="top"
     data-original-title="#{ t("tooltips.races.#{message_key}") }"></em>
     HTML
 

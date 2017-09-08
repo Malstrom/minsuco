@@ -1,11 +1,11 @@
 <div class="panel panel-default">
 
   <div class="panel-heading">
-    <div class="pull-right label label-success" data-toggle="tooltip" data-placement="left"
+    <div class="pull-right label label-success info" data-toggle="tooltip" data-placement="left"
          data-original-title="<%= I18n.t('tooltips.attendees.confirmed_attendees') %>">
       <%= Attendee.where(race:@race, status: :confirmed).count %>
     </div>
-    <div class="pull-right label label-danger" data-toggle="tooltip" data-placement="left"
+    <div class="pull-right label label-danger info" data-toggle="tooltip" data-placement="left"
          data-original-title="<%= I18n.t('tooltips.attendees.deny_attendees') %>">
       <%= Attendee.where(race:@race, status: :deny).count %></div>
     Partecipanti
@@ -54,13 +54,13 @@
             <%= form_for([@race, attendee], method: :put) do |f| %>
               <% if attendee.status == 'confirmed' %>
                 <%= f.hidden_field :status, value: :deny %>
-                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-danger pull-right btn-circle" data-toggle="tooltip" data-placement="left"
+                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-danger pull-right btn-circle info" data-toggle="tooltip" data-placement="left"
                         data-original-title="<%= I18n.t('tooltips.attendees.deny_partecipation') %>">
                   <em class="fa fa-close"></em>
                 </button>
               <% else %>
                 <%= f.hidden_field :status, value: :confirmed %>
-                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success pull-right " data-toggle="tooltip" data-placement="left"
+                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success pull-right info" data-toggle="tooltip" data-placement="left"
                         data-original-title="<%= I18n.t('tooltips.attendees.allow_join') %>">
                   <em class="fa fa-check"></em>
                 </button>

@@ -1,7 +1,92 @@
-<h3>Come vuoi pubblicare la gara sul portale?</h3>
-<div class="panel panel-default">
-  <div class="panel-heading"></div>
-  <div class="panel-body">
-    <%= render 'publish_form' %>
+<div class="row">
+  <div class="col-md-4 col-lg-offset-2">
+    <!-- Team Panel-->
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title text-center">Gara pubblica</div>
+      </div>
+      <div class="panel-body bt  text-center">
+        <em class="fa fa-group text-info fa-5x"></em>
+      </div>
+      <div class="panel-body bt">
+        <p class="text-center">
+          Avrai a disposizione n gare gratuite come omaggio per la tua iscrizione,
+          dopodichè per pubblicare una gara come "Pubblica" avrai bisogno di un account Pro per creatori oppure
+          pagare ad ogni singola gara.
+        </p>
+        <div class="col-md-12 text-center">
+          <%= link_to "Passa a premium", plans_user_path(current_user), class:'btn btn-xs btn-oval btn-success' %>
+        </div>
+      </div>
+      <br>
+      <div class="panel-body bt">
+        <div class="row">
+          <div class="col-md-8">Costo di pubblicazione</div>
+          <% if current_user.has_reward?('pay_for_publish') %>
+            <div class="col-md-4 text-right">0€</div>
+        <% else %>
+            <div class="col-md-4 text-right">
+              <%= number_to_currency @race.price / 100, symbol: "€" %>
+            </div>
+        <% end %>
+        </div>
+      </div>
+      <div class="panel-footer text-center">
+        <% if @race.payed? or current_user.has_reward?('pay_for_publish') %>
+          <%= form_for @race, url: publish_check_race_path, method:'patch', class:"form-inline" do |f| %>
+            <%= f.hidden_field :kind, value: :pay_for_publish %>
+            <%= f.submit "Pubblica", class: "btn btn-info btn-oval", id:"publish_public" %>
+          <% end %>
+        <% else %>
+          <%= render 'payola/transactions/checkout', sellable: @race ,
+                     email:current_user.email,
+                     button_text: 'Paga e pubblica'
+          %>
+        <% end %>
+      </div>
+    </div>
+    </div>
+
+    <!-- end Team Panel-->
+  <div class="col-md-4">
+    <!-- Team Panel-->
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <div class="pull-right">
+          <!--<div class="label label-success">29€</div>-->
+        </div>
+        <div class="panel-title text-center">Gara privata</div>
+      </div>
+      <div class="panel-body bt  text-center">
+        <em class="fa fa-group fa-5x text-warning"></em>
+      </div>
+      <div class="panel-body bt">
+        <p class="text-center">
+          Permette di pubblicare gratuitamente la gara che sarà visibile all'interno del portale,
+          la partecipazione alla gara pero sarà riservata solo a chi ha un account Pro,
+          oppure l'utente che vorrà partecipare ad una gara privata dovranno pagare una quota di 29€.
+        </p>
+      </div>
+      <br>
+      <div class="panel-body bt">
+        <div class="row">
+          <div class="col-md-8">Costo di pubblicazione</div>
+          <div class="col-md-4 text-right">0€</div>
+        </div>
+      </div>
+
+      <div class="panel-footer text-center">
+        <%= form_for @race, url: publish_check_race_path, method:'patch', class:"form-inline" do |f| %>
+          <%= f.hidden_field :kind, value: :pay_for_join %>
+          <%= f.submit "Pubblica la gara come privata", class: "btn btn-warning btn-oval", id:"publish_private" %>
+        <% end %>
+      </div>
+    </div>
+    <!-- end Team Panel-->
   </div>
 </div>
+
+<% unless @race.owner.valid? %>
+  <%= render partial: 'layouts/modals/rui_modal' %>
+<% end %>
+

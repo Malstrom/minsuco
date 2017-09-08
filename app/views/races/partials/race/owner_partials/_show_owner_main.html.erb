@@ -3,24 +3,24 @@
   <div class="panel-heading">
     <div class="pull-right mt">
       <% if @race.started? %>
-        <div class="label label-info" data-toggle="tooltip" data-placement="left"
+        <div class="label label-info info" data-toggle="tooltip" data-placement="left"
              data-original-title="<%= I18n.t("tooltips.races.#{@race.status}") %>">
           <%= t("activerecord.enum.statuses.#{@race.status}") %>
         </div>
       <% else %>
-        <div class="label label-warning" data-toggle="tooltip" data-placement="left"
+        <div class="label label-warning info" data-toggle="tooltip" data-placement="left"
              data-original-title="<%= I18n.t("tooltips.races.#{@race.status}") %>">
           <%= t("activerecord.enum.statuses.#{@race.status}") %>
         </div>
       <% end %>
       &nbsp;
       <% if @race.pay_for_publish? %>
-        <div class="label label-info" data-toggle="tooltip" data-placement="top"
+        <div class="label label-info info" data-toggle="tooltip" data-placement="top"
              data-original-title="<%= I18n.t("tooltips.races.public_race") %>" >
           Pubblica
         </div>
       <% else %>
-        <div class="label label-warning" data-toggle="tooltip" data-placement="top"
+        <div class="label label-warning info" data-toggle="tooltip" data-placement="top"
              data-original-title="<%= I18n.t("tooltips.races.private_race") %>">
           Privata
         </div>
@@ -31,64 +31,79 @@
     </h4>
   </div>
   <div class="panel-body bb bt">
-
     <div class="panel widget">
       <div class="row row-table row-flush">
-        <div class="col-xs-6 bb br">
+        <div class="col-xs-4 bb br">
           <div class="row row-table row-flush">
-            <div class="col-xs-4 text-center text-info">
-              <em class="fa fa-dollar fa-2x"></em>
+            <div class="col-xs-4 text-center text-<%= race_complete_color(@race.completed_percentage.to_i) %>">
+              <em class="fa fa-money fa-2x"></em>
             </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= number_to_currency @race.value_covered, unit: '€' %></h4>
-                <p class="mb0 text-muted">Valore coperto</p>
+                <h4 class="mt0"><%= number_to_currency @race.race_value %></h4>
+                <p class="mb0 text-muted">Obbiettivo</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-6 bb">
+        <div class="col-xs-4 bb br">
           <div class="row row-table row-flush">
-            <div class="col-xs-4 text-center text-info">
-              <em class="fa fa-soccer-ball-o fa-2x"></em>
-            </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= number_to_currency @race.race_value, unit: '€' %></h4>
-                <p class="mb0 text-muted">Premio</p>
+                <h4 class="mt0"><%= number_to_currency @race.value_covered %></h4>
+                <p class="mb0 text-muted">Obbiettivo coperto</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4 bb">
+          <div class="row row-table row-flush">
+            <div class="col-xs-8">
+              <div class="panel-body text-center">
+                <h4 class="mt0"><%= number_to_currency @race.race_value - @race.value_covered %></h4>
+                <p class="mb0 text-muted">Obbiettivo rimanente</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="row row-table row-flush">
-        <div class="col-xs-6 br">
+        <div class="col-xs-4 br">
           <div class="row row-table row-flush">
-            <div class="col-xs-4 text-center text-info">
-              <em class="fa fa-users fa-2x"></em>
+            <div class="col-xs-4 text-center text-default">
+              <em class="fa fa-info fa-2x"></em>
             </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
                 <h4 class="mt0">
-                  <%= number_to_currency( @race.total_commission, unit: "€") %>
+                  <%= number_to_percentage( @race.completed_percentage, precision: 0 ) %>
                 </h4>
-                <p class="mb0 text-muted">Provvigioni assegnate</p>
+                <p class="mb0 text-muted">Provvigione</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-4 br">
           <div class="row row-table row-flush">
-            <div class="col-xs-4 text-center text-info">
-              <em class="fa fa-calendar-times-o fa-2x"></em>
+            <div class="col-xs-8">
+              <div class="panel-body text-center">
+                <h4 class="mt0">
+                  <%= @race.attendees.count %> / <%= @race.max_attendees   %>
+                </h4>
+                <p class="mb0 text-muted">Partecipanti</p>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="row row-table row-flush">
             <div class="col-xs-8">
               <div class="panel-body text-center">
                 <% if @race.expired? %>
                   <h4 class="mt0">Gara finita da</h4>
-                  <p class="mb0 text-muted"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %></p>
+                  <p class="mb0 text-muted"><%= @race.ends_at.strftime('%d/%m/%Y') %></p>
                 <% else %>
-                  <h4 class="mt0"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %></h4>
+                  <h4 class="mt0"><%= @race.ends_at.strftime('%d/%m/%Y') %></h4>
                   <p class="mb0 text-muted">al termine</p>
                 <% end %>
               </div>

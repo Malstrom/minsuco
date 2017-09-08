@@ -12,7 +12,7 @@ it:
           act: "La provvigione non puo essere modificata aver creato la gara."
           start_and_end_cant_updated: "Le date della gara non possono essere cambiate."
           category_cant_updated: "La categoria non può essere cambiata."
-          commission_cant_updated: "La percentuale di provvigione non può essere cambiata."
+          commission_cant_updated: "La percentuale di provvigione non può essere minore di quella attuale."
     models:
       race: Gara
     attributes:

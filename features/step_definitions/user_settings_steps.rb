@@ -1,5 +1,5 @@
 And(/^I change my "([^"]*)" in "([^"]*)"$/) do |arg1, arg2|
-  fill_in 'rui', :with => "12345678910"
+  fill_in 'user_rui', :with => "12345678910"
   fill_in arg1, :with => arg2, :match => :prefer_exact
   click_on "Aggiorna informazioni"
 end
@@ -23,10 +23,7 @@ end
 And(/^I complete my profile$/) do
   click_on('IMPOSTAZIONI')
 
-  fill_in 'rui', :with => "12345678910"
-  fill_in 'name', :with => 'user_test', :match => :prefer_exact
-  fill_in 'phone', :with => '353452435'
-  fill_in 'city', :with => 'test_city'
+  fill_user_form
 
   click_on "Aggiorna informazioni"
 end
@@ -40,4 +37,21 @@ end
 
 When(/^I click to '([^']*)' element$/) do |arg|
   find("##{arg}").click
+end
+
+def fill_user_form(field = nil, value = nil)
+  fill_in 'user_rui', :with => 'b123456789'
+  fill_in 'user_name', :with => 'user_test', :match => :prefer_exact
+  fill_in 'user_phone', :with => '353452435'
+  fill_in 'user_city', :with => 'Milan'
+  fill_in 'user_company_name', :with => 'Minmin'
+  fill_in 'user_address', :with => 'minmin strett'
+  fill_in 'user_address_num', :with => '77'
+  fill_in 'user_city', :with => 'Mincity'
+  fill_in 'user_zip', :with => '77777'
+  fill_in 'user_fiscal_code', :with => '77777234234'
+
+  if field and value
+    fill_in field, :with => value
+  end
 end

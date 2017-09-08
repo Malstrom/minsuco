@@ -83,14 +83,11 @@ end
 
 When(/^I publish race as "([^"]*)"$/) do |arg1|
   if arg1 == 'private'
-    find('#pay_for_join').click
-    click_on('Pubblica la gara')
+    click_on('Pubblica la gara come privata')
   elsif arg1 == 'public'
-    find('#pay_for_publish').click
-    click_on('Pubblica la gara')
-  elsif arg1 == 'public_basic_user'
-    find('#pay_for_publish').click
-    click_on('Paga e rendi la gara pubblica')
+    click_on('Pubblica')
+  elsif arg1 == 'public_no_rewards'
+    click_on('Paga e pubblica')
 
     within_frame 'stripe_checkout_app' do
       find_field('Card number').send_keys(4242424242424242)
@@ -104,15 +101,18 @@ When(/^I publish race as "([^"]*)"$/) do |arg1|
 end
 
 # I fill data in rui modal "" value
-When(/^I fill data in rui modal '([^']*)' value '([^']*)'$/) do |id,value|
-  find("#userDataModal").find("#user_rui").set 121345
-  find("#userDataModal").find("#user_name").set 'test_user_name'
-  find("#userDataModal").find("#user_phone").set '091238478932'
-  find("#userDataModal").find("#user_city").set 'Milan'
-  
-  find("#userDataModal").find("##{id}").set value
+When(/^I fill data in rui modal '([^']*)' value '([^']*)'$/) do |field,value|
 
-  find("#userDataModal").click_on('Save changes')
+  fill_user_form(field,value)
+
+  # find("#userDataModal").find("##{id}").set value
+
+  find("#userDataModal").click_on('Aggiorna profilo')
+end
+
+When(/^I fill user modal$/) do
+  fill_user_form
+  find("#userDataModal").click_on('Aggiorna profilo')
 end
 
 When(/^I close rui modal$/) do
@@ -133,4 +133,21 @@ Given(/^User "([^"]*)" join in "([^"]*)" race$/) do |user_name, race_name|
   create :attendee,
          user: create(:user, name:user_name, email: "#{user_name}@test.com"),
          race: Race.find_by_name(race_name)
+end
+
+def fill_user_form(field = nil, value = nil)
+  fill_in 'user_rui', :with => 'b123456789'
+  fill_in 'user_name', :with => 'user_test', :match => :prefer_exact
+  fill_in 'user_phone', :with => '353452435'
+  fill_in 'user_city', :with => 'Milan'
+  fill_in 'user_company_name', :with => 'Minmin'
+  fill_in 'user_address', :with => 'minmin strett'
+  fill_in 'user_address_num', :with => '77'
+  fill_in 'user_city', :with => 'Mincity'
+  fill_in 'user_zip', :with => '77777'
+  fill_in 'user_fiscal_code', :with => '77777234234'
+
+  if field and value
+    fill_in field, :with => value
+  end
 end

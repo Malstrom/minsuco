@@ -9,6 +9,7 @@ it:
       achieved: "La gara è stata archiviata"
       commission: "Percentuale di provvigione che viene pagata."
       category: "Ramo della gara di produzione"
+      permalink: "Codice identificativo univoco della gara"
     attendees:
       allow_join: "Permetti a questa utente di far parte della gara."
       deny_partecipation: "Nega a questa persona di partecipare alla gara."

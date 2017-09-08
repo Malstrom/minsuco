@@ -8,7 +8,7 @@ it:
     attributes:
       user:
         email: Email
-        name: Nome
+        name: Nome utente
         password: Password
         kind: Tipologia agente
         fiscal_kind: "Tipologia utente"
@@ -19,7 +19,11 @@ it:
         address_num: "Numero"
         zip: "Cap"
         phone: "Telefono"
-        interest_list: "Categorie di interesse"
+        interest_list: "Gare che ti interessano"
+        fiscal_kinds:
+          broker: "Broker"
+          agent: "Agente"
+          sub_agent: "Sub Agente"
     enum:
       statuses:
         paused: "Ferma"

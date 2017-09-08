@@ -14,7 +14,7 @@ Feature: Create race
     Given I logged in as a "basic"
     When I visit "/races/new"
     And I fill race form
-    Then I should see "Come vuoi pubblicare la gara sul portale?"
+    Then I should see "Pubblica gara"
 
   Scenario: User should not create race with start date before today
     Given I logged in as a "basic"
@@ -22,17 +22,19 @@ Feature: Create race
     And I fill race attribute "start_date" with "10/08/2017"
     Then I should see "La gara non puo iniziare nel passato"
 
-  Scenario: Basic user should be able to publish race as public after payment trought
+  Scenario: Basic user should be able to publish race as public using reward
     Given I logged in as a "basic"
     When I visit "/races/new"
     And I fill race form
-    And I publish race as "public_basic_user"
+    And I fill user modal
+    And I publish race as "public"
     Then I should see "Gara pubblicata sul portale"
 
   Scenario: Basic user should be able to publish race as a private
     Given I logged in as a "basic"
     When I visit "/races/new"
     And I fill race form
+    And I fill user modal
     And I publish race as "private"
     Then I should see "Gara pubblicata sul portale"
 
@@ -40,6 +42,7 @@ Feature: Create race
     Given I logged in as a "creator"
     When I visit "/races/new"
     And I fill race form
+    And I fill user modal
     And I publish race as "public"
     Then I should see "Gara pubblicata sul portale"
 
@@ -47,31 +50,34 @@ Feature: Create race
     Given I logged in as a "creator"
     When I visit "/races/new"
     And I fill race form
+    And I fill user modal
     And I publish race as "public"
     Then I should see "pubblica"
 
+    @current
   Scenario: New user should be able to publish race as a public
     Given I sign up
     When I visit "/races/new"
     And I fill race form
-    And I fill data in rui modal 'user_rui' value '1234567891'
-    And I publish race as "public_basic_user"
+    And I fill user modal
+    And I publish race as "public"
     Then I should see "Gara pubblicata sul portale"
 
   Scenario: New user should be able to publish race as a private
     Given I sign up
     When I visit "/races/new"
     And I fill race form
-    And I fill data in rui modal 'user_rui' value '1234567891'
+    And I fill user modal
     And I publish race as "private"
     Then I should see "Gara pubblicata sul portale"
 
+  @current
   Scenario: User without RUI should be able to pay race but not publish it
     Given I sign up
     When I click to "Creare una mia gara e pubblicarla"
     And I fill race form
     And I close rui modal
-    And I publish race as "public_basic_user"
+    And I publish race as "public"
     Then I should see "Non pubblicata"
 
   Scenario: User should start and stop its races

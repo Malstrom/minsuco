@@ -10,22 +10,22 @@ Feature: User settings
 
   Scenario: New user should be able to change its name
     When I click to "IMPOSTAZIONI"
-    And I change my "name" in "test_name"
+    And I change my "user_name" in "test_name"
     Then I should see "Profilo aggiornato"
     
   Scenario: New user should be able to change its email
     When I click to "IMPOSTAZIONI"
-    And I change my "email" in "newtest@email.com"
+    And I change my "user_mail" in "newtest@email.com"
     Then I should see "Profilo aggiornato"
     
   Scenario: New user should be able to change its RUI with valid RUI
     When I click to "IMPOSTAZIONI"
-    And I change my "rui" in "1234567891"
+    And I change my "user_rui" in "1234567891"
     Then I should see "Profilo aggiornato"
     
   Scenario: New user should not be able to change its RUI with invalid RUI
     When I click to "IMPOSTAZIONI"
-    And I change my "rui" in "1234"
+    And I change my "user_rui" in "1234"
     Then I should see "Rui è troppo corto"
 
   Scenario: Basic user should be able to change plan to pro attendee

@@ -1,116 +1,35 @@
 <div class="panel b">
   <div class="panel-heading bg-gray-lighter text-bold">Profile</div>
   <div class="panel-body">
-    <%= form_for @user do |f| %>
-      <div class="panel widget">
-        <div style="background-image: url( /assets/background1.jpg)" class="panel-body text-center bg-center">
-          <div class="row row-table">
-            <div class="col-xs-12 text-white">
-              <% if @user.image %>
-                <img src="<%= image_path(@user.image) %>" alt="Image" class="img-thumbnail img-circle thumb128">
-                <h3 class="m0"><%= @user.name %></h3>
-                <p class="m0">
-                  <%= @user.kind.camelize %></p>
-              <% else %>
-                <img src="<%= image_path("default_profile.png")%>" alt="Image" class="img-thumbnail img-circle thumb128">
-                <br>
-                <br>
-                <p class="m0">
-                  <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-labeled btn-danger" do %>
-                    <span class="btn-label"><i class="fa fa-google"></i></span>
-                    <%= "Carica immagine di profilo da Google" %>
-                  <% end %>
-                  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
-                    <span class="btn-label"><i class="fa fa-facebook"></i></span>
-                    <%= "Carica immagine di profilo da Facebook" %>
-                  <% end %>
-                </p>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <%= render 'users/partials/form_errors' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :name  %>
-        <%= f.text_field :name, class: 'form-control', id:'name'%>
-      </div>
-      <div class="form-group">
-        <%= f.label :email  %>
-        <%= f.text_field :email, class: 'form-control', id:'email'%>
-      </div>
-      <div class="form-group">
-        <%= f.label :rui  %>
-        <%= f.text_field :rui, class: 'form-control' , id:'rui'%>
-      </div>
-      <div class="form-group">
-        <%= f.label :kind  %>
-        <%= f.select(:kind, User.kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
-      </div>
-      <div class="form-group">
-        <%= f.label :fiscal_kind  %>
-        <%= f.select(:fiscal_kind, User.fiscal_kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
-      </div>
-      <div class="form-group">
-        <%= f.label :company_name  %>
-        <%= f.text_field :company_name, class: 'form-control', id:'name'%>
-      </div>
-      <div class="form-group">
-        <%= f.label :fiscal_code  %>
-        <%= f.text_field :fiscal_code, class: 'form-control', id:'location'%>
-      </div>
-
-      <div class="row">
-        <div class="col-md-8">
-          <div class="form-group">
-            <%= f.label :city  %>
-            <%= f.text_field :city, class: 'form-control', id:'city'%>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <%= f.label :zip  %>
-            <%= f.text_field :zip, class: 'form-control', id:'zip'%>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="form-group">
-            <%= f.label :address  %>
-            <%= f.text_field :address, class: 'form-control', id:'address'%>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <%= f.label :address_num  %>
-            <%= f.text_field :address_num, class: 'form-control', id:'address_num'%>
+    <div class="panel widget">
+      <div style="background-image: url( /assets/background1.jpg)" class="panel-body text-center bg-center">
+        <div class="row row-table">
+          <div class="col-xs-12 text-white">
+            <% if @user.image %>
+              <img src="<%= image_path(@user.image) %>" alt="Image" class="img-thumbnail img-circle thumb128">
+              <h3 class="m0"><%= @user.name %></h3>
+              <p class="m0">
+                <%= @user.kind.camelize %></p>
+            <% else %>
+              <img src="<%= image_path("default_profile.png")%>" alt="Image" class="img-thumbnail img-circle thumb128">
+              <br>
+              <br>
+              <p class="m0">
+                <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-labeled btn-danger" do %>
+                  <span class="btn-label"><i class="fa fa-google"></i></span>
+                  <%= "Carica immagine di profilo da Google" %>
+                <% end %>
+                <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
+                  <span class="btn-label"><i class="fa fa-facebook"></i></span>
+                  <%= "Carica immagine di profilo da Facebook" %>
+                <% end %>
+              </p>
+            <% end %>
           </div>
         </div>
       </div>
-
-
-
-      <div class="form-group">
-        <%= f.label :phone  %>
-        <%= f.text_field :phone, class: 'form-control', id:'phone'%>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :interest_list  %>
-        <%= f.grouped_collection_select(:interest_list, Category.find_by_name('assicurazioni').children,
-                                        :children, :name, :id ,:name,
-                                        {},
-                                        {:class=>'form-control',
-                                         :multiple => true,
-                                         :id => 'select2-3'}) -%>
-
-      </div>
-
-
-
-      <%= f.submit "Aggiorna informazioni", class:"btn btn-info" %>
-      <p>
-        <small class="text-muted">Per pubblicare una gara sul portale e obbligatorio fornire un RUI valido </small>
-      </p>
-    <% end %>
+      <%= render 'users/partials/form_errors' %>
+    </div>
+    <%= render :partial => "users/form", :locals => { :user => @user, :where => :user_edit} %>
   </div>
 </div>

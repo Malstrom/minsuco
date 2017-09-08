@@ -1,21 +1,110 @@
-<%= form_for @user do |f| %>
+<%= form_for user do |f| %>
 
-
-  <% if @user.errors.any? %>
+  <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2 class="text-center"><%= pluralize(@user.errors.count, "error") %> Riprova </h2>
+      <h2 class="text-center"><%= pluralize(user.errors.count, "error") %> Riprova </h2>
 
       <ul>
-        <% @user.errors.full_messages.each do |message| %>
+        <% user.errors.full_messages.each do |message| %>
           <div class="well well-sm">
             <h4 class="text-danger"><%= message %></h4>
           </div>
         <% end %>
       </ul>
-
     </div>
   <% end %>
 
 
-<% end %>
+  <% unless where == :rui_modal %>
+    <div class="form-group">
+      <%= f.label :email  %>
+      <%= f.text_field :email, class: 'form-control'%>
+    </div>
+  <% end %>
 
+
+  <div class="form-group">
+    <%= f.label :name  %>
+    <%= f.text_field :name, class: 'form-control'%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :rui  %>
+    <%= f.text_field :rui, class: 'form-control'%>
+  </div>
+
+  <% unless where == :rui_modal %>
+    <div class="form-group">
+      <%= f.label :kind  %>
+      <%= f.select(:kind, User.kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :fiscal_kind  %>
+    <%= f.select(:fiscal_kind, User.fiscal_kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :company_name  %>
+    <%= f.text_field :company_name, class: 'form-control'%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :fiscal_code  %>
+    <%= f.text_field :fiscal_code, class: 'form-control'%>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= f.label :city  %>
+        <%= f.text_field :city, class: 'form-control'%>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :zip  %>
+        <%= f.text_field :zip, class: 'form-control'%>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= f.label :address  %>
+        <%= f.text_field :address, class: 'form-control'%>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :address_num  %>
+        <%= f.text_field :address_num, class: 'form-control'%>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone  %>
+    <%= f.text_field :phone, class: 'form-control'%>
+  </div>
+
+  <% unless where == :rui_modal %>
+    <div class="form-group">
+    <%= f.label :interest_list  %>
+    <%= f.grouped_collection_select(:interest_list, Category.find_by_name('assicurazioni').children,
+                                    :children, :name, :id ,:name,
+                                    {},
+                                    {:class=>'form-control',
+                                     :multiple => true,
+                                     :id => 'select2-3'}) -%>
+    </div>
+    <%= f.submit "Aggiorna informazioni", class:"btn btn-info" %>
+
+
+  <% end %>
+
+  <p>
+    <small class="text-muted">
+      Per pubblicare una gara sul portale è necessario fornire i dati societari per la fatturazione e un Rui valido.
+    </small>
+  </p>
+<% end %>

@@ -20,7 +20,7 @@ class User < ApplicationRecord
   # many events as recipient and as a "who did the action"
   has_many      :events, :foreign_key => "who_did_id", dependent: :destroy
 
-  #auth
+  # auth
   has_many      :authorizations, dependent: :destroy
 
   # many friends imported from social
@@ -32,7 +32,7 @@ class User < ApplicationRecord
   # todo consider remove role and use plan only
   enum role:        [:basic, :pro_attendee, :pro_creator, :premium, :enterprise, :banned, :admin]
 
-  enum kind:        [:broker, :agent]
+  enum kind:        [:broker, :agent, :sub_agent]
   enum fiscal_kind: [:individual, :company]
 
   # who user want to do in this app
@@ -50,15 +50,18 @@ class User < ApplicationRecord
   after_initialize :set_default_rewards, :if => :new_record?
 
   validates_presence_of :email
-
   validates :email, uniqueness: true
+  #
+  validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }
+  validates_presence_of :name, :fiscal_code,         on: :update, :if => lambda { self.individual? }
+
+  validates_presence_of :address, :city, :zip, :address_num, on: :update
 
   validates :rui, length: { minimum: 10 }, on: :update
 
   validates_associated :plan
 
   after_create_commit :create_default_channels
-
 
   scope :attendee_users, -> { where("intent = ?", :attendee) }
   scope :creator_users,  -> { where("intent = ?", :creator) }

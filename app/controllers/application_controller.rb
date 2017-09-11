@@ -61,7 +61,10 @@ class ApplicationController < ActionController::Base
     session[:history] ||= []
 
     if request.path != session[:history].last
-      session[:history] << request.path
+      unless request.xhr?
+        session[:history] << request.path
+
+      end
     end
   end
 end

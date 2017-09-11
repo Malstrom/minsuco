@@ -47,9 +47,8 @@ class Race < ApplicationRecord
   scope :by_owner,      ->(owner)     { where(owner: owner) }
   scope :by_recipients, ->(recipient) { where(recipients: [recipient, :for_all]) }
 
-
   def likes
-    Event.where(thing_type: "Race", thing_id: id, message: "add_like")
+    Event.where(thing_type: 'Race', thing_id: id, message: 'add_like')
   end
 
   def completed_percentage
@@ -93,7 +92,7 @@ class Race < ApplicationRecord
   end
 
   def already_liked_by_user(user)
-    if (Event.where(thing_type: "Race", thing_id: id, who_did: user, message: "add_like").first)
+    if Event.where(thing_type: 'Race', thing_id: id, who_did: user, message: 'add_like').first
       true
     else
       false
@@ -103,7 +102,7 @@ class Race < ApplicationRecord
   def add_like_of(who_did)
     unless already_liked_by_user(who_did)
       Event.create(thing_type: 'Race', thing_id: id, message: 'add_like', who_did: who_did,
-                   channel: owner.private_channel, notifiable: true, read: false)
+                   channel: owner.private_channel, notifiable: false, read: false)
     end
   end
 

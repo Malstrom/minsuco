@@ -109,3 +109,20 @@ $('#payed_submit').click(function(){
   $('form').submit();
 });
 
+$('#add_like_button').click(function () {
+  raceId = $(this).data('race');
+  userId = $(this).data('user');
+  likes  = $(this).data('likes');
+
+  $.ajax({
+    url: "/races/" + raceId + "/like",
+    method: 'get',
+    success: function(){
+      $("#like_widget").html("<button id=\"likes_counter\" type=\"button\" class=\"btn btn-default btn-xs\">\n" +
+        "            <em class=\"fa fa-thumbs-up text-info\"></em>\n" +
+        "            <span class='text-info'>" + (parseInt(likes) + 1) + "</span>\n" +
+        "            </button>"
+      );
+    }
+  });
+});

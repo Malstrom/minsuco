@@ -12,9 +12,9 @@ class Race < ApplicationRecord
 
   belongs_to :category
 
-  enum kind:        [:pay_for_publish, :pay_for_join]
-  enum status:      [:started, :paused, :draft, :achieved]
-  enum recipients:  [:broker, :agent, :for_all]
+  enum kind:        %i[pay_for_publish pay_for_join]
+  enum status:      %i[started paused draft achieved]
+  enum recipients:  %i[broker agent for_all]
 
   before_validation :set_permalink, on: :create
 
@@ -23,7 +23,7 @@ class Race < ApplicationRecord
   validates :race_value, numericality: { only_integer: true }
   validate  :attendees_cap
 
-  validate  :date_not_changed, :category_not_changed, :commission_not_decrased, :on => :update
+  validate  :date_not_changed, :category_not_changed, :commission_not_decrased, on: :update
 
   validates_presence_of :name, :description, :commission, :recipients, :race_value,
                         :category_id, :starts_at, :ends_at, :kind
@@ -31,22 +31,26 @@ class Race < ApplicationRecord
   before_save   :sanitize_data
   after_create  :set_redirect_path
 
-  before_update :set_status , if: Proc.new { |race| race.status.nil? or race.status == :draft }
+  before_update :set_status, if: proc { |race| race.status.nil? || race.status == :draft }
 
   after_create_commit :subscribe_owner
 
   # Use like this "Race.started_races"
   scope :started_races, -> { where status: :started }
-  scope :not_expired,   -> { where("ends_at > ?", DateTime.now)}
-  scope :expired,       -> { where("ends_at < ?", DateTime.now)}
+  scope :not_expired,   -> { where('ends_at > ?', DateTime.now) }
+  scope :expired,       -> { where('ends_at < ?', DateTime.now) }
 
-  scope :public_races,  -> { where( kind: :pay_for_publish) }
-  scope :private_races, -> { where( kind: :pay_for_join) }
+  scope :public_races,  -> { where(kind: :pay_for_publish) }
+  scope :private_races, -> { where(kind: :pay_for_join) }
 
-  scope :by_category,   -> (category)  { where( category: category ) }
-  scope :by_owner,      -> (owner)     { where( owner: owner ) }
-  scope :by_recipients, -> (recipient) { where( recipients: [recipient, :for_all] ) }
+  scope :by_category,   ->(category)  { where(category: category) }
+  scope :by_owner,      ->(owner)     { where(owner: owner) }
+  scope :by_recipients, ->(recipient) { where(recipients: [recipient, :for_all]) }
 
+
+  def likes
+    Event.where(thing_type: "Race", thing_id: id, message: "add_like")
+  end
 
   def completed_percentage
     value_covered.to_f / race_value.to_f * 100
@@ -59,7 +63,7 @@ class Race < ApplicationRecord
 
   # If owner payed for the race when publish as public race
   def payed?
-    (PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish?) ? true : false
+    PayolaSale.find_by_product_id(id) || owner.has_plan_for_publish? ? true : false
   end
 
   # check by date and not by datetime for exclude race expired today
@@ -69,7 +73,7 @@ class Race < ApplicationRecord
 
   # Sum of all attendees join_value for this race
   def value_covered
-    Attendee.where(race_id:self.id, status: 'confirmed').sum(:join_value)
+    Attendee.where(race_id: id, status: 'confirmed').sum(:join_value)
   end
 
   def total_commission
@@ -78,30 +82,49 @@ class Race < ApplicationRecord
 
   # set case and check if Owner not write prohibited data in fields like it s name or phone number
   def sanitize_data
-    self.name.upcase!
-    self.description.capitalize!
+    name.upcase!
+    description.capitalize!
   end
 
-  #create channel and subscription owner for receive notifications
+  # create channel and subscription owner for receive notifications
   def subscribe_owner
     channel = Channel.create(name: "#{id}_race_channel")
-    ChannelSubscription.create user:owner, channel: channel
+    ChannelSubscription.create user: owner, channel: channel
+  end
+
+  def already_liked_by_user(user)
+    if (Event.where(thing_type: "Race", thing_id: id, who_did: user, message: "add_like").first)
+      true
+    else
+      false
+    end
+  end
+
+  def add_like_of(who_did)
+    unless already_liked_by_user(who_did)
+      Event.create(thing_type: 'Race', thing_id: id, message: 'add_like', who_did: who_did,
+                   channel: owner.private_channel, notifiable: true, read: false)
+    end
+  end
+
+  def race_channel(id)
+    Channel.find_or_initialize_by(name: "#{id}_race_channel")
   end
 
   private
 
   # SETTTERS
   def set_status
-    publishable? ? self.status = :started : self.status = :draft
+    self.status = (publishable? ? :started : :draft)
   end
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path
-    update_column(:redirect_path, "/races/#{self.id}/publish_check?kind=pay_for_publish")
+    update_column(:redirect_path, "/races/#{id}/publish_check?kind=pay_for_publish")
   end
 
   def set_permalink
-    self.permalink = "#{Time.now.to_i}"
+    self.permalink = Time.now.to_i.to_s
   end
 
   # CUSTOM VALIDATIONS
@@ -119,14 +142,14 @@ class Race < ApplicationRecord
 
   # validation when update race
   def date_not_changed
-    if starts_at_changed? or ends_at_changed? && self.persisted?
+    if starts_at_changed? || ends_at_changed? && persisted?
       errors.add(:start_and_end_cant_updated, I18n.t('activerecord.errors.models.race.start_and_end_cant_updated'))
     end
   end
 
   # validation when update race
   def category_not_changed
-    if category_id_changed? && self.persisted?
+    if category_id_changed? && persisted?
       errors.add(:category_cant_updated, I18n.t('activerecord.errors.models.race.category_cant_updated'))
     end
   end

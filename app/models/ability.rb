@@ -18,6 +18,7 @@ class Ability
     can :create, Race, owner:user
     can :publish_race, Race, owner:user
     can :update, Race, owner:user
+    can :like, Race
 
     #attendee
     can :read, Attendee, user:user

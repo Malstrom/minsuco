@@ -60,7 +60,21 @@
         </div>
     <% end %>
       <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6 br text-center">
+            <em class="fa fa-thumbs-up fa-fw text-primary"></em>
+            <strong><%= number_to_human race.likes.count %></strong>
+          </div>
+          <div class="col-xs-6 text-center">
+            <em class="fa fa-users fa-fw text-info"></em>
+            <strong><%= number_to_human race.attendees.confirmed.count %> / <%= race.max_attendees %></strong>
+          </div>
+
+        </div>
+        <br>
         <%= race_progress_bar(race) %>
+        <br>
+
         <div class="row row-table row-flush">
           <div class="col-xs-6 bb br">
             <div class="row row-table row-flush">
@@ -98,7 +112,6 @@
                   <h4 class="mt0"><%= race.category.name.humanize %></h4>
                   <p class="mb0 text-muted">
                     Ramo
-
                   </p>
                   <%= tooltip_widget(:category) %>
                 </div>

@@ -29,11 +29,21 @@
       </div>
 
     <% else %>
-      <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-xl btn-oval" >
+      <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-lg" >
         <em class="fa fa-plus fa-fw text-muted text-white"></em>
         <span>Partecipa</span>
       </button>
     <% end %>
+
+      <br>
+      <br>
+      <div id="like_widget">
+       <% if @race.already_liked_by_user(current_user) %>
+          <%= likes_counter_widget(@race.likes.count) %>
+        <% else %>
+          <%= likes_button_widget(@race.id, current_user.id, @race.likes.count) %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

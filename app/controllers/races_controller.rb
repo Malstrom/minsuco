@@ -2,7 +2,7 @@ class RacesController < ApplicationController
   load_and_authorize_resource
 
 
-  before_action :set_race, only: [:show, :edit, :update, :publish, :publish_check]
+  before_action :set_race, only: [:show, :edit, :update, :publish, :publish_check, :like]
 
   # GET /races
   # GET /races.json
@@ -104,7 +104,14 @@ class RacesController < ApplicationController
         format.html { render :edit }
       end
     end
+  end
 
+  def like
+    if @race.add_like_of current_user
+      render status: 200, json: @race.to_json
+    else
+      render status: 304, json: @race.to_json
+    end
   end
 
   private

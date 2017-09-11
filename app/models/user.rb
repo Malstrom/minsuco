@@ -69,6 +69,10 @@ class User < ApplicationRecord
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
   scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
 
+  def private_channel
+    Channel.find_by_name "#{id}_user_channel"
+  end
+
   def attendee(race)
     Attendee.find_by_race_id(race.id)
   end

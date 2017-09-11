@@ -11,6 +11,9 @@
           <h4 id="myModalLabel" class="modal-title">Abbiamo bisogno che completi il tuo profilo prima di pubblicare la gara.</h4>
         </div>
         <div class="modal-body form-horizontal">
+          <div class="text-center">
+            <em class="text-center fa text-default fa-5x fa-id-card-o"></em>
+          </div>
           <div class="panel-body">
             <%= render :partial => "users/form", :locals => { :user => current_user, :where => :rui_modal} %>
           </div>

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :subscriptions
 
+
   resources :users do
     member do
       get :plans
@@ -43,6 +44,7 @@ Rails.application.routes.draw do
   resources :races do
     # post :races
     member do
+      get :like
       get :start
       get :pause
       get :publish, to: 'races#publish'

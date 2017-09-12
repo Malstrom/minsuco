@@ -7,7 +7,7 @@ module RacesHelper
     html = <<-HTML
       <div data-toggle="tooltip" data-title="Obbiettivo raggiunto al #{perc}%">
          <div class="progress m0">
-            <div style="width:#{perc}%" class="progress-bar progress-bar-striped progress-bar-#{color}"></div>
+            <div style="width:#{perc}%"  class="progress-bar progress-bar-striped progress-bar-#{color}"><span>#{perc}%</span></div>
          </div>
       </div>
     HTML

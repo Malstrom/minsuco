@@ -2,20 +2,7 @@
   <div class="panel-body">
     <div class="row">
       <% if current_user.joined?(@race) %>
-        <div class="col-sm-12">
-        <p class="lead">
-          Valore della partecipazion
-          <br>
-          <%= number_to_currency current_user.participation(@race).join_value, unit: "€" %>
-        </p>
-      </div>
-        <div class="col-sm-12">
-        <p class="lead">Provvigione
-          <br>
-          <%= number_to_currency(current_user.participation(@race).commission, unit: "€") %>
-        </p>
-      </div>
-        <div class="col-sm-12">
+        <div class="col-lg-12">
         <%= form_for([@race, current_user.participation(@race)], method: :delete, :html => {:style => 'display:inline;'}) do |f| %>
           <button id="<%= @race.name %>" type="submit" class="btn btn-info btn-pill-left btn-warning">
             <em class="fa fa-minus fa-fw text-muted text-white"></em>
@@ -26,22 +13,23 @@
             <!--<em class="fa fa-plus fa-fw text-muted text-white"></em>-->
             <span>Modifica partecipazione</span>
           </button>
-      </div>
-
-    <% else %>
-      <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-lg" >
-        <em class="fa fa-plus fa-fw text-muted text-white"></em>
-        <span>Partecipa</span>
-      </button>
-    <% end %>
-
+        </div>
+      <% else %>
+        <div class="col-lg-12">
+          <button id="<%= @race.name %>" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-lg" >
+            <em class="fa fa-plus fa-fw text-muted text-white"></em>
+            <span>Partecipa</span>
+          </button>
+        </div>
+      <% end %>
       <br>
       <br>
-      <div id="like_widget">
+      <br>
+      <div id="like_widget" class="col-lg-12">
        <% if @race.already_liked_by_user(current_user) %>
           <%= likes_counter_widget(@race.likes.count) %>
         <% else %>
-          <%= likes_button_widget(@race.id, current_user.id, @race.likes.count) %>
+          <%= likes_button_widget(current_user.id, @race.id, @race.likes.count) %>
         <% end %>
       </div>
     </div>

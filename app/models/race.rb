@@ -90,8 +90,8 @@ class Race < ApplicationRecord
     ChannelSubscription.create user: owner, channel: channel
   end
 
-  def already_liked_by_user(user)
-    if Event.where(thing_type: 'Race', thing_id: id, who_did: user, message: 'add_like').first
+  def already_liked_by_user(who_did)
+    if Event.where(thing_type: 'Race', thing_id: self.id, who_did: who_did, message: 'add_like').first
       true
     else
       false

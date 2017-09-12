@@ -7,7 +7,7 @@ class Attendee < ApplicationRecord
 
   # validates_associated :user, :race
 
-  validate :max_attendee, :unique_join, :not_joinable, :self_join, :race_value_cap, on: :create
+  validate :unique_join, :not_joinable, :self_join, :race_value_cap, on: :create
 
   validates :join_value, numericality: { only_integer: true }
 
@@ -54,12 +54,6 @@ class Attendee < ApplicationRecord
   def self_join
     if race.owner_id == user_id
       errors.add(:self_join, I18n.t('activerecord.errors.models.attendee.self_join'))
-    end
-  end
-
-  def max_attendee
-    if race.attendees.count >= race.max_attendees
-      errors.add(:max_attendees, I18n.t('activerecord.errors.models.attendee.max_attendees'))
     end
   end
 

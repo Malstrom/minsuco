@@ -13,6 +13,7 @@ it:
           start_and_end_cant_updated: "Le date della gara non possono essere cambiate."
           category_cant_updated: "La categoria non può essere cambiata."
           commission_cant_updated: "La percentuale di provvigione non può essere minore di quella attuale."
+          already_liked: "Hai gia messo mi piace."
     models:
       race: Gara
     attributes:
@@ -25,8 +26,7 @@ it:
         ends_at: Finisce
         race_value: Obbiettivo
         commission: Provvigione
-        max_attendees: Numero massimo di partecipanti
-        min_pieces: Numero di pezzi minimo
+        compensation_start_amount: Fisso per pezzo
     race:
       enum:
         recipients:

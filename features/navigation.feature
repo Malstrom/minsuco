@@ -25,7 +25,7 @@ Feature: See all lists of races and interact with this list
     And I visit attendees page
     When I click to "back-history"
     And I click to "back-history"
-    Then I should see "Impostazioni"
+    Then I should see "IL MIO PROFILO"
 
   Scenario: User should be turn back with history back icon
     Given I logged in as a "basic"

@@ -21,7 +21,7 @@ When(/^I visit user plan$/) do
 end
 
 And(/^I complete my profile$/) do
-  click_on('IMPOSTAZIONI')
+  click_on('IL MIO PROFILO')
 
   fill_user_form
 

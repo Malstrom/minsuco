@@ -2,9 +2,7 @@ FactoryGirl.define do
   factory :race do
     name "TestRace"
     description "Test Race description"
-    max_attendees "10"
     commission "1000"
-    min_pieces "50"
     recipients "for_all"
     race_value "100000"
     category_id 5

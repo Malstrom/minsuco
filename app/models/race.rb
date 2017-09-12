@@ -21,7 +21,6 @@ class Race < ApplicationRecord
   validate          :start_in_past, on: :create
 
   validates :race_value, numericality: { only_integer: true }
-  validate  :attendees_cap
 
   validate  :date_not_changed, :category_not_changed, :commission_not_decrased, on: :update
 
@@ -130,12 +129,6 @@ class Race < ApplicationRecord
   def start_in_past
     if starts_at && starts_at < Date.today
       errors.add(:start_in_past, I18n.t('activerecord.errors.models.race.start_in_past'))
-    end
-  end
-
-  def attendees_cap
-    if max_attendees && attendees.count > max_attendees
-      errors.add(:attendees_cap, I18n.t('activerecord.errors.models.race.attendees_cap'))
     end
   end
 

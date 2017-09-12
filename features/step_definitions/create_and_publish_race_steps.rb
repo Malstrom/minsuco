@@ -47,9 +47,9 @@ end
 
 # I fill race form
 When(/^I fill race form$/) do
-  fill_in "name", :with => 'TestRace'
+
   fill_in "description", :with => 'A test race'
-  fill_in "race_value", :with => '100000'
+  fill_in "race_race_value", :with => '100000'
   # fill_in "min_pieces", :with => '50'
   # fill_in "max_attendees", :with => '50'
   fill_in "commission", :with => '20'
@@ -59,16 +59,14 @@ When(/^I fill race form$/) do
   # select('auto', from: 'race_category_id', visible:false)
   # select('Tutti', from: 'race_recipients', visible:false)
 
-  click_on('Pubblica la gara')
+  click_on('CREA GARA')
 end
 
 # I fill race attribute "" with ""
 When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
-  fill_in "name", :with => 'TestRace'
+
   fill_in "description", :with => 'A test race'
-  fill_in "race_value", :with => '100000'
-  # fill_in "min_pieces", :with => '50'
-  # fill_in "max_attendees", :with => '50'
+  fill_in "race_race_value", :with => '100000'
   fill_in "commission", :with => '20'
   fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
   fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
@@ -78,7 +76,7 @@ When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
 
   fill_in arg1, :with => arg2 if arg1 and arg2
 
-  click_on('Pubblica la gara')
+  click_on('CREA GARA')
 end
 
 When(/^I publish race as "([^"]*)"$/) do |arg1|

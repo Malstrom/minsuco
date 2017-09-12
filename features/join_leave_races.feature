@@ -19,12 +19,6 @@ Feature: Join in race
     And I join in a public race
     Then I should have '1' free private join
 
-  Scenario: User should not join in race when race reached max attendees cap
-    Given I sign up
-    When I visit "/races"
-    And I join in a full race
-    Then I should see "La gara ha raggiunto il massimo dei partecipanti"
-
   Scenario: User should not join in race whi join_value over value of race
     Given I sign up
     And I complete my profile

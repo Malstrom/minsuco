@@ -17,7 +17,7 @@ class RacesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create race" do
     assert_difference('Race.count') do
-      post races_url, params: { race: { category: @race.category, commission: @race.commission, compensation_start_amount: @race.compensation_start_amount, max_attendees: @race.max_attendees, name: @race.name, owner: @race.owner, min_pieces: @race.min_pieces, race_value: @race.race_value, recipients: @race.recipients } }
+      post races_url, params: { race: { category: @race.category, commission: @race.commission, compensation_start_amount: @race.compensation_start_amount, name: @race.name, owner: @race.owner, race_value: @race.race_value, recipients: @race.recipients } }
     end
 
     assert_redirected_to race_url(Race.last)
@@ -34,7 +34,7 @@ class RacesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update race" do
-    patch race_url(@race), params: { race: { category: @race.category, category: @race.category, commission: @race.commission, compensation_start_amount: @race.compensation_start_amount, max_attendees: @race.max_attendees, name: @race.name, owner: @race.owner, min_pieces: @race.min_pieces, race_value: @race.race_value, recipients: @race.recipients } }
+    patch race_url(@race), params: { race: { category: @race.category, category: @race.category, commission: @race.commission, compensation_start_amount: @race.compensation_start_amount, name: @race.name, owner: @race.owner, min_pieces: @race.min_pieces, race_value: @race.race_value, recipients: @race.recipients } }
     assert_redirected_to race_url(@race)
   end
 

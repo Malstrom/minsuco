@@ -67,7 +67,7 @@
           </div>
           <div class="col-xs-6 text-center">
             <em class="fa fa-users fa-fw text-info"></em>
-            <strong><%= number_to_human race.attendees.confirmed.count %> / <%= race.max_attendees %></strong>
+            <strong><%= number_to_human race.attendees.confirmed.count %></strong>
           </div>
 
         </div>
@@ -84,7 +84,7 @@
                   <p class="mb0 text-muted">
                     Obbiettivo rimanente
                   </p>
-                  <%= tooltip_widget(:remain_value) %>
+                  <%= tooltip_widget(:races, :remain_value) %>
                 </div>
               </div>
 
@@ -98,7 +98,7 @@
                   <p class="mb0 text-muted">
                     Provvigione
                   </p>
-                  <%= tooltip_widget(:commission) %>
+                  <%= tooltip_widget(:races, :commission) %>
                 </div>
               </div>
             </div>
@@ -113,7 +113,7 @@
                   <p class="mb0 text-muted">
                     Ramo
                   </p>
-                  <%= tooltip_widget(:category) %>
+                  <%= tooltip_widget(:races, :category) %>
                 </div>
               </div>
             </div>

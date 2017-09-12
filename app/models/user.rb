@@ -78,19 +78,19 @@ class User < ApplicationRecord
   end
 
   def has_plan_for_join?
-    (plan == Plan.find_by_stripe_id('pro_attendee') or plan == Plan.find_by_stripe_id('premium')) ? true : false
+    plan == Plan.find_by_stripe_id('pro_attendee') or plan == Plan.find_by_stripe_id('premium') ? true : false
   end
 
   def has_plan_for_publish?
-    (plan == Plan.find_by_stripe_id('pro_creator') or plan == Plan.find_by_stripe_id('premium')) ? true : false
+    plan == Plan.find_by_stripe_id('pro_creator') or plan == Plan.find_by_stripe_id('premium') ? true : false
   end
 
   def has_reward?(kind)
     case kind
       when 'pay_for_publish'
-        reward.public_races > 0 ? reward.public_races : false
+        reward.public_races > 0 ? true : false
       when 'pay_for_join'
-        reward.join_private > 0 ? reward.join_private : false
+        reward.join_private > 0 ? true : false
       else
         false
     end

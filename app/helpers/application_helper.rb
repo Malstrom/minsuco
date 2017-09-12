@@ -28,6 +28,20 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def system_notice_widget
+    html = ""
+    flash.each do |key, value|
+      key = 'info' if key == 'notice'
+      key = 'danger' if key == 'alert'
+      html << <<-HTML
+        <a>
+          <div id="notice" data-notify="" data-message=" #{value}" data-onload="true" data-options="{&quot;status&quot;:&quot;#{key}&quot;}"></div>
+        </a>
+      HTML
+    end
+    html.html_safe
+  end
+
   def tooltip_widget(thing,message_key)
     html = <<-HTML
     <em class="fa fa-info-circle info text-muted" data-toggle="tooltip" data-placement="top"

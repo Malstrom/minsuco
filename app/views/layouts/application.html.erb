@@ -27,11 +27,7 @@
 
 <body class="layout-fixed">
 
-<% flash.each do |key, value| %>
-  <% key = 'info' if key == 'notice' %>
-  <% key = 'danger' if key == 'alert' %>
-  <div id="notice" data-notify="" data-message="<%= value %>" data-onload="true" data-options="{&quot;status&quot;:&quot;<%= key %>&quot;}"></div>
-<% end %>
+<%= system_notice_widget %>
 
 <div class="wrapper">
   <!-- top navbar-->

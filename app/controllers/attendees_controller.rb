@@ -1,4 +1,4 @@
-class AttendeesController < ApplicationController
+ class AttendeesController < ApplicationController
   # load_and_authorize_resource
 
   before_action :set_attendee, only: [:update, :destroy]
@@ -22,7 +22,7 @@ class AttendeesController < ApplicationController
         format.json { render :show, status: :created, location: @attendee }
       else
         format.html { redirect_to race_path(@attendee.race),
-                                  alert:  t("activerecord.errors.models.attendee.#{@attendee.errors.first[0]}") }
+                                  alert:  t("activerecord.errors.models.attendee.#{@attendee.errors.first[0]}", user_id: current_user.id) }
         format.json { render json: @attendee.errors, status: :unprocessable_entity }
       end
     end

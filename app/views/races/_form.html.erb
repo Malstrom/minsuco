@@ -8,26 +8,12 @@
 
 <%= form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
   <div class="panel-body">
-  <h4>Descrizione Gara</h4><br><br>
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :name, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-3">
-        <%= f.text_field :name, class:'form-control', id:'name' %>
-      </div>
-      <div class="col-sm-4">
-        <span class="help-block m-b-none"><%= t('forms.race.help.name') %></span>
-      </div>
-    </div>
-  </fieldset>
+  <h4><%= t('view.races.new.form_title') %></h4><br><br>
   <fieldset>
     <div class="form-group">
       <%= f.label :description, class: 'col-sm-2 control-label' %>
       <div class="col-sm-8">
         <%= f.text_area :description, class:'form-control', rows: "5" , id:'description'  %>
-      </div>
-      <div class="col-sm-2">
-        <span class="help-block m-b-none"><%= t('forms.race.help.description') %></span>
       </div>
     </div>
   </fieldset>
@@ -35,18 +21,26 @@
   <% if @race.new_record? %>
     <fieldset>
       <div class="form-group">
-        <%= f.label :category, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-3">
+        <div class="col-lg-2 control-label pull-left">
+          <%= f.label :category %>
+          <%= tooltip_widget(:races, :category) %>
+        </div>
+        <%# f.label :category, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-3">
           <%= f.grouped_collection_select(:category_id, Category.find_by_name('assicurazioni').children,
                                           :children, :name, :id ,:name,
                                           {},
                                           {:class=>'chosen-select input-md form-control input-lg m-b',}) -%>
         </div>
-        <%= f.label :recipients, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-3">
+        <div class="col-lg-2 control-label pull-left">
+          <%= f.label :recipients %>
+          <%= tooltip_widget(:races, :recipients) %>
+        </div>
+        <div class="col-lg-3">
           <%= f.select(:recipients, options_for_select([['Tutti', 'for_all'],
                                                         ['Agenti', 'agent'],
-                                                        ['Broker', 'broker']]),
+                                                        ['Broker', 'broker'],
+                                                        ['Sub-agenti', 'sub_agent']]),
                        {},
                        {:class=>'chosen-select input-md form-control m-b',
                        }) %>
@@ -57,61 +51,89 @@
     <fieldset>
       <div class="form-group">
         <%= f.label :starts_at, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-3">
+        <div class="col-lg-3">
           <%= f.text_field :starts_at, class:'form-control input-group date datetimepicker', id:'start_date' %>
         </div>
         <%= f.label :ends_at, class: 'col-lg-2 control-label' %>
-        <div class="col-sm-3">
+        <div class="col-lg-3">
           <%= f.text_field :ends_at, class:'form-control input-group date datetimepicker', id:'end_date'  %>
         </div>
       </div>
     </fieldset>
+
+    <br><h4>Guadagni</h4><br><br>
+
+    <fieldset>
+      <div class="form-group">
+        <div class="col-lg-2 control-label">
+          <%= f.label :race_value %>
+          <%= tooltip_widget(:races, :race_value) %>
+        </div>
+        <div class="col-lg-4">
+          <div class="input-group m-b">
+            <span class="input-group-addon">€</span>
+            <%= f.text_field :race_value, class:'form-control'%>
+            <span class="input-group-addon">.00</span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class="form-group">
+        <div class="col-lg-2 control-label">
+          <%= f.label "Provvigione" %>
+          <%= tooltip_widget(:races, :commission) %>
+        </div>
+        <div class="col-lg-2">
+          <div class="input-group m-b">
+            <%= f.text_field :commission, class:'form-control', id:'commission'  %>
+            <span id="replace_money_2" class="input-group-addon">%</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="input-group m-b">
+            <span id="replace_money_2" class="input-group-addon">dal</span>
+            <%# f.text_field "start", class:'form-control', id:'commission'  %>
+            <span id="replace_money_2" class="input-group-addon">anno</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="input-group m-b">
+            <span id="replace_money_2" class="input-group-addon">al</span>
+            <%# f.text_field "end", class:'form-control', id:'commission'  %>
+            <span id="replace_money_2" class="input-group-addon">anno</span>
+          </div>
+        </div>
+
+      </div>
+    </fieldset>
+
   <% end %>
+  <br><h4>Dati aggiuntivi <small class="text-muted">(Opzionale)</small></h4><br><br>
 
-  <br><h4>Remunerazione</h4><br><br>
-
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :race_value, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-3 ">
-        <div class="input-group m-b">
-          <span class="input-group-addon">€</span>
-          <%= f.text_field :race_value, class:'form-control', id:'race_value'%>
-          <span class="input-group-addon">.00</span>
+    <fieldset>
+      <div class="form-group">
+        <div class="col-lg-3 control-label">
+          <%= f.label :compensation_start_amount %>
+          <%= tooltip_widget(:races, :compensation_start_amount) %>
+        </div>
+        <div class="col-lg-4">
+          <div class="input-group m-b">
+            <span class="input-group-addon">€</span>
+            <%= f.text_field :compensation_start_amount, class:'form-control', id:'race_value'%>
+            <span class="input-group-addon">.00</span>
+          </div>
         </div>
       </div>
-
-      <%= f.label :commission, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-2">
-        <div class="input-group m-b">
-          <%= f.text_field :commission, class:'form-control', id:'commission'  %>
-          <span id="replace_money_2" class="input-group-addon">%</span>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-
-  <br><h4>Dati aggiuntivi</h4><br><br>
-
+    </fieldset>
 
   <fieldset>
-    <div class="form-group">
-      <%= f.label :max_attendees, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-2">
-        <%= f.number_field :max_attendees, class:'form-control input-lg m-b', id:'max_attendees'  %>
-      </div>
-      <%= f.label :min_pieces, class: 'col-lg-2 control-label' %>
-      <div class="col-sm-2">
-        <%= f.number_field :min_pieces, class:'form-control input-lg m-b', id:'min_pieces' %>
-      </div>
+    <div class="form-group text-center" style="display: grid;">
+      <%= f.submit 'CREA GARA', class: 'btn btn-xl btn-success' %>
     </div>
   </fieldset>
-
-  <fieldset>
-    <div class="form-group text-center">
-      <%= f.submit 'Pubblica la gara', class: 'btn btn-xl btn-success' %>
-    </div>
-  </fieldset>
-
 </div>
 <% end %>

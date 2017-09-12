@@ -1,0 +1,5 @@
+it:
+  view:
+    races:
+      new:
+        form_title: "Compila la tua gara."

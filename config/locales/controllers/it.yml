@@ -6,7 +6,7 @@ it:
     races:
       action:
         index: "Trova gare"
-        user_races: "Mie gare"
+        user_races: "Gare create"
         show: "Dettagli della gara"
         new: "Nuova gara"
         edit: "Modifica gara"
@@ -17,7 +17,7 @@ it:
         index: "Partecipazioni"
     users:
       action:
-        edit: "Impostazioni"
+        edit: "Il mio profilo"
   menu:
     section:
       discover: "scopri"

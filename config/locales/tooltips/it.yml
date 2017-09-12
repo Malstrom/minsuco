@@ -11,6 +11,11 @@ it:
       category: "Ramo della gara di produzione"
       permalink: "Codice identificativo univoco della gara"
       attendee_count: "Partecipanti"
+      race_value: "L'importo complessivo necessario da assicurare"
+      category: "Spiegazione della category"
+      commission: "Provvigione al primo anno"
+      compensation_start_amount: "Premio per ogni pezzo eseguito"
+      recipients: "Quale categoria di assicuratore potra partecipare alla gara."
     attendees:
       allow_join: "Permetti a questa utente di far parte della gara."
       deny_partecipation: "Nega a questa persona di partecipare alla gara."

@@ -4,6 +4,7 @@ class Event < ApplicationRecord
   belongs_to :who_did, :class_name => "User"
   belongs_to :channel
 
+  # return name of event thing when exists or race not found.
   def thing
     case thing_type
       when 'Attendee'

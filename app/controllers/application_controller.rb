@@ -63,7 +63,6 @@ class ApplicationController < ActionController::Base
     if request.path != session[:history].last
       unless request.xhr?
         session[:history] << request.path
-
       end
     end
   end

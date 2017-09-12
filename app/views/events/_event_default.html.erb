@@ -1,4 +1,4 @@
 <% @events.each do |event| %>
-      <%= notice_widget(event.id, "icon-user-follow", event.who_did.name, event.message, event.thing ) %>
+  <%= notice_widget(event.id, event.icon, event.who_did.name, event.message, event.thing ) %>
 <% end %>
 

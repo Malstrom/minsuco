@@ -4,6 +4,18 @@ class Event < ApplicationRecord
   belongs_to :who_did, :class_name => "User"
   belongs_to :channel
 
+  # todo: maybe improve assign icon and messages
+  def icon
+    case message
+      when "join_in_race"
+        "icon-user-follow"
+      when "leave_from_race"
+        "icon-user-unfollow"
+      else
+        "icon-user"
+    end
+  end
+
   # return name of event thing when exists or race not found.
   def thing
     case thing_type

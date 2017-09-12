@@ -49,14 +49,20 @@
             <li>
               <!-- START list group-->
               <div class="list-group" id="events">
-                <% if @events %>
-                  <%= render partial: 'events/event_default' %>
+                <% if @events.count > 0 %>
+                  <% @events.each do |event| %>
+                    <%= notice_widget(event.id, event.icon, event.who_did.name, event.message, event.thing ) %>
+                  <% end %>
+                  <a href="#" class="list-group-item">
+                    <small><%= t("view.topnavbar.notifications.more") %> </small>
+                    <span class="label label-danger pull-right"><%= @events.count %></span>
+                  </a>
+                <% else %>
+                  <a href="#" class="list-group-item">
+                    <small><%= t("view.topnavbar.notifications.no_events") %> </small>
+                    <span class="label label-danger pull-right">0</span>
+                  </a>
                 <% end  %>
-                <!-- last list item -->
-                <!--<a href="#" class="list-group-item">-->
-                  <!--<small>More notifications</small>-->
-                  <!--<span class="label label-danger pull-right">14</span>-->
-                <!--</a>-->
               </div>
               <!-- END list group-->
             </li>

@@ -3,3 +3,7 @@ it:
     races:
       new:
         form_title: "Compila la tua gara."
+\    topnavbar:
+      notifications:
+        more: "Ultime notifiche"
+        no_events: "Non hai notifiche."

@@ -37,10 +37,6 @@ $(".setting-color").click(function () {
   });
 });
 
-
-
-
-
 $('.info')
   .tooltip({ content: 'Click to close', position: { my: 'left center', at: 'right center' }, items: '*' })
   .tooltip('open')

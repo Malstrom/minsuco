@@ -1,4 +1,4 @@
-<% if @race.pay_for_join? and current_user.plan.stripe_id != 'pro_attendee' and !@race.expired? %>
+<% if @race.close? and current_user.plan.stripe_id != 'pro_attendee' and !@race.expired? %>
   <div role="alert" class="alert alert-warning">
     <strong>Attenzione!</strong>
     Questa gara è privata. Puoi partecipare ancora a <%= current_user.reward.join_private %> gare private,
@@ -34,5 +34,9 @@
 <% content_for :body_area do %>
   <%= render partial: 'attendees/partials/modal_join' %>
   <%= render partial: 'attendees/partials/modal_edit_form' if current_user.participation(@race) %>
+<% end %>
+
+<% unless current_user.valid_attribute?(:rui) %>
+  <%= render partial: 'layouts/modals/rui_modal' %>
 <% end %>
 

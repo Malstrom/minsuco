@@ -1,14 +1,14 @@
 <% @attendees.each do |attendee| %>
   <div class="col-lg-4 col-md-6">
     <div class="panel b">
-      <% if attendee.race.kind == 'pay_for_publish' %>
+      <% if attendee.race.kind == 'open' %>
         <div class="panel-heading bg-info">
           <div class="pull-right">
             <div class="label label-sucess" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.public_race') %>">
               Pubblica
             </div>
           </div>
-          <h4 class="m0"><%= attendee.race.name %></h4>
+          <h4 class="m0"><%= attendee.race.permalink %></h4>
           <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->
         </div>
       <% else %>
@@ -24,7 +24,7 @@
               Privata
             </div>
           </div>
-          <h4 class="m0"><%= attendee.race.name %></h4>
+          <h4 class="m0"><%= attendee.race.permalink %></h4>
           <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->
         </div>
       <% end %>
@@ -83,7 +83,7 @@
 
       <div class="panel-footer text-center">
         <%= link_to(race_path(attendee.race)) do %>
-          <button type="button" class="btn btn-info" id="<%= attendee.race.name %>">Maggiori informazioni</button>
+          <button type="button" class="btn btn-info" id="<%= attendee.race.permalink %>">Maggiori informazioni</button>
         <% end %>
       </div>
     </div>

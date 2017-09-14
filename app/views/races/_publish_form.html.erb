@@ -25,42 +25,42 @@
         <%= f.label :kind, class: 'col-lg-2 control-label' %>
         <div class="col-sm-3">
           <div data-toggle="buttons" class="btn-group">
-            <%= label_tag :kind, "public", class:'btn btn-primary btn-outline active', id: 'pay_for_publish' do  %>
-              <%= f.radio_button :kind, 'pay_for_publish', checked:true  %>
-              Gara pubblica
+            <%= label_tag :kind, "public", class:'btn btn-primary btn-outline active', id: 'open' do  %>
+              <%= f.radio_button :kind, 'open', checked:true  %>
+              Gara aperta
             <% end %>
-            <%= label_tag :kind, "private", class:'btn btn-primary btn-outline', id: 'pay_for_join' do  %>
-              <%= f.radio_button :kind, 'pay_for_join', checked:false  %>
-              Gara privata
+            <%= label_tag :kind, "private", class:'btn btn-primary btn-outline', id: 'close' do  %>
+              <%= f.radio_button :kind, 'close', checked:false  %>
+              Gara chiusa
             <% end %>
           </div>
         </div>
         <div class="col-sm-1">
-          <p class="lead pay_for_publish">29€</p>
-          <p class="lead pay_for_join" style="display: none;">0€</p>
+          <p class="lead open">29€</p>
+          <p class="lead close" style="display: none;">0€</p>
         </div>
         <div class="col-sm-5">
-          <span class="help-block m-b-none pay_for_publish">Le persone potranno partecipare gratuitamente alla tua gara.</span>
-          <span style="display: none;" class="help-block m-b-none pay_for_join">Le persone dovranno pagare un o avere un account "pro" per partecipare.</span>
+          <span class="help-block m-b-none open">Le persone potranno partecipare gratuitamente alla tua gara.</span>
+          <span style="display: none;" class="help-block m-b-none close">Le persone dovranno pagare un o avere un account "pro" per partecipare.</span>
         </div>
       </div>
     </fieldset>
   </div>
 
-  <div class="pay_for_join text-center" style="display: none;">
+  <div class="close text-center" style="display: none;">
     <%= f.submit 'Pubblica la gara', class: 'btn btn-info' %>
   </div>
 
 <% end %>
 
-<div class="text-center pay_for_publish">
+<div class="text-center open">
   <% if @race.payed? %>
     <button id="payed_submit" class="btn btn-info">Pubblica la gara</button>
     <%# link_to 'Pubblica la gara', publish_check_race_path(@race), class: 'btn btn-success' %>
   <% else %>
       <%= render 'payola/transactions/checkout', sellable: @race ,
                  email:current_user.email,
-                 button_text: 'Paga e rendi la gara pubblica'
+                 button_text: 'Paga e rendi la gara aperta'
       %>
   <% end %>
 </div>

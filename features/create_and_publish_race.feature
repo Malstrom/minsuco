@@ -11,47 +11,48 @@ Feature: Create race
     Then I should see "Nuova gara"
 
   Scenario: User should create new race
-    Given I logged in as a "basic"
+    Given I logged in having basic account
     When I visit "/races/new"
     And I fill race form
     Then I should see "Pubblica gara"
 
   Scenario: User should not create race with start date before today
-    Given I logged in as a "basic"
+    Given I logged in having basic account
     When I visit "/races/new"
     And I fill race attribute "start_date" with "10/08/2017"
     Then I should see "La gara non puo iniziare nel passato"
 
+    @current
   Scenario: Basic user should be able to publish race as public using reward
-    Given I logged in as a "basic"
+    Given I logged in having basic account
     When I visit "/races/new"
     And I fill race form
     And I fill user modal
-    And I publish race as "public"
+    And I publish race as open
     Then I should see "Gara pubblicata sul portale"
 
   Scenario: Basic user should be able to publish race as a private
-    Given I logged in as a "basic"
+    Given I logged in having basic account
     When I visit "/races/new"
     And I fill race form
     And I fill user modal
-    And I publish race as "private"
+    And I publish race as open
     Then I should see "Gara pubblicata sul portale"
 
   Scenario: creator should be able to publish race as a private
-    Given I logged in as a "creator"
+    Given I logged in having creator account
     When I visit "/races/new"
     And I fill race form
     And I fill user modal
-    And I publish race as "public"
+    And I publish race as open
     Then I should see "Gara pubblicata sul portale"
 
   Scenario: creator should be able to publish race as a private
-    Given I logged in as a "creator"
+    Given I logged in having creator account
     When I visit "/races/new"
     And I fill race form
     And I fill user modal
-    And I publish race as "public"
+    And I publish race as open
     Then I should see "pubblica"
 
   Scenario: New user should be able to publish race as a public
@@ -59,7 +60,7 @@ Feature: Create race
     When I visit "/races/new"
     And I fill race form
     And I fill user modal
-    And I publish race as "public"
+    And I publish race as open
     Then I should see "Gara pubblicata sul portale"
 
   Scenario: New user should be able to publish race as a private
@@ -67,19 +68,20 @@ Feature: Create race
     When I visit "/races/new"
     And I fill race form
     And I fill user modal
-    And I publish race as "private"
+    And I publish race as close
     Then I should see "Gara pubblicata sul portale"
 
-  Scenario: User without RUI should be able to pay race but not publish it
+  Scenario: New user without RUI should be able to create and pay race but not publish it
     Given I sign up
     When I click to "Creare una mia gara e pubblicarla"
     And I fill race form
     And I close rui modal
-    And I publish race as "public"
+    And I publish race as open
     Then I should see "Non pubblicata"
 
   Scenario: User should start and stop its races
-    Given I logged in as a "basic"
+    Given I logged in having basic account
+    And I complete my profile
     And I create private race
     When I visit "private" race page
     And I stop race
@@ -87,7 +89,7 @@ Feature: Create race
     Then I should see "La gara è stata aggiornata"
 
   Scenario: Owner of race should see join list
-    Given I logged in as a "creator"
+    Given I logged in having creator account
     And I create public race
     When I visit "public" race page
     Then I should see "Partecipanti"

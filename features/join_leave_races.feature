@@ -9,14 +9,15 @@ Feature: Join in race
     And I complete my profile
     And I have '1' rewards for join
     When I visit "/races"
-    And I join in a private race
+    And I join in a close race
     Then I should have '0' free private join
 
   Scenario: New user should join in public race without spending reward
     Given I sign up
+    And I complete my profile
     And I have '1' rewards for join
     When I visit "/races"
-    And I join in a public race
+    And I join in a open race
     Then I should have '1' free private join
 
   Scenario: User should not join in race whi join_value over value of race
@@ -29,27 +30,26 @@ Feature: Join in race
     Given I sign up
     And I complete my profile
     And I visit "/races"
-    When I join in a public race
+    When I join in a open race
     And I click to "Lascia gara"
     Then I should see "Partecipazione cancellata"
 
   Scenario: User should not join in race if not have rui
     Given I sign up
     When I visit "/races"
-    And I join in a public race
-    Then I should see "Per partecipare devi completare il tuo profilo personale."
+    And I join in a open race
+    Then I should see "Per partecipare devi completare il tuo profilo personale"
 
-  Scenario: User should not join in race if not have rui
-    Given I logged in as a "basic"
+  Scenario: User without join reward should not join in race
+    Given I logged in having basic account
     And I not have reward for join race
-    And I complete my profile
     When I visit "/races"
-    And I join in a public race
+    And I join in a open race
     Then I should see "Il tuo piano non ti permette di partecipare a questa gara"
 
   Scenario: Attendee should change value of its join_value
-    Given I logged in as a "basic"
-    And I join in a public race
+    Given I logged in having basic account
+    And I join in a open race
     When I click to "Modifica partecipazione"
     And I fill "5000" in "join_value" input
     And I click to "Partecipa"

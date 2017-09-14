@@ -22,7 +22,7 @@ class EventsMailer < ApplicationMailer
         "sub"=> {
             "%recipient_name%"  => ["#{recipient.name}}"],
             "%who_did%"         => ["#{event.who_did}"],
-            "%race_name%"       => ["#{}"],
+            "%race.name%"       => ["#{}"],
         },
         "filters"=> {
             "templates"=> {

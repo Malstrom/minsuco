@@ -2,21 +2,21 @@
 When(/^(I|Someone|\d+) create (public|private|\d+) race$/) do |who,kind|
   if who == 'I'
     if kind == 'public'
-      create(:race, name: kind, kind: "pay_for_publish", owner: User.first)
+      create(:race, name: kind, kind: "open", owner: User.first)
     else
-      create(:race, name: kind, kind: "pay_for_join", owner: User.first)
+      create(:race, name: kind, kind: "close", owner: User.first)
     end
   else
     if kind == 'public'
-      create(:race, name: kind, kind: "pay_for_publish", owner: create(:user))
+      create(:race, name: kind, kind: "open", owner: create(:user))
     else
-      create(:race, name: kind, kind: "pay_for_join", owner: create(:user))
+      create(:race, name: kind, kind: "close", owner: create(:user))
     end
   end
 end
 
 Given(/^User (basic|attendee|creator\d+) create (public|private|\d+) race$/) do |who,kind|
-  kind == 'public' ? kind = 'pay_for_publish' : kind = 'pay_for_join'
+  kind == 'public' ? kind = 'open' : kind = 'close'
 
   case who
     when 'basic'
@@ -32,15 +32,15 @@ end
 When(/^(I|Someone|\d+) create (public|private|\d+) race with '([^']*)' = '([^']*)'$/) do |who,kind,field,value|
   if who == 'I'
     if kind == 'public'
-      create(:race, name: kind, kind: "pay_for_publish", owner: User.first, "#{field}" => value)
+      create(:race, name: kind, kind: "open", owner: User.first, "#{field}" => value)
     else
-      create(:race, name: kind, kind: "pay_for_join", owner: User.first, "#{field}" => value)
+      create(:race, name: kind, kind: "close", owner: User.first, "#{field}" => value)
     end
   else
     if kind == 'public'
-      create(:race, name: kind, kind: "pay_for_publish", owner: create(:user), "#{field}" => value)
+      create(:race, name: kind, kind: "open", owner: create(:user), "#{field}" => value)
     else
-      create(:race, name: kind, kind: "pay_for_join", owner: create(:user), "#{field}" => value)
+      create(:race, name: kind, kind: "close", owner: create(:user), "#{field}" => value)
     end
   end
 end
@@ -79,12 +79,12 @@ When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
   click_on('CREA GARA')
 end
 
-When(/^I publish race as "([^"]*)"$/) do |arg1|
-  if arg1 == 'private'
-    click_on('Pubblica la gara come privata')
-  elsif arg1 == 'public'
+When(/^I publish race as (open|close|pay_and_open\d+)$/) do |arg1|
+  if arg1 == 'close'
+    click_on('Pubblica la gara come chiusa')
+  elsif arg1 == 'open'
     click_on('Pubblica')
-  elsif arg1 == 'public_no_rewards'
+  elsif arg1 == 'pay_and_open'
     click_on('Paga e pubblica')
 
     within_frame 'stripe_checkout_app' do
@@ -109,7 +109,9 @@ When(/^I fill data in rui modal '([^']*)' value '([^']*)'$/) do |field,value|
 end
 
 When(/^I fill user modal$/) do
-  fill_user_form
+  fill_in 'user_rui', :with => 'b123456789'
+  fill_in 'user_phone', :with => '353452435'
+
   find("#userDataModal").click_on('Aggiorna profilo')
 end
 
@@ -131,21 +133,4 @@ Given(/^User "([^"]*)" join in "([^"]*)" race$/) do |user_name, race_name|
   create :attendee,
          user: create(:user, name:user_name, email: "#{user_name}@test.com"),
          race: Race.find_by_name(race_name)
-end
-
-def fill_user_form(field = nil, value = nil)
-  fill_in 'user_rui', :with => 'b123456789'
-  fill_in 'user_name', :with => 'user_test', :match => :prefer_exact
-  fill_in 'user_phone', :with => '353452435'
-  fill_in 'user_city', :with => 'Milan'
-  fill_in 'user_company_name', :with => 'Minmin'
-  fill_in 'user_address', :with => 'minmin strett'
-  fill_in 'user_address_num', :with => '77'
-  fill_in 'user_city', :with => 'Mincity'
-  fill_in 'user_zip', :with => '77777'
-  fill_in 'user_fiscal_code', :with => '77777234234'
-
-  if field and value
-    fill_in field, :with => value
-  end
 end

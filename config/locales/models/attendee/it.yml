@@ -10,7 +10,7 @@ it:
           race_value_cap: "Non puoi partecipare a questa gara con questo importo."
           can_leave: "Non puoi lasciare una gara dalla quale sei stato bannato"
           attendee: Partecipante
-          no_rui: "Per partecipare devi completare il tuo profilo personale %{user_id}. <a href='/users/%{user_id}/edit' style='color:white;'>Clicca qui per completarlo.</a>"
+          no_rui: "Per partecipare fornirci un rui valido. <a href='/users/%{user_id}/edit' style='color:white;'>Vai al mio profilo.</a>"
           different_recipient: "La tua tipologia di utente (broker, agente, subagente) non puo partecipare a questa gara"
     attributes:
       attendee:

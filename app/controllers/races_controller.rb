@@ -45,14 +45,12 @@ class RacesController < ApplicationController
   # GET /races/new
   def new
     @race = Race.new
-
-    @race.name = Faker::Space.star
     @race.description = Faker::Matz.quote
     @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     @race.race_value = %W(10000 50000 100000 75000 25000).sample
     @race.compensation_start_amount = %W(0 0 0 0 500 1000).sample
     @race.commission = rand(5..50)
-    @race.kind = %w(pay_for_publish pay_for_join).sample
+    @race.kind = %w(open close).sample
     @race.status = 'started'
   end
 
@@ -80,7 +78,6 @@ class RacesController < ApplicationController
 
   def publish_check
     if @race.update(kind: params[:race] ? params[:race][:kind] : params[:kind])
-      current_user.reward.decrement_public_races if @race.pay_for_publish?
       if @race.started?
         flash[:notice] = I18n.t('flash.races.publish_check.notice')
       else
@@ -99,7 +96,8 @@ class RacesController < ApplicationController
       if @race.update(race_params)
         format.html {redirect_to race_path(@race), notice: I18n.t('flash.races.update.notice')}
       else
-        format.html { render :edit }
+        format.html { redirect_to race_path(@race),
+                                  alert:  t("activerecord.errors.models.race.#{@race.errors.first[0]}", user_id: current_user.id) }
       end
     end
   end
@@ -121,7 +119,7 @@ class RacesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def race_params
-    params.require(:race).permit(:name, :description, :owner, :commission, :compensation_start_amount,
+    params.require(:race).permit(:description, :owner, :commission, :compensation_start_amount,
                                  :recipients, :race_value, :category_id, :starts_at, :ends_at, :status, :kind)
   end
 end

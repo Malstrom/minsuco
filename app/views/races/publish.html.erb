@@ -3,7 +3,7 @@
     <!-- Team Panel-->
     <div class="panel panel-info">
       <div class="panel-heading">
-        <div class="panel-title text-center">Gara pubblica</div>
+        <div class="panel-title text-center">Gara aperta</div>
       </div>
       <div class="panel-body bt  text-center">
         <em class="fa fa-group text-info fa-5x"></em>
@@ -21,20 +21,16 @@
       <br>
       <div class="panel-body bt">
         <div class="row">
-          <div class="col-md-8">Costo di pubblicazione</div>
-          <% if current_user.has_reward?('pay_for_publish') %>
-            <div class="col-md-4 text-right">0€</div>
-        <% else %>
+          <div class="col-md-8">Gara aperte gratuite</div>
             <div class="col-md-4 text-right">
-              <%= number_to_currency @race.price / 100, symbol: "€" %>
+              <%= @race.owner.reward.public_races.to_i %>
             </div>
-        <% end %>
         </div>
       </div>
       <div class="panel-footer text-center">
-        <% if @race.payed? or current_user.has_reward?('pay_for_publish') %>
+        <% if @race.payed? or current_user.has_reward?('open') %>
           <%= form_for @race, url: publish_check_race_path, method:'patch', class:"form-inline" do |f| %>
-            <%= f.hidden_field :kind, value: :pay_for_publish %>
+            <%= f.hidden_field :kind, value: :open %>
             <%= f.submit "Pubblica", class: "btn btn-info btn-oval", id:"publish_public" %>
           <% end %>
         <% else %>
@@ -55,7 +51,7 @@
         <div class="pull-right">
           <!--<div class="label label-success">29€</div>-->
         </div>
-        <div class="panel-title text-center">Gara privata</div>
+        <div class="panel-title text-center">Gara chiusa</div>
       </div>
       <div class="panel-body bt  text-center">
         <em class="fa fa-group fa-5x text-warning"></em>
@@ -77,8 +73,8 @@
 
       <div class="panel-footer text-center">
         <%= form_for @race, url: publish_check_race_path, method:'patch', class:"form-inline" do |f| %>
-          <%= f.hidden_field :kind, value: :pay_for_join %>
-          <%= f.submit "Pubblica la gara come privata", class: "btn btn-warning btn-oval", id:"publish_private" %>
+          <%= f.hidden_field :kind, value: :close %>
+          <%= f.submit "Pubblica la gara come chiusa", class: "btn btn-warning btn-oval", id:"publish_private" %>
         <% end %>
       </div>
     </div>
@@ -86,7 +82,7 @@
   </div>
 </div>
 
-<% unless @race.owner.valid? %>
+<% unless @race.owner.valid_attribute?(:rui) %>
   <%= render partial: 'layouts/modals/rui_modal' %>
 <% end %>
 

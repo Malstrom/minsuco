@@ -6,15 +6,15 @@ Feature: Login and registration for users
     Then  I should see "Cosa desideri fare?"
 
   Scenario: User with basic account should see its Dashboard
-    Given I logged in as a "basic"
+    Given I logged in having basic account
     Then  I should see "Dashboard"
 
   Scenario: User with pro attendee account should see its Dashboard
-    Given I logged in as a "attendee"
+    Given I logged in having basic account
     Then  I should see "Dashboard"
 
   Scenario: User with pro creator account should see its Dashboard
-    Given I logged in as a "creator"
+    Given I logged in having basic account
     Then  I should see "Dashboard"
 
 

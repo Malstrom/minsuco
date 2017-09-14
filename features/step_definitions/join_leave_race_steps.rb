@@ -6,12 +6,8 @@ And(/^I start race$/) do
   find("#start_button").click
 end
 
-When(/^I join in a (public|private|\d+) race$/) do |kind|
-  kind == 'private' ? kind = 'pay_for_join' : kind = 'pay_for_publish'
-
+When(/^I join in a (open|close|\d+) race$/) do |kind|
   race = create(:race, name:kind , kind: kind, owner: create(:user), permalink: kind)
-
-
   join_steps race.name
 end
 
@@ -48,7 +44,7 @@ def join_steps(race_name, join_value = 1000)
   visit "/races"
 
   find("##{race_name}").click
-  find("##{race_name}").click
+  find("#open_join_modal").click
 
   fill_in "join_value", :with => join_value
 

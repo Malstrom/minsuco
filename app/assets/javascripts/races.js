@@ -93,15 +93,15 @@ $('.datetimepicker').datetimepicker({
   }
 });
 
-$('#pay_for_publish').click(function(){
-  $( ".pay_for_publish" ).show();
-  $( ".pay_for_join" ).hide();
+$('#open').click(function(){
+  $( ".open" ).show();
+  $( ".close" ).hide();
   $( ".payola-checkout-button" ).show();
 });
 
-$('#pay_for_join').click(function(){
-  $( ".pay_for_publish" ).hide();
-  $( ".pay_for_join" ).show();
+$('#close').click(function(){
+  $( ".open" ).hide();
+  $( ".close" ).show();
   // $( ".payola-checkout-button" ).hide();
 });
 

@@ -1,9 +1,14 @@
 <% @races.each do |race| %>
   <div class="col-lg-4 col-md-6">
     <div class="panel b">
-      <% if race.kind == 'pay_for_publish' %>
+      <% if race.kind == 'open' %>
         <div class="panel-heading bg-info">
           <div class="pull-right">
+            <% if race.expired? %>
+              <div class="label label-danger info" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
+                Scaduta
+              </div>
+            <% end %>&nbsp
             <div class="label label-sucess info" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.public_race') %>">
               Pubblica
             </div>
@@ -18,14 +23,7 @@
               <% end %>
               <%= distance_of_time_in_words(Time.now, race.ends_at)  %>
             </small>
-            <!--<small>-->
-              <!--<div class="label label-info info pull-right" data-toggle="tooltip" data-placement="top"-->
-                   <!--data-original-title="<%# I18n.t('tooltips.races.permalink') %>">-->
-                <!--<%# race.permalink %>-->
-              <!--</div>-->
-            <!--</small>-->
           </h4>
-          <!--<small class="text-muted"><%# race.description.truncate_words(1) %></small>-->
         </div>
     <% else %>
         <div class="panel-heading bg-warning" >
@@ -34,8 +32,7 @@
               <div class="label label-danger info" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
                 Scaduta
               </div>
-            <% end %>
-            &nbsp;
+            <% end %>&nbsp
             <div class="label label-warning info" data-toggle="tooltip" data-placement="left" data-original-title="<%= I18n.t('tooltips.races.private_race') %>">
               Privata
             </div>
@@ -50,12 +47,6 @@
               <% end %>
               <%= distance_of_time_in_words(Time.now, race.ends_at)  %>
             </small>
-            <!--<small>-->
-              <!--<div class="label label-warning info pull-right" data-toggle="tooltip" data-placement="top"-->
-                   <!--data-original-title="<%# I18n.t('tooltips.races.permalink') %>">-->
-                <!--<%# race.permalink %>-->
-              <!--</div>-->
-            <!--</small>-->
           </h4>
         </div>
     <% end %>

@@ -7,7 +7,7 @@ class Attendee < ApplicationRecord
 
   # validates_associated :user, :race
 
-  validate :unique_join, :not_joinable, :self_join, :race_value_cap, on: :create
+  validate :unique_join, :joinable, :self_join, :race_value_cap, on: :create
 
   validates :join_value, numericality: { only_integer: true }
 
@@ -15,7 +15,7 @@ class Attendee < ApplicationRecord
 
   before_create :set_status
 
-  after_create :decrement_rewards, if: proc { |attendee| attendee.race.pay_for_join? }
+  after_create :decrement_private_join_rewards, if: proc { |attendee| attendee.race.close? }
 
   after_create_commit   :join_in_race_event
   after_update_commit	  :update_race_event
@@ -29,17 +29,17 @@ class Attendee < ApplicationRecord
 
   private
 
-  def decrement_rewards
-    unless user.plan.stripe_id == "pro_attendee" or race.kind == 'pay_for_publish' or race.kind == "pay_for_publish"
+  def decrement_private_join_rewards
+    unless user.plan.stripe_id == "pro_attendee" or race.open?
       user.reward.decrement_join_private
     end
   end
 
   # check if attendee has permission to join the race (subscription, kind of race, free join token, ecc...)
-  def not_joinable
+  def joinable
     if !user.rui?
       errors.add(:no_rui, I18n.t('activerecord.errors.models.attendee.no_rui', :user_id => user.id ))
-    elsif race.pay_for_join? and !user.has_plan_for_join? and !user.has_reward?('pay_for_join')
+    elsif race.close? and !user.has_plan_for_join? and !user.has_reward?('close')
       errors.add(:invalid_plan, I18n.t('activerecord.errors.models.attendee.invalid_plan', :user_id => user.id))
       errors.add(:not_reward, I18n.t('activerecord.errors.models.attendee.no_reward', :user_id => user.id))
     elsif user.kind != race.recipients

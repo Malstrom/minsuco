@@ -47,11 +47,11 @@
 # end
 #
 # When(/^I create private race name "([^"]*)"$/) do |arg1|
-#   create(:race, name: arg1, kind: "pay_for_join", owner: $user)
+#   create(:race, name: arg1, kind: "close", owner: $user)
 # end
 #
 # When(/^I create public race name "([^"]*)"$/) do |arg1|
-#   create(:race, name: arg1, kind: "pay_for_publish", owner: $user)
+#   create(:race, name: arg1, kind: "open", owner: $user)
 # end
 #
 # When(/^I fill race form$/) do
@@ -89,13 +89,13 @@
 #
 # When(/^I publish race as "([^"]*)"$/) do |arg1|
 #   if arg1 == 'private'
-#     find('#pay_for_join').click
+#     find('#close').click
 #     click_on('Pubblica la gara')
 #   elsif arg1 == 'public'
-#     find('#pay_for_publish').click
+#     find('#open').click
 #     click_on('Pubblica la gara')
 #   elsif arg1 == 'public_basic_user'
-#     find('#pay_for_publish').click
+#     find('#open').click
 #     click_on('Paga e rendi la gara pubblica')
 #
 #     within_frame 'stripe_checkout_app' do
@@ -122,7 +122,7 @@
 #
 #   arg1.times do
 #     user = create(:user, email:"test_email_#{count}@test.com")
-#     create(:race, name:"test_private_race_#{count}", kind: 'pay_for_join', owner: user, permalink: count)
+#     create(:race, name:"test_private_race_#{count}", kind: 'close', owner: user, permalink: count)
 #     count += 1
 #   end
 #   count = 1

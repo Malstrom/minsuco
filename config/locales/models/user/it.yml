@@ -29,3 +29,4 @@ it:
         paused: "Ferma"
         started: "Attiva"
         draft: "Non pubblicata"
+        achieved: "Archiviata"

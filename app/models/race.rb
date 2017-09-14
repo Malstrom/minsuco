@@ -12,39 +12,48 @@ class Race < ApplicationRecord
 
   belongs_to :category
 
-  enum kind:        %i[pay_for_publish pay_for_join]
+  enum kind: [:open, :close]
+
   enum status:      %i[started paused draft achieved]
   enum recipients:  %i[broker agent for_all]
 
-  before_validation :set_permalink, on: :create
-
-  validate          :start_in_past, on: :create
+  before_validation :initialize_race, on: :create
+  validate          :start_in_past,   on: :create
 
   validates :race_value, numericality: { only_integer: true }
 
-  validate  :date_not_changed, :category_not_changed, :commission_not_decrased, on: :update
+  validate  :date_not_changed, :category_not_changed, :commission_not_changed, on: :update
 
-  validates_presence_of :name, :description, :commission, :recipients, :race_value,
-                        :category_id, :starts_at, :ends_at, :kind
+  validate  :publishability, on: :update
+
+  # name, permalink, price validate by payola sellable. write here for not forget this.
+  validates_presence_of :name, :permalink, :price,
+                        :description, :commission, :recipients, :race_value, :category_id, :starts_at, :ends_at, :kind
 
   before_save   :sanitize_data
   after_create  :set_redirect_path
 
-  before_update :set_status, if: proc { |race| race.status.nil? || race.status == :draft }
+  # before_update :set_status
 
-  after_create_commit :subscribe_owner
+  after_update  :decrement_open_race_reward, if: proc { |race| race.open? }
+
+  after_create_commit   :subscribe_owner
 
   # Use like this "Race.started_races"
   scope :started_races, -> { where status: :started }
   scope :not_expired,   -> { where('ends_at > ?', DateTime.now) }
   scope :expired,       -> { where('ends_at < ?', DateTime.now) }
 
-  scope :public_races,  -> { where(kind: :pay_for_publish) }
-  scope :private_races, -> { where(kind: :pay_for_join) }
+  scope :public_races,  -> { where(kind: :open) }
+  scope :private_races, -> { where(kind: :close) }
 
   scope :by_category,   ->(category)  { where(category: category) }
   scope :by_owner,      ->(owner)     { where(owner: owner) }
   scope :by_recipients, ->(recipient) { where(recipients: [recipient, :for_all]) }
+
+  def decrement_open_race_reward
+    owner.reward.decrement_public_races
+  end
 
   def likes
     Event.where(thing_type: 'Race', thing_id: id, message: 'add_like')
@@ -54,9 +63,9 @@ class Race < ApplicationRecord
     value_covered.to_f / race_value.to_f * 100
   end
 
-  # all external validation needed for publish race
+  # validations for publishing race
   def publishable?
-    owner.valid?
+    owner.valid_attribute?(:rui) and owner.has_reward?('open') ? true : false
   end
 
   # If owner payed for the race when publish as public race
@@ -80,7 +89,6 @@ class Race < ApplicationRecord
 
   # set case and check if Owner not write prohibited data in fields like it s name or phone number
   def sanitize_data
-    name.upcase!
     description.capitalize!
   end
 
@@ -111,18 +119,34 @@ class Race < ApplicationRecord
 
   private
 
-  # SETTTERS
-  def set_status
-    self.status = (publishable? ? :started : :draft)
+  def publishability
+    if self.started? or self.status == nil
+      if publishable?
+        self.status = :started
+      else
+        self.draft!
+        errors.add(:not_publishable, I18n.t('activerecord.errors.models.race.not_publishable'))
+      end
+    end
   end
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path
-    update_column(:redirect_path, "/races/#{id}/publish_check?kind=pay_for_publish")
+    update_column(:redirect_path, "/races/#{id}/publish_check?kind=open")
   end
 
   def set_permalink
-    self.permalink = Time.now.to_i.to_s
+    self.permalink ||= (Faker::Coffee.blend_name.parameterize + "-" + SecureRandom.hex(3)).upcase
+  end
+
+  # create race name if not exists (need for test)
+  def set_name
+    self.name ||= "Gara di #{owner.name}".parameterize
+  end
+
+  def initialize_race
+    set_permalink
+    set_name
   end
 
   # CUSTOM VALIDATIONS
@@ -147,8 +171,8 @@ class Race < ApplicationRecord
   end
 
   # validation when update race
-  def commission_not_decrased
-    if commission < commission_was
+  def commission_not_changed
+    if commission_changed? && persisted?
       errors.add(:commission_cant_updated, I18n.t('activerecord.errors.models.race.commission_cant_updated'))
     end
   end

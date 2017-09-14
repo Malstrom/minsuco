@@ -14,7 +14,7 @@ class Reward < ApplicationRecord
   private
 
   def set_default_rewards
-    self.join_private = 10
-    self.public_races = 10
+    self.join_private = 3
+    self.public_races = 3
   end
 end

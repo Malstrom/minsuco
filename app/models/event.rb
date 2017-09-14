@@ -21,10 +21,10 @@ class Event < ApplicationRecord
     case thing_type
       when 'Attendee'
         attendee = Attendee.find_by_id(thing_id)
-        attendee ? attendee.race.name : "gara non trovata"
+        attendee ? attendee.race.permalink : "gara non trovata"
       when 'Race'
         race = Race.find_by_id(thing_id)
-        race ? race.name : "gara non trovata"
+        race ? race.permalink.permalink : "gara non trovata"
       else
         false
     end

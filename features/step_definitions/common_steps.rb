@@ -95,8 +95,8 @@ end
 Given(/^Create list of races$/) do
   user = create :user, email:'user@email.com'
   create :race, category: Category.find_by_name('auto'), owner: user, name: "test_race1"
-  create :race, kind: 'pay_for_publish', owner: user, name: "test_race2"
-  create :race, kind: 'pay_for_join', owner: user, name: "test_race"
+  create :race, kind: 'open', owner: user, name: "test_race2"
+  create :race, kind: 'close', owner: user, name: "test_race"
   create :race, commission: 10, owner: user, name: "test_race"
   create :race, commission: 20, owner: user, name: "test_race"
   create :race, ends_at: (Time.now + 100.hours).strftime("%d/%m/%Y"), owner: user, name: "test_race"

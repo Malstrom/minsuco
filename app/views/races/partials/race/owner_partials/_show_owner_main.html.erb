@@ -14,7 +14,7 @@
         </div>
       <% end %>
       &nbsp;
-      <% if @race.pay_for_publish? %>
+      <% if @race.open? %>
         <div class="label label-info info" data-toggle="tooltip" data-placement="top"
              data-original-title="<%= I18n.t("tooltips.races.public_race") %>" >
           Pubblica
@@ -27,7 +27,7 @@
       <% end %>
     </div>
     <h4 class="mv">
-      <span><%= @race.name %></span>
+      <span><%= @race.permalink %></span>
     </h4>
   </div>
   <div class="panel-body bb bt">

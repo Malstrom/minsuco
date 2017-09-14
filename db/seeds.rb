@@ -79,7 +79,7 @@ end
   race_saved = false
   until race_saved
 
-    race.name = Faker::App.name
+    race.permalink = Faker::App.name
     race.description = Faker::Matz.quote
     race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     race.race_value = race_values.sample
@@ -87,11 +87,11 @@ end
     race.starts_at = rand(DateTime.now - 7.days..DateTime.now + 7.days)
     race.ends_at = race.starts_at + rand( 30..90 ).days
     race.commission = rand(5..50)
-    race.kind = %w(pay_for_publish pay_for_join).sample
+    race.kind = %w(open close).sample
     race.status = 'started'
     race.recipients = %w(broker agent for_all).sample
     race.price = 2900
-    race.permalink = race.name
+    race.permalink = race.permalink
 
     race_saved = race.save
 

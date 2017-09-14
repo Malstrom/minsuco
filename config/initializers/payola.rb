@@ -9,7 +9,7 @@ Payola.configure do |payola|
   #   if sale.product_type == 'Race'
   #     race = Race.find(sale.product_id)
   #     race.update_attribute(:status, 'started')
-  #     race.update_attribute(:kind, 'pay_for_publish')
+  #     race.update_attribute(:kind, 'open')
   #   end
   # end
 

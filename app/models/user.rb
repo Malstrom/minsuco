@@ -52,10 +52,8 @@ class User < ApplicationRecord
   validates_presence_of :email
   validates :email, uniqueness: true
   #
-  validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }
-  validates_presence_of :name, :fiscal_code,         on: :update, :if => lambda { self.individual? }
-
-  validates_presence_of :address, :city, :zip, :address_num, on: :update
+  # validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }
+  # validates_presence_of :name, :fiscal_code,         on: :update, :if => lambda { self.individual? }
 
   validates :rui, length: { minimum: 10 }, on: :update
 
@@ -87,9 +85,9 @@ class User < ApplicationRecord
 
   def has_reward?(kind)
     case kind
-      when 'pay_for_publish'
+      when 'open'
         reward.public_races > 0 ? true : false
-      when 'pay_for_join'
+      when 'close'
         reward.join_private > 0 ? true : false
       else
         false

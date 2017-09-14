@@ -9,7 +9,7 @@ FactoryGirl.define do
     starts_at Time.now.strftime("%d/%m/%Y")
     ends_at((Time.now + 100.hours).strftime("%d/%m/%Y") )
     status "started"
-    kind "pay_for_join"
+    kind "close"
     permalink "#{Time.now.to_i}-TestRace"
     price 2900
     association :owner, factory: :user

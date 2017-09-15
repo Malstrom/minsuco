@@ -35,7 +35,7 @@ class Race < ApplicationRecord
 
   # before_update :set_status
 
-  after_update  :decrement_open_race_reward, if: proc { |race| race.open? }
+  # after_update  :decrement_open_race_reward, if: proc { |race| race.open? }
 
   after_create_commit   :subscribe_owner
 

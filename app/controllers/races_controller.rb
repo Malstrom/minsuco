@@ -79,6 +79,9 @@ class RacesController < ApplicationController
   def publish_check
     if @race.update(kind: params[:race] ? params[:race][:kind] : params[:kind])
       if @race.started?
+        if @race.open? and current_user.plan != Plan.find_by_stripe_id("pro_creator")
+          owner.reward.decrement_public_races
+        end
         flash[:notice] = I18n.t('flash.races.publish_check.notice')
       else
         flash[:alert] = I18n.t('flash.races.publish_check.alert')

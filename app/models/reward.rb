@@ -8,7 +8,7 @@ class Reward < ApplicationRecord
   end
 
   def decrement_public_races
-    decrement!(:public_races, 1)
+    decrement!(:public_races, 1) if public_races >= 1
   end
 
   private

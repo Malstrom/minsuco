@@ -67,6 +67,17 @@ class User < ApplicationRecord
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
   scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
 
+  # several checks for se if can accept payments from user.
+  def billable?
+    if individual?
+      valid_attribute?(:name) and valid_attribute?(:fiscal_code) ? true : false
+    end
+
+    if company?
+      valid_attribute?(:name) and valid_attribute?(:fiscal_code) ? true : false
+    end
+  end
+
   def private_channel
     Channel.find_by_name "#{id}_user_channel"
   end

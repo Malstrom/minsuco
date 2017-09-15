@@ -7,6 +7,10 @@
         </button>
         <h4 id="joinModalLabel" class="modal-title">Inserisci per quale importo vuoi partecipare</h4>
       </div>
+      <br>
+      <div class="text-center">
+        <em class="text-center fa text-default fa-5x fa-id-card-o"></em>
+      </div>
       <%= form_for([@race, @race.attendees.build]) do |f| %>
         <div class="modal-body">
           <fieldset>

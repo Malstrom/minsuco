@@ -1,0 +1,51 @@
+<% content_for :body_area do %>
+
+  <!-- Modal-->
+  <div id="userDataModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button id="closeMyModal" type="button" data-dismiss="modal" aria-label="Close" class="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 id="myModalLabel" class="modal-title">Prima abbiamo biosgno dei tuoi dati </h4>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="text-center">
+            <em class="text-center fa text-default fa-5x fa-id-card-o"></em>
+          </div>
+          <div class="panel-body">
+            <%= render :partial => "users/form", :locals => { :user => current_user, :where => :billing_modal} %>
+          </div>
+
+        </div>
+        <div class="modal-footer text-center">
+          <button id="save" type="button" class="btn btn-success btn-pill-left">Aggiorna profilo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('#userDataModal').modal('show').css("display", "block").addClass( "in" );
+
+    $('#save').click(function(){
+
+      data = $('form').serialize();
+      console.log(data);
+
+      $.ajax({
+        url: "/users/<%= current_user.id %>",
+        method: 'patch',
+        data: data,
+        dataType: "json",
+        success: function(){
+          $("#userDataModal").modal('hide');
+        },
+        error: function(data){
+          $("#errors").html("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");
+        }
+      });
+
+    });
+  </script>
+<% end %>

@@ -71,13 +71,19 @@
             <p class="lead">
               Iscritto al piano Pro partecipanti
             </p>
+          <% elsif !@user.billable? %>
+            <p class="text-danger">
+              Completa il tuo profilo personale prima.
+            </p>
+            <%= link_to 'Vai al mio profilo', edit_user_path(current_user) %>
           <% else %>
             <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_attendee').first,
                        email:current_user.email,
                        button_text: "Passa a un piano Pro Partecipanti"
             %>
+            <br>
           <% end %>
-          <br>
+
         </div>
       </div>
     </div>
@@ -114,6 +120,12 @@
             <p class="lead">
               Iscritto al piano Pro creatori
             </p>
+          <% elsif !@user.billable? %>
+            <p class="text-danger">
+              Completa il tuo profilo personale prima.
+              <br>
+              <%= link_to 'Vai al mio profilo', edit_user_path(current_user) %>
+            </p>
           <% else %>
             <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_creator').first,
                        email:current_user.email,
@@ -121,6 +133,7 @@
             %>
             <br>
           <% end %>
+
         </div>
       </div>
     </div>

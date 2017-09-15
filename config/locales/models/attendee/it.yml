@@ -14,4 +14,4 @@ it:
           different_recipient: "La tua tipologia di utente (broker, agente, subagente) non puo partecipare a questa gara"
     attributes:
       attendee:
-        join_value: Valora partecipazione
+        join_value: Importo

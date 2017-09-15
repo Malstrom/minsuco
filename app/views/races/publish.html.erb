@@ -33,6 +33,12 @@
             <%= f.hidden_field :kind, value: :open %>
             <%= f.submit "Pubblica", class: "btn btn-info btn-oval", id:"publish_public" %>
           <% end %>
+        <% elsif !current_user.billable? %>
+          <p class="text-danger">
+            Completa il tuo profilo personale prima.
+            <br>
+            <%= link_to 'Vai al mio profilo', edit_user_path(current_user) %>
+          </p>
         <% else %>
           <%= render 'payola/transactions/checkout', sellable: @race ,
                      email:current_user.email,

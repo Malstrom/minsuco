@@ -25,14 +25,10 @@
       <%= f.text_field :email, class: 'form-control'%>
     </div>
 
-
-
     <div class="form-group">
       <%= f.label :name  %>
       <%= f.text_field :name, class: 'form-control'%>
     </div>
-
-
 
     <div class="form-group">
       <%= f.label :kind  %>
@@ -61,6 +57,7 @@
           <%= f.text_field :city, class: 'form-control'%>
         </div>
       </div>
+
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :zip  %>
@@ -81,6 +78,14 @@
       </div>
     </div>
 
+  <% end %>
+
+    <div class="form-group">
+      <%= f.label :phone  %>
+      <%= f.text_field :phone, class: 'form-control'%>
+    </div>
+
+  <% unless where == :rui_modal %>
     <div class="form-group">
       <%= f.label :interest_list  %>
       <%= f.grouped_collection_select(:interest_list, Category.find_by_name('assicurazioni').children,
@@ -93,18 +98,11 @@
     <%= f.submit "Aggiorna informazioni", class:"btn btn-info" %>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :phone  %>
-    <%= f.text_field :phone, class: 'form-control'%>
-  </div>
 
   <p>
     <small class="text-muted">
-      Nessuna gara verrà pubblicata sul portale finchè il creatore non inserirà un RUI valido
+      Non è possibile ne creare ne partecipare a nessuna gara se non si inserisce il proprio RUI.
     </small>
     <br>
-    <small class="text-muted">
-      Prima di poter effetuare un pagamento l'utente deve fornire i dati di fatturazione.
-    </small>
   </p>
 <% end %>

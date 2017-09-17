@@ -1,5 +1,9 @@
 it:
   tooltips:
+    pieces:
+      name: "Nome che vuoi dare al a questo pezzo"
+      value: "Valore del pezzo"
+      duration: "Duarata (su questo dato verrà calcolata la tua provvigione)"
     races:
       public_race: "Possono partecipare tutte le persone senza usare nessun bonus ne avere un piano per partecipanti."
       private_race: "Possono partecipare solo le persone che hanno un account per partecipanti oppure avere un bonus di partecipazione."

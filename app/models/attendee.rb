@@ -3,22 +3,21 @@ class Attendee < ApplicationRecord
   belongs_to :user
   belongs_to :race
 
+  has_many :pieces, :dependent => :destroy
+
+  accepts_nested_attributes_for :pieces, allow_destroy: true
+
   enum status: [:confirmed, :deny, :waiting, :banned]
 
   # validates_associated :user, :race
 
-  validate :unique_join, :joinable, :self_join, :race_value_cap, on: :create
-
-  validates :join_value, numericality: { only_integer: true }
-
-  validate :can_leave, on: :delete
+  validate :unique_join, :joinable, :self_join, :race_target_cap, on: :create
 
   before_create :set_status
 
   after_create :decrement_private_join_rewards, if: proc { |attendee| attendee.race.close? }
 
   after_create_commit   :join_in_race_event
-  after_update_commit	  :update_race_event
   after_destroy_commit	:leave_from_race_event
 
   scope :confirmed, -> { where status: :confirmed }
@@ -47,7 +46,6 @@ class Attendee < ApplicationRecord
         errors.add(:different_recipient, I18n.t('activerecord.errors.models.attendee.different_recipient'))
       end
     else
-      true
     end
   end
 
@@ -63,15 +61,9 @@ class Attendee < ApplicationRecord
     end
   end
 
-  def race_value_cap
-    if race.value_covered + join_value > race.race_value
-      errors.add(:race_value_cap, I18n.t('activerecord.errors.models.attendee.race_value_cap'))
-    end
-  end
-
-  def can_leave
-    if attendee.status == 'banned'
-      errors.add(:can_leave, I18n.t('activerecord.errors.models.attendee.can_leave'))
+  def race_target_cap
+    if race.value_covered + pieces.sum(&:value) > race.race_value
+      errors.add(:race_target_cap, I18n.t('activerecord.errors.models.attendee.race_target_cap'))
     end
   end
 
@@ -89,17 +81,6 @@ class Attendee < ApplicationRecord
   def leave_from_race_event
     # create_attendee_event(user,"#{race.owner.id}_user_channel",'leave_from_race', true)
     # ChannelSubscription.where(user:user, channel: Channel.find_by_name("#{race.id}_race_channel")).first.destroy
-  end
-
-  # create event every time attendee: update status, update join_value
-  def update_race_event
-    if previous_changes['status']
-      prev_status = previous_changes['status'][0]
-      create_attendee_event(race.owner,"#{user.id}_user_channel","change_status", true, prev_status, status, )
-    elsif previous_changes['join_value']
-      prev_join_value = previous_changes['join_value'][0]
-      create_attendee_event( user,"#{race.owner.id}_user_channel", "change_join_value", true, prev_join_value)
-    end
   end
 
   def create_attendee_event(who_did, channel, message, notifiable, previous = nil, now = nil)

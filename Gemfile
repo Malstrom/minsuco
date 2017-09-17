@@ -39,6 +39,8 @@ gem 'cancancan', '~> 2.0'
 gem "chartkick"       # simply charts
 gem 'groupdate'       # with chartkick charts are very simply
 
+gem "nested_form"
+
 # gem 'paper_trail'   # Track changes to your models' data. Good for auditing or versioning.
 # gem 'active_admin'  # elegant backends for website administration
 

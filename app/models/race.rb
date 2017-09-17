@@ -12,7 +12,7 @@ class Race < ApplicationRecord
 
   belongs_to :category
 
-  enum kind: [:open, :close]
+  enum kind: %i[open close]
 
   enum status:      %i[started paused draft achieved]
   enum recipients:  %i[broker agent for_all]
@@ -60,12 +60,12 @@ class Race < ApplicationRecord
   end
 
   def completed_percentage
-    value_covered.to_f / race_value.to_f * 100
+    (value_covered.to_f / race_value.to_f * 100).to_i
   end
 
   # validations for publishing race
   def publishable?
-    owner.valid_attribute?(:rui) and owner.has_reward?('open') ? true : false
+    owner.valid_attribute?(:rui) && owner.has_reward?('open') ? true : false
   end
 
   # If owner payed for the race when publish as public race
@@ -80,7 +80,9 @@ class Race < ApplicationRecord
 
   # Sum of all attendees join_value for this race
   def value_covered
-    Attendee.where(race_id: id, status: 'confirmed').sum(:join_value)
+    value_covered = 0
+    attendees.each { |attendee| value_covered += attendee.pieces.sum :value }
+    value_covered
   end
 
   def total_commission
@@ -99,7 +101,7 @@ class Race < ApplicationRecord
   end
 
   def already_liked_by_user(who_did)
-    if Event.where(thing_type: 'Race', thing_id: self.id, who_did: who_did, message: 'add_like').first
+    if Event.where(thing_type: 'Race', thing_id: id, who_did: who_did, message: 'add_like').first
       true
     else
       false
@@ -120,11 +122,11 @@ class Race < ApplicationRecord
   private
 
   def publishability
-    if self.started? or self.status == nil
+    if started? || status.nil?
       if publishable?
         self.status = :started
       else
-        self.draft!
+        draft!
         errors.add(:not_publishable, I18n.t('activerecord.errors.models.race.not_publishable'))
       end
     end
@@ -136,7 +138,7 @@ class Race < ApplicationRecord
   end
 
   def set_permalink
-    self.permalink ||= (Faker::Coffee.blend_name.parameterize + "-" + SecureRandom.hex(3)).upcase
+    self.permalink ||= (Faker::Coffee.blend_name.parameterize + '-' + SecureRandom.hex(3)).upcase
   end
 
   # create race name if not exists (need for test)

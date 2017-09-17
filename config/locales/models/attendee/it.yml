@@ -7,10 +7,10 @@ it:
           not_joinable: "Devi avere un account Pro per partecipanti per accedere alla gara. <a href='/users/%{user_id}/plans' style='color:white;'>Passa a premium.</a>"
           invalid_plan: "Il tuo piano non ti permette di partecipare a questa gara. <a href='/users/%{user_id}/plans' style='color:white;'>Passa a premium.</a>"
           no_reward: "Non hai più gare gratuite. <a href='/users/%{user_id}/plans' style='color:white;'>Passa a premium.</a>"
-          race_value_cap: "Non puoi partecipare a questa gara con questo importo."
+          race_target_cap: "Partecipazione fallita! La somma dei tuoi pezzi supera quella dell'obbiettivo della gara."
           can_leave: "Non puoi lasciare una gara dalla quale sei stato bannato"
           attendee: Partecipante
-          no_rui: "Per partecipare fornirci un rui valido. <a href='/users/%{user_id}/edit' style='color:white;'>Vai al mio profilo.</a>"
+          no_rui: "Per partecipare devi inserire nel tuo profilo un RUI valido. <a href='/users/%{user_id}/edit' style='color:white;'>Vai al mio profilo.</a>"
           different_recipient: "La tua tipologia di utente (broker, agente, subagente) non puo partecipare a questa gara"
     attributes:
       attendee:

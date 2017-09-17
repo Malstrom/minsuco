@@ -1,11 +1,11 @@
 Feature: New feature
 
-  Scenario: Race should strated if user have valid rui
+  Scenario: Race should started if user have valid rui
     Given a user: "john" exists with email: "test@usergmail.com", rui: "12345678910", name: "john"
     And a race exists with name: "test_race", kind: "open", owner: user "john"
     Then a race: "test_race" should exist with status: "started"
 
-  Scenario: Race should strated if user have valid rui
+  Scenario: Race should started if user have valid rui
     Given a user: "john" exists with email: "test@usergmail.com", rui: "12345678910", name: "john"
     And a race exists with name: "test_race", kind: "open", owner: user "john"
     Then a race: "test_race" should exist with status: "started"

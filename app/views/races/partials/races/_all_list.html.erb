@@ -1,0 +1,65 @@
+
+<% @races.each do |race| %>
+  <div class="list-group">
+    <a href="<%= race_path(race) %>" class="list-group-item">
+      <table class="wd-wide">
+        <tbody>
+        <tr>
+          <td class="wd-xs">
+            <div class="ph text-center">
+              <% if race.kind == 'open' %>
+                <em class="fa fa-group fa-2x text-info"></em>
+              <% else %>
+                <em class="fa fa-group fa-2x text-warning"></em>
+            <% end %>
+            </div>
+          </td>
+          <td>
+            <div class="ph">
+              <h4 class="media-box-heading"><%= race.name %></h4>
+              <small class="text-muted"><%= race.description %></small>
+            </div>
+          </td>
+          <td class="wd-sm hidden-xs hidden-sm">
+            <div class="ph">
+                <% if race.expired? %>
+                  <p class="m0">Scaduta da</p>
+                  <small class="text-muted">
+                  <%= distance_of_time_in_words(Time.now, race.ends_at)  %>
+                  </small>
+                <% else %>
+                  <p class="m0">Scade</p>
+                  <small class="text-muted">
+                  <%= race.ends_at.strftime('%d/%m/%Y') %>
+                  </small>
+                <% end %>
+            </div>
+          </td>
+          <td class="wd-xs hidden-xs hidden-sm">
+            <div class="ph">
+              <p class="m0">Categoria</p>
+              <small class="text-muted">Yesterday at 10:20 pm</small>
+            </div>
+          </td>
+          <td class="wd-xs hidden-xs hidden-sm">
+            <div class="ph">
+              <p class="m0">Obbiettivo / coperto</p>
+              <small class="text-muted">
+                <%= race.race_value %> /
+                <%= race.value_covered %>
+
+              </small>
+            </div>
+          </td>
+          <td class="wd-sm">
+            <div class="ph">
+              <progressbar value="<%= race.completed_percentage %>" type="green" class="m0 progress-xs"><%= race.completed_percentage %></progressbar>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </a>
+    <!-- END dashboard main content-->
+  </div>
+<% end %>

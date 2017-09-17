@@ -190,6 +190,7 @@ GEM
     mustermann (1.0.0)
     mysql2 (0.4.7)
     mysql2 (0.4.7-x64-mingw32)
+    nested_form (0.3.2)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
@@ -369,6 +370,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   meta_request
   mysql2
+  nested_form
   omniauth-facebook
   omniauth-google-oauth2
   omnicontacts!

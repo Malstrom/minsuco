@@ -1,0 +1,11 @@
+it:
+  activerecord:
+    attributes:
+      piece:
+        value: Importo
+        duration: Durata(anni)
+        name: Nome
+    errors:
+      models:
+        piece:
+          last_piece: "Non puoi eliminare l'ultimo pezzo dalla tua partecipazione."

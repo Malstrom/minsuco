@@ -32,8 +32,8 @@
 
 
 <% content_for :body_area do %>
-  <%= render partial: 'attendees/partials/modal_join' %>
-  <%= render partial: 'attendees/partials/modal_edit_form' if current_user.participation(@race) %>
+  <%= render partial: 'attendees/partials/modal_join', :locals => { :attendee => current_user } %>
+  <%# render partial: 'attendees/partials/modal_edit_form' if current_user.participation(@race) %>
 <% end %>
 
 <% unless current_user.valid_attribute?(:rui) %>

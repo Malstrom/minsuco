@@ -1,21 +1,20 @@
 class RacesController < ApplicationController
   load_and_authorize_resource
 
-
-  before_action :set_race, only: [:show, :edit, :update, :publish, :publish_check, :like]
+  before_action :set_race, only: %i[show edit update publish publish_check like]
 
   # GET /races
   # GET /races.json
   def index
-    if params[:category_id] and !params[:category_id].empty?
+    if params[:category_id] && !params[:category_id].empty?
       category = Category.find(params[:category_id])
       @races = Race.by_category(category)
-                   .not_expired.by_recipients(current_user.kind).order("ends_at ASC")
-    elsif params[:commission] and !params[:commission].empty?
+                   .not_expired.by_recipients(current_user.kind).order('ends_at ASC')
+    elsif params[:commission] && !params[:commission].empty?
       @races = Race.not_expired.by_recipients(current_user.kind).order "commission #{params[:commission]}"
-    elsif params[:kind] and !params[:kind].empty?
+    elsif params[:kind] && !params[:kind].empty?
       @races = Race.not_expired.by_recipients(current_user.kind).order "kind #{params[:commission]}"
-    elsif params[:ends_at] and !params[:ends_at].empty?
+    elsif params[:ends_at] && !params[:ends_at].empty?
       @races = Race.not_expired.by_recipients(current_user.kind).order "ends_at #{params[:ends_at]}"
     else
       @races = Race.not_expired.by_recipients(current_user.kind)
@@ -23,14 +22,14 @@ class RacesController < ApplicationController
   end
 
   def user_races
-    if params[:category_id] and !params[:category_id].empty?
+    if params[:category_id] && !params[:category_id].empty?
       category = Category.find(params[:category_id])
-      @races = Race.by_owner(current_user).by_category(category).order("ends_at ASC}")
-    elsif params[:commission] and !params[:commission].empty?
+      @races = Race.by_owner(current_user).by_category(category).order('ends_at ASC}')
+    elsif params[:commission] && !params[:commission].empty?
       @races = Race.by_owner(current_user).order "commission #{params[:commission]}"
-    elsif params[:kind] and !params[:kind].empty?
+    elsif params[:kind] && !params[:kind].empty?
       @races = Race.by_owner(current_user).order "kind #{params[:commission]}"
-    elsif params[:ends_at] and !params[:ends_at].empty?
+    elsif params[:ends_at] && !params[:ends_at].empty?
       @races = Race.by_owner(current_user).order "ends_at #{params[:ends_at]}"
     else
       @races = Race.by_owner(current_user)
@@ -40,6 +39,11 @@ class RacesController < ApplicationController
   # GET /races/1
   # GET /races/1.json
   def show
+    @attendee = current_user.attendee(@race)
+    unless @attendee
+      @attendee = @race.attendees.build
+      @attendee.pieces.build
+    end
   end
 
   # GET /races/new
@@ -47,19 +51,17 @@ class RacesController < ApplicationController
     @race = Race.new
     @race.description = Faker::Matz.quote
     @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
-    @race.race_value = %W(10000 50000 100000 75000 25000).sample
-    @race.compensation_start_amount = %W(0 0 0 0 500 1000).sample
+    @race.race_value = %w[10000 50000 100000 75000 25000].sample
+    @race.compensation_start_amount = %w[0 0 0 0 500 1000].sample
     @race.commission = rand(5..50)
-    @race.kind = %w(open close).sample
+    @race.kind = %w[open close].sample
     @race.status = 'started'
   end
 
-  def publish
-  end
+  def publish; end
 
   # GET /races/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /races
   # POST /races.json
@@ -67,7 +69,7 @@ class RacesController < ApplicationController
     @race = current_user.races.build(race_params)
     respond_to do |format|
       if @race.save
-        format.html {redirect_to publish_race_path(@race), notice: I18n.t('flash.races.create.notice')}
+        format.html { redirect_to publish_race_path(@race), notice: I18n.t('flash.races.create.notice') }
         format.json { render :show, status: :created, location: @race }
       else
         format.html { render :new }
@@ -79,7 +81,7 @@ class RacesController < ApplicationController
   def publish_check
     if @race.update(kind: params[:race] ? params[:race][:kind] : params[:kind])
       if @race.started?
-        if @race.open? and current_user.plan != Plan.find_by_stripe_id("pro_creator")
+        if @race.open? && current_user.plan != Plan.find_by_stripe_id('pro_creator')
           owner.reward.decrement_public_races
         end
         flash[:notice] = I18n.t('flash.races.publish_check.notice')
@@ -97,10 +99,12 @@ class RacesController < ApplicationController
   def update
     respond_to do |format|
       if @race.update(race_params)
-        format.html {redirect_to race_path(@race), notice: I18n.t('flash.races.update.notice')}
+        format.html { redirect_to race_path(@race), notice: I18n.t('flash.races.update.notice') }
       else
-        format.html { redirect_to race_path(@race),
-                                  alert:  t("activerecord.errors.models.race.#{@race.errors.first[0]}", user_id: current_user.id) }
+        format.html do
+          redirect_to race_path(@race),
+                      alert: t("activerecord.errors.models.race.#{@race.errors.first[0]}", user_id: current_user.id)
+        end
       end
     end
   end

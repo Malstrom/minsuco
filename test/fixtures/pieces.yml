@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  attendee: one
+  name: MyString
+  value: 1
+  duration: 1
+
+two:
+  attendee: two
+  name: MyString
+  value: 1
+  duration: 1

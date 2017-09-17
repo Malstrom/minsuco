@@ -22,7 +22,6 @@ Feature: Create race
     And I fill race attribute "start_date" with "10/08/2017"
     Then I should see "La gara non puo iniziare nel passato"
 
-    @current
   Scenario: Basic user should be able to publish race as public using reward
     Given I logged in having basic account
     When I visit "/races/new"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911170652) do
+ActiveRecord::Schema.define(version: 20170915152403) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -189,6 +189,16 @@ ActiveRecord::Schema.define(version: 20170911170652) do
     t.index ["guid"], name: "index_payola_subscriptions_on_guid"
   end
 
+  create_table "pieces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "attendee_id"
+    t.string "name"
+    t.integer "value"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendee_id"], name: "index_pieces_on_attendee_id"
+  end
+
   create_table "plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "stripe_id"
@@ -308,6 +318,7 @@ ActiveRecord::Schema.define(version: 20170911170652) do
   add_foreign_key "events", "users", column: "who_did_id"
   add_foreign_key "featured_races", "races"
   add_foreign_key "friends", "users"
+  add_foreign_key "pieces", "attendees"
   add_foreign_key "races", "users", column: "owner_id"
   add_foreign_key "rewards", "users"
   add_foreign_key "users", "plans"

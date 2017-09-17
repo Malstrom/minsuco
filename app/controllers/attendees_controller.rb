@@ -1,4 +1,4 @@
- class AttendeesController < ApplicationController
+class AttendeesController < ApplicationController
   # load_and_authorize_resource
 
   before_action :set_attendee, only: [:update, :destroy]
@@ -14,7 +14,8 @@
   # POST /attendees.json
   def create
     race = Race.find(params[:race_id])
-    @attendee = race.attendees.build(user:current_user, join_value:params[:attendee][:join_value])
+    @attendee = race.attendees.build(attendee_params)
+    @attendee.user = current_user
 
     respond_to do |format|
       if @attendee.save
@@ -58,7 +59,8 @@
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendee_params
-      params.require(:attendee).permit(:join_value, :status)
+      params.require(:attendee).permit(:join_value, :status,
+                                       pieces_attributes: [:id, :name, :value, :duration,:_destroy])
       # params.fetch(:attendee, {:join_value})
     end
 end

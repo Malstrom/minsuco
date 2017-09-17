@@ -3,6 +3,9 @@ it:
     races:
       new:
         form_title: "Compila la tua gara."
+      modal:
+        join:
+          text_help: "Descrivi ogni singolo pezzo che vuoi inserire nella tua partecipazione alla gara. Premi + per aggiungere un pezzo. "
     topnavbar:
       notifications:
         more: "Ultime notifiche"

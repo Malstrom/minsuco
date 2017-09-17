@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915152403) do
+ActiveRecord::Schema.define(version: 20170917131254) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 20170915152403) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "commissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "race_id"
+    t.integer "value"
+    t.integer "starts"
+    t.integer "ends"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["race_id"], name: "index_commissions_on_race_id"
   end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -315,6 +325,7 @@ ActiveRecord::Schema.define(version: 20170915152403) do
 
   add_foreign_key "channel_subscriptions", "channels"
   add_foreign_key "channel_subscriptions", "users"
+  add_foreign_key "commissions", "races"
   add_foreign_key "events", "users", column: "who_did_id"
   add_foreign_key "featured_races", "races"
   add_foreign_key "friends", "users"

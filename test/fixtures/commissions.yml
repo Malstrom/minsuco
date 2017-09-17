@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  race: one
+  value: 1
+  starts: 1
+  ends: 1
+
+two:
+  race: two
+  value: 1
+  starts: 1
+  ends: 1

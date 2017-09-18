@@ -50,7 +50,6 @@ Feature: Join in race
     And I join with 1 pieces to join named 'first' with '110000' value for '1' years
     Then I should see "La somma dei tuoi pezzi supera quella dell'obbiettivo della gara"
 
-  @current
   Scenario: User should update its join
     Given I logged in having basic account
     And I complete my profile

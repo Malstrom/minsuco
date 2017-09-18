@@ -73,7 +73,7 @@ When(/^I not have reward for (join|publish|\d+) race$/) do |reward|
   if reward == 'join'
     User.first.reward.update(join_private: 0 )
   else
-    User.first.reward.update(pubic_races: 0 )
+    User.first.reward.update(public_races: 0 )
   end
 end
 

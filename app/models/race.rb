@@ -1,6 +1,8 @@
 class Race < ApplicationRecord
   include Payola::Sellable
 
+  belongs_to :category
+
   # who create the race
   belongs_to :owner, class_name: 'User'
 
@@ -10,7 +12,8 @@ class Race < ApplicationRecord
 
   has_many :featured_races
 
-  belongs_to :category
+  has_many :commissions
+  accepts_nested_attributes_for :commissions, allow_destroy: true
 
   enum kind: %i[open close]
 
@@ -24,12 +27,13 @@ class Race < ApplicationRecord
 
   validate  :date_not_changed, :category_not_changed, :commission_not_changed, on: :update
 
-  validate  :publishability, on: :update
+  #validate  :publishability, on: :update
 
   # name, permalink, price validate by payola sellable. write here for not forget this.
   validates_presence_of :name, :permalink, :price,
-                        :description, :commission, :recipients, :race_value, :category_id, :starts_at, :ends_at, :kind
+                        :description, :recipients, :race_value, :category_id, :starts_at, :ends_at, :kind
 
+  before_create :set_draft
   before_save   :sanitize_data
   after_create  :set_redirect_path
 
@@ -50,6 +54,15 @@ class Race < ApplicationRecord
   scope :by_category,   ->(category)  { where(category: category) }
   scope :by_owner,      ->(owner)     { where(owner: owner) }
   scope :by_recipients, ->(recipient) { where(recipients: [recipient, :for_all]) }
+
+
+  def set_draft
+    self.status ||= :draft
+  end
+
+  def find_commission_by_year(year)
+    commissions.where("starts <= ? AND ends >= ? AND race_id = ?", year, year, id).first.value.to_f
+  end
 
   def decrement_open_race_reward
     owner.reward.decrement_public_races
@@ -86,7 +99,9 @@ class Race < ApplicationRecord
   end
 
   def total_commission
-    attendees.sum(:join_value) / 100 * commission
+    sum = 0
+    attendees.each {|attendee| sum += attendee.commission}
+    sum
   end
 
   # set case and check if Owner not write prohibited data in fields like it s name or phone number
@@ -120,17 +135,6 @@ class Race < ApplicationRecord
   end
 
   private
-
-  def publishability
-    if started? || status.nil?
-      if publishable?
-        self.status = :started
-      else
-        draft!
-        errors.add(:not_publishable, I18n.t('activerecord.errors.models.race.not_publishable'))
-      end
-    end
-  end
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path

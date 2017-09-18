@@ -22,8 +22,22 @@ class Attendee < ApplicationRecord
 
   scope :confirmed, -> { where status: :confirmed }
 
+  # commission calc for each year
   def commission
-    join_value / 100 * race.commission
+    sum = 0
+    pieces.each do |piece|
+      year = 1
+      piece.duration.times do
+        commission = race.find_commission_by_year(year)
+        sum += piece.value / 100 * commission
+        year += 1
+      end
+    end
+    sum
+  end
+
+  def target_covered
+    pieces.sum(&:value)
   end
 
   private

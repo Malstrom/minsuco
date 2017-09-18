@@ -14,14 +14,14 @@
   <% end %>
 
 
-<%= form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
+<%= nested_form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
   <div class="panel-body">
   <h4><%= t('view.races.new.form_title') %></h4><br><br>
   <fieldset>
     <div class="form-group">
       <%= f.label :description, class: 'col-sm-2 control-label' %>
       <div class="col-sm-8">
-        <%= f.text_area :description, class:'form-control', rows: "5" , id:'description'  %>
+        <%= f.text_area :description, class:'form-control', rows: "5"%>
       </div>
     </div>
   </fieldset>
@@ -60,11 +60,11 @@
       <div class="form-group">
         <%= f.label :starts_at, class: 'col-lg-2 control-label' %>
         <div class="col-lg-3">
-          <%= f.text_field :starts_at, class:'form-control input-group date datetimepicker', id:'start_date' %>
+          <%= f.text_field :starts_at, class:'form-control input-group date datetimepicker' %>
         </div>
         <%= f.label :ends_at, class: 'col-lg-2 control-label' %>
         <div class="col-lg-3">
-          <%= f.text_field :ends_at, class:'form-control input-group date datetimepicker', id:'end_date'  %>
+          <%= f.text_field :ends_at, class:'form-control input-group date datetimepicker'  %>
         </div>
       </div>
     </fieldset>
@@ -87,37 +87,53 @@
       </div>
     </fieldset>
 
-    <fieldset>
-      <div class="form-group">
-        <div class="col-lg-2 control-label">
-          <%= f.label "Provvigione" %>
-          <%= tooltip_widget(:races, :commission) %>
-        </div>
-        <div class="col-lg-2">
-          <div class="input-group m-b">
-            <%= f.text_field :commission, class:'form-control', id:'commission'  %>
-            <span id="replace_money_2" class="input-group-addon">%</span>
-          </div>
-        </div>
 
-        <div class="col-lg-3">
-          <div class="input-group m-b">
-            <span id="replace_money_2" class="input-group-addon">dal</span>
-            <%# f.text_field "start", class:'form-control', id:'commission'  %>
-            <span id="replace_money_2" class="input-group-addon">anno</span>
-          </div>
-        </div>
+    <br><h5 class="text-center">Tabella provvigionale</h5><br><br>
 
-        <div class="col-lg-3">
-          <div class="input-group m-b">
-            <span id="replace_money_2" class="input-group-addon">al</span>
-            <%# f.text_field "end", class:'form-control', id:'commission'  %>
-            <span id="replace_money_2" class="input-group-addon">anno</span>
-          </div>
-        </div>
+    <%= f.fields_for :commissions do |commission_form| %>
+        <fieldset>
+          <div class="form-group">
+            <div class="row">
+            <div class="col-lg-2 text-center hidden-sm hidden-md hidden-xs">
+              <em class="fa fa-money fa-2x text-green"></em>
+            </div>
 
-      </div>
-    </fieldset>
+            <div class="col-lg-8 col-lg-offset-0 col-xs-offset-4 col-xs-4">
+              <div class="input-group m-b">
+                <%= commission_form.number_field :value, class:'form-control' %>
+                <span class="input-group-addon">%</span>
+                <span class="input-group-addon hidden-md hidden-sm hidden-xs">dal</span>
+                <%= commission_form.number_field :starts, class:'form-control hidden-md hidden-sm hidden-xs'  %>
+                <span class="input-group-addon hidden-md hidden-sm hidden-xs">anno</span>
+                <span class="input-group-addon hidden-md hidden-sm hidden-xs">al</span>
+                <%= commission_form.number_field :ends, class:'form-control hidden-md hidden-sm hidden-xs'  %>
+                <span class="input-group-addon hidden-md hidden-sm hidden-xs">anno</span>
+              </div>
+            </div>
+              <br class="hidden-lg">
+              <br class="hidden-lg">
+            <div class="col-xs-12 hidden-lg">
+              <div class="input-group m-b ">
+                <span class="input-group-addon">dal</span>
+                <%= commission_form.number_field :starts, class:'form-control'  %>
+                <span class="input-group-addon">anno</span>
+                <span class="input-group-addon">al</span>
+                <%= commission_form.number_field :ends, class:'form-control'  %>
+                <span class="input-group-addon">anno</span>
+              </div>
+            </div>
+              <br class="hidden-lg">
+              <br class="hidden-lg">
+            <div class="col-lg-1 col-xs-12 text-center">
+                <%= commission_form.link_to_remove "", class:'icon-close text-danger fa-2x no-decoration' %>
+            </div>
+            </div>
+          </div>
+        </fieldset>
+    <% end %>
+      <p class="text-center">
+        <%= f.link_to_add "", :commissions, class:'icon-plus text-success fa-2x no-decoration', id:"add_commission" %>
+      </p>
 
   <% end %>
   <br><h4>Dati aggiuntivi <small class="text-muted">(Opzionale)</small></h4><br><br>

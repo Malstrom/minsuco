@@ -39,10 +39,13 @@ class RacesController < ApplicationController
   # GET /races/1
   # GET /races/1.json
   def show
-    @attendee = current_user.attendee(@race)
-    unless @attendee
-      @attendee = @race.attendees.build
-      @attendee.pieces.build
+    # need for create nested form with pieces
+    unless current_user.owner?(@race)
+      @attendee = current_user.attendee(@race)
+      unless @attendee
+        @attendee = @race.attendees.build
+        @attendee.pieces.build
+      end
     end
   end
 
@@ -53,9 +56,14 @@ class RacesController < ApplicationController
     @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     @race.race_value = %w[10000 50000 100000 75000 25000].sample
     @race.compensation_start_amount = %w[0 0 0 0 500 1000].sample
-    @race.commission = rand(5..50)
     @race.kind = %w[open close].sample
     @race.status = 'started'
+
+    @race.commissions.build(value:3,starts:0, ends:1)
+    @race.commissions.build(value:1.5,starts:1, ends:5)
+    @race.commissions.build(value:1,starts:5, ends:10)
+    @race.commissions.build(value:0.5,starts:10, ends:15)
+    @race.commissions.build(value:0.2,starts:15, ends:20)
   end
 
   def publish; end
@@ -80,9 +88,10 @@ class RacesController < ApplicationController
 
   def publish_check
     if @race.update(kind: params[:race] ? params[:race][:kind] : params[:kind])
+      @race.update_attribute(:status, :started) if @race.publishable?
       if @race.started?
         if @race.open? && current_user.plan != Plan.find_by_stripe_id('pro_creator')
-          owner.reward.decrement_public_races
+          @race.owner.reward.decrement_public_races
         end
         flash[:notice] = I18n.t('flash.races.publish_check.notice')
       else
@@ -127,6 +136,7 @@ class RacesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def race_params
     params.require(:race).permit(:description, :owner, :commission, :compensation_start_amount,
-                                 :recipients, :race_value, :category_id, :starts_at, :ends_at, :status, :kind)
+                                 :recipients, :race_value, :category_id, :starts_at, :ends_at, :status, :kind,
+                                 commissions_attributes: [:id, :value, :starts, :ends, :_destroy])
   end
 end

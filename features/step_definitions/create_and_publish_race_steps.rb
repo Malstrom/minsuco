@@ -47,44 +47,40 @@ end
 
 # I fill race form
 When(/^I fill race form$/) do
+  visit "/races/new"
 
-  fill_in "description", :with => 'A test race'
+  fill_in "race_description", :with => 'A test race'
   fill_in "race_race_value", :with => '100000'
-  # fill_in "min_pieces", :with => '50'
-  # fill_in "max_attendees", :with => '50'
-  fill_in "commission", :with => '20'
-  fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
-  fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
-
-  # select('auto', from: 'race_category_id', visible:false)
-  # select('Tutti', from: 'race_recipients', visible:false)
+  fill_in "race_starts_at", :with => Time.now.strftime("%m/%d/%Y")
+  fill_in "race_ends_at", :with => Time.now.strftime("%m/%d/%Y")
 
   click_on('CREA GARA')
 end
 
 # I fill race attribute "" with ""
 When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
+  visit "/races/new"
 
-  fill_in "description", :with => 'A test race'
+  fill_in "race_description", :with => 'A test race'
   fill_in "race_race_value", :with => '100000'
-  fill_in "commission", :with => '20'
-  fill_in "start_date", :with => Time.now.strftime("%m/%d/%Y")
-  fill_in "end_date", :with => Time.now.strftime("%m/%d/%Y")
+  fill_in "race_starts_at", :with => Time.now.strftime("%m/%d/%Y")
+  fill_in "race_ends_at", :with => Time.now.strftime("%m/%d/%Y")
 
-  # select('auto', from: 'race_category_id', visible:false)
-  # select('Tutti', from: 'race_recipients', visible:false)
 
   fill_in arg1, :with => arg2 if arg1 and arg2
 
   click_on('CREA GARA')
 end
 
-When(/^I publish race as (open|close|pay_and_open\d+)$/) do |arg1|
+When(/^I publish race as (open|close|pay|\d+)$/) do |arg1|
+  race = Race.first
+  visit "races/#{race.id}/publish"
+
   if arg1 == 'close'
     click_on('Pubblica la gara come chiusa')
   elsif arg1 == 'open'
     click_on('Pubblica')
-  elsif arg1 == 'pay_and_open'
+  elsif arg1 == 'pay'
     click_on('Paga e pubblica')
 
     within_frame 'stripe_checkout_app' do
@@ -133,4 +129,12 @@ Given(/^User "([^"]*)" join in "([^"]*)" race$/) do |user_name, race_name|
   create :attendee,
          user: create(:user, name:user_name, email: "#{user_name}@test.com"),
          race: Race.find_by_name(race_name)
+end
+
+And(/^I have create (\d+) open races$/) do |arg|
+  create(:race, kind:'open', owner:User.first)
+end
+
+When(/^I should not change category of race$/) do
+  raise "updated" if Race.update(category:Category.last)
 end

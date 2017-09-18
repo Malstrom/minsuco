@@ -71,9 +71,7 @@ class User < ApplicationRecord
   def billable?
     if individual?
       valid_attribute?(:name) and valid_attribute?(:fiscal_code) ? true : false
-    end
-
-    if company?
+    else
       valid_attribute?(:name) and valid_attribute?(:fiscal_code) ? true : false
     end
   end
@@ -91,7 +89,7 @@ class User < ApplicationRecord
   end
 
   def has_plan_for_publish?
-    plan == Plan.find_by_stripe_id('pro_creator') or plan == Plan.find_by_stripe_id('premium') ? true : false
+    plan == Plan.find_by_stripe_id('pro_creator') ? true : false
   end
 
   def has_reward?(kind)
@@ -105,8 +103,12 @@ class User < ApplicationRecord
     end
   end
 
+  def attendee?(race)
+    race.attendees.include?(self) ? true : false
+  end
+
   def owner?(race)
-    (race.owner == self) ? true : false
+    race.owner == self ? true : false
   end
 
   def joined?(race)

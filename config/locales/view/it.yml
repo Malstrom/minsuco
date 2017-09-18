@@ -2,7 +2,7 @@ it:
   view:
     races:
       new:
-        form_title: "Compila la tua gara."
+        form_title: "Crea una gara"
       modal:
         join:
           text_help: "Descrivi ogni singolo pezzo che vuoi inserire nella tua partecipazione alla gara. Premi + per aggiungere un pezzo. "

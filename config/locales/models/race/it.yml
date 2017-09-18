@@ -3,7 +3,7 @@ it:
     errors:
       models:
         race:
-          start_in_past: "La gara non puo iniziare nel passato."
+          start_in_past: "La gara non puo iniziare prima di oggi."
           attendees_cap: "Ha raggiunto il massimo dei partecipanti."
           no_rui: "RUI non presente."
           not_publishable: "Gara non pubblicabile."

@@ -1,6 +1,6 @@
 Given /^a user named "([^"]*)" is online$/ do |name|
   using_session(name) do
-    step %{I logged in as a "#{name}"}
+    step %{I logged in having creator account}
   end
 end
 

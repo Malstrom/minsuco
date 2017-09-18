@@ -48,7 +48,7 @@
               <%= number_to_currency attendee.commission, unit:"€" %>
           </td>
           <td>
-              <%= number_to_currency attendee.join_value, unit:"€" %>
+              <%= number_to_currency attendee.target_covered, unit:"€" %>
           </td>
           <td>
             <%= form_for([@race, attendee], method: :put) do |f| %>

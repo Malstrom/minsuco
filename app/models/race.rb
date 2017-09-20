@@ -18,14 +18,14 @@ class Race < ApplicationRecord
   enum kind: %i[open close]
 
   enum status:      %i[started paused draft achieved]
-  enum recipients:  %i[broker agent for_all]
+  enum recipients:  %i[for_all broker agent sub_agent]
 
   before_validation :initialize_race, on: :create
   validate          :start_in_past,   on: :create
 
   validates :race_value, numericality: { only_integer: true }
 
-  validate  :date_not_changed, :category_not_changed, :commission_not_changed, on: :update
+  validate  :date_not_changed, :category_not_changed, on: :update
 
   #validate  :publishability, on: :update
 
@@ -55,13 +55,8 @@ class Race < ApplicationRecord
   scope :by_owner,      ->(owner)     { where(owner: owner) }
   scope :by_recipients, ->(recipient) { where(recipients: [recipient, :for_all]) }
 
-
   def set_draft
     self.status ||= :draft
-  end
-
-  def find_commission_by_year(year)
-    commissions.where("starts <= ? AND ends >= ? AND race_id = ?", year, year, id).first.value.to_f
   end
 
   def decrement_open_race_reward
@@ -94,14 +89,12 @@ class Race < ApplicationRecord
   # Sum of all attendees join_value for this race
   def value_covered
     value_covered = 0
-    attendees.each { |attendee| value_covered += attendee.pieces.sum :value }
+    attendees.confirmed.each { |attendee| value_covered += attendee.pieces.sum :value }
     value_covered
   end
 
-  def total_commission
-    sum = 0
-    attendees.each {|attendee| sum += attendee.commission}
-    sum
+  def remaining_value
+    race_value - value_covered
   end
 
   # set case and check if Owner not write prohibited data in fields like it s name or phone number
@@ -142,7 +135,7 @@ class Race < ApplicationRecord
   end
 
   def set_permalink
-    self.permalink ||= (Faker::Coffee.blend_name.parameterize + '-' + SecureRandom.hex(3)).upcase
+    self.permalink ||= SecureRandom.hex(4)
   end
 
   # create race name if not exists (need for test)
@@ -173,13 +166,6 @@ class Race < ApplicationRecord
   def category_not_changed
     if category_id_changed? && persisted?
       errors.add(:category_cant_updated, I18n.t('activerecord.errors.models.race.category_cant_updated'))
-    end
-  end
-
-  # validation when update race
-  def commission_not_changed
-    if commission_changed? && persisted?
-      errors.add(:commission_cant_updated, I18n.t('activerecord.errors.models.race.commission_cant_updated'))
     end
   end
 end

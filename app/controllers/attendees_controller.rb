@@ -23,7 +23,7 @@ class AttendeesController < ApplicationController
         format.json { render :show, status: :created, location: @attendee }
       else
         format.html { redirect_to race_path(@attendee.race),
-                                  alert:  t("activerecord.errors.models.attendee.#{@attendee.errors.first[0]}", user_id: current_user.id) }
+                                  alert: @attendee.errors.first[1] }
         format.json { render json: @attendee.errors, status: :unprocessable_entity }
       end
     end

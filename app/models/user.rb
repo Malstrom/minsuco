@@ -81,7 +81,7 @@ class User < ApplicationRecord
   end
 
   def attendee(race)
-    Attendee.find_by_race_id(race.id)
+    Attendee.where(user:self,race:race.id).first
   end
 
   def has_plan_for_join?
@@ -112,8 +112,7 @@ class User < ApplicationRecord
   end
 
   def joined?(race)
-    attendee = Attendee.where(user: self, race: race).first
-    attendee ? attendee : false
+    attendee(race) ? true : false
   end
 
   def participation(race)

@@ -11,6 +11,10 @@ class Attendee < ApplicationRecord
 
   # validates_associated :user, :race
 
+  validates :pieces, :presence => true
+
+  validates :race, :user, presence: true
+
   validate :unique_join, :joinable, :self_join, :race_target_cap, on: :create
 
   before_create :set_status
@@ -22,16 +26,18 @@ class Attendee < ApplicationRecord
 
   scope :confirmed, -> { where status: :confirmed }
 
-  # commission calc for each year
-  def commission
+  def total_revenue
     sum = 0
     pieces.each do |piece|
-      year = 1
-      piece.duration.times do
-        commission = race.find_commission_by_year(year)
-        sum += piece.value / 100 * commission
-        year += 1
-      end
+      sum += piece.total_revenue
+    end
+    sum
+  end
+
+  def revenue_by(commission)
+    sum = 0
+    pieces.each do |piece|
+      sum += piece.revenue(commission)
     end
     sum
   end
@@ -71,7 +77,7 @@ class Attendee < ApplicationRecord
 
   def unique_join
     if Attendee.exists?(user: user, race: race)
-      errors.add(:unique_join, "User must join only one time")
+      errors.add(:unique_join, I18n.t('activerecord.errors.models.attendee.unique_join'))
     end
   end
 

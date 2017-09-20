@@ -5,6 +5,7 @@
 <% end %>
 
 <div class="row">
+
   <div class="col-lg-8">
     <%= render partial: 'races/partials/race/owner_partials/show_owner_main' %>
   </div>
@@ -18,7 +19,8 @@
     <div class="row">
       <% unless @race.expired? %>
         <div class="col-md-8">
-          <%= render partial: 'races/partials/race/owner_partials/attendees_list' %>
+          <%# render partial: 'races/partials/race/owner_partials/attendees_list' %>
+          <%= render partial: 'races/partials/race/owner_partials/attendees_panel' %>
         </div>
         <div class="col-md-4">
           <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>

@@ -10,11 +10,11 @@ Feature: Login and registration for users
     Then  I should see "Dashboard"
 
   Scenario: User with pro attendee account should see its Dashboard
-    Given I logged in having basic account
+    Given I logged in having attendee account
     Then  I should see "Dashboard"
 
   Scenario: User with pro creator account should see its Dashboard
-    Given I logged in having basic account
+    Given I logged in having creator account
     Then  I should see "Dashboard"
 
 

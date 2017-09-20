@@ -2,6 +2,13 @@
 <div class="panel b">
   <div class="panel-heading">
     <div class="pull-right mt">
+      <div id="like_widget" class="col-lg-12">
+        <% if @race.already_liked_by_user(current_user) %>
+          <%= likes_counter_widget(@race.likes.count) %>
+        <% else %>
+          <%= likes_button_widget(current_user.id, @race.id, @race.likes.count) %>
+        <% end %>
+      </div>
     </div>
     <h4 class="mv">
       <span><%= @race.permalink %></span>
@@ -19,22 +26,23 @@
             </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= number_to_currency @race.race_value - @race.value_covered , unit: '€' %></h4>
+                <h4 class="mt0"><%= number_to_currency @race.race_value - @race.value_covered, precision:0, unit: '€' %></h4>
                 <p class="mb0 text-muted">Obbiettivo residuo</p>
+                <%= tooltip_widget(:races, :remaining_value) %>
               </div>
             </div>
-
           </div>
         </div>
         <div class="col-xs-6 bb">
           <div class="row row-table row-flush">
             <div class="col-xs-4 text-center text-info">
-              <em class="fa fa-percent fa-2x"></em>
+              <em class="fa fa-puzzle-piece fa-2x"></em>
             </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= @race.commission %>%</h4>
-                <p class="mb0 text-muted">Provvigione</p>
+                <h4 class="mt0"><%= number_to_currency @race.compensation_start_amount, precision:0, unit:'€' %></h4>
+                <p class="mb0 text-muted">Fisso per pezzo</p>
+                <%= tooltip_widget(:races, :each_piece) %>
               </div>
             </div>
           </div>
@@ -50,6 +58,7 @@
               <div class="panel-body text-center">
                 <h4 class="mt0"><%= @race.category.name.humanize %></h4>
                 <p class="mb0 text-muted">Ramo</p>
+                <%= tooltip_widget(:races, :remaining_value) %>
               </div>
             </div>
           </div>
@@ -61,8 +70,8 @@
             </div>
             <div class="col-xs-8">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %></h4>
-                <p class="mb0 text-muted">al termine</p>
+                <h4 class="mt0"><%= @race.ends_at.strftime('%d/%m/%Y')  %></h4>
+                <p class="mb0 text-muted"><%= distance_of_time_in_words(Time.now, @race.ends_at)  %> al termine</p>
               </div>
             </div>
           </div>
@@ -73,7 +82,17 @@
   </div>
   <div class="panel-body">
     <h4>Descrizione della gara</h4>
-    <p><%= @race.description %></p>
+    <% if current_user.joined?(@race) %>
+      <p><%= @race.description %></p>
+    <% else %>
+      <p>
+        Per sapere piu informazioni devi partecipare alla gara.
+        <a id="open_join_modal" type="button" data-toggle="modal" data-target="#joinModal" class="text-success" >
+          Partecipa ora
+        </a>
+      </p>
+    <% end %>
+
   </div>
 </div>
 <!-- End Main panel-->

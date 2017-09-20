@@ -10,14 +10,14 @@ Feature: Notifications
     Given I logged in having basic account
     When I join in race of 'creator' user
     Then creator should see notification "ha partecipato ad una tua gara"
-    And creator should see "RACE_OF_CREATOR" page when click to "readed_join_in_race"
+    And creator should see "Dettagli della gara" page when click to "readed_join_in_race"
 
-  Scenario: User should see notification expired when someone join but leave form race before user seen notification
-    Given I logged in having basic account
-    When I join in race of 'creator' user
-    When I click to "Lascia gara"
-    Then creator should see notification "basic ha partecipato alla gara gara non trovata"
-    And creator should see "Notifica scaduta" page when click to "ha partecipato ad una tua gara"
+#  Scenario: User should see notification expired when someone join but leave form race before user seen notification
+#    Given I logged in having basic account
+#    When I join in race of 'creator' user
+#    When I click to "Lascia gara"
+#    Then creator should see notification "basic ha partecipato alla gara gara non trovata"
+#    And creator should see "Notifica scaduta" page when click to "ha partecipato ad una tua gara"
 
 
 

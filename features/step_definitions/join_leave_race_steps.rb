@@ -28,6 +28,7 @@ end
 
 When(/^I join in a race with (\d+) join value where race value is (\d+)$/) do |join_value, race_value|
   race = create(:race, name: "test_private_race", race_value: race_value)
+  visit race_path(race)
   join_steps
 end
 
@@ -41,11 +42,13 @@ end
 
 When(/^I join in race of '([^']*)' user/) do |owner|
   race = create :race, name: "race_of_#{owner}" , owner: User.find_by_name(owner)
+  visit race_path(race)
   join_steps
 end
 
 def join_steps(qt = 1, name = "first", value = "10000", duration = "1")
-  find("#open_join_modal").click
+  first("#open_join_modal").click
+
   add_piece(qt,name,value,duration)
   find("#join").click
 end
@@ -61,6 +64,7 @@ end
 def add_piece(qt = 1, name = "first", value = "10000", duration = "1")
   count = 0
   qt.to_i.times do
+    sleep 0.5
     fill_in "attendee_pieces_attributes_#{count}_name", :with => name
     fill_in "attendee_pieces_attributes_#{count}_value", :with => value
     fill_in "attendee_pieces_attributes_#{count}_duration", :with => duration
@@ -123,3 +127,5 @@ end
 When(/^I update my join piece named '([^']*)' with '([^']*)' value for '([^']*)' years/) do |name,value,duration|
   join_steps(1,name,value,duration)
 end
+
+

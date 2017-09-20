@@ -20,6 +20,10 @@ it:
       commission: "Provvigione al primo anno"
       compensation_start_amount: "Premio per ogni pezzo eseguito"
       recipients: "Quale categoria di assicuratore potra partecipare alla gara."
+      remaining_value: "Importo rimanente della gara, deterimina il tuo valore massimo di partecipazione"
+      each_piece: "Importo che creatore verserà al partecipante per ogni pezzo"
+    commissions:
+      commission_range: "Importo totale che il creatore dovrà al partecipante suddiviso per scaglioni di tempo determinati dal creatore"
     attendees:
       allow_join: "Permetti a questa utente di far parte della gara."
       deny_partecipation: "Nega a questa persona di partecipare alla gara."

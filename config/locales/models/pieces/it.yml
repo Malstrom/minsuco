@@ -9,3 +9,4 @@ it:
       models:
         piece:
           last_piece: "Non puoi eliminare l'ultimo pezzo dalla tua partecipazione."
+          race_value_cap: "Obbiettivo residuo inferiore a quello del tuo ultimo pezzo."

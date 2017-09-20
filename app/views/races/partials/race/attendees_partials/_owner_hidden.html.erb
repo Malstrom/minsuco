@@ -1,11 +1,27 @@
 <div class="panel b text-center">
   <div class="panel-body">
-    <p class="h4 text-bold mb0">Questo è il creatore</p>
+    <p class="h4 text-bold mb0">Vuoi sapere chi è il creatore?</p>
   </div>
   <div class="panel-body">
-    <em class="fa fa-question fa-5x"></em>
-    <p class="h4 text-bold mb0">
-      Partecipa alla gara per sapere chi è il creatore
-    </p>
+    <% if current_user.joined?(@race) %>
+      <div class="col-lg-12">
+        <%= form_for([@race, current_user.participation(@race)], method: :delete, :html => {:style => 'display:inline;'}) do |f| %>
+          <button id="<%= @race.permalink %>" type="submit" class="btn btn-info btn-pill-left btn-warning">
+            <em class="fa fa-minus fa-fw text-muted text-white"></em>
+            <span>Lascia gara</span>
+          </button>
+        <% end %>
+        <button id="open_join_modal" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-info btn-pill-right" >
+          <!--<em class="fa fa-plus fa-fw text-muted text-white"></em>-->
+          <span>Modifica partecipazione</span>
+        </button>
+      </div>
+    <% else %>
+      <div class="col-lg-12">
+        <button id="open_join_modal" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-success btn-lg" >
+          <span>PARTECIPA</span>
+        </button>
+      </div>
+    <% end %>
   </div>
 </div>

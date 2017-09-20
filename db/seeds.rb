@@ -9,8 +9,6 @@
 start = Time.now
 # code to time
 
-
-
 # user = CreateAdminService.new.call
 # puts 'CREATED ADMIN USER: ' << user.email
 
@@ -20,28 +18,25 @@ puts 'CREATED PLANS'
 # Categories
 
 $categories = {
-    assicurazioni:{
-        altro: ['casa', 'infortuni', 'auto', 'malattia', 'cyber_risk', 'protection indemnity'],
-        vita:  ['mista', 'temporanea caso morte', 'vita intera', 'rendità', 'unit linked', 'pir', 'keyman']
-    }
+  assicurazioni: {
+    altro: ['casa', 'infortuni', 'auto', 'malattia', 'cyber_risk', 'protection indemnity'],
+    vita:  ['mista', 'TCM', 'vita intera', 'rendita', 'unit linked', 'pir', 'keyman']
+  }
 }
 
 $categories.each do |key, value|
-  level_1 = Category.find_or_create_by(name:key)
-  if value.is_a?(Hash)
-    value.each do |key2, val2|
-      level_2 = Category.find_or_create_by(name:key2, parent: level_1)
-      if val2.is_a?(Array)
-        val2.each do |key3,val3|
-          level_3 = Category.find_or_create_by(name:key3, parent: level_2)
-        end
-      end
+  level_1 = Category.find_or_create_by(name: key)
+  next unless value.is_a?(Hash)
+  value.each do |key2, val2|
+    level_2 = Category.find_or_create_by(name: key2, parent: level_1)
+    next unless val2.is_a?(Array)
+    val2.each do |key3, _val3|
+      level_3 = Category.find_or_create_by(name: key3, parent: level_2)
     end
   end
 end
 
 # --== Generate Sample Users creator
-
 
 10.times do
   user = User.new
@@ -51,28 +46,21 @@ end
   user.password = Faker::Internet.password(8)
   user.password_confirmation = user.password
   user.image = Faker::Avatar.image
-  user.role = %w(pro_creator premium).sample
-  user.kind = %w(broker agent).sample
-  user.plan = [Plan.find_by_stripe_id('pro_creator'),Plan.find_by_stripe_id('premium')].sample()
-  user.rui = 7774356463777
-
+  user.role = %w[pro_creator premium].sample
+  user.kind = %w[broker agent].sample
+  user.plan = [Plan.find_by_stripe_id('pro_creator'), Plan.find_by_stripe_id('premium')].sample
+  user.rui = 7_774_356_463_777
 
   user.save
 
   # p user.errors.full_messages
-# --== Generate Sample Races
+  # --== Generate Sample Races
   race = user.races.build
 
+  race_values = %w[10000 50000 100000 75000 25000]
+  compensation_start_amounts = %w[0 0 0 0 500 1000]
 
-  portafoglio = 100
-
-
-  race_values = %W(10000 50000 100000 75000 25000)
-  race_comp_kinds = %w(perc money)
-  race_attendees = rand(10..50)
-  compensation_start_amounts = %W(0 0 0 0 500 1000)
-
-  def time_rand from = 0.0, to = Time.now
+  def time_rand(from = 0.0, to = Time.now)
     Time.at(from + rand * (to.to_f - from.to_f))
   end
 
@@ -85,24 +73,27 @@ end
     race.race_value = race_values.sample
     race.compensation_start_amount = compensation_start_amounts.sample
     race.starts_at = rand(DateTime.now - 7.days..DateTime.now + 7.days)
-    race.ends_at = race.starts_at + rand( 30..90 ).days
-    race.commission = rand(5..50)
-    race.kind = %w(open close).sample
+    race.ends_at = race.starts_at + rand(30..90).days
+    race.kind = %w[open close].sample
     race.status = 'started'
-    race.recipients = %w(broker agent for_all).sample
+    race.recipients = %w[broker agent for_all].sample
     race.price = 2900
     race.permalink = race.permalink
 
     race_saved = race.save
 
-      p race.errors.full_messages
+    p race.errors.full_messages
   end
+  race.commissions.create(value: 3,   starts: 0,  ends: 1)
+  race.commissions.create(value: 1.5, starts: 1,  ends: 5)
+  race.commissions.create(value: 1,   starts: 5,  ends: 10)
+  race.commissions.create(value: 0.5, starts: 10, ends: 15)
+  race.commissions.create(value: 0.2, starts: 15, ends: 20)
 end
 
 # --== Generate Sample User Attendees
 
 40.times do
-
   user_attendee = User.new
 
   user_attendee.name = Faker::Name.name
@@ -110,33 +101,24 @@ end
   user_attendee.password = Faker::Internet.password(8)
   user_attendee.password_confirmation = user_attendee.password
   user_attendee.image = Faker::Avatar.image
-  user_attendee.role = %w(basic pro_attendee).sample
-  user_attendee.kind = %w(broker agent).sample
-  user_attendee.plan = [Plan.find_by_stripe_id('pro_attendee'),Plan.find_by_stripe_id('premium')].sample()
-  user_attendee.rui = 74356634677777
+  user_attendee.role = %w[basic pro_attendee].sample
+  user_attendee.kind = %w[broker agent].sample
+  user_attendee.plan = [Plan.find_by_stripe_id('pro_attendee'), Plan.find_by_stripe_id('premium')].sample
+  user_attendee.rui = 74_356_634_677_777
 
   user_attendee.save
 
   rand(1..3).times do
-    Attendee.create(user:user_attendee,
-                    race:Race.all.order("RAND()").first,
-                    join_value:rand(1000..10000),
-                    status: :confirmed)
+    Attendee.create(user: user_attendee,
+                    race: Race.all.order('RAND()').first,
+                    status: :confirmed,
+                    pieces_attributes: [
+                      { name: Faker::Name.name, value: rand(1000..3000), duration: rand(1..30) },
+                      { name: Faker::Name.name, value: rand(1000..3000), duration: rand(1..30) },
+                      { name: Faker::Name.name, value: rand(1000..3000), duration: rand(1..30) }
+                    ])
   end
 end
-
-# # --== Highlight some races
-#
-# races_to_highlight = Race.order("RAND()").limit(2)
-#
-# races_to_highlight.each do |race|
-#   race_to_highlight = race.featured_races.build
-#
-#   race_to_highlight.starts_at = rand(race.starts_at..rand(race.starts_at + 0.days..race.starts_at + 20.days))
-#   race_to_highlight.ends_at = rand(race_to_highlight.starts_at..rand(race_to_highlight.starts_at + 2.days..race_to_highlight.starts_at + 30.days))
-#
-#   race_to_highlight.save
-# end
 
 finish = Time.now
 

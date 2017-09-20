@@ -6,13 +6,12 @@ Feature: Join in race
 
   Scenario: User should join in open race
     Given I logged in having basic account
-    And I complete my profile
     When I visit a open race
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
     Then I should see "Partecipazione avvenuta con successo"
 
   Scenario: User should not join in open race if he have not rui
-    Given I logged in having basic account
+    Given I sign up
     When I visit a open race
     And I close rui modal
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
@@ -20,7 +19,6 @@ Feature: Join in race
 
   Scenario: User should join in close race using reward
     Given I logged in having basic account
-    And I complete my profile
     When I visit a close race
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
     Then I should see "Partecipazione avvenuta con successo"
@@ -28,7 +26,6 @@ Feature: Join in race
 
   Scenario: User should not join in close race if he not have rewards
     Given I logged in having basic account
-    And I complete my profile
     And I have '0' rewards for join
     When I visit a close race
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
@@ -37,7 +34,6 @@ Feature: Join in race
 
   Scenario: User with premium attendee plan should join in private race not using reward
     Given I logged in having attendee account
-    And I complete my profile
     When I visit a close race
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
     Then I should see "Partecipazione avvenuta con successo"
@@ -45,14 +41,12 @@ Feature: Join in race
 
   Scenario: User should not join in race if sum of pieces are higher then race target
     Given I logged in having basic account
-    And I complete my profile
     When I visit a open race
     And I join with 1 pieces to join named 'first' with '110000' value for '1' years
-    Then I should see "La somma dei tuoi pezzi supera quella dell'obbiettivo della gara"
+    Then I should see "Partecipazione fallita! La somma dei tuoi pezzi supera quella dell'obbiettivo della gara."
 
   Scenario: User should update its join
     Given I logged in having basic account
-    And I complete my profile
     When I visit a open race
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
     And I update my join piece named 'first' with '1500' value for '1' years

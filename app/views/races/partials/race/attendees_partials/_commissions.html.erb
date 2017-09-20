@@ -1,0 +1,19 @@
+<div class="panel widget ">
+  <div class="row row-table">
+    <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
+      <em class="fa fa-percent"></em>
+    </div>
+    <% count = 0 %>
+    <% @race.commissions.each do |commission| %>
+      <div class="text-center col-md-2 col-sm-3 col-xs-6 pv br <%= "hidden-sm hidden-xs" if count > 0 %>">
+        <!--<em class="fa fa-plus-circle info text-muted pull-right" data-toggle="tooltip" data-placement="top"-->
+            <!--data-original-title="">-->
+        <!--</em>-->
+        <div class="h2 m0"><%= commission.value %> %</div>
+        <div class="text-muted">
+          <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
+        </div>      </div>
+      <% count += 1 %>
+    <% end %>
+  </div>
+</div>

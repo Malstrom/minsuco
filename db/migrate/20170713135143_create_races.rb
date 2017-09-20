@@ -7,7 +7,6 @@ class CreateRaces < ActiveRecord::Migration[5.1]
       t.belongs_to :category
       t.string :recipients
       t.integer :race_value
-      t.integer :commission
       t.integer :min_pieces
       t.integer :compensation_start_amount, :precision => 8, :scale => 2
       t.integer :max_attendees

@@ -14,7 +14,8 @@ Given(/^I logged in having basic account/) do
   $user = create(:user, name: "basic",
                  plan: Plan.find_by_stripe_id('basic'),
                  email:'basic_user_test@email.com',
-                 password: "test_password")
+                 password: "test_password",
+                 intent: :attendee)
 
   login_as($user, :scope => :user)
 
@@ -23,10 +24,10 @@ Given(/^I logged in having basic account/) do
 end
 
 Given(/^I logged in having creator account/) do
-  $user = create(:user, name: "Areator",
+  $user = create(:user, name: "creator",
                  plan: Plan.find_by_stripe_id('pro_creator'),
                  email:'creator_user_test@email.com',
-                 intent: "creator",
+                 intent: :creator,
                  password: "test_password")
 
   login_as($user, :scope => :user)
@@ -39,7 +40,7 @@ Given(/^I logged in having attendee account/) do
   $user = create(:user, name: "Attendee",
                  plan: Plan.find_by_stripe_id('pro_attendee'),
                  email:'attendee_user_test@email.com',
-                 intent: 'attendee',
+                 intent: :attendee,
                  password: "test_password")
 
   login_as($user, :scope => :user)

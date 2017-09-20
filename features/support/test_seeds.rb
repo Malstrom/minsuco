@@ -6,7 +6,7 @@ AfterConfiguration do |config|
   $categories = {
       assicurazioni:{
           altro: ['casa', 'infortuni', 'auto', 'malattia', 'cyber_risk', 'protection indemnity'],
-          vita:  ['mista', 'temporanea caso morte', 'vita intera', 'rendità', 'unit linked', 'pir', 'keyman']
+          vita:  ['mista', 'temporanea caso morte', 'vita intera', 'rendita', 'unit linked', 'pir', 'keyman']
       }
   }
 

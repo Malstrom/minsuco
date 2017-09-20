@@ -1,0 +1,59 @@
+<h3>Partecipanti
+  <small class="text-muted">
+    Legenda:
+  </small>
+  <em class="fa fa-euro"></em>
+  <small class="text-muted">
+    Importo totale della partecipazione,
+  </small>
+  <em class="fa icon-wallet"></em>
+  <small class="text-muted">
+  Provvigioni totali,
+  </small>
+  <em class="fa fa-ticket"></em>
+  <small class="text-muted">
+  Pezzi totali
+  </small>
+</h3>
+
+  <div class="row">
+    <% @race.attendees.each do |attendee| %>
+      <div class="col-lg-4 col-md-6">
+        <div class="panel b text-center">
+          <div class="panel-body">
+            <% if attendee.user.image %>
+              <img src="<%= attendee.user.image %>" alt="" class="img-circle thumb64">
+            <% else %>
+              <img src="<%= image_path("default_profile.png")%>" alt="" class="img-circle thumb64">
+            <% end %>
+            <p class="h4 text-bold mb0"><%= attendee.user.name %></p>
+            <p>Rome, Italy</p>
+            <button type="button" id="btnPieces" data-toggle="modal" data-target="#piecesModal_<%= attendee.id %>" class="btn btn-info btn-oval">
+              Provvigioni
+            </button>
+            <!--<button type="button" class="btn btn-success btn-pill-right">Escludi</button>-->
+          </div>
+          <div class="panel-body bt">
+            <div class="row">
+              <div class="col-xs-4 br p0">
+                <em class="fa fa-euro fa-fw text-primary"></em><br>
+                <strong><%= number_to_currency attendee.target_covered, precision:0 %></strong>
+              </div>
+              <div class="col-xs-4 br p0">
+                <em class="fa icon-wallet fa-fw text-info"></em><br>
+                <strong><%= number_to_currency attendee.total_revenue, precision:0 %></strong>
+              </div>
+              <div class="col-xs-4 p0">
+                <em class="fa fa-ticket fa-fw text-danger"></em><br>
+                <strong><%= attendee.pieces.count %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% content_for :body_area do %>
+        <%= render partial: 'races/partials/race/owner_partials/pieces_modal', :locals => { :attendee => attendee } %>
+      <% end %>
+    <% end %>
+  </div>
+

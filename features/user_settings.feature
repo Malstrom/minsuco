@@ -8,26 +8,6 @@ Feature: User settings
   Background:
     Given I sign up
 
-  Scenario: New user should be able to change its name
-    When I click to "IL MIO PROFILO"
-    And I change my "user_name" in "test_name"
-    Then I should see "Profilo aggiornato"
-    
-  Scenario: New user should be able to change its email
-    When I click to "IL MIO PROFILO"
-    And I change my "user_mail" in "newtest@email.com"
-    Then I should see "Profilo aggiornato"
-    
-  Scenario: New user should be able to change its RUI with valid RUI
-    When I click to "IL MIO PROFILO"
-    And I change my "user_rui" in "1234567891"
-    Then I should see "Profilo aggiornato"
-    
-  Scenario: New user should not be able to change its RUI with invalid RUI
-    When I click to "IL MIO PROFILO"
-    And I change my "user_rui" in "1234"
-    Then I should see "Rui è troppo corto"
-
   Scenario: Basic user should be able to change plan to pro attendee
     When I visit user plan
     And I click to "Passa a un piano Pro Partecipanti"
@@ -55,6 +35,7 @@ Feature: User settings
     And I click to "DASHBOARD"
     Then I should see "Dashboard"
 
+    @current
   Scenario: User should able to change its theme
     When I click to "theme-options"
     And I click to 'theme-a' element

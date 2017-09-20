@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+  <!--<div class="panel-heading">Demo Table #1</div>-->
+  <!-- START table-responsive-->
+  <div class="table-responsive">
+    <table id="races-table" class="table table-bordered table-hover table-responsive">
+      <thead>
+      <tr>
+        <th class="hidden-sm hidden-xs">UID</th>
+        <th>Nome</th>
+        <th class="hidden-sm hidden-xs">Ramo</th>
+        <th class="hidden-sm hidden-xs">Obbiettivo</th>
+        <th class="hidden-sm hidden-xs">Coperto</th>
+        <th class="hidden-sm hidden-xs">Rimanente</th>
+        <th>Scade</th>
+        <th>Azioni</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @races.each do |race| %>
+        <tr>
+          <td class="hidden-sm hidden-xs"><%= race.permalink %></td>
+          <td><%= race.name  %></td>
+          <td class="hidden-sm hidden-xs"><%= race.category.name  %></td>
+          <td class="hidden-sm hidden-xs">
+            <%= number_to_currency race.race_value, precision:0, symbol:"€" %>
+          </td>
+          <td class="text-center hidden-sm hidden-xs">
+            <div data-label="<%= race.completed_percentage %>%" class="radial-bar radial-bar-<%= race.completed_percentage %> radial-bar-xs"></div><br>
+          </td>
+          <td class="hidden-sm hidden-xs">
+            <%= number_to_currency race.remaining_value, precision:0, symbol:"€" %>
+          </td>
+          <td><%= race.ends_at.strftime('%d/%m/%Y')  %><br>(<%= distance_of_time_in_words(Time.now, race.ends_at)%>)</td>
+          <td class="text-center">
+            <%= link_to "", race_path(race), class:'fa fa-2x fa-eye text-info no-decoration' %>
+            &nbsp;&nbsp;
+            &nbsp;&nbsp;
+            &nbsp;&nbsp;
+            <%= link_to "", edit_race_path(race), class:'fa fa-2x fa-pencil text-muted no-decoration' %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <!-- END table-responsive-->
+  <div class="panel-footer">
+  </div>
+</div>

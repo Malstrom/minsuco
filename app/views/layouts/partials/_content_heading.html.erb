@@ -1,12 +1,13 @@
-<div class="content-heading">
+<div class="content-heading hidden-xs">
   <div class="row">
-    <div class="col-md-1 text-center br">
+    <div class="col-lg-1 col-xs-2 text-center br">
       <%= link_to history_back_path, id:'back-history' do %>
         <em class="fa fa-arrow-left text-muted"></em>
       <% end %>
     </div>
-    <div class="col-md-11">
+    <div class="col-lg-11 col-xs-10">
       <%= t("controller.#{controller_name}.action.#{action_name}") %>
     </div>
   </div>
 </div>
+<br class="visible-xs">

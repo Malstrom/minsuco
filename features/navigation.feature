@@ -27,10 +27,10 @@ Feature: See all lists of races and interact with this list
     And I click to "back-history"
     Then I should see "IL MIO PROFILO"
 
-  Scenario: User should be turn back with history back icon
-    Given I logged in having basic account
-    And I visit "/races"
-    When I click to "back-history"
-    When I click to "back-history"
-    When I click to "back-history"
-    Then I should see "Dashboard"
+#  Scenario: User should be turn back with history back icon
+#    Given I logged in having basic account
+#    And I visit "/races"
+#    When I click to "back-history"
+#    When I click to "back-history"
+#    When I click to "back-history"
+#    Then I should see "Dashboard"

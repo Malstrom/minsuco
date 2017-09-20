@@ -17,23 +17,35 @@
     <%= render partial: 'races/partials/race/attendees_partials/show_attendees_main' %>
   </div>
   <div class="col-lg-4">
-    <% unless @race.expired? %>
-      <%= render partial: 'races/partials/race/attendees_partials/attendees_actions' %>
-    <% end %>
-
     <% if current_user.joined?(@race) %>
       <%= render partial: 'races/partials/race/attendees_partials/owner_profile' %>
     <% else %>
-      <%= render partial: 'races/partials/race/attendees_partials/owner_hidden' %>
+      <% unless @race.expired? %>
+        <%= render partial: 'races/partials/race/attendees_partials/owner_hidden' %>
+      <% end %>
     <% end %>
+  </div>
 
+  <div class="col-lg-12">
+    <h3>Provvigione
+      <small class="text-muted">diviso per ogni scaglione deciso del creatore della gara.</small>
+    </h3>
+    <%= render partial: 'races/partials/race/attendees_partials/commissions' %>
+  </div>
+
+  <div class="col-lg-12">
+    <% if current_user.joined?(@race) %>
+      <h3>Guadagni
+        <small class="text-muted"> diviso per ogni scaglione deciso del creatore della gara.</small>
+      </h3>
+      <%= render partial: 'races/partials/race/attendees_partials/revenue' %>
+    <% end %>
   </div>
 </div>
 
 
 <% content_for :body_area do %>
   <%= render partial: 'attendees/partials/modal_join', :locals => { :attendee => current_user } %>
-  <%# render partial: 'attendees/partials/modal_edit_form' if current_user.participation(@race) %>
 <% end %>
 
 <% unless current_user.valid_attribute?(:rui) %>

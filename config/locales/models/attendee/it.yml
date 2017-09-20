@@ -12,6 +12,7 @@ it:
           attendee: Partecipante
           no_rui: "Per partecipare devi inserire nel tuo profilo un RUI valido. <a href='/users/%{user_id}/edit' style='color:white;'>Vai al mio profilo.</a>"
           different_recipient: "La tua tipologia di utente (broker, agente, subagente) non puo partecipare a questa gara"
+          unique_join: "Non puoi partecipare più di una volta alla stessa gara"
     attributes:
       attendee:
         join_value: Importo

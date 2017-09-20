@@ -1,5 +1,5 @@
 When(/^I click to "([^"]*)"$/) do |arg|
-  click_on(arg)
+  click_on(arg, match: :first)
 end
 
 When(/^I visit "([^"]*)"$/) do |arg1|

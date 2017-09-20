@@ -85,7 +85,7 @@
             <div class="row row-table row-flush">
               <div class="col-xs-12">
                 <div class="panel-body text-center">
-                  <h4 class="mt0"><%= number_to_percentage race.commission, precision:0 %></h4>
+                  <h4 class="mt0"><%# number_to_percentage race.commission, precision:0 %></h4>
                   <p class="mb0 text-muted">
                     Provvigione
                   </p>
@@ -126,7 +126,6 @@
           </div>
         </div>
       </div>
-
       <%= link_to(race_path(race), class:"no-decoration", id:race.name) do %>
         <div class="panel-footer text-center btn-info bg-info">
           <% if current_user.owner?(race) %>

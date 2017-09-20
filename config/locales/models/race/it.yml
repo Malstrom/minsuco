@@ -31,3 +31,6 @@ it:
       enum:
         recipients:
           for_all: "Per tutti"
+          brokers: "Brokers"
+          agents: "Agenti"
+          sub_agents: "Sub agenti"

@@ -1,0 +1,81 @@
+<!-- Modal-->
+<div id="piecesModal_<%= attendee.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button id="closeMyModal" type="button" data-dismiss="modal" aria-label="Close" class="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 id="myModalLabel" class="modal-title">Tabella provvigioni <small class="text-muted"> Riepilogo delle proviggioni che ti spettano</small></h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="panel widget">
+          <div class="row row-table">
+            <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
+              <div class="h2 m0">%</div>
+              <small class=""></small>
+            </div>
+            <% count = 0 %>
+            <% @race.commissions.each do |commission| %>
+              <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
+                <div class="h3 m0">
+                  <%= number_to_percentage commission.value %>
+                </div>
+              </div>
+              <% count += 1 %>
+            <% end %>
+          </div>
+        </div>
+        <div class="panel widget">
+          <div class="row row-table">
+            <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
+              <div class="h2 m0"><%= number_to_currency attendee.total_revenue, precision:0, unit:'€' %></div>
+              <small class="">Totale</small>
+            </div>
+            <% count = 0 %>
+            <% @race.commissions.each do |commission| %>
+              <div class="col-md-2 col-sm-3 col-xs-6 text-center pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
+                <div class="h2 m0">
+                  <%= number_to_currency attendee.revenue_by(commission), precision:0, unit:'€' %>
+                </div>
+                <div class="text-muted">
+                  <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
+                </div>
+              </div>
+              <% count += 1 %>
+            <% end %>
+          </div>
+        </div>
+        <p class="h1 text-center">=</p>
+        <% attendee.pieces.each do |piece| %>
+          <div class="panel widget">
+            <div class="row row-table">
+              <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h4 br">
+                <div class="h3 m0"><%= number_to_currency piece.total_revenue, precision:0, unit:'€' %></div>
+                <small class=""><%= piece.name %> (<%= piece.duration %> anni)</small>
+              </div>
+              <% count = 0 %>
+              <% @race.commissions.each do |commission| %>
+                <div class="col-md-2 col-sm-3 col-xs-6 text-center pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
+                  <div class="h3 m0">
+                    <%= number_to_currency piece.revenue(commission), precision:0, unit:'€' %>
+                  </div>
+                  <div class="text-muted">
+                    <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
+                  </div>
+                </div>
+                <% count += 1 %>
+              <% end %>
+            </div>
+          </div>
+          <% unless piece == attendee.pieces.last %>
+            <p class="h1 text-center">+</p>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

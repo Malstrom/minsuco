@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20170917131254) do
 
   create_table "commissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "race_id"
-    t.decimal "value", precision: 10
+    t.decimal "value", precision: 10, scale: 2
     t.integer "starts"
     t.integer "ends"
     t.datetime "created_at", null: false
@@ -225,7 +225,6 @@ ActiveRecord::Schema.define(version: 20170917131254) do
     t.bigint "category_id"
     t.integer "recipients"
     t.integer "race_value"
-    t.integer "commission"
     t.integer "compensation_start_amount"
     t.integer "kind", default: 1
     t.integer "status"

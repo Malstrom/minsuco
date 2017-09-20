@@ -1,5 +1,4 @@
 <div class="panel panel-default">
-
   <div class="panel-heading">
     <div class="pull-right label label-success info" data-toggle="tooltip" data-placement="left"
          data-original-title="<%= I18n.t('tooltips.attendees.confirmed_attendees') %>">
@@ -8,7 +7,7 @@
     <div class="pull-right label label-danger info" data-toggle="tooltip" data-placement="left"
          data-original-title="<%= I18n.t('tooltips.attendees.deny_attendees') %>">
       <%= Attendee.where(race:@race, status: :deny).count %></div>
-    Partecipanti
+    &nbsp;
   </div>
   <!-- START table-responsive-->
   <div class="table-responsive">
@@ -16,9 +15,9 @@
       <thead>
       <tr>
         <th>Dati partecipante</th>
-        <th>Provvigione</th>
+        <th>Provvigione totale da pagare</th>
         <th>Valore coperto</th>
-        <th>Stato</th>
+        <th>Azioni</th>
       </tr>
       </thead>
       <tbody>
@@ -31,7 +30,7 @@
                   <img src="<%= attendee.user.image %>" alt="" class="media-object img-responsive img-circle">
                 <% else %>
                   <img src="<%= image_path("default_profile.png")%>" alt="" class="media-object img-responsive img-circle">
-              <% end %>
+                <% end %>
               </a>
               <div class="">
 
@@ -45,22 +44,23 @@
             </div>
           </td>
           <td>
-              <%= number_to_currency attendee.commission, unit:"€" %>
+              <%# number_to_currency attendee.commission, unit:"€" %>
+            <%= link_to '', race_attendee_path(@race,attendee), class: 'btn btn-info btn-xs fa fa-info' %>
           </td>
           <td>
               <%= number_to_currency attendee.target_covered, unit:"€" %>
           </td>
-          <td>
-            <%= form_for([@race, attendee], method: :put) do |f| %>
+          <td class="text-center">
+            <%= form_for([@race, attendee], method: :put, html:{class: 'inline'}) do |f| %>
               <% if attendee.status == 'confirmed' %>
                 <%= f.hidden_field :status, value: :deny %>
-                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-danger pull-right btn-circle info" data-toggle="tooltip" data-placement="left"
+                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-danger btn-circle info" data-toggle="tooltip" data-placement="left"
                         data-original-title="<%= I18n.t('tooltips.attendees.deny_partecipation') %>">
                   <em class="fa fa-close"></em>
                 </button>
               <% else %>
                 <%= f.hidden_field :status, value: :confirmed %>
-                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success pull-right info" data-toggle="tooltip" data-placement="left"
+                <button id="confirm_toggle" type="submit" class="btn btn-sm btn-success info" data-toggle="tooltip" data-placement="left"
                         data-original-title="<%= I18n.t('tooltips.attendees.allow_join') %>">
                   <em class="fa fa-check"></em>
                 </button>

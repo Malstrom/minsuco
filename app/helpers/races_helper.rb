@@ -49,4 +49,18 @@ module RacesHelper
     html.html_safe
   end
 
+  def race_kind_icon(kind)
+    if kind == :open
+      icon_prop = "fa fa-3x fa-users text-success"
+    else
+      icon_prop = "fa fa-3x fa-users text-warning"
+    end
+
+    html = <<-HTML
+     <em class="#{icon_prop}"></em>
+    HTML
+
+    html.html_safe
+  end
+
 end

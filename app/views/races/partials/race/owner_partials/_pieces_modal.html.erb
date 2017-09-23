@@ -12,36 +12,36 @@
 
       <div class="modal-body">
         <div class="panel widget">
-          <div class="row row-table">
+          <div class="row row-table b">
             <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
               <div class="h2 m0">%</div>
               <small class=""></small>
             </div>
             <% count = 0 %>
             <% @race.commissions.each do |commission| %>
-              <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
+              <div class="p0 col-md-2 col-sm-3 col-xs-6 text-center bg-info pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
                 <div class="h3 m0">
                   <%= number_to_percentage commission.value %>
                 </div>
+                <small class="text-white">
+                  <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
+                </small>
               </div>
               <% count += 1 %>
             <% end %>
           </div>
         </div>
+        <h3>Totale provvigioni <small class="text-muted">viene calcolata sommando tutti i pezzi.</small></h3>
         <div class="panel widget">
-          <div class="row row-table">
+          <div class="row row-table b">
             <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
               <div class="h2 m0"><%= number_to_currency attendee.total_revenue, precision:0, unit:'€' %></div>
-              <small class="">Totale</small>
             </div>
             <% count = 0 %>
             <% @race.commissions.each do |commission| %>
               <div class="col-md-2 col-sm-3 col-xs-6 text-center pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
                 <div class="h2 m0">
                   <%= number_to_currency attendee.revenue_by(commission), precision:0, unit:'€' %>
-                </div>
-                <div class="text-muted">
-                  <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
                 </div>
               </div>
               <% count += 1 %>
@@ -50,20 +50,17 @@
         </div>
         <p class="h1 text-center">=</p>
         <% attendee.pieces.each do |piece| %>
+          <h4 class=""><%= piece.name %> (durata: <%= piece.duration %> anni)</h4>
           <div class="panel widget">
-            <div class="row row-table">
+            <div class="row row-table b">
               <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h4 br">
                 <div class="h3 m0"><%= number_to_currency piece.total_revenue, precision:0, unit:'€' %></div>
-                <small class=""><%= piece.name %> (<%= piece.duration %> anni)</small>
               </div>
               <% count = 0 %>
               <% @race.commissions.each do |commission| %>
                 <div class="col-md-2 col-sm-3 col-xs-6 text-center pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
                   <div class="h3 m0">
                     <%= number_to_currency piece.revenue(commission), precision:0, unit:'€' %>
-                  </div>
-                  <div class="text-muted">
-                    <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
                   </div>
                 </div>
                 <% count += 1 %>

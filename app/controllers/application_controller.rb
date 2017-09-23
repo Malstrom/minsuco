@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!, :load_notifications, :set_intent
+  before_action :authenticate_user!, :except => [:public_url]
+  before_action :load_notifications, :set_intent
 
   before_action :save_url_in_history, except: :history_back
   after_action  :remove_last_from_history, only: :history_back
@@ -39,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   # remove admin panel for devise controllers
   def layout_by_resource
-    if devise_controller?
+    if devise_controller? or action_name == "public_url"
       'pages'
     else
       'application'

@@ -28,7 +28,6 @@ Rails.application.routes.draw do
 
   resources :subscriptions
 
-
   resources :users do
     member do
       get :plans
@@ -51,6 +50,7 @@ Rails.application.routes.draw do
       get :like
       get :start
       get :pause
+      get :public_url
       get :publish, to: 'races#publish'
       get :publish_check, to: 'races#publish_check'
       patch :publish_check, to: 'races#publish_check'

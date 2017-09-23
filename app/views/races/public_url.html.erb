@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="block-center mt-xl">
+      <!-- START panel-->
+      <div class="panel panel-dark panel-flat">
+        <div class="panel-heading text-center">
+          <a href="#">
+            <img src="<%= image_path('angle/logo.png') %>" alt="Image" class="block-center img-rounded" />
+          </a>
+        </div>
+        <div class="panel-body text-center">
+          <h2 class="text-center">Questa è una gara di produzione creata sul portale myinsurancecontest.it</h2>
+          <p class="lead">Il primo portale in italia che ti permette di creare o partecipare alla gare assicurative per vincerle, partecipare con provvigioni molto più alte o per trovare nuovi partner con i quali iniziare a lavorare da subito.</p>
+          <p class="lead">Dettagli della gara:</p>
+          <div class="row">
+            <div class="col-lg-3">
+              <!-- START widget-->
+              <div class="panel widget">
+                <div class="row row-table row-flush">
+                  <div class="col-xs-4 bg-info text-center">
+                    <em class="fa fa-code-fork fa-2x"></em>
+                  </div>
+                  <div class="col-xs-8">
+                    <div class="panel-body text-center">
+                      <h4 class="mt0"><%= @race.category.name.upcase %></h4>
+                      <p class="mb0 text-muted">RAMO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END widget-->
+            </div>
+            <div class="col-lg-3">
+              <!-- START widget-->
+              <div class="panel widget">
+                <div class="row row-table row-flush">
+                  <div class="col-xs-4 bg-green text-center">
+                    <em class="fa fa-euro fa-2x"></em>
+                  </div>
+                  <div class="col-xs-8">
+                    <div class="panel-body text-center">
+                      <h4 class="mt0"><%= number_to_currency @race.remaining_value, precision:0 %></h4>
+                      <p class="mb0 text-muted">Rimanente</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END widget-->
+            </div>
+            <div class="col-lg-3">
+              <!-- START widget-->
+              <div class="panel widget">
+                <div class="row row-table row-flush">
+                  <div class="col-xs-4 bg-inverse text-center">
+                    <em class="fa fa-group fa-2x"></em>
+                  </div>
+                  <div class="col-xs-8">
+                    <div class="panel-body text-center">
+                      <h4 class="mt0">+<%= @race.attendees.count %></h4>
+                      <p class="mb0 text-muted">Partecipanti</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END widget-->
+            </div>
+            <div class="col-lg-3">
+              <!-- START widget-->
+              <div class="panel widget">
+                <div class="row row-table row-flush">
+                  <div class="col-xs-4 bg-green text-center">
+                    <em class="fa fa-inbox fa-2x"></em>
+                  </div>
+                  <div class="col-xs-8">
+                    <div class="panel-body text-center">
+                      <h4 class="mt0"><%= number_to_currency @race.compensation_start_amount, precision:0 %></h4>
+                      <p class="mb0 text-muted">Fisso per pezzo</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END widget-->
+            </div>
+          </div>
+          <p class="lead text-center">Il creatore è disposto a pagare questa provvigione</p>
+          <div class="panel widget">
+            <div class="row row-table b">
+              <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
+                <div class="h2 m0">%</div>
+                <small class=""></small>
+              </div>
+              <% count = 0 %>
+              <% @race.commissions.each do |commission| %>
+                <div class="p0 col-md-2 col-sm-3 col-xs-6 text-center bg-info pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
+                    <h3 class="m0"><%= number_to_percentage commission.value %></h3>
+                  <small class="text-white m0">
+                    <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
+                  </small>
+                </div>
+                <% count += 1 %>
+              <% end %>
+            </div>
+          </div>
+          <p class="lead text-center">Cosa aspetti? entra subito con il tuoi profili social per partecipare alla gara è scoprire chi è il creatore.</p>
+          <div class="text-center pv row">
+            <%- if devise_mapping.omniauthable? %>
+
+              <div class="col-md-12" style="padding-bottom: 10px">
+              <%- resource_class.omniauth_providers.reverse.each do |provider| %>
+
+                  <% if OmniAuth::Utils.camelize(provider) == 'Facebook' %>
+                    <%= link_to(omniauth_authorize_path(resource_name, provider), class: "btn btn-labeled btn-info btn-facebook btn-lg", style:'margin: 10px;') do  %>
+                      <span class="btn-label"><i class="fa fa-facebook"></i></span>
+                      <%= "Login con Facebook"  %>
+                    <% end %>
+                  <% elsif OmniAuth::Utils.camelize(provider) == 'GoogleOauth2' %>
+                    <%= link_to(omniauth_authorize_path(resource_name, provider), class: "btn btn-labeled btn-danger btn-lg") do  %>
+                      <span class="btn-label"><i class="fa fa-google"></i></span>
+                      <%= "Login con Google"  %>
+                    <% end %>
+                  <% end %>
+
+              <% end -%>
+              </div>
+            <% end -%>
+          </div>
+        </div>
+      </div>
+      <!-- END panel-->
+    </div>
+  </div>
+</div>

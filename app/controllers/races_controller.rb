@@ -1,7 +1,7 @@
 class RacesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_race, only: %i[show edit update publish publish_check like]
+  before_action :set_race, only: %i[show edit update publish publish_check like public_url]
 
   # GET /races
   # GET /races.json
@@ -64,6 +64,11 @@ class RacesController < ApplicationController
     @race.commissions.build(value:1,starts:5, ends:10)
     @race.commissions.build(value:0.5,starts:10, ends:15)
     @race.commissions.build(value:0.2,starts:15, ends:20)
+  end
+
+  #url allow access all users
+  def public_url
+
   end
 
   def publish; end

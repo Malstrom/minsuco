@@ -2,6 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new # guest user (not logged in)
+
     alias_action :index, :show, :readed, :to => :read
     alias_action :new, :to => :create
     alias_action :edit, :to => :update
@@ -19,6 +21,7 @@ class Ability
     can :publish_race, Race, owner:user
     can :update, Race, owner:user
     can :like, Race
+    can :public_url, Race
 
     #attendee
     can :read, Attendee, user:user

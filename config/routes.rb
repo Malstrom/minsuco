@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   # Google
   match '/oauth2callback' => 'friends#import', :via => [:get]
 
+  devise_scope :user do
+    get '/users/sign_out', to: 'devise/sessions#destroy'
+  end
+
   resources :subscriptions
 
 

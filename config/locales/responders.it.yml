@@ -24,3 +24,6 @@ it:
       delete:
         notice: "Partecipazione cancellata"
         alert: "Non è possibile uscire dalla gara"
+    friends:
+      invites:
+        notice: "Inviti inviati"

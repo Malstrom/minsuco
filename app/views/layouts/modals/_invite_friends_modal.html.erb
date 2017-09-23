@@ -1,75 +1,22 @@
 <!-- Modal-->
 <div id="friends_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
-
-      <div class="modal-header">
-        <button id="closeMyModal" type="button" data-dismiss="modal" aria-label="Close" class="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 id="myModalLabel" class="modal-title">Invita le persone che conosci</h4>
+      <div class="modal-header bg-danger">
+        <h4 class="text-center"> <em class="fa fa-google pull-left"></em>
+          Google contatti
+          <button id="closeMyModal" type="button" data-dismiss="modal" aria-label="Close" class="close">
+            <em class="fa fa-times"></em>
+          </button>
+        </h4>
       </div>
-
-      <div class="modal-body form-horizontal">
-        <div id="errors"></div>
-        <% if @race.owner.friends.empty? %>
-          <div class="text-center">
-            <p class="lead">Non hai amici? Importali da Google contacts</p>
-
-            <%= link_to invite_from_google_user_friends_path(current_user, race_id:@race.id), class: "btn btn-labeled btn-danger btn-xl", id:'btnContactGoogle' do %>
-              <span class="btn-label"><i class="fa fa-google"></i></span>
-              <%= "Google Contatti" %>
-            <% end %>
-          </div>
-
-        <% else %>
-          <%= form_tag invites_user_friends_path(current_user), method: :post do %>
-            <div class="table-responsive">
-            <table id="table-ext-1" class="table table-bordered table-hover">
-              <thead>
-              <tr>
-                <th>Picture</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th data-check-all="">
-                  <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox" data-original-title="" title="">
-                    <label>
-                      <input type="checkbox" checked>
-                      <span class="fa fa-check"></span>
-                    </label>
-                  </div>
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-              <% @race.owner.friends.each do |friend| %>
-                <tr>
-                  <td>
-                    <div class="media">
-                      <img src="img/user/01.jpg" alt="Image" class="img-responsive img-circle">
-                    </div>
-                  </td>
-                  <td><%= friend.name %></td>
-                  <td><%= friend.email %></td>
-                  <td>
-                    <div class="checkbox c-checkbox">
-                      <label>
-                        <%= check_box_tag "emails[#{friend.id}]", friend.email, checked:true%>
-                        <span id="<%= friend.id %>" class="fa fa-check"></span>
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-              <% end %>
-              </tbody>
-            </table>
-              <div class="modal-footer">
-                <button id="save" type="submit" class="btn btn-primary">Invita amici</button>
-              </div>
-            </div>
-          <% end %>
-          </div>
-        <% end %>
+      <div class="modal-body m0">
+        <p class="lead text-center">Spunta le persone che vorresti invitare a questa gara, una volta finito vai in fondo e clicca su "Invita". Le persone invitate riceveranno una mail con la proposta di partecipare alla tua gara.</p>
+        <div id="allFriends" role="tabpanel" class="tab-pane active">
+          <%= render partial: 'races/partials/race/owner_partials/friend_list',
+                 :locals => { :friends => current_user.friends, :datatable => 'allFriendsTable' } %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

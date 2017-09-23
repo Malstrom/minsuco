@@ -29,6 +29,7 @@ And(/^I complete my profile$/) do
 end
 
 Then(/^'([^']*)' attribute '([^']*)' should '([^']*)'$/) do |model, attr, value|
+  sleep 0.5
   klass = Object.const_get model
   user = klass.first
   value_saved = user.instance_eval(attr).to_s

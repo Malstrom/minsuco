@@ -11,8 +11,14 @@
  *= require fonts
  *= require vendor.assets
  *= require races
+
+ *= require social-share-button
+
+
  *
  */
+
+@import "social-share-button";
 
 .btn-facebook{
   background-color: #3B5998 !important;
@@ -27,4 +33,14 @@
 }
 .no-decoration{
   text-decoration: none !important;
+}
+
+$size: 30px;
+
+.social-share-button {
+  .ssb-icon {
+    background-size: $size $size;
+    height: $size;
+    width: $size;
+  }
 }

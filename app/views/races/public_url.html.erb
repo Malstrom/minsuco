@@ -12,14 +12,13 @@
       <!-- START panel-->
       <div class="panel panel-dark panel-flat">
         <div class="panel-heading text-center">
-          <a href="#">
-            <img src="<%= image_path('angle/logo.png') %>" alt="Image" class="block-center img-rounded" />
-          </a>
+            <h1 class="m0">myinsurancecontest.it</h1>
+            <!--<img src="<%= image_path('angle/logo.png') %>" alt="Image" class="block-center img-rounded" />-->
         </div>
         <div class="panel-body text-center">
-          <h2 class="text-center">Questa è una gara di produzione creata sul portale myinsurancecontest.it</h2>
-          <p class="lead">Il primo portale in italia che ti permette di creare o partecipare alla gare assicurative per vincerle, partecipare con provvigioni molto più alte o per trovare nuovi partner con i quali iniziare a lavorare da subito.</p>
-          <p class="lead">Dettagli della gara:</p>
+          <h2 class="text-center">Gara di produzione: <%= @race.name %></h2>
+          <p class="lead">Questa gara è stata creata su myinsurancecontest.it, il primo portale in italia che ti permette di creare o partecipare alla gare assicurative per vincerle, partecipare con provvigioni molto più alte o per trovare nuovi partner con i quali iniziare a lavorare da subito.</p>
+          <p class="lead">Dettagli:</p>
           <div class="row">
             <div class="col-lg-3">
               <!-- START widget-->
@@ -109,6 +108,7 @@
               <% end %>
             </div>
           </div>
+
           <p class="lead text-center">Cosa aspetti? entra subito con il tuoi profili social per partecipare alla gara è scoprire chi è il creatore.</p>
           <div class="text-center pv row">
             <%- if devise_mapping.omniauthable? %>

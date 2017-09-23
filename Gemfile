@@ -19,6 +19,8 @@ gem 'jbuilder', '~> 2.5'      # Build JSON APIs with ease. Read more: https://gi
 gem "bower-rails", "~> 0.9.2"
 gem "slim-rails"
 
+gem 'turbolinks', '~> 5.0.0'
+
 gem 'activerecord-session_store'
 
 # gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
@@ -95,3 +97,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem "state_machines-activerecord"
 # gem 'aasm'
 
+gem 'social-share-button'

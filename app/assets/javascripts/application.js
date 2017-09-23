@@ -7,6 +7,9 @@
 //= require payola
 //= require Chart.bundle
 
+
+//= require social-share-button
+
 //--- Angle
 //= require_tree ./angle/
 
@@ -54,3 +57,4 @@ $('.info')
       $(self).tooltip('close');
     })
   });
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="<%= yield :description %>">
+  <meta name="keywords" content="insurtech, insurance, app, web-app, insurance-arena, gare di produzione, agenti, assicurazioni ">
+  <title><%= yield :title %> - My Insurance Contest</title>
+  <!-- =============== VENDOR STYLES ===============-->
+  <%= stylesheet_link_tag 'base' %>
+  <!-- =============== VIEW VENDOR STYLES ===============-->
+  <%= stylesheet_link_tag params[:controller] %>
+  <!-- =============== APP STYLES ===============-->
+  <%= stylesheet_link_tag 'application', media: 'all', id: "maincss" %>
+
+  <style>
+    body{
+      background-size: 100%;
+      background-image: url( /background1.jpg )
+    }
+  </style>
+
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<div class="wrapper">
+  <%= yield %>
+</div>
+<div class="p-lg text-center">
+  <span>&copy;</span>
+  <span>2017</span>
+  <span>-</span>
+  <span>My Insurance Contest</span>
+  <br>
+  <!--<span>Bootstrap Admin Template</span>-->
+</div>
+<!-- =============== VENDOR SCRIPTS ===============-->
+<%= javascript_include_tag 'base' %>
+<!-- =============== VIEW VENDOR SCRIPTS ===============-->
+<%= javascript_include_tag params[:controller] %>
+<!-- =============== APP SCRIPTS ===============-->
+<%= javascript_include_tag 'application' %>
+</body>
+
+</html>

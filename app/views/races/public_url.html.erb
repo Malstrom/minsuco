@@ -1,3 +1,11 @@
+<% content_for :title do %>
+  <%= "Gara di produzione #{@race.name}" %>
+<% end %>
+
+<% content_for :description do %>
+  <%= "Questa gara del ramo #{@race.category.name.upcase}, mancano ancora #{@race.remaining_value} euro per poter essere vinta dal creatore che è disposto a pagare #{number_to_percentage @race.commissions.first_year.value}." %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
     <div class="block-center mt-xl">

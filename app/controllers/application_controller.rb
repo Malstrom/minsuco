@@ -40,8 +40,10 @@ class ApplicationController < ActionController::Base
 
   # remove admin panel for devise controllers
   def layout_by_resource
-    if devise_controller? or action_name == "public_url"
+    if devise_controller?
       'pages'
+    elsif action_name == "public_url"
+      'race_public'
     else
       'application'
     end

@@ -30,13 +30,21 @@ class FriendsController < ApplicationController
 
   def invites
     emails = params[:emails]
+
+    # if user type email in form and that email do not in list of friends create new friend
+    if emails.is_a? String
+      emails = params[:emails].split(',')
+      emails.each {|email| Friend.create(email:email) unless current_user.friends.include?(email)}
+    end
     InviteMailer.invite_friends(emails.to_json).deliver_later
 
-    redirect_to root_path
+    flash[:notice] = I18n.t('flash.friends.invites.notice')
+
+    redirect_to race_path(Race.find(params[:race_id]))
   end
 
   def invite_from_google
-    current_user.update_attribute :redirect_path, "/races/#{params[:race_id]}"
+    current_user.update_attribute :redirect_path, "/races/#{params[:race_id]}?friend_modal=#{params[:friend_modal]}"
     redirect_to "/contacts/gmail"
   end
 
@@ -55,7 +63,7 @@ class FriendsController < ApplicationController
 
     if @user.redirect_path
       redirect_to @user.redirect_path
-      @user.update_attribute(:redirect_path, nil)
+      # @user.update_attribute(:redirect_path, nil)
     else
       redirect_to root_path
     end

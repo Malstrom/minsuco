@@ -1,13 +1,8 @@
+<h3>Altre informazioni</h3>
 <!-- Aside panel-->
 <div class="panel b">
   <table class="table bb">
     <tbody>
-    <tr>
-      <td>
-        <strong>Dettagli</strong>
-      </td>
-      <td></td>
-    </tr>
     <tr>
       <td>
         <strong>Ramo rischio</strong>
@@ -24,7 +19,7 @@
       <td>
         <strong>Fisso per pezzo</strong>
       </td>
-      <td><%= number_to_currency @race.compensation_start_amount, unit: '€' %></td>
+      <td><%= number_to_currency @race.compensation_start_amount, unit: '€', precision: 0 %></td>
     </tr>
     <tr>
       <td>

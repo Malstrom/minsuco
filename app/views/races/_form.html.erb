@@ -154,10 +154,19 @@
       </div>
     </fieldset>
 
-  <fieldset>
-    <div class="form-group text-center" style="display: grid;">
-      <%= f.submit 'CREA GARA', class: 'btn btn-xl btn-success' %>
-    </div>
-  </fieldset>
+    <% if @race.new_record? %>
+      <fieldset>
+        <div class="form-group text-center" style="display: grid;">
+          <%= f.submit 'CREA GARA', class: 'btn btn-xl btn-success' %>
+        </div>
+      </fieldset>
+    <% else %>
+      <fieldset>
+        <div class="form-group text-center" style="display: grid;">
+          <%= f.submit 'MODIFICA GARA', class: 'btn btn-xl btn-success' %>
+        </div>
+      </fieldset>
+    <% end %>
+
 </div>
 <% end %>

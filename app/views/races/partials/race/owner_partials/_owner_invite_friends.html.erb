@@ -1,27 +1,37 @@
-<h3>Invita i tuoi amici</h3>
-<div class="panel b text-center bg-purple">
+<!--<h3>Invita <small class="text-muted">le persone che conosci.</small></h3>-->
+<div class="panel current-bg">
   <div class="panel-body">
-    <p class="h4 text-bold mb0"></p>
-  </div>
-  <div class="panel-body">
-    <div class="text-center">
-      <%= form_for [current_user, Friend.new] do |f| %>
-        <div class="input-group">
-          <%= f.text_field :email, class: "form-control" %>
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-default">Invita</button>
-          </span>
-        </div>
+    <p class="text-center">Inserisci le mail delle persone che conosci qui sotto</p>
+    <div>
+      <%= form_tag invites_user_friends_path(current_user) do |f| %>
+        <%= hidden_field_tag :race_id, @race.id %>
+        <fieldset class="p0">
+          <div class="form-group"><label class="col-sm-12 control-label">
+          </label>
+            <div class="col-sm-12 input-group">
+              <input type="text" data-role="tagsinput" name="emails" class="form-control" style="display: none;">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default">Invia email</button>
+              </span>
+            </div>
+          </div>
+        </fieldset>
       <% end %>
-      <br>
-      <% if current_user.friends  %>
-        <button type="button" data-toggle="modal" data-target="#friends_modal" class="btn btn-lg btn-default">Miei contatti</button>
-      <% else %>
-        <%= link_to '/contacts/gmail', class: "btn btn-labeled btn-danger btn-lg" do %>
-          <span class="btn-label"><i class="fa fa-google"></i></span>
-          Importa da google
+      <p class="text-center">oppure</p>
+      <p class="text-center">invita le persone che potrebbero essere interessate direttamente dalla tua lista di contatti di google.</p>
+      <div class="text-center">
+        <% if current_user.friends.empty? %>
+          <%= link_to invite_from_google_user_friends_path(current_user,race_id:@race.id,friend_modal:'true'), class: "btn btn-labeled btn-danger btn-lg" do %>
+            <span class="btn-label"><i class="fa fa-google"></i></span>
+            Importa da google
+          <% end %>
+        <% else %>
+          <button type="button" data-toggle="modal" data-target="#friends_modal" class="btn btn-labeled btn-danger btn-lg">
+            <span class="btn-label"><i class="fa fa-google"></i></span>
+            Lista contatti di google
+          </button>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

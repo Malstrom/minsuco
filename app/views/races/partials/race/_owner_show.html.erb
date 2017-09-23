@@ -8,10 +8,16 @@
 
   <div class="col-lg-8">
     <%= render partial: 'races/partials/race/owner_partials/show_owner_main' %>
+    <%= render partial: 'races/partials/race/owner_partials/attendees_panel' %>
+
   </div>
   <div class="col-lg-4">
     <% unless @race.expired? %>
+      <%= render partial: 'races/partials/race/owner_partials/owner_socials' %>
+      <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>
       <%= render partial: 'races/partials/race/owner_partials/owner_actions' %>
+
+
     <% end %>
     <%= render partial: 'races/partials/race/owner_partials/show_owner_details' %>
   </div>
@@ -19,11 +25,9 @@
     <div class="row">
       <% unless @race.expired? %>
         <div class="col-md-8">
-          <%# render partial: 'races/partials/race/owner_partials/attendees_list' %>
-          <%= render partial: 'races/partials/race/owner_partials/attendees_panel' %>
         </div>
         <div class="col-md-4">
-          <%= render partial: 'races/partials/race/owner_partials/owner_invite_friends' %>
+
         </div>
       <% end %>
     </div>
@@ -32,4 +36,12 @@
 
 <% content_for :body_area do %>
   <%= render partial: 'layouts/modals/invite_friends_modal' %>
+  <script>
+    friend_modal = $.urlParam('friend_modal');
+    if(friend_modal === 'true'){
+      $('#friends_modal').modal('show').css("display", "block").addClass( "in" );
+    }
+  </script>
 <% end %>
+
+

@@ -1,8 +1,5 @@
-
+<h3>Pannello di controllo</h3>
 <div class="panel b text-center">
-  <div class="panel-body">
-    <p class="h4 text-bold mb0">Controlla</p>
-  </div>
   <div class="panel-body">
     <div class="row">
       <% if @race.expired? %>
@@ -30,8 +27,7 @@
             <span>Modifica gara</span>
           <% end %>
         </div>
-        <br><br>
-        <hr>
+        <br><br><br>
         <div class="col-sm-12">
           <% if @race.open? %>
             <%= link_to publish_race_path(@race), class: "btn btn-warning btn-oval" do %>

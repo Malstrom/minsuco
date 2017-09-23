@@ -1,8 +1,4 @@
 // Place all the behaviors and hooks related to the matching controller here.
-
-
-
-
 //--- jQuery UI
 //= require jquery-ui/jquery-ui
 //= require jqueryui-touch-punch/jquery.ui.touch-punch.min
@@ -26,7 +22,6 @@
 //= require datatables/media/js/dataTables.bootstrap
 //--- Filestyle
 //= require bootstrap-filestyle/src/bootstrap-filestyle
-
 
 //--- Input Mask
 //= require jquery.inputmask/dist/jquery.inputmask.bundle
@@ -62,20 +57,8 @@
 //= require cropper/dist/cropper.js
 // --- Select2
 //= require select2/dist/js/select2
-
-
-
-// $("#replace_money_1").hide();
-//
-// $('#perc').click(function(){
-//   $( "#replace_money_1" ).hide();
-//   $( "#replace_money_2" ).replaceWith( "<span id=\"replace_perc_2\" class=\"input-group-addon\">%</span>" );
-// });
-//
-// $('#money').click(function(){
-//   $( "#replace_money_1" ).show();
-//   $( "#replace_perc_2" ).replaceWith( "<span id=\"replace_money_2\" class=\"input-group-addon\">.00</span>" );
-// });
+//--- Tags input
+//= require bootstrap-tagsinput/dist/bootstrap-tagsinput.min
 
 $('.datetimepicker').datetimepicker({
   format: 'DD/MM/YYYY',
@@ -126,3 +109,60 @@ $('#add_like_button').click(function () {
     }
   });
 });
+
+$.urlParam = function(name){
+  var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+  if (results==null){
+    return null;
+  }
+  else{
+    return decodeURI(results[1]) || 0;
+  }
+};
+
+
+(function(window, document, $, undefined){
+
+  if ( ! $.fn.dataTable ) return;
+
+  $(function(){
+
+
+    $('#inAppFriendsTable').dataTable({
+      "pagingType": "full",
+      'paging':   true,  // Table pagination
+      'ordering': false,  // Column ordering
+      'info':     true,  // Bottom left status text
+      'responsive': true, // https://datatables.net/extensions/responsive/examples/
+      // Text translation options
+      // Note the required keywords between underscores (e.g _MENU_)
+      oLanguage: {
+        sSearch:      'Cerca',
+        sLengthMenu:  '_MENU_ records per pagina',
+        info:         'Mostra page _PAGE_ of _PAGES_',
+        zeroRecords:  'Non hai amici - mi spiace',
+        infoEmpty:    'Non ho trovato nulla',
+        infoFiltered: '(filtered from _MAX_ total records)'
+      }
+    });
+
+    $('#allFriendsTable').dataTable({
+      "pagingType": "full",
+      'paging':   true,  // Table pagination
+      'ordering': false,  // Column ordering
+      'info':     true,  // Bottom left status text
+      'responsive': true, // https://datatables.net/extensions/responsive/examples/
+      // Text translation options
+      // Note the required keywords between underscores (e.g _MENU_)
+      oLanguage: {
+        sSearch:      'Cerca',
+        sLengthMenu:  'Records per pagina _MENU_',
+        info:         'Mostra _START_ to _END_ of _TOTAL_ amici',
+        zeroRecords:  'Non hai amici - mi spiace',
+        infoEmpty:    'Non ho trovato nulla',
+        infoFiltered: '(filtered from _MAX_ total records)'
+      }
+    });
+  });
+
+})(window, document, window.jQuery);

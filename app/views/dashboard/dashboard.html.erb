@@ -1,70 +1,227 @@
-<!--Title-->
-<%= render partial: 'dashboard/partials/heading' %>
 
+<!-- START widgets box-->
 <div class="row">
-  <div class="col-lg-4 col-sm-6">
+  <div class="col-lg-3 col-sm-6">
     <!-- START widget-->
     <div class="panel widget bg-primary">
       <div class="row row-table">
         <div class="col-xs-4 text-center bg-primary-dark pv-lg">
-          <em class="icon-cloud-upload fa-3x"></em>
+          <em class="fa fa-rocket fa-3x"></em>
         </div>
         <div class="col-xs-8 pv-lg">
-          <div class="h2 mt0"><%= number_to_currency Race.where(owner:current_user).sum(:race_value), unit: "€" %></div>
-          <div class="text-uppercase">Premi delle gare Attive</div>
+          <div class="h2 mt0"><%= number_to_currency current_user.total_target, precision:0  %></div>
+          <div class="text-uppercase">Obbiettivi totali</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-4 col-sm-6">
+  <div class="col-lg-3 col-sm-6">
     <!-- START widget-->
-    <div class="panel widget bg-primary">
+    <div class="panel widget bg-green">
       <div class="row row-table">
-        <div class="col-xs-4 text-center bg-primary-dark pv-lg">
-          <em class="icon-cloud-upload fa-3x"></em>
+        <div class="col-xs-4 text-center bg-green-dark pv-lg">
+          <em class="fa fa-flag-checkered fa-3x"></em>
         </div>
         <div class="col-xs-8 pv-lg">
-          <div class="h2 mt0"><%= number_to_currency Attendee.where(user:current_user).sum(:join_value), unit: "€" %></div>
-          <div class="text-uppercase">Premi allocati gare Attive</div>
+          <div class="h2 mt0"><%= number_to_currency current_user.total_covered, precision:0  %>
+          </div>
+          <div class="text-uppercase">Obbiettivi raggiunti</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <!-- START widget-->
+    <div class="panel widget bg-warning">
+      <div class="row row-table">
+        <div class="col-xs-4 text-center bg-warning-dark pv-lg">
+          <em class="fa fa-flag-o fa-3x"></em>
+
+        </div>
+        <div class="col-xs-8 pv-lg">
+          <div class="h2 mt0"><%= number_to_currency current_user.total_remaining, precision:0  %></div>
+          <div class="text-uppercase">Obbiettivi rimanenti</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <!-- START widget-->
+    <div class="panel widget bg-info">
+      <div class="row row-table">
+        <div class="col-xs-4 text-center bg-info-dark pv-lg">
+          <em class="fa fa-pie-chart fa-3x"></em>
+        </div>
+        <div class="col-xs-8 pv-lg">
+          <div class="h2 mt0"><%= number_to_currency current_user.total_commissions, precision:0 %></div>
+          <div class="text-uppercase">Provvigioni</div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<!-- END widgets box-->
 <div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Partecipazioni
-      </div>
-      <div class="panel-body">
-        <%# line_chart Attendee.where(user:current_user).group_by_month(:created_at).count %>
+  <!-- START dashboard main content-->
+  <div class="col-lg-9">
+    <!-- START chart-->
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- START widget-->
+        <div id="panelChart9" class="panel panel-default panel-demo">
+          <div class="panel-heading">
+            <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
+              <em class="fa fa-minus"></em>
+            </a>
+            <div class="panel-title">Partecipazioni alle tue gare</div>
+          </div>
+          <div class="panel-body p0">
+            <%= area_chart Attendee.group_by_user(current_user),  discrete: true %>
+          </div>
+        </div>
+        <!-- END widget-->
       </div>
     </div>
-  </div>
-</div>
+    <!-- END chart-->
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Divisione portafoglio per categorie
-      </div>
-      <div class="panel-body">
-        <%= pie_chart Category.joins(:races).where('races.owner_id = ?', current_user.id).group('categories.name').count %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Gare Iniziate/in pausa/archiviate....
-      </div>
-      <div class="panel-body">
-        <%= pie_chart Race.where(owner:current_user).group(:status).count %>
-      </div>
-    </div>
-  </div>
-</div>
 
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- START widget-->
+        <div class="panel widget">
+          <div class="panel-body">
+            <div class="clearfix">
+              <h3 class="pull-left text-muted mt0">Suddivisione per rami</h3>
+              <%= tooltip_widget(:charts, :races_by_categories, "fa-2x pull-right") %>
+            </div>
+            <div class="panel-body p0">
+              <%= pie_chart Category.joins(:races).where('races.owner_id = ?', current_user.id).group('categories.name').count, height:"200px" %>
+            </div>
+          </div>
+        </div>
+        <!-- END widget-->
+      </div>
+      <div class="col-lg-6">
+        <!-- START widget-->
+        <div class="panel widget">
+          <div class="panel-body">
+            <div class="clearfix">
+              <h3 class="pull-left text-muted mt0">Partecipanti per rami</h3>
+              <%= tooltip_widget(:charts, :attendees_by_categories, "fa-2x pull-right") %>
+            </div>
+            <div class="panel-body p0">
+              <%= pie_chart Category.joins(:attendees).where('attendees.race_id IN (?)', current_user.races.pluck(:id)).group('categories.name').count, height:"200px" %>
+            </div>
+          </div>
+        </div>
+        <!-- END widget-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Insight del portale</h3>
+      </div>
+      <div class="col-lg-12">
+        <!-- START widget-->
+        <div class="panel widget">
+          <div class="panel-body">
+            <div class="clearfix">
+              <h3 class="pull-left text-muted mt0">Gare sul portale per rami</h3>
+              <%= tooltip_widget(:charts, :app_races_by_category, "fa-2x pull-right") %>
+            </div>
+            <div class="panel-body p0">
+              <%= line_chart Category.joins(:races).group('categories.name').group_by_day('races.created_at').count, height:"300px",  discrete: true %>
+            </div>
+          </div>
+        </div>
+        <!-- END widget-->
+      </div>
+      <div class="col-lg-12">
+        <!-- START widget-->
+        <div class="panel widget">
+          <div class="panel-body">
+            <div class="clearfix">
+              <h3 class="pull-left text-muted mt0">Partecipanti su </h3>
+              <%= tooltip_widget(:charts, :app_attendees_by_category, "fa-2x pull-right") %>
+            </div>
+            <div class="panel-body p0">
+              <%= line_chart Category.joins(:attendees).group('categories.name').group_by_day('attendees.created_at').count, height:"300px",  discrete: true %>
+            </div>
+          </div>
+        </div>
+        <!-- END widget-->
+      </div>
+    </div>
+  </div>
+  <!-- END dashboard main content-->
+  <!-- START dashboard sidebar-->
+  <aside class="col-lg-3">
+    <div class="panel widget">
+      <div class="panel-body text-center">
+        <div class="radial-bar radial-bar-<%= current_user.completeness %> radial-bar radial-bar-<%= color_percentual(current_user.completeness) %> m0">
+          <% if current_user.image  %>
+            <img src="<%= image_path(current_user.image)  %>"/>
+          <% else %>
+            <img src="<%= image_path("default_profile.png")%>"/>
+          <% end %>
+        </div>
+        <p>
+          <span>Profilo completo al</span><br>
+          <strong><%= number_to_percentage current_user.completeness, precision:0  %></strong>
+        </p>
+      </div>
+    </div>
+    <!-- START loader widget-->
+    <!-- END loader widget-->
+    <!-- START messages and activity-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Ultime gare inserite</div>
+      </div>
+      <!-- START list group-->
+      <div class="list-group">
+        <% Race.last(10).reverse.each do |race| %>
+          <div class="list-group-item">
+            <div class="media-box">
+              <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-success"></em>
+                        <em class="fa fa-newspaper-o fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+              </div>
+              <div class="media-box-body clearfix">
+                <small class="text-muted pull-right ml"><%= distance_of_time_in_words(Time.now, race.ends_at) %></small>
+                <div class="media-box-heading"><a href="#" class="text-success m0"><%= race.category.name.upcase %></a>
+                </div>
+                <p class="m0">
+                  <small>
+                    <em>
+                      <%= number_to_percentage race.commissions.first_year.value %>
+                      <%= tooltip_widget(:commissions, :first_year) %>
+                    </em>
+                    /
+                    <em>
+                      <%= number_to_currency race.remaining_value, precision:0 %>
+                      <%= tooltip_widget(:races, :remaining_value) %>
+                    </em>
+                  </small>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+      <!-- END list group-->
+      <!-- START panel footer-->
+      <div class="panel-footer clearfix">
+        <a href="#" class="pull-left">
+          <small>Load more</small>
+        </a>
+      </div>
+      <!-- END panel-footer-->
+    </div>
+    <!-- END messages and activity-->
+  </aside>
+  <!-- END dashboard sidebar-->
+</div>

@@ -2,6 +2,7 @@ class Attendee < ApplicationRecord
 
   belongs_to :user
   belongs_to :race
+  belongs_to :category
 
   has_many :pieces, :dependent => :destroy
 
@@ -17,7 +18,7 @@ class Attendee < ApplicationRecord
 
   validate :unique_join, :joinable, :self_join, :race_target_cap, on: :create
 
-  before_create :set_status
+  before_create :set_status, :set_category
 
   after_create :decrement_private_join_rewards, if: proc { |attendee| attendee.race.close? }
 
@@ -25,6 +26,9 @@ class Attendee < ApplicationRecord
   after_destroy_commit	:leave_from_race_event
 
   scope :confirmed, -> { where status: :confirmed }
+  scope :group_by_user, ->(user) { where(race:user.races).group_by_day(:created_at).count }
+
+
 
   def total_revenue
     sum = 0
@@ -89,6 +93,10 @@ class Attendee < ApplicationRecord
 
   def set_status
     self.status = :confirmed
+  end
+
+  def set_category
+    self.category = race.category
   end
 
   # create event every time create attendee

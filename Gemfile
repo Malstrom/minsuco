@@ -40,6 +40,8 @@ gem 'cancancan', '~> 2.0'
 
 gem "chartkick"       # simply charts
 gem 'groupdate'       # with chartkick charts are very simply
+gem 'active_median'
+gem 'hightop'
 
 gem "nested_form"
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917131254) do
+ActiveRecord::Schema.define(version: 20170926171638) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20170917131254) do
     t.datetime "updated_at", null: false
     t.integer "join_value"
     t.integer "status"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_attendees_on_category_id"
     t.index ["race_id"], name: "index_attendees_on_race_id"
     t.index ["user_id"], name: "index_attendees_on_user_id"
   end

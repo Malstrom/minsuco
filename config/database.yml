@@ -47,11 +47,11 @@ test: &test
 #
 production:
  adapter: mysql2
- url: <%= ENV['CLEARDB_DATABASE_URL'] %>
+ url: <%= ENV['JAWSDB_URL'] %>
 
 staging:
  adapter: mysql2
- url: <%= ENV['CLEARDB_DATABASE_URL'] %>
+ url: <%= ENV['JAWSDB_URL'] %>
 
 cucumber:
   <<: *test

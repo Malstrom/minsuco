@@ -55,9 +55,15 @@ class Race < ApplicationRecord
   scope :by_owner,      ->(owner)     { where(owner: owner) }
   scope :by_recipients, ->(recipient) { where(recipients: [recipient, :for_all]) }
 
+  # scope :group_by_categories,           -> { group(:category).category.name }
+
+
   def set_draft
     self.status ||= :draft
   end
+
+
+
 
   def decrement_open_race_reward
     owner.reward.decrement_public_races
@@ -135,17 +141,15 @@ class Race < ApplicationRecord
   end
 
   def set_permalink
-    self.permalink ||= SecureRandom.hex(4)
-  end
-
-  # create race name if not exists (need for test)
-  def set_name
-    self.name ||= "Gara di #{owner.name}".parameterize
+    self.permalink = loop do
+      random_token = SecureRandom.hex(4)
+      break random_token unless Race.exists?(permalink: random_token)
+    end
   end
 
   def initialize_race
     set_permalink
-    set_name
+    self.name = permalink
   end
 
   # CUSTOM VALIDATIONS

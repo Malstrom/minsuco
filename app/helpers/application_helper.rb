@@ -42,9 +42,9 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def tooltip_widget(thing,message_key)
+  def tooltip_widget(thing,message_key,dimension = nil)
     html = <<-HTML
-    <em class="fa fa-info-circle info text-muted" data-toggle="tooltip" data-placement="top"
+    <em class="fa fa-info-circle info text-muted #{dimension}" data-toggle="tooltip" data-placement="top"
     data-original-title="#{ t("tooltips.#{thing}.#{message_key}") }"></em>
     HTML
 
@@ -70,4 +70,14 @@ module ApplicationHelper
     html.html_safe
   end
 
+
+  def color_percentual(perc)
+    if perc >= 50 and perc < 80
+      "info"
+    elsif perc >= 80
+      "success"
+    else
+      "default"
+    end
+  end
 end

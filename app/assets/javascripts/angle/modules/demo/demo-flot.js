@@ -5,7 +5,7 @@
   $(function(){
 
     var data = [{
-      "label": "Uniques",
+      "label": "Uniche",
       "color": "#768294",
       "data": [
         ["Mar", 70],
@@ -188,7 +188,7 @@
       "label": "Recurrent",
       "color": "#7dc7df",
       "data": [
-        ["Mar", 13],
+        ["Mar", 150],
         ["Apr", 44],
         ["May", 44],
         ["Jun", 27],

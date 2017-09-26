@@ -24,6 +24,7 @@ it:
       each_piece: "Importo che creatore verserà al partecipante per ogni pezzo"
     commissions:
       commission_range: "Importo totale che il creatore dovrà al partecipante suddiviso per scaglioni di tempo determinati dal creatore"
+      first_year: "Provvigione che il creatore pagare il primo anno."
     attendees:
       allow_join: "Permetti a questa utente di far parte della gara."
       deny_partecipation: "Nega a questa persona di partecipare alla gara."
@@ -33,3 +34,8 @@ it:
       race_attendees: "Tutte le gare alle quali hai partecipato."
       user_races: "Visualiza tutte le gare che hai creato."
       private_net: "Presto disponibile, permettera di creare gare solo per la tua rete vendite."
+    charts:
+      races_by_categories: "Le tue gare suddivise per i rami nelle quali le hai create."
+      attendees_by_categories: "I partecipanti alle tue gare suddivisi per i rami."
+      app_races_by_category: "Tutte le gare create sul portale divise per rami"
+      app_attendees_by_category: "Tutte le partecipazioni sul portale divise per rami"

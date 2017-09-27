@@ -13,6 +13,7 @@
       <!--</div>-->
       <%= nested_form_for([@race, @attendee]) do |f| %>
         <div class="modal-body">
+          <div id="errors"></div>
           <div class="row">
             <div class="col-lg-12 text-center">
               <p class="text-center lead"><%= t('view.races.modal.join.text_help') %></p>

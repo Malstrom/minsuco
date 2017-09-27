@@ -50,7 +50,7 @@
         </div>
         <p class="h1 text-center">=</p>
         <% attendee.pieces.each do |piece| %>
-          <h4 class=""><%= piece.name %> (durata: <%= piece.duration %> anni)</h4>
+          <h4 class=""><%= piece.name %> (premio: <%= number_to_currency piece.value, precision:0 %>, durata: <%= piece.duration %> anni)</h4>
           <div class="panel widget">
             <div class="row row-table b">
               <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h4 br">

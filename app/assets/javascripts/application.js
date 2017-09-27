@@ -2,17 +2,18 @@
 // listed below.
 //
 
+//= require turbolinks
+
+
 //= require jquery_nested_form
 
 //= require payola
 //= require Chart.bundle
 
-
 //= require social-share-button
 
 //--- Angle
 //= require_tree ./angle/
-
 
 //--- Skycons
 //= require skycons/skycons
@@ -24,6 +25,8 @@
 //= require bootstrap-tour/build/js/bootstrap-tour-standalone.js
 // --- Sweet Alert
 //= require sweetalert/dist/sweetalert.min.js
+
+
 
 Chartkick.configure({language: "it"});
 ////= require cable

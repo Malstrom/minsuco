@@ -18,7 +18,6 @@ gem 'coffee-rails', '~> 4.2'  # Use CoffeeScript for .coffee assets and views
 gem 'jbuilder', '~> 2.5'      # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "bower-rails", "~> 0.9.2"
 gem "slim-rails"
-
 gem 'turbolinks', '~> 5.0.0'
 
 gem 'activerecord-session_store'

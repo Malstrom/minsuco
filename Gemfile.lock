@@ -107,7 +107,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    completeness-fu (0.6.0)
     concurrent-ruby (1.0.5)
     cucumber (2.4.0)
       builder (>= 2.1.2)
@@ -370,7 +369,6 @@ DEPENDENCIES
   chartkick
   chromedriver-helper
   coffee-rails (~> 4.2)
-  completeness-fu
   cucumber
   cucumber-rails
   database_cleaner
@@ -381,6 +379,7 @@ DEPENDENCIES
   groupdate
   hightop
   jbuilder (~> 2.5)
+  jquery-rails
   meta_request
   mysql2
   nested_form

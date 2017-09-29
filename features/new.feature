@@ -27,5 +27,3 @@ Feature: New feature
 #    When 'John' join in race with piece named 'first' value '10000' for 10 years
 #    And I sleep "10" seconds
 #    Then 'John' should 1000 of total revenue
-
-

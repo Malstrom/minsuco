@@ -5,9 +5,15 @@
       <%= tooltip_widget(:races, :panel_help, 'pull-right') %>
     </div>
     <div class="panel-body">
-      <em class="fa fa-2x <%= race.open? ? "icon-lock-open  text-success" : "icon-lock  text-warning" %>"></em>
+      <%= tooltip_widget(:races,
+                         race.open? ? :open_race : :close_race  ,
+                         race.open? ? "icon-lock-open  text-success fa-2x" : "icon-lock  text-warning fa-2x") %>
       <h2 class="h2">
+        <small><%= tooltip_widget(:races, :category, 'fa-code-fork') %></small>
+        &nbsp;
         <%= race.category.name.humanize %> |  <%= number_to_currency race.remaining_value, precision:0  %>
+        &nbsp;
+        <small><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></small>
       </h2>
       <p>
         <% if race.expired? %>
@@ -18,13 +24,13 @@
           fine gara.
         <% end %>
       </p>
-      <div class="b">
+      <div class="b bg-gray-lighter">
         <%= tooltip_widget(:commissions, :table) %>
         <table class="table table-hover">
           <thead>
           <tr>
             <% race.commissions.each do |commission| %>
-              <th>
+              <th class="text-center">
                 <%= commission.starts == 0 ? "" : "" + commission.starts.to_s + "°/" %><%= commission.ends %>° anno
               </th>
             <% end %>
@@ -33,7 +39,7 @@
           <tbody>
           <tr>
             <% race.commissions.each do |commission| %>
-              <td>
+              <td class="text-center">
                 <%= number_to_percentage commission.value %>
               </td>
             <% end %>
@@ -53,15 +59,15 @@
     <div class="panel-body bt">
       <div class="row">
         <div class="col-xs-4 br">
-          <em class="fa fa-users fa-fw text-info"></em>
+          <%= tooltip_widget(:races, :attendees, 'fa-users fa-fw text-info') %>
           <strong>+<%= race.attendees.count %></strong>
         </div>
         <div class="col-xs-4 br">
-          <em class="fa fa-puzzle-piece fa-fw text-success"></em>
+          <%= tooltip_widget(:races, :compensation_start_amount, 'fa-puzzle-piece fa-fw text-info') %>
           <strong><%= number_to_currency race.compensation_start_amount, precision: 0%></strong>
         </div>
         <div class="col-xs-4">
-          <em class="fa fa-thumbs-o-up fa-fw text-primary"></em>
+          <%= tooltip_widget(:races, :likes, 'fa-thumbs-o-up fa-fw text-primary') %>
           <strong>+<%= race.likes.count %></strong>
         </div>
       </div>

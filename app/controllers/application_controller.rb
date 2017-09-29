@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :except => [:public_url]
   before_action :load_notifications, :set_intent
 
-  before_action :save_url_in_history, except: :history_back
-  after_action  :remove_last_from_history, only: :history_back
+  # before_action :save_url_in_history, except: [:history_back, :create, :destroy, :update]
+  # after_action  :remove_last_from_history, only: :history_back
 
   rescue_from CanCan::AccessDenied do |_exception|
     respond_to do |format|
@@ -21,15 +21,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def history_back
-    session[:history].pop # remove current url
-    previous_path = session[:history].last
-    if previous_path
-      redirect_to previous_path
-    else
-      redirect_to root_path
-    end
-  end
+  # def history_back
+  #   session[:history].pop # remove current url
+  #   previous_path = session[:history].last
+  #   if previous_path
+  #     redirect_to previous_path
+  #   else
+  #     redirect_to root_path
+  #   end
+  # end
 
   # remove history_back_path after_action
   def remove_last_from_history
@@ -60,13 +60,13 @@ class ApplicationController < ActionController::Base
   end
 
   # save navigation history of users
-  def save_url_in_history
-    session[:history] ||= []
-
-    if request.path != session[:history].last
-      unless request.xhr?
-        session[:history] << request.path
-      end
-    end
-  end
+  # def save_url_in_history
+  #   session[:history] ||= []
+  #
+  #   if request.path != session[:history].last
+  #     unless request.xhr? or params[:action] == 'publish' or params[:action] == 'create' or params[:action] == 'update'
+  #       session[:history] << request.path
+  #     end
+  #   end
+  # end
 end

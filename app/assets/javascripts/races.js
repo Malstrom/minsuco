@@ -60,6 +60,9 @@
 //--- Tags input
 //= require bootstrap-tagsinput/dist/bootstrap-tagsinput.min
 
+// --- Bootstrap Tour
+//= require bootstrap-tour/build/js/bootstrap-tour-standalone.js
+
 $('.datetimepicker').datetimepicker({
   format: 'DD/MM/YYYY',
   locale: 'it',
@@ -150,6 +153,23 @@ $.urlParam = function(name){
       "pagingType": "full",
       'paging':   true,  // Table pagination
       'ordering': false,  // Column ordering
+      'info':     true,  // Bottom left status text
+      'responsive': true, // https://datatables.net/extensions/responsive/examples/
+      // Text translation options
+      // Note the required keywords between underscores (e.g _MENU_)
+      oLanguage: {
+        sSearch:      'Cerca',
+        sLengthMenu:  'Records per pagina _MENU_',
+        info:         'Mostra _START_ to _END_ of _TOTAL_ amici',
+        zeroRecords:  'Non hai amici - mi spiace',
+        infoEmpty:    'Non ho trovato nulla',
+        infoFiltered: '(filtered from _MAX_ total records)'
+      }
+    });
+    $('#userRaceTable').dataTable({
+      "pagingType": "full",
+      'paging':   true,  // Table pagination
+      'ordering': true,  // Column ordering
       'info':     true,  // Bottom left status text
       'responsive': true, // https://datatables.net/extensions/responsive/examples/
       // Text translation options

@@ -45,15 +45,18 @@ class Race < ApplicationRecord
 
   # Use like this "Race.started_races"
   scope :started_races, -> { where status: :started }
+  scope :achieved,      -> { where('status  < ?', :achieved) }
   scope :not_expired,   -> { where('ends_at > ?', DateTime.now) }
   scope :expired,       -> { where('ends_at < ?', DateTime.now) }
 
-  scope :public_races,  -> { where(kind: :open) }
-  scope :private_races, -> { where(kind: :close) }
+  scope :open_races,  -> { where(kind: :open) }
+  scope :close_races, -> { where(kind: :close) }
 
   scope :by_category,   ->(category)  { where(category: category) }
   scope :by_owner,      ->(owner)     { where(owner: owner) }
   scope :by_recipients, ->(recipient) { where(recipients: [recipient, :for_all]) }
+
+  scope :scope_races,   ->(scope) { send(scope) if methods.include?(scope.to_sym) }
 
   # scope :group_by_categories,           -> { group(:category).category.name }
 
@@ -62,11 +65,8 @@ class Race < ApplicationRecord
     self.status ||= :draft
   end
 
-
-
-
   def decrement_open_race_reward
-    owner.reward.decrement_public_races
+    owner.reward.decrement_open_races
   end
 
   def likes
@@ -149,7 +149,7 @@ class Race < ApplicationRecord
 
   def initialize_race
     set_permalink
-    self.name = permalink
+    self.name ||= permalink
   end
 
   # CUSTOM VALIDATIONS

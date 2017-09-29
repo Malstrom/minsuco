@@ -58,3 +58,21 @@
 // --- Select2
 //= require select2/dist/js/select2
 
+$('#userAttendeesTable').dataTable({
+  "pagingType": "full",
+  'paging':   true,  // Table pagination
+  'ordering': false,  // Column ordering
+  'info':     true,  // Bottom left status text
+  'responsive': true, // https://datatables.net/extensions/responsive/examples/
+  // Text translation options
+  // Note the required keywords between underscores (e.g _MENU_)
+  oLanguage: {
+    sSearch:      'Cerca',
+    sLengthMenu:  '_MENU_ records per pagina',
+    info:         'Mostra page _PAGE_ of _PAGES_',
+    zeroRecords:  'Non hai amici - mi spiace',
+    infoEmpty:    'Non ho trovato nulla',
+    infoFiltered: '(filtered from _MAX_ total records)'
+  }
+});
+

@@ -4,7 +4,17 @@ class AttendeesController < ApplicationController
   before_action :set_attendee, only: [:update, :destroy]
 
   def index
-    @attendees = current_user.attendees
+    @scope = params[:scope]
+    if @scope
+      @attendees = current_user.attendees.scope_attendees(@scope)
+      if @attendees.empty?
+        @scope = nil
+        @attendees = @current_user.attendees
+        flash[:warning] = "Non esistono gare di questa tipologia"
+      end
+    else
+      @attendees = @current_user.attendees
+    end
   end
 
   def edit

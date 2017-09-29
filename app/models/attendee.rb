@@ -26,9 +26,13 @@ class Attendee < ApplicationRecord
   after_destroy_commit	:leave_from_race_event
 
   scope :confirmed, -> { where status: :confirmed }
+  scope :deny,      -> { where status: :deny }
+  scope :waiting,   -> { where status: :waiting }
+  scope :banned,    -> { where status: :banned }
+
+  scope :scope_attendees,   ->(scope) { send(scope) if methods.include?(scope.to_sym) }
+
   scope :group_by_user, ->(user) { where(race:user.races).group_by_day(:created_at).count }
-
-
 
   def total_revenue
     sum = 0

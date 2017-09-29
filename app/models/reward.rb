@@ -7,7 +7,7 @@ class Reward < ApplicationRecord
     decrement!(:join_private, 1)
   end
 
-  def decrement_public_races
+  def decrement_open_races
     decrement!(:public_races, 1) if public_races >= 1
   end
 

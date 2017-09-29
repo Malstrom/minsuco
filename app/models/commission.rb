@@ -1,5 +1,5 @@
 class Commission < ApplicationRecord
   belongs_to :race
 
-  scope :first_year,   -> { find_by_starts(0) }
+  scope :first_year,   -> { order('starts ASC').first }
 end

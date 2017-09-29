@@ -42,9 +42,9 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def tooltip_widget(thing,message_key,dimension = nil)
+  def tooltip_widget(thing,message_key, prop = nil , icon = "fa-info-circle")
     html = <<-HTML
-    <em class="fa fa-info-circle info text-muted #{dimension}" data-toggle="tooltip" data-placement="top"
+    <em class="fa info text-muted #{prop} #{icon}" data-toggle="tooltip" data-placement="top"
     data-original-title="#{ t("tooltips.#{thing}.#{message_key}") }"></em>
     HTML
 
@@ -80,4 +80,9 @@ module ApplicationHelper
       "default"
     end
   end
+
+  def action_icon_widget(controller, action)
+
+  end
+
 end

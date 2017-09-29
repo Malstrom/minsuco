@@ -41,6 +41,9 @@ it:
         intent:
           text: 'Cosa cerchi nella piattaforma?'
           icon: 'fa-question'
+        plans:
+          text: 'Scegli il piano più adatto a te'
+          icon: 'fa-cubes'
   menu:
     section:
       discover:

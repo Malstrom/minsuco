@@ -2,7 +2,7 @@
 // listed below.
 //
 
-//= require turbolinks
+//# require turbolinks
 
 
 //= require jquery_nested_form

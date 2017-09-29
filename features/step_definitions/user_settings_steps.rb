@@ -16,6 +16,7 @@ And(/^I pay via stripe$/) do
 end
 
 When(/^I visit user plan$/) do
+  sleep 0.5
   id = User.find_by_email("new_user@test.com").id
   visit "users/#{id}/plans"
 end
@@ -56,3 +57,5 @@ def fill_user_form(field = nil, value = nil)
     fill_in field, :with => value
   end
 end
+
+

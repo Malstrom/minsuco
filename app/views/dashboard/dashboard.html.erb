@@ -156,7 +156,7 @@
   <!-- END dashboard main content-->
   <!-- START dashboard sidebar-->
   <aside class="col-lg-3">
-    <div class="panel widget">
+    <div class="panel widget current-bg">
       <div class="panel-body text-center">
         <div class="radial-bar radial-bar-<%= current_user.completeness %> radial-bar radial-bar-<%= color_percentual(current_user.completeness) %> m0">
           <% if current_user.image  %>
@@ -196,7 +196,7 @@
                 <p class="m0">
                   <small>
                     <em>
-                      <%= number_to_percentage race.commissions.first_year.value %>
+                      <%= number_to_percentage race.commissions.first_year.value unless race.commissions.empty? %>
                       <%= tooltip_widget(:commissions, :first_year) %>
                     </em>
                     /

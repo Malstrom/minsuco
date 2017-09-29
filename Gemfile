@@ -97,5 +97,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem "state_machines-activerecord"
 # gem 'aasm'
+# gem 'formulaic', group: :test
 
 gem 'social-share-button'

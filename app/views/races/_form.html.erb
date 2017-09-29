@@ -17,9 +17,23 @@
 <%= nested_form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
   <div class="panel-body">
   <h4><%= t('view.races.new.form_title') %></h4><br><br>
+    <fieldset>
+      <div class="form-group">
+        <div class="col-lg-2 control-label pull-left">
+          <%= f.label :name %>
+          <%= tooltip_widget(:races, :name) %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.text_field :name, class:'form-control', rows: "5"%>
+        </div>
+      </div>
+    </fieldset>
   <fieldset>
     <div class="form-group">
-      <%= f.label :description, class: 'col-sm-2 control-label' %>
+      <div class="col-lg-2 control-label pull-left">
+        <%= f.label :description %>
+        <%= tooltip_widget(:races, :description) %>
+      </div>
       <div class="col-sm-8">
         <%= f.text_area :description, class:'form-control', rows: "5"%>
       </div>
@@ -156,7 +170,7 @@
 
     <% if @race.new_record? %>
       <fieldset>
-        <div class="form-group text-center" style="display: grid;">
+        <div id="race_create" class="form-group text-center" style="display: grid;">
           <%= f.submit 'CREA GARA', class: 'btn btn-xl btn-success' %>
         </div>
       </fieldset>

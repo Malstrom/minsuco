@@ -36,7 +36,7 @@ When(/^I have '([^']*)' rewards for (join|publish|\d+)$/) do |n, reward|
   if reward == 'join'
     User.first.reward.update(join_private: n )
   else
-    User.first.reward.update(public_races: n )
+    User.first.reward.update(open_races: n )
   end
 end
 

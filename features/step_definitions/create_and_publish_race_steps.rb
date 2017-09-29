@@ -49,10 +49,14 @@ end
 When(/^I fill race form$/) do
   visit "/races/new"
 
+  fill_in "race_name", :with => 'Test race name'
   fill_in "race_description", :with => 'A test race'
   fill_in "race_race_value", :with => '100000'
   fill_in "race_starts_at", :with => Time.now.strftime("%m/%d/%Y")
-  fill_in "race_ends_at", :with => Time.now.strftime("%m/%d/%Y")
+  fill_in "race_ends_at", :with => (Time.now + 2.days).strftime("%m/%d/%Y")
+
+  page.execute_script "window.scrollBy(0,10000)"
+
 
   click_on('CREA GARA')
 end
@@ -66,10 +70,12 @@ When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
   fill_in "race_starts_at", :with => Time.now.strftime("%m/%d/%Y")
   fill_in "race_ends_at", :with => Time.now.strftime("%m/%d/%Y")
 
-
   fill_in arg1, :with => arg2 if arg1 and arg2
 
-  click_on('CREA GARA')
+  page.execute_script "window.scrollBy(0,10000)"
+
+  find('#race_create').click
+  # click_on('CREA GARA')
 end
 
 When(/^I publish race as (open|close|pay|\d+)$/) do |arg1|

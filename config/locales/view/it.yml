@@ -3,6 +3,12 @@ it:
     races:
       new:
         form_title: "Crea una gara"
+      user_races:
+        all: tutte
+        expired: scadute
+        open_races: aperte
+        close_races: aperte
+        achieved: archiviate
       modal:
         join:
           text_help: "Descrivi ogni singolo pezzo che vuoi inserire nella tua partecipazione alla gara. Premi + per aggiungere un pezzo. "

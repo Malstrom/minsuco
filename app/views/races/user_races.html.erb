@@ -1,14 +1,4 @@
-<div class="row">
-  <div class="col-md-12 hidden-xs hidden-sm hidden-md">
-    <%= render partial: "races/partials/races/filter_desktop", :locals => { :path_to_go => user_races_path(current_user) } %>
-  </div>
-  <div class="hidden-lg col-xs-12">
-    <button type="button" data-toggle="modal" data-target="#filterModal" class="btn btn-primary btn-xl btn-pill-left pull-right">Filtra e ordina</button>
-    <%= content_for :body_area do %>
-      <%= render partial: "races/partials/races/filter_mobile_modal", :locals => { :path_to_go => user_races_path(current_user)} %>
-    <% end %>
-  </div>
-</div>
+<%= render partial: "races/partials/races/user_races_insight_widgets" %>
 <br class="hidden-lg">
 <div class="row text">
   <!--ALl Races-->
@@ -24,9 +14,12 @@
     </div>
   <% else %>
     <div class="row">
-      <div class="col-lg-10 col-lg-offset-1">
-        <%= render partial: "races/partials/races/table" %>
+      <div class="col-lg-12">
+        <div class="panel panel-primary">
+          <%= render partial: 'races/partials/races/datatable' %>
+        </div>
       </div>
+
     </div>
   <% end %>
 </div>

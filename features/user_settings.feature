@@ -1,4 +1,4 @@
-@user @settings @javascript
+@user @settings @javascript @current
 Feature: User settings
   User should be able to update its data
   User should be able to change ita plan
@@ -35,9 +35,20 @@ Feature: User settings
     And I click to "DASHBOARD"
     Then I should see "Dashboard"
 
-#    @current
-#  Scenario: User should able to change its theme
-#    When I click to "theme-options"
-#    And I click to 'theme-a' element
-#    And I visit "/"
-#    Then 'User' attribute 'theme' should 'theme-a'
+  Scenario: User should able to change its theme
+    When I click to "theme-options"
+    And I click to 'theme-a' element
+    And I visit "/"
+    Then 'User' attribute 'theme' should 'theme-a'
+
+  Scenario: User should no be insert invalid rui
+    When I fill in user profile "ewkjh4k5j" in "user_rui"
+    Then I should see "Rui non è valido"
+
+  Scenario: User should insert invalid rui
+    When I fill in user profile "a123456789" in "user_rui"
+    Then I should not see "Rui non è valido"
+
+  Scenario: User should insert invalid rui
+    When I fill in user profile "eu123456789" in "user_rui"
+    Then I should not see "Rui non è valido"

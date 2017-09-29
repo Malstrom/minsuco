@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <%= "Gara di produzione #{@race.name}" %>
+  <%= "Gara di produzione #{@race.name} codice: #{@race.permalink}" %>
 <% end %>
 
 <% content_for :description do %>
@@ -16,9 +16,16 @@
             <!--<img src="<%= image_path('angle/logo.png') %>" alt="Image" class="block-center img-rounded" />-->
         </div>
         <div class="panel-body text-center">
-          <h2 class="text-center">Gara di produzione: <%= @race.name %></h2>
+          <h1 class="text-center">
+            Codice gara: <div class="label label-primary"><%= @race.permalink %></div>
+          </h1>
+          <br>
+          <p>
+            <%= social_share_button_tag(@race.name, :url => public_url_race_path(@race)) %>
+          </p>
+          <br>
           <p class="lead">Questa gara è stata creata su myinsurancecontest.it, il primo portale in italia che ti permette di creare o partecipare alla gare assicurative per vincerle, partecipare con provvigioni molto più alte o per trovare nuovi partner con i quali iniziare a lavorare da subito.</p>
-          <p class="lead">Dettagli:</p>
+          <h2 class="">Ulteriori informazioni</h2>
           <div class="row">
             <div class="col-lg-3">
               <!-- START widget-->
@@ -29,8 +36,8 @@
                   </div>
                   <div class="col-xs-8">
                     <div class="panel-body text-center">
-                      <h4 class="mt0"><%= @race.category.name.upcase %></h4>
-                      <p class="mb0 text-muted">RAMO</p>
+                      <p class="mt0 h4"><%= @race.category.name.upcase %></p>
+                      <h3 class="mb0 text-muted h5">RAMO</h3>
                     </div>
                   </div>
                 </div>
@@ -46,8 +53,8 @@
                   </div>
                   <div class="col-xs-8">
                     <div class="panel-body text-center">
-                      <h4 class="mt0"><%= number_to_currency @race.remaining_value, precision:0 %></h4>
-                      <p class="mb0 text-muted">Rimanente</p>
+                      <p class="mt0 h4"><%= number_to_currency @race.remaining_value, precision:0 %></p>
+                      <h3 class="mb0 text-muted h5">Rimanente</h3>
                     </div>
                   </div>
                 </div>
@@ -63,8 +70,8 @@
                   </div>
                   <div class="col-xs-8">
                     <div class="panel-body text-center">
-                      <h4 class="mt0">+<%= @race.attendees.count %></h4>
-                      <p class="mb0 text-muted">Partecipanti</p>
+                      <p class="mt0 h4">+<%= @race.attendees.count %></p>
+                      <h3 class="mb0 text-muted h5">Partecipanti</h3>
                     </div>
                   </div>
                 </div>
@@ -80,8 +87,8 @@
                   </div>
                   <div class="col-xs-8">
                     <div class="panel-body text-center">
-                      <h4 class="mt0"><%= number_to_currency @race.compensation_start_amount, precision:0 %></h4>
-                      <p class="mb0 text-muted">Fisso per pezzo</p>
+                      <p class="mt0 h4"><%= number_to_currency @race.compensation_start_amount, precision:0 %></p>
+                      <h3 class="mb0 text-muted h5">Fisso per pezzo</h3>
                     </div>
                   </div>
                 </div>
@@ -89,7 +96,7 @@
               <!-- END widget-->
             </div>
           </div>
-          <p class="lead text-center">Il creatore è disposto a pagare questa provvigione</p>
+          <h2 class="text-center">Provvigione offerta</h2>
           <div class="panel widget">
             <div class="row row-table b">
               <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
@@ -127,7 +134,6 @@
                       <%= "Login con Google"  %>
                     <% end %>
                   <% end %>
-
               <% end -%>
               </div>
             <% end -%>

@@ -6,3 +6,8 @@ Feature: App Authorizations
     Given I logged in having basic account
     When I visit edit page of another user
     Then I should see "Non sei autorizzato ad accedere a questa pagina"
+
+  Scenario: User should not see edit race page of another user
+    Given I logged in having basic account
+    When I visit edit race page of another user
+    Then I should see "Non sei autorizzato ad accedere a questa pagina"

@@ -2,24 +2,53 @@ it:
   controller:
     dashboard:
       action:
-        dashboard: "Dashboard"
+        dashboard:
+          text: "Dashboard"
+          icon: "icon-speedometer"
     races:
       action:
-        index: "Trova gare"
-        user_races: "Gare create"
-        show: "Dettagli della gara"
-        new: "Nuova gara"
-        edit: "Modifica gara"
-        update: "Modifica gara"
-        publish: "Pubblica gara"
+        index:
+          text: "Trova gare"
+          icon: "fa-bullseye"
+        user_races:
+          text: "Gare create"
+          icon: 'fa-road'
+        show:
+          text: "Dettagli della gara"
+          icon: 'fa-eye'
+        new:
+          text: "Nuova gara"
+          icon: 'icon-plus'
+        edit:
+          text: "Modifica gara"
+          icon: 'fa-pencil'
+        update:
+          text: "Modifica gara"
+          icon:
+        publish:
+          text: "Pubblica gara"
+          icon: 'fa-check'
     attendees:
       action:
-        index: "Partecipazioni"
+        index:
+          text: "Partecipazioni"
+          icon: 'fa-car'
     users:
       action:
-        edit: "Il mio profilo"
+        edit:
+          text: "Il mio profilo"
+          icon: 'fa-user'
+        intent:
+          text: 'Cosa cerchi nella piattaforma?'
+          icon: 'fa-question'
   menu:
     section:
-      discover: "scopri"
-      other: "Altro"
-      handle: "Gestisci"
+      discover:
+       text: "scopri"
+       icon: ''
+      other:
+        text: "Altro"
+        icon: ''
+      handle:
+        text: "Gestisci"
+        icon: ''

@@ -22,10 +22,17 @@ it:
       recipients: "Quale categoria di assicuratore potra partecipare alla gara."
       remaining_value: "Importo rimanente della gara, deterimina il tuo valore massimo di partecipazione"
       each_piece: "Importo che creatore verserà al partecipante per ogni pezzo"
+      description: "Descrivi la tua gara in poche parole."
+      name: "Dai un nome alla tua gara cosi che potrai facilmente trovarla sucessivamente"
+      panel_help: "Questo è un riassunto di una gara creata sul portale. Qui puoi vedere l'obbiettivo rimanente, le provvigoni, e la scadenza della gara."
     commissions:
+      table: "Tabella provvigioni che il creatore darà il base all'importo con il quale parteciperai alla gara"
       commission_range: "Importo totale che il creatore dovrà al partecipante suddiviso per scaglioni di tempo determinati dal creatore"
       first_year: "Provvigione che il creatore pagare il primo anno."
     attendees:
+      name: "Il nome di riferimento, ad esempio il nome del contraente"
+      value: "Inserisci il premio il totale dei soldi che il pezzo vale"
+      duration: "Questa è la durata del contratto"
       allow_join: "Permetti a questa utente di far parte della gara."
       deny_partecipation: "Nega a questa persona di partecipare alla gara."
       deny_attendees: "Numero di persone alle quali hai negato la partecipazione."

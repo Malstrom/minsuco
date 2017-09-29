@@ -49,8 +49,11 @@ class User < ApplicationRecord
   after_initialize :set_default_rewards, if: :new_record?
 
   validates_presence_of :email
-  validates :email, uniqueness: true
-  #
+  validates             :email, uniqueness: true
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
+
+  validates_format_of :rui,   :with => /\A[a|b|c|d|ue]{1,2}[0-9]{9,10}/i, on: :update
+
   # validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }
   # validates_presence_of :name, :fiscal_code,         on: :update, :if => lambda { self.individual? }
 
@@ -72,13 +75,13 @@ class User < ApplicationRecord
 
   def total_covered
     sum = 0
-    races.each {|race| sum += race.value_covered}
+    races.each { |race| sum += race.value_covered }
     sum
   end
 
   def total_remaining
     sum = 0
-    races.each {|race| sum += race.remaining_value}
+    races.each { |race| sum += race.remaining_value }
     sum
   end
 
@@ -94,10 +97,10 @@ class User < ApplicationRecord
 
   def completeness
     comp = 20
-    if self.valid?(rui) and self.valid?(name) and self.valid?(phone)
+    if valid?(rui) && valid?(name) && valid?(phone)
       comp = 50
-    elsif self.valid?(fiscal_code) and self.valid?(city) and
-        self.valid?(address) and self.valid?(address_num) and self.valid?(zip)
+    elsif valid?(fiscal_code) && valid?(city) &&
+          valid?(address) && valid?(address_num) && valid?(zip)
       comp = 100
     end
     comp

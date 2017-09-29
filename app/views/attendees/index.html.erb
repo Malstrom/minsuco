@@ -1,31 +1,25 @@
-<div class="row">
-  <div class="col-md-12 hidden-xs hidden-sm hidden-md">
-    <%= render partial: "races/partials/races/filter_desktop",
-               :locals => { :path_to_go => user_attendees_path(current_user) } %>
-  </div>
-  <div class="hidden-lg col-xs-12">
-    <button type="button" data-toggle="modal" data-target="#filterModal"
-            class="btn btn-primary btn-xl btn-pill-left pull-right">Filtra e ordina</button>
-    <%= content_for :body_area do %>
-      <%= render partial: "races/partials/races/filter_mobile_modal",
-                 :locals => { :path_to_go => user_attendees_path(current_user)} %>
-    <% end %>
-  </div>
-</div>
+<%= render partial: "attendees/partials/attendee_races_widget" %>
 <br class="hidden-lg">
-<div class="row">
+<div class="row text">
   <!--ALl Races-->
   <% if @attendees.empty? %>
     <div class="text-center">
-      <p class="lead">Non hai ancora partecipato a nessuna gara!</p>
-      <%= link_to(races_path, class:'btn btn-success btn-oval btn-xl', id:'plus_nuova_gara') do %>
+      <p class="lead">Non hai ancora partecipato a nessuna gara!,</p>
+      <p class="lead">cosa aspetti?</p>
+      <%= link_to(races_path, class:'btn btn-info btn-oval btn-xl', id:'plus_nuova_gara') do %>
         &nbsp
-        <em class="fa fa-search-plus"></em>
+        <em class="fa fa-search"></em>
         &nbsp
       <% end %>
     </div>
-
   <% else %>
-    <%= render partial: "attendees/partials/races" %>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-primary">
+          <%= render partial: 'attendees/partials/datatable' %>
+        </div>
+      </div>
+
+    </div>
   <% end %>
 </div>

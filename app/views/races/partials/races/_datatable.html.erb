@@ -1,0 +1,35 @@
+<table id="userRaceTable" class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>ID / Nome</th>
+    <th class="sort-alpha">Ramo</th>
+    <th class="visible-lg sort-numeric">Obbiettivo</th>
+    <th class="visible-lg sort-numeric">Raggiunto</th>
+    <th class="visible-lg sort-numeric">Rimanente</th>
+    <th class="visible-lg sort-numeric">Partecipanti</th>
+    <th class="visible-lg">Likes</th>
+    <th>Scadenza</th>
+    <th>Azioni</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @races.each do |race| %>
+    <tr class="gradeX">
+      <td class="lead">
+        <div class="label label-success"><%= race.permalink %></div>
+        / <%= race.name.capitalize %>
+      </td>
+      <td><%= race.category.name.upcase %></td>
+      <td class="visible-lg"><%= number_to_currency race.race_value,      precision: 0 %></td>
+      <td class="visible-lg"><%= number_to_currency race.value_covered,   precision: 0 %></td>
+      <td class="visible-lg"><%= number_to_currency race.remaining_value, precision: 0 %></td>
+      <td class="visible-lg"><%= number_to_human race.attendees.count %></td>
+      <td class="visible-lg"><%= number_to_human race.likes.count %></td>
+      <td><%= race.ends_at.strftime('%d/%m/%Y') %></td>
+      <td class="text-center">
+        <%= link_to "", race_path(race), class:'fa fa-2x fa-eye text-info no-decoration' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

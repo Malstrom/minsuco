@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="col-lg-4 col-sm-6">
+    <div class="panel panel-primary mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa fa-list fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.races.count %></div>
+            <p class="m0">Tutte</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_races_path(current_user) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra gare</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% unless @scope %>
+      <div class="text-center m0 p0 visible-lg">
+          <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-sm-6">
+    <div class="panel panel-green mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa icon-lock-open fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.races.open_races.count %></div>
+            <p class="m0">Gare aperte</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_races_path(current_user, scope: :open_races) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra gare</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% if @scope == 'open_races' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-sm-6">
+    <div class="panel panel-warning mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa icon-lock fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.races.close_races.count %></div>
+            <p class="m0">Gare chiuse</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_races_path(current_user, scope: :close_races) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra gare</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% if @scope == 'close_races' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-md-6 col-sm-6">
+    <div class="panel panel-success mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa fa-flag-checkered fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.races.expired.count %></div>
+            <p class="m0">Concluse</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_races_path(current_user, scope: :expired) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra gare</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+    </div>
+    <% if @scope == 'expired' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-md-6 col-sm-6">
+    <div class="panel panel-primary mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa icon-layers fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.races.achieved.count %></div>
+            <p class="m0">Archiviate</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_races_path(current_user, scope: :achieved) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra gare</span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% if @scope == 'achieved' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+</div>

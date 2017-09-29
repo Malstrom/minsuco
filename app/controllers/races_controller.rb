@@ -22,17 +22,12 @@ class RacesController < ApplicationController
   end
 
   def user_races
-    if params[:category_id] && !params[:category_id].empty?
-      category = Category.find(params[:category_id])
-      @races = Race.by_owner(current_user).by_category(category).order('ends_at ASC}')
-    elsif params[:commission] && !params[:commission].empty?
-      @races = Race.by_owner(current_user).order "commission #{params[:commission]}"
-    elsif params[:kind] && !params[:kind].empty?
-      @races = Race.by_owner(current_user).order "kind #{params[:commission]}"
-    elsif params[:ends_at] && !params[:ends_at].empty?
-      @races = Race.by_owner(current_user).order "ends_at #{params[:ends_at]}"
-    else
-      @races = Race.by_owner(current_user)
+    @scope = params[:scope]
+    if @scope
+      @races = current_user.races.scope_races(@scope)
+      if @races.empty?
+        @races = current_user.races
+      end
     end
   end
 
@@ -96,7 +91,7 @@ class RacesController < ApplicationController
       @race.update_attribute(:status, :started) if @race.publishable?
       if @race.started?
         if @race.open? && current_user.plan != Plan.find_by_stripe_id('pro_creator')
-          @race.owner.reward.decrement_public_races
+          @race.owner.reward.decrement_open_races
         end
         flash[:notice] = I18n.t('flash.races.publish_check.notice')
       else
@@ -140,7 +135,7 @@ class RacesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def race_params
-    params.require(:race).permit(:description, :owner, :commission, :compensation_start_amount,
+    params.require(:race).permit(:name, :description, :owner, :commission, :compensation_start_amount,
                                  :recipients, :race_value, :category_id, :starts_at, :ends_at, :status, :kind,
                                  commissions_attributes: [:id, :value, :starts, :ends, :_destroy])
   end

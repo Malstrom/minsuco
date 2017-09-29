@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="col-lg-4 col-sm-6">
+    <div class="panel panel-primary mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa fa-list fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.attendees.count %></div>
+            <p class="m0">Tutte</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_attendees_path(current_user) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra partecipazioni</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% unless @scope %>
+      <div class="text-center m0 p0 visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-sm-6">
+    <div class="panel panel-green mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa icon-check fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.attendees.confirmed.count %></div>
+            <p class="m0">Confermate</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_attendees_path(current_user, scope: :confirmed) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra partecipazioni</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% if @scope == 'confirmed' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-sm-6">
+    <div class="panel panel-warning mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa fa-spinner fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.attendees.waiting.count %></div>
+            <p class="m0">In attesa</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_attendees_path(current_user, scope: :waiting) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra partecipazioni</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% if @scope == 'waiting' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-md-6 col-sm-6">
+    <div class="panel panel-danger mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa fa-times fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.attendees.deny.count %></div>
+            <p class="m0">Rifiutato</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%= user_attendees_path(current_user, scope: :deny) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra partecipazioni</span>
+        <span class="pull-right">
+                           <em class="fa fa-chevron-circle-down"></em>
+                        </span>
+      </a>
+    </div>
+    <% if @scope == 'deny' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-2 col-md-6 col-sm-6">
+    <div class="panel panel-inverse mb0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <em class="fa icon-ban fa-5x"></em>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="text-lg"><%= current_user.attendees.banned.count %></div>
+            <p class="m0">Bannato</p>
+          </div>
+        </div>
+      </div>
+      <a href="<%# user_attendees_path(current_user, scope: :achieved) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+        <span class="pull-left">Mostra partecipazioni</span>
+      </a>
+      <!-- END panel-->
+    </div>
+    <% if @scope == 'banned' %>
+      <div class="text-center visible-lg">
+        <em class="fa fa-chevron-down fa-3x"></em>
+      </div>
+    <% end %>
+  </div>
+</div>

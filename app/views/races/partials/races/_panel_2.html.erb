@@ -1,0 +1,71 @@
+<% @races.each do |race| %>
+<div class="col-lg-4 col-md-6">
+  <div class="panel b text-center">
+    <div style="margin-right: 4px; margin-top: 4px;">
+      <%= tooltip_widget(:races, :panel_help, 'pull-right') %>
+    </div>
+    <div class="panel-body">
+      <em class="fa fa-2x <%= race.open? ? "icon-lock-open  text-success" : "icon-lock  text-warning" %>"></em>
+      <h2 class="h2">
+        <%= race.category.name.humanize %> |  <%= number_to_currency race.remaining_value, precision:0  %>
+      </h2>
+      <p>
+        <% if race.expired? %>
+          fine gara
+          <%= distance_of_time_in_words(Time.now, race.ends_at)  %>
+        <% else %>
+          <%= race.ends_at.strftime('%d/%m/%Y') %>
+          fine gara.
+        <% end %>
+      </p>
+      <div class="b">
+        <%= tooltip_widget(:commissions, :table) %>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <% race.commissions.each do |commission| %>
+              <th>
+                <%= commission.starts == 0 ? "" : "" + commission.starts.to_s + "°/" %><%= commission.ends %>° anno
+              </th>
+            <% end %>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <% race.commissions.each do |commission| %>
+              <td>
+                <%= number_to_percentage commission.value %>
+              </td>
+            <% end %>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="">
+        <br>
+        <% if current_user.owner?(race) %>
+          <%= link_to("Guarda e modifica", race_path(race), class:"btn btn-primary btn-oval", id: race.name) %>
+        <% else %>
+          <%= link_to("Scopri", race_path(race), class:"btn btn-success btn-oval", id: race.name) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-body bt">
+      <div class="row">
+        <div class="col-xs-4 br">
+          <em class="fa fa-users fa-fw text-info"></em>
+          <strong>+<%= race.attendees.count %></strong>
+        </div>
+        <div class="col-xs-4 br">
+          <em class="fa fa-puzzle-piece fa-fw text-success"></em>
+          <strong><%= number_to_currency race.compensation_start_amount, precision: 0%></strong>
+        </div>
+        <div class="col-xs-4">
+          <em class="fa fa-thumbs-o-up fa-fw text-primary"></em>
+          <strong>+<%= race.likes.count %></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

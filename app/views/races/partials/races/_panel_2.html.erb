@@ -25,12 +25,12 @@
         <% end %>
       </p>
       <div class="b bg-gray-lighter">
-        <%= tooltip_widget(:commissions, :table) %>
+        <%# tooltip_widget(:commissions, :table) %>
         <table class="table table-hover">
           <thead>
           <tr>
             <% race.commissions.each do |commission| %>
-              <th class="text-center">
+              <th class="text-center pb0 pt0">
                 <%= commission.starts == 0 ? "" : "" + commission.starts.to_s + "°/" %><%= commission.ends %>° anno
               </th>
             <% end %>
@@ -39,7 +39,7 @@
           <tbody>
           <tr>
             <% race.commissions.each do |commission| %>
-              <td class="text-center">
+              <td class="text-center pb0">
                 <%= number_to_percentage commission.value %>
               </td>
             <% end %>

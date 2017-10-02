@@ -10,11 +10,11 @@
                            @race.open? ? :open_race : :close_race  ,
                            @race.open? ? "icon-lock-open  text-success fa-3x" : "icon-lock  text-warning fa-3x") %>
         <h2 class="h2">
-          <small><%= tooltip_widget(:races, :category, 'fa-code-fork') %></small>
+          <span><%= tooltip_widget(:races, :category, 'fa-code-fork') %></span>
           &nbsp;
           <%= @race.category.name.humanize %> |  <%= number_to_currency @race.remaining_value, precision:0  %>
           &nbsp;
-          <small><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></small>            </h2>
+          <span><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></span>            </h2>
       </div>
        <div class="col-lg-offset-2 col-lg-8">
         <p>
@@ -28,10 +28,13 @@
         </p>
       </div>
        <div class="col-lg-offset-1 col-lg-10 bg-gray-lighter b" style="padding-bottom: 15px;">
-        <%= tooltip_widget(:commissions, :table) %>
+        <%# tooltip_widget(:commissions, :table) %>
         <table class="table">
           <thead>
           <tr>
+            <th class="text-center">
+
+            </th>
             <% @race.commissions.each do |commission| %>
               <th class="text-center">
                 <%= commission.starts == 0 ? "" : "" + commission.starts.to_s + "°/" %><%= commission.ends %>° anno
@@ -41,6 +44,9 @@
           </thead>
           <tbody>
           <tr>
+            <th class="text-center lead">
+              Provvigione
+            </th>
             <% @race.commissions.each do |commission| %>
               <td class="lead">
                 <%= number_to_percentage commission.value %>
@@ -49,6 +55,9 @@
           </tr>
           <% if current_user.joined?(@race) %>
             <tr class="bg-green">
+              <th class="text-center lead">
+                Guadagni
+              </th>
               <% @race.commissions.each do |commission| %>
                 <td class="lead">
                   <%= number_to_currency current_user.attendee(@race).revenue_by(commission), precision:0, unit:'€' %>
@@ -86,7 +95,7 @@
               <% end %>
               <button id="open_join_modal" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-info btn-pill-right" >
                 <!--<em class="fa fa-plus fa-fw text-muted text-white"></em>-->
-                <span>Modifica partecipazione</span>
+                <span>Aggiungi o rimuovi un pezzo</span>
               </button>
             </div>
       <% else %>
@@ -111,7 +120,7 @@
         <em class="fa fa-barcode fa-fw text-inverse"></em>
         <strong><%= @race.permalink %></strong>
       </div>
-      <div class="col-xs-4">
+      <div id="like_widget" class="col-xs-4">
         <% if @race.already_liked_by_user(current_user) %>
           <%= likes_counter_widget(@race.likes.count) %>
         <% else %>

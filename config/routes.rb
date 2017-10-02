@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       patch :theme
     end
     get :races, to: 'races#user_races'
+    get :events, to: 'events#index'
     resources :attendees
     resources :friends do
       collection do

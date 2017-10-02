@@ -22,4 +22,5 @@ Rails.application.config.assets.precompile += %w(
  users.css users.js
  attendees.css attendees.js
  Chart.bundle.js chartkick.js
- cable.js )
+ cable.js
+ events.css events.js )

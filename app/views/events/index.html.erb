@@ -1,0 +1,28 @@
+<ul class="timeline">
+  <li data-datetime="Oggi" class="timeline-separator"></li>
+
+  <% current_user.all_events.order('created_at DESC').limit(50).each_with_index do |event, index| %>
+    <li class="<%= "timeline-inverted" if index.even? %>">
+    <div class="timeline-badge primary">
+      <em class="fa <%= t("events.timeline.join_in_race.icon") %>"></em>
+    </div>
+    <div class="timeline-panel">
+      <div class="popover">
+        <div class="popover-content">
+          <p>
+            <img src="<%= image_profile_widget(event.who_did_id)  %>" class="img-circle thumb64">
+            &nbsp;
+            <%= t("events.timeline.join_in_race.description", :name => User.find(event.who_did_id).name) %>
+            <br/>
+            <small><%= distance_of_time_in_words_to_now(event.created_at) %></small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+  <!-- END timeline item-->
+  <!-- START timeline separator-->
+  <li data-datetime="Yesterday" class="timeline-separator"></li>
+</ul>
+<!-- END timeline-->

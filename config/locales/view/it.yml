@@ -16,3 +16,15 @@ it:
       notifications:
         more: "Ultime notifiche"
         no_events: "Non hai notifiche."
+  events:
+    timeline:
+      join_in_race:
+        icon: 'fa-plus'
+        title: "Nuova partecipazione"
+        description: "%{name} è entrato a far parte della tua gara."
+        small: ""
+      add_like:
+        icon: 'fa-thumbs-up'
+        title: "Nuovo like"
+        description: "%{name} ha messo un like alla tua gara."
+        small: ""

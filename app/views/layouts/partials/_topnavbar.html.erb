@@ -65,7 +65,7 @@
                   <% @events.each do |event| %>
                     <%= notice_widget(event.id, event.icon, event.who_did.name, event.message, event.thing ) %>
                   <% end %>
-                  <a href="#" class="list-group-item">
+                  <a href="<%= user_events_path(current_user) %>" class="list-group-item">
                     <small><%= t("view.topnavbar.notifications.more") %> </small>
                     <span class="label label-danger pull-right"><%= @events.count %></span>
                   </a>

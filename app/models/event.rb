@@ -24,7 +24,7 @@ class Event < ApplicationRecord
         attendee ? attendee.race.permalink : "gara non trovata"
       when 'Race'
         race = Race.find_by_id(thing_id)
-        race ? race.permalink.permalink : "gara non trovata"
+        race ? race.permalink : "gara non trovata"
       else
         false
     end

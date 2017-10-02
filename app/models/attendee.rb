@@ -12,7 +12,7 @@ class Attendee < ApplicationRecord
 
   # validates_associated :user, :race
 
-  validates :pieces, :presence => true
+  #validates :pieces, :presence => true
 
   validates :race, :user, presence: true
 

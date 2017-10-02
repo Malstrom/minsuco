@@ -162,6 +162,10 @@ class User < ApplicationRecord
     @events = Event.where(read: false, channel: channels)
   end
 
+  def all_events
+    @events = Event.where(channel: channels)
+  end
+
   def create_default_channels
     ChannelSubscription.create user_id: id, channel: Channel.find_or_create_by(name: "#{id}_user_channel")
   end

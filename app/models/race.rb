@@ -17,7 +17,7 @@ class Race < ApplicationRecord
 
   enum kind: %i[open close]
 
-  enum status:      %i[started paused draft achieved]
+  enum status:      %i[started paused draft achieved expired]
   enum recipients:  %i[for_all broker agent sub_agent]
 
   before_validation :initialize_race, on: :create
@@ -37,6 +37,7 @@ class Race < ApplicationRecord
   before_save   :sanitize_data
   after_create  :set_redirect_path
 
+  # after_save :set_status
   # before_update :set_status
 
   # after_update  :decrement_open_race_reward, if: proc { |race| race.open? }
@@ -134,6 +135,12 @@ class Race < ApplicationRecord
   end
 
   private
+
+  # def set_status
+  #   if race.expired?
+  #     race.expire!
+  #   end
+  # end
 
   # set redirect_path after create to redirect race after payola one time pay
   def set_redirect_path

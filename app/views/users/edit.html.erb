@@ -56,7 +56,7 @@
           <div class="panel-body">
             <%= form_for @user do |f| %>
               <%= f.hidden_field(:image_cache)  %>
-              <%= f.file_field(:image, id:"input-file-now", "class" => "dropify", "data-default-file" => @user.image.rounded, style:"")%>
+              <%= f.file_field(:image, id:"input-file-now", "class" => "dropify", "data-default-file" => @user.image, style:"")%>
               <br>
               <div class="text-center">
                 <%= f.submit class:"btn btn-success" %>

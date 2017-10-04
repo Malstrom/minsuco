@@ -49,7 +49,7 @@ end
 def join_steps(qt = 1, name = "first", value = "10000", duration = "1")
   first("#open_join_modal").click
 
-  add_piece(qt,name,value,duration)
+  # add_piece(qt,name,value,duration)
   find("#join").click
 end
 

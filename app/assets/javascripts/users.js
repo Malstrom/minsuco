@@ -43,3 +43,7 @@
 // --- Select2
 //= require select2/dist/js/select2
 
+//= require dropify/dist/js/dropify.min
+
+
+$('.dropify').dropify();

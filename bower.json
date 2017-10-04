@@ -76,7 +76,6 @@
     "jquery-knob": "1.2.13",
     "cropper": "2.3.4",
     "matchMedia": "matchmedia#0.2.0",
-//    "sparkline": "http://omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.js",
     "select2": "4.0.3",
     "select2-bootstrap-theme": "0.1.0-beta.10",
     "dataTables.fontAwesome": "https://cdn.datatables.net/plug-ins/1.10.10/integration/font-awesome/dataTables.fontAwesome.css",

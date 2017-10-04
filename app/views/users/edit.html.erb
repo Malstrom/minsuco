@@ -1,4 +1,4 @@
-<div class="container-md">
+
   <div class="row">
     <div class="col-md-3">
       <div class="row">
@@ -8,7 +8,7 @@
             <div class="list-group">
               <a href="#tabSetting1" data-toggle="tab" class="list-group-item">Generale</a>
               <a href="#tabSetting2" data-toggle="tab" class="list-group-item">Password</a>
-              <a href="#tabSetting4" data-toggle="tab" class="list-group-item">Notifications</a>
+              <a href="#tabSetting3" data-toggle="tab" class="list-group-item">Notifiche</a>
               <%= link_to "Abbonamenti", plans_user_path, class:"list-group-item" %>
             </div>
           </div>
@@ -23,7 +23,7 @@
               </a>
               <a href="#" class="list-group-item" id="open_races">
                 <!--<em class="pull-right fa fa-users fa-lg fa-fw text-muted mt"></em>-->
-                <h4 class="list-group-item-heading"><%= @user.reward.public_races %></h4>
+                <h4 class="list-group-item-heading"><%= @user.reward.open_races %></h4>
                 <p class="list-group-item-text">Gare pubbliche gratuite</p>
               </a>
               <a href="#" class="list-group-item" id="join_private">
@@ -36,69 +36,36 @@
         </div>
       </div>
     </div>
-    <div class="col-md-9">
-      <div class="col-md-12">
-        <div class="tab-content p0 b0">
-          <div id="tabSetting1" class="tab-pane active">
-            <%= render 'users/partials/form_account' %>
-          </div>
-          <div id="tabSetting2" class="tab-pane">
-            <%= render 'users/partials/form_password' %>
-          </div>
-          <div id="tabSetting3" class="tab-pane">
-            <div class="panel b">
-              <div class="panel-heading bg-gray-lighter text-bold">Emails</div>
-              <div class="panel-body">
-                <p>Etiam eros nibh, condimentum in auctor et, aliquam quis elit. Donec id libero eros. Ut fringilla, justo id fringilla pretium, nibh nunc suscipit mauris, et suscipit nulla nisl ac dolor. Nam egestas, leo eu gravida tincidunt, sem ipsum
-                  pellentesque quam, vel iaculis est quam et eros.</p>
-                <p>
-                  <strong>Your email addresses</strong>
-                </p>
-                <p>
-                  <span class="mr">email@someaddress.com</span>
-                  <span class="label label-success">primary</span>
-                </p>
-                <p>
-                  <span class="mr">another.email@someaddress.com</span>
-                  <span class="label bg-gray">private</span>
-                </p>
-              </div>
-              <div class="panel-body bt">
-                <p>
-                  <strong>Add email address</strong>
-                </p>
-                <form action="">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <input type="email" placeholder="email@server.com" class="form-control" />
-                          <span class="input-group-btn">
-                                       <button type="button" class="btn btn-default">Add</button>
-                                    </span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="" />Keep my email address private</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-info">Update email</button>
-                  <p>
-                    <small class="text-muted">* Integer fermentum accumsan metus, id sagittis ipsum molestie vitae</small>
-                  </p>
-                </form>
-              </div>
-            </div>
-          </div>
+    <div class="col-md-5">
+      <div class="tab-content p0 b0">
+        <div id="tabSetting1" class="tab-pane active">
+          <%= render 'users/partials/form_account' %>
+        </div>
+        <div id="tabSetting2" class="tab-pane">
+          <%= render 'users/partials/form_password' %>
+        </div>
+        <div id="tabSetting3" class="tab-pane">
           <%= render partial: "users/partials/form_notification" %>
         </div>
       </div>
 
     </div>
-  </div>
+    <div class="col-md-4">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-body">
+            <%= form_for @user do |f| %>
+              <%= f.hidden_field(:image_cache)  %>
+              <%= f.file_field(:image, id:"input-file-now", "class" => "dropify", "data-default-file" => @user.image.rounded, style:"")%>
+              <br>
+              <div class="text-center">
+                <%= f.submit class:"btn btn-success" %>
 
-</div>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

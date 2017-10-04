@@ -10,10 +10,10 @@ class User < ApplicationRecord
   # many to many with races using attendee
   has_many      :attendees
   has_many      :races, class_name: 'Race', through: :attendees
-  has_many      :races, foreign_key: 'owner_id'
+  has_many      :races, foreign_key: 'owner_id', dependent: :destroy
 
   # many to many channels using channel_subscriptions
-  has_many      :channel_subscriptions
+  has_many      :channel_subscriptions, dependent: :destroy
   has_many      :channels, class_name: 'Channel', through: :channel_subscriptions
 
   # many events as recipient and as a "who did the action"
@@ -26,7 +26,9 @@ class User < ApplicationRecord
   has_many      :friends, dependent: :destroy
 
   # rewards for using free application
-  has_one :reward
+  has_one :reward, dependent: :destroy
+
+  mount_uploader :image, AvatarUploader
 
   # TODO: consider remove role and use plan only
   enum role:        %i[basic pro_attendee pro_creator premium enterprise banned admin]
@@ -52,12 +54,10 @@ class User < ApplicationRecord
   validates             :email, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
 
-  validates_format_of :rui,   :with => /\A[a|b|c|d|ue]{1,2}[0-9]{9,10}/i, on: :update
+  validates_format_of :rui,   :with => /\A[a|b|c|d|ue]{1,2}[0-9]{9,10}/i, on: :update, :if => :rui_changed?
 
   # validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }
   # validates_presence_of :name, :fiscal_code,         on: :update, :if => lambda { self.individual? }
-
-  validates :rui, length: { minimum: 10 }, on: :update
 
   validates_associated :plan
 
@@ -134,7 +134,7 @@ class User < ApplicationRecord
   def has_reward?(kind)
     case kind
     when 'open'
-      reward.public_races > 0 ? true : false
+      reward.open_races > 0 ? true : false
     when 'close'
       reward.join_private > 0 ? true : false
     else
@@ -200,7 +200,7 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0, 10]
         user.email = auth.info.email
         user.name = auth.info.name   # assuming the user model has a name
-        user.image = auth.info.image # assuming the user model has an image
+        user.image = open(auth.info.image)
 
         user.save
       end
@@ -222,7 +222,7 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0, 10]
         user.email = auth.info.email
         user.name = auth.info.name   # assuming the user model has a name
-        user.image = auth.info.image # assuming the user model has an image
+        user.image = open(auth.info.image)
 
         user.save
       end

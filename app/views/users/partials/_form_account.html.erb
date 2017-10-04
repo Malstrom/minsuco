@@ -1,34 +1,6 @@
+
 <div class="panel b">
-  <div class="panel-heading bg-gray-lighter text-bold">Profile</div>
   <div class="panel-body">
-    <div class="panel widget">
-      <div style="background-image: url( /assets/background1.jpg)" class="panel-body text-center bg-center">
-        <div class="row row-table">
-          <div class="col-xs-12 text-white">
-            <% if @user.image %>
-              <img src="<%= image_path(@user.image) %>" alt="Image" class="img-thumbnail img-circle thumb128">
-              <h3 class="m0"><%= @user.name %></h3>
-              <p class="m0">
-                <%= @user.kind.camelize %></p>
-            <% else %>
-              <img src="<%= image_path("default_profile.png")%>" alt="Image" class="img-thumbnail img-circle thumb128">
-              <br>
-              <br>
-              <p class="m0">
-                <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-labeled btn-danger" do %>
-                  <span class="btn-label"><i class="fa fa-google"></i></span>
-                  <%= "Carica immagine di profilo da Google" %>
-                <% end %>
-                <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-labeled btn-info btn-facebook" do %>
-                  <span class="btn-label"><i class="fa fa-facebook"></i></span>
-                  <%= "Carica immagine di profilo da Facebook" %>
-                <% end %>
-              </p>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
     <%= render :partial => "users/form", :locals => { :user => @user, :where => :user_edit} %>
   </div>
 </div>

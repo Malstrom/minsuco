@@ -46,7 +46,7 @@ And(/^I visit user setting page$/) do
 end
 
 Then(/^I should have '([^']*)' free public race$/) do |n|
-  raise User.first.reward.public_races if User.first.reward.public_races != n.to_i
+  raise User.first.reward.open_races if User.first.reward.open_races != n.to_i
 end
 
 Then(/^I should have '([^']*)' free private join/) do |n|

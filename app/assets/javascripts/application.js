@@ -2,9 +2,6 @@
 // listed below.
 //
 
-//# require turbolinks
-
-
 //= require jquery_nested_form
 
 //= require payola
@@ -25,6 +22,7 @@
 //= require bootstrap-tour/build/js/bootstrap-tour-standalone.js
 // --- Sweet Alert
 //= require sweetalert/dist/sweetalert.min.js
+
 
 
 

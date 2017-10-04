@@ -7,19 +7,16 @@
         </button>
         <h4 id="joinModalLabel" class="modal-title">Descrivi la tua partecipazione.</h4>
       </div>
-      <br>
-      <!--<div class="text-center">-->
-        <!--&lt;!&ndash;&ndash;&gt;-->
-      <!--</div>-->
       <%= nested_form_for([@race, @attendee]) do |f| %>
-        <div class="modal-body">
-          <div id="errors"></div>
+        <div class="panel-body pt0">
           <div class="row">
             <div class="col-lg-12 text-center">
+              <p class="h2">Ora sei dentro</p>
+              <em class="fa fa-check fa-4x text-success"></em>
               <p class="text-center lead"><%= t('view.races.modal.join.text_help') %></p>
             </div>
           </div>
-
+          <div id="errors"></div>
           <%= f.fields_for :pieces do |pieces_form| %>
             <div class="row">
               <div class="col-lg-4" >

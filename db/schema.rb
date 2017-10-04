@@ -243,7 +243,7 @@ ActiveRecord::Schema.define(version: 20170926171638) do
 
   create_table "rewards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
-    t.integer "public_races"
+    t.integer "open_races"
     t.integer "join_private"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

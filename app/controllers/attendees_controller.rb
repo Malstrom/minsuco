@@ -24,7 +24,11 @@ class AttendeesController < ApplicationController
   # POST /attendees.json
   def create
     race = Race.find(params[:race_id])
-    @attendee = race.attendees.build(attendee_params)
+    if params[:attendee]
+      @attendee = race.attendees.build(attendee_params)
+    else
+      @attendee = race.attendees.build
+    end
     @attendee.user = current_user
 
     respond_to do |format|

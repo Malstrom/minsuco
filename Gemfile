@@ -100,3 +100,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'formulaic', group: :test
 
 gem 'social-share-button'
+
+gem 'carrierwave'
+gem 'cloudinary'

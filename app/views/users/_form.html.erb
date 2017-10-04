@@ -2,15 +2,12 @@
 
   <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2 class="text-center"><%= pluralize(user.errors.count, "error") %> Riprova </h2>
-
-      <ul>
+      <h2 class="text-center"><%= pluralize(user.errors.count, "errori") %> Riprova </h2>
         <% user.errors.full_messages.each do |message| %>
-          <div class="well well-sm">
-            <h4 class="text-danger"><%= message %></h4>
+          <div role="alert" class="alert alert-danger">
+            <strong>Ops!</strong> <%= message %>.
           </div>
         <% end %>
-      </ul>
     </div>
   <% end %>
 

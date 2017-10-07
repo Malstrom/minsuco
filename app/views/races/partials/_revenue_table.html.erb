@@ -1,0 +1,49 @@
+<table class="table table-bordered">
+  <thead>
+  <tr class="bg-gray">
+    <th class="text-center">
+      Provvigione
+    </th>
+    <% @race.commissions.each do |commission| %>
+      <th class="text-center">
+        <%= commission.duration %> anni
+      </th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="bg-gray">
+    <th class="text-center lead">
+    </th>
+    <% @race.commissions.each do |commission| %>
+      <td class="lead">
+        <%= number_to_percentage commission.value %>
+      </td>
+    <% end %>
+  </tr>
+  <% if user.joined?(@race) %>
+    <% user.attendee(@race).pieces.each do |piece| %>
+      <tr class="bg-gray">
+        <th class="text-center lead">
+          <%= piece.name.try(:humanize) %>
+        </th>
+        <% @race.commissions.each do |commission| %>
+          <td class="lead <%= "bg-green-light" if piece.commission == commission %>">
+            <% if piece.commission == commission %>
+              <%= number_to_currency piece.revenue, precision:0, unit:'€' %>
+              <small>(<%= piece.duration %> anni)</small>
+            <% end %>
+          </td>
+        <% end %>
+        <br>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<% if user.joined?(@race) %>
+  <hr class="style-eight">
+  <div class="text-center">
+    <p class="h3 text-center"><%= number_to_currency user.attendee(@race).revenue, precision:0 %></p>
+  </div>
+<% end %>

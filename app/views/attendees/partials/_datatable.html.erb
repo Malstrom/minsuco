@@ -7,21 +7,28 @@
     <th class="visible-lg sort-numeric">Numero di pezzi</th>
     <th class="visible-lg">Likes</th>
     <th>Scadenza della gara</th>
-    <th>Azioni</th>
   </tr>
   </thead>
   <tbody>
   <% @attendees.each do |attendee| %>
     <tr class="gradeX">
-      <td><%= attendee.category.name.upcase %></td>
+      <td class="lead">
+                <span class="actions hidden">
+          <small>
+            <%= link_to "Mostra", race_path(attendee.race), class:'btn btn-xs btn-primary' %>
+          </small>
+                          <br>
+        </span>
+
+        <div class="label label-success"><%= attendee.race.permalink %></div>
+        / <%= attendee.race.name.capitalize %>
+
+      </td>
       <td class="visible-lg"><%= number_to_currency attendee.target_covered, precision: 0 %></td>
-      <td ><%= number_to_currency attendee.total_revenue,   precision: 0 %></td>
+      <td ><%= number_to_currency attendee.revenue,   precision: 0 %></td>
       <td ><%= number_to_human attendee.pieces.count %></td>
       <td class="visible-lg"><%= number_to_human attendee.race.likes.count %></td>
       <td><%= attendee.race.ends_at.strftime('%d/%m/%Y') %></td>
-      <td class="text-center">
-        <%= link_to "", race_path(attendee.race), class:'fa fa-2x fa-eye text-info no-decoration' %>
-      </td>
     </tr>
   <% end %>
   </tbody>

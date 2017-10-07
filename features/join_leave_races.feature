@@ -10,10 +10,10 @@ Feature: Join in race
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
     Then I should see "Partecipazione avvenuta con successo"
 
+  @current
   Scenario: User should not join in open race if he have not rui
     Given I sign up
     When I visit a open race
-    And I close rui modal
     And I join with 1 pieces to join named 'first' with '1000' value for '1' years
     Then I should see "Per partecipare devi inserire nel tuo profilo un RUI valido"
 

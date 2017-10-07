@@ -103,3 +103,4 @@ gem 'social-share-button'
 
 gem 'carrierwave'
 gem 'cloudinary'
+

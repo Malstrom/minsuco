@@ -62,8 +62,7 @@ ActiveRecord::Schema.define(version: 20170926171638) do
   create_table "commissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "race_id"
     t.decimal "value", precision: 10, scale: 2
-    t.integer "starts"
-    t.integer "ends"
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["race_id"], name: "index_commissions_on_race_id"

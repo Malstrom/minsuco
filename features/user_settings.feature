@@ -1,4 +1,4 @@
-@user @settings @javascript @current
+@user @settings @javascript
 Feature: User settings
   User should be able to update its data
   User should be able to change ita plan

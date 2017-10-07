@@ -14,7 +14,8 @@
           &nbsp;
           <%= @race.category.name.humanize %> |  <%= number_to_currency @race.remaining_value, precision:0  %>
           &nbsp;
-          <span><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></span>            </h2>
+          <span><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></span>
+        </h2>
       </div>
        <div class="col-lg-offset-2 col-lg-8">
         <p>
@@ -27,48 +28,9 @@
           <% end %>
         </p>
       </div>
-       <div class="col-lg-offset-1 col-lg-10 bg-gray-lighter b" style="padding-bottom: 15px;">
-        <%# tooltip_widget(:commissions, :table) %>
-        <table class="table">
-          <thead>
-          <tr>
-            <th class="text-center">
-
-            </th>
-            <% @race.commissions.each do |commission| %>
-              <th class="text-center">
-                <%= commission.starts == 0 ? "" : "" + commission.starts.to_s + "°/" %><%= commission.ends %>° anno
-              </th>
-            <% end %>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th class="text-center lead">
-              Provvigione
-            </th>
-            <% @race.commissions.each do |commission| %>
-              <td class="lead">
-                <%= number_to_percentage commission.value %>
-              </td>
-            <% end %>
-          </tr>
-          <% if current_user.joined?(@race) %>
-            <tr class="bg-green">
-              <th class="text-center lead">
-                Guadagni
-              </th>
-              <% @race.commissions.each do |commission| %>
-                <td class="lead">
-                  <%= number_to_currency current_user.attendee(@race).revenue_by(commission), precision:0, unit:'€' %>
-                </td>
-              <% end %>
-              <br>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
+       <div class="col-lg-offset-1 col-lg-10" style="padding-bottom: 15px;">
+         <%= render partial: "races/partials/revenue_table", :locals => { user: current_user } %>
+       </div>
        <div class="col-lg-offset-1 col-lg-10">
         <br>
         <% if current_user.joined?(@race) %>
@@ -80,32 +42,17 @@
           <p><%= @race.description %></p>
         <% else %>
           <p>
-            Il creatore ha è di Milano e ha il 90% premi pagati, partecipando avrai le informazioni per contattarlo.
+            Puoi avere maggiori informazioni sia sulla gara che sul creatore partecipando alla gara.
           </p>
         <% end %>
       </div>
        <div class="col-lg-offset-2 col-lg-8">
-        <% if current_user.joined?(@race) %>
-            <div class="col-lg-12">
-              <%= form_for([@race, current_user.participation(@race)], method: :delete, :html => {:style => 'display:inline;'}) do |f| %>
-                <button id="<%= @race.permalink %>" type="submit" class="btn btn-info btn-pill-left btn-warning">
-                  <em class="fa fa-minus fa-fw text-muted text-white"></em>
-                  <span>Lascia gara</span>
-                </button>
-              <% end %>
-              <button id="open_join_modal" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-info btn-pill-right" >
-                <!--<em class="fa fa-plus fa-fw text-muted text-white"></em>-->
-                <span>Aggiungi o rimuovi un pezzo</span>
-              </button>
-            </div>
-      <% else %>
-          <% unless @race.expired? %>
+        <% unless current_user.joined?(@race) or @race.expired? %>
             <div class="col-lg-12">
               <button id="open_join_modal" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-primary btn-lg btn-oval" >
                 <span>PARTECIPA</span>
               </button>
             </div>
-          <% end %>
         <% end %>
       </div>
     </div>

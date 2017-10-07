@@ -19,7 +19,7 @@ puts 'CREATED PLANS'
 
 $categories = {
   assicurazioni: {
-    altro: ['casa', 'infortuni', 'auto', 'malattia', 'cyber_risk', 'protection indemnity'],
+    altro: ['casa', 'infortuni', 'auto', 'malattia', 'cyber risk', 'protection indemnity'],
     vita:  ['mista', 'TCM', 'vita intera', 'rendita', 'unit linked', 'pir', 'keyman']
   }
 }
@@ -84,11 +84,10 @@ end
 
     p race.errors.full_messages
   end
-  race.commissions.create(value: 3,   starts: 0,  ends: 1)
-  race.commissions.create(value: 1.5, starts: 1,  ends: 5)
-  race.commissions.create(value: 1,   starts: 5,  ends: 10)
-  race.commissions.create(value: 0.5, starts: 10, ends: 15)
-  race.commissions.create(value: 0.2, starts: 15, ends: 20)
+  race.commissions.create(value: 5,  duration: 1)
+  race.commissions.create(value: 10, duration: 5)
+  race.commissions.create(value: 15, duration: 10)
+  race.commissions.create(value: 20, duration: 15)
 end
 
 # --== Generate Sample User Attendees

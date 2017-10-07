@@ -11,7 +11,7 @@
           <%= number_to_currency current_user.attendee(@race).revenue_by(commission), precision:0, unit:'€' %>
         </div>
         <div class="text-muted">
-          <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
+          <%=  %>° anno
         </div>
       </div>
       <% count += 1 %>

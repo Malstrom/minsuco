@@ -29,14 +29,9 @@
       </ul>
       <!-- END Left navbar-->
      <ul class="nav navbar-nav navbar-left visible-xs">
-       <li id="back" class="br">
-         <%= link_to history_back_path, id:'back-history', class:'pt1' do %>
-           <em class="fa fa-2x fa-arrow-left text-muted"></em>
-         <% end %>
-       </li>
        <li id="back" class="">
          <h1 class="h3 text-muted" style="margin-left: 26px;margin-top: 13px;">
-           <%= t("controller.#{controller_name}.action.#{action_name}") %>
+           <%= t("controller.#{controller_name}.action.#{action_name}.text") %>
          </h1>
        </li>
      </ul>

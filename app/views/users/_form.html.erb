@@ -12,64 +12,64 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :rui  %>
+    *<%= f.label :rui, class:'text-danger mb0' %> <small>(necessario per pubblicare o partecipare alle gare)</small>
     <%= f.text_field :rui, class: 'form-control'%>
   </div>
 
   <% unless where == :rui_modal %>
     <div class="form-group">
-      <%= f.label :email  %>
+      <%= f.label :email, class:'mb0' %>
       <%= f.text_field :email, class: 'form-control'%>
     </div>
 
     <div class="form-group">
-      <%= f.label :name  %>
+      <%= f.label :name, class:'mb0'  %>
       <%= f.text_field :name, class: 'form-control'%>
     </div>
 
     <div class="form-group">
-      <%= f.label :kind  %>
+      <%= f.label :kind, class:'mb0'  %>
       <%= f.select(:kind, User.kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
     </div>
 
     <div class="form-group">
-      <%= f.label :fiscal_kind  %>
+      <%= f.label :fiscal_kind, class:'mb0'  %>
       <%= f.select(:fiscal_kind, User.fiscal_kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
     </div>
 
     <div class="form-group">
-      <%= f.label :company_name  %>
+      <%= f.label :company_name, class:'mb0'  %>
       <%= f.text_field :company_name, class: 'form-control'%>
     </div>
 
     <div class="form-group">
-      <%= f.label :fiscal_code  %>
+      <%= f.label :fiscal_code, class:'mb0'  %>
       <%= f.text_field :fiscal_code, class: 'form-control'%>
     </div>
 
     <div class="row">
       <div class="col-md-8">
         <div class="form-group">
-          <%= f.label :city  %>
+          <%= f.label :city, class:'mb0'  %>
           <%= f.text_field :city, class: 'form-control'%>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
-          <%= f.label :zip  %>
+          <%= f.label :zip, class:'mb0'  %>
           <%= f.text_field :zip, class: 'form-control'%>
         </div>
       </div>
       <div class="col-md-8">
         <div class="form-group">
-          <%= f.label :address  %>
+          <%= f.label :address, class:'mb0'  %>
           <%= f.text_field :address, class: 'form-control'%>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <%= f.label :address_num  %>
+          <%= f.label :address_num, class:'mb0'  %>
           <%= f.text_field :address_num, class: 'form-control'%>
         </div>
       </div>
@@ -78,13 +78,13 @@
   <% end %>
 
     <div class="form-group">
-      <%= f.label :phone  %>
+      <%= f.label :phone, class:'mb0'  %>
       <%= f.text_field :phone, class: 'form-control'%>
     </div>
 
   <% unless where == :rui_modal %>
     <div class="form-group">
-      <%= f.label :interest_list  %>
+      <%= f.label :interest_list, class:'mb0'  %>
       <%= f.grouped_collection_select(:interest_list, Category.find_by_name('assicurazioni').children,
                                       :children, :name, :id ,:name,
                                       {},

@@ -42,14 +42,14 @@
             <span><%= t("menu.section.discover.text").upcase %></span>
          </li>
 
-        <li class="<%= 'active' if controller?('dashboard') && action?('dashboard') %>">
+        <li id="btnDashboard" class="<%= 'active' if controller?('dashboard') && action?('dashboard') %>">
           <a href="/dashboard/dashboard" title="Dashboard v1">
             <em class="icon-speedometer"></em>
             <span><%= t("controller.dashboard.action.dashboard.text").upcase %></span>
           </a>
         </li>
 
-        <li class="<%= 'active' if controller?('races') && action?('index') %>">
+        <li id="btnIndexRaces" class="<%= 'active' if controller?('races') && action?('index') %>">
           <%= link_to(races_path) do %>
             <em class="fa fa-bullseye"></em>
             <span data-localize="sidebar.nav.race.INDEX">

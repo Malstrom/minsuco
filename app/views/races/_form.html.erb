@@ -1,40 +1,38 @@
 
   <% if @race.errors.any? %>
     <div id="error_explanation">
-      <h2 class="text-center"><%= pluralize(@race.errors.count, "error") %> Riprova </h2>
+      <h2 class="text-center">Ci sono <%= pluralize(@race.errors.count, "errori") %>, iprova </h2>
 
       <ul>
         <% @race.errors.full_messages.each do |message| %>
-          <div class="well well-sm">
-            <h4 class="text-danger"><%= message %></h4>
+          <div role="alert" class="alert alert-danger">
+            <strong>Ops! </strong><%= message %>.
           </div>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-
 <%= nested_form_for @race, :html => {:class => 'form-horizontal'} do |f| %>
   <div class="panel-body">
-  <h4><%= t('view.races.new.form_title') %></h4><br><br>
     <fieldset>
       <div class="form-group">
-        <div class="col-lg-2 control-label pull-left">
+        <div class="col-lg-3 control-label pull-left">
           <%= f.label :name %>
           <%= tooltip_widget(:races, :name) %>
         </div>
-        <div class="col-sm-8">
-          <%= f.text_field :name, class:'form-control', rows: "5"%>
+        <div class="col-sm-9">
+          <%= f.text_field :name, class:'form-control', required:true, rows: "5" %>
         </div>
       </div>
     </fieldset>
   <fieldset>
     <div class="form-group">
-      <div class="col-lg-2 control-label pull-left">
+      <div class="col-lg-3 control-label pull-left">
         <%= f.label :description %>
         <%= tooltip_widget(:races, :description) %>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <%= f.text_area :description, class:'form-control', rows: "5"%>
       </div>
     </div>
@@ -43,18 +41,18 @@
   <% if @race.new_record? %>
     <fieldset>
       <div class="form-group">
-        <div class="col-lg-2 control-label pull-left">
+        <div class="col-lg-3 control-label pull-left">
           <%= f.label :category %>
           <%= tooltip_widget(:races, :category) %>
         </div>
-        <%# f.label :category, class: 'col-lg-2 control-label' %>
+        <%# f.label :category, class: 'col-lg-3 control-label' %>
         <div class="col-lg-3">
           <%= f.grouped_collection_select(:category_id, Category.find_by_name('assicurazioni').children,
                                           :children, :name, :id ,:name,
                                           {},
                                           {:class=>'chosen-select input-md form-control input-lg m-b',}) -%>
         </div>
-        <div class="col-lg-2 control-label pull-left">
+        <div class="col-lg-3 control-label pull-left">
           <%= f.label :recipients %>
           <%= tooltip_widget(:races, :recipients) %>
         </div>
@@ -72,13 +70,13 @@
 
     <fieldset>
       <div class="form-group">
-        <%= f.label :starts_at, class: 'col-lg-2 control-label' %>
+        <%= f.label :starts_at, class: 'col-lg-3 control-label' %>
         <div class="col-lg-3">
-          <%= f.text_field :starts_at, class:'form-control input-group date datetimepicker' %>
+          <%= f.text_field :starts_at, class:'form-control input-group date datetimepicker', required:true %>
         </div>
-        <%= f.label :ends_at, class: 'col-lg-2 control-label' %>
+        <%= f.label :ends_at, class: 'col-lg-3 control-label' %>
         <div class="col-lg-3">
-          <%= f.text_field :ends_at, class:'form-control input-group date datetimepicker'  %>
+          <%= f.text_field :ends_at, class:'form-control input-group date datetimepicker', required:true  %>
         </div>
       </div>
     </fieldset>
@@ -87,20 +85,19 @@
 
     <fieldset>
       <div class="form-group">
-        <div class="col-lg-2 control-label">
+        <div class="col-lg-3 control-label">
           <%= f.label :race_value %>
           <%= tooltip_widget(:races, :race_value) %>
         </div>
         <div class="col-lg-4">
           <div class="input-group m-b">
             <span class="input-group-addon">€</span>
-            <%= f.text_field :race_value, class:'form-control'%>
+            <%= f.text_field :race_value, class:'form-control', required:true %>
             <span class="input-group-addon">.00</span>
           </div>
         </div>
       </div>
     </fieldset>
-
 
     <br><h5 class="text-center">Tabella provvigionale</h5><br><br>
 
@@ -108,36 +105,24 @@
         <fieldset>
           <div class="form-group">
             <div class="row">
-            <div class="col-lg-2 text-center hidden-sm hidden-md hidden-xs">
-              <em class="fa fa-money fa-2x text-green"></em>
-            </div>
+              <div class="col-lg-3 text-center">
+                <em class="fa fa-money fa-2x text-green"></em>
+              </div>
 
-            <div class="col-lg-8 col-lg-offset-0 col-xs-offset-4 col-xs-4">
-              <div class="input-group m-b">
-                <%= commission_form.number_field :value, class:'form-control' %>
+              <div class="col-lg-3 text-center hidden-sm hidden-md hidden-xs">
+                <div class="input-group m-b">
+                <%= commission_form.number_field :value, class:'form-control', required:true %>
                 <span class="input-group-addon">%</span>
-                <span class="input-group-addon hidden-md hidden-sm hidden-xs">dal</span>
-                <%= commission_form.number_field :starts, class:'form-control hidden-md hidden-sm hidden-xs'  %>
-                <span class="input-group-addon hidden-md hidden-sm hidden-xs">anno</span>
-                <span class="input-group-addon hidden-md hidden-sm hidden-xs">al</span>
-                <%= commission_form.number_field :ends, class:'form-control hidden-md hidden-sm hidden-xs'  %>
-                <span class="input-group-addon hidden-md hidden-sm hidden-xs">anno</span>
+                </div>
               </div>
-            </div>
-              <br class="hidden-lg">
-              <br class="hidden-lg">
-            <div class="col-xs-12 hidden-lg">
-              <div class="input-group m-b ">
-                <span class="input-group-addon">dal</span>
-                <%= commission_form.number_field :starts, class:'form-control'  %>
-                <span class="input-group-addon">anno</span>
-                <span class="input-group-addon">al</span>
-                <%= commission_form.number_field :ends, class:'form-control'  %>
-                <span class="input-group-addon">anno</span>
+
+              <div class="col-lg-3 text-center hidden-sm hidden-md hidden-xs">
+                <div class="input-group m-b">
+                  <%= commission_form.number_field :duration, class:'form-control hidden-md hidden-sm hidden-xs', required:true  %>
+
+                  <span class="input-group-addon hidden-md hidden-sm hidden-xs">anni</span>
+                </div>
               </div>
-            </div>
-              <br class="hidden-lg">
-              <br class="hidden-lg">
             <div class="col-lg-1 col-xs-12 text-center">
                 <%= commission_form.link_to_remove "", class:'icon-close text-danger fa-2x no-decoration' %>
             </div>

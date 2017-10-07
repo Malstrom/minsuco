@@ -13,27 +13,6 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="list-group">
-              <a href="#" class="list-group-item">
-                <!--<em class="pull-right fa fa-gift fa-lg fa-fw text-yellow mt"></em>-->
-                <h4 class="list-group-item-heading">Bonus</h4>
-                <!--<p class="list-group-item-text">Creare gare pubbliche</p>-->
-              </a>
-              <a href="#" class="list-group-item" id="open_races">
-                <!--<em class="pull-right fa fa-users fa-lg fa-fw text-muted mt"></em>-->
-                <h4 class="list-group-item-heading"><%= @user.reward.open_races %></h4>
-                <p class="list-group-item-text">Gare pubbliche gratuite</p>
-              </a>
-              <a href="#" class="list-group-item" id="join_private">
-                <!--<em class="pull-right fa fa-rss fa-lg fa-fw text-muted mt"></em>-->
-                <h4 class="list-group-item-heading"><%= @user.reward.join_private %></h4>
-                <p class="list-group-item-text">Partecipazioni a gare private</p>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="col-md-5">
@@ -59,8 +38,7 @@
               <%= f.file_field(:image, id:"input-file-now", "class" => "dropify", "data-default-file" => @user.image, style:"")%>
               <br>
               <div class="text-center">
-                <%= f.submit class:"btn btn-success" %>
-
+                <%= f.submit 'Aggiorna foto', class:"btn btn-success" %>
               </div>
             <% end %>
 

@@ -1,16 +1,15 @@
 <h3>Partecipanti
   <small class="text-muted">
     Legenda:
-  </small>
-  <em class="fa fa-euro"></em>
+  </small>&nbsp;
+  <em class="fa fa-euro text-primary"></em>
   <small class="text-muted">
-    Importo totale della partecipazione,
-  </small>
-  <em class="fa icon-wallet"></em>
-  <small class="text-muted">
-  Provvigioni totali,
-  </small>
-  <em class="fa fa-ticket"></em>
+    Premi in entrata
+  </small>&nbsp;
+  <em class="fa icon-wallet text-primary"></em>
+  <small class="text-muted">Provvigioni uscita
+  </small>&nbsp;
+  <em class="fa fa-ticket text-primary"></em>
   <small class="text-muted">
   Pezzi totali
   </small>
@@ -40,11 +39,11 @@
                 <strong><%= number_to_currency attendee.target_covered, precision:0 %></strong>
               </div>
               <div class="col-xs-4 br p0">
-                <em class="fa icon-wallet fa-fw text-info"></em><br>
-                <strong><%= number_to_currency attendee.total_revenue, precision:0 %></strong>
+                <em class="fa icon-wallet fa-fw text-primary"></em><br>
+                <strong><%= number_to_currency attendee.revenue, precision:0 %></strong>
               </div>
               <div class="col-xs-4 p0">
-                <em class="fa fa-ticket fa-fw text-danger"></em><br>
+                <em class="fa fa-ticket fa-fw text-primary"></em><br>
                 <strong><%= attendee.pieces.count %></strong>
               </div>
             </div>

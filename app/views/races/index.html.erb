@@ -1,14 +1,4 @@
-<div class="row">
-  <div class="col-md-12 hidden-xs hidden-sm hidden-md">
-    <%= render partial: "races/partials/races/filter_desktop", :locals => { :path_to_go => races_path } %>
-  </div>
-  <div class="hidden-lg col-xs-12">
-    <button type="button" data-toggle="modal" data-target="#filterModal" class="btn btn-primary btn-xl btn-pill-left pull-right">Filtra e ordina</button>
-    <%= content_for :body_area do %>
-      <%= render partial: "races/partials/races/filter_mobile_modal", :locals => { :path_to_go => races_path } %>
-    <% end %>
-  </div>
-</div>
+
 <br class="hidden-lg">
 <div class="row">
   <!--Featured races-->

@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :description do %>
-  <%= "Questa gara del ramo #{@race.category.name.upcase}, mancano ancora #{@race.remaining_value} euro per poter essere vinta dal creatore che è disposto a pagare #{number_to_percentage @race.commissions.first_year.value}." %>
+  <%= "Questa gara del ramo #{@race.category.name.upcase}, mancano ancora #{@race.remaining_value} euro per poter essere vinta dal creatore che è disposto a pagare [da rividere]" %>
 <% end %>
 
 <div class="row">
@@ -108,7 +108,7 @@
                 <div class="p0 col-md-2 col-sm-3 col-xs-6 text-center bg-info pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
                     <h3 class="m0"><%= number_to_percentage commission.value %></h3>
                   <small class="text-white m0">
-                    <%= commission.starts == 0 ? "" : "dal " + commission.starts.to_s + "°" %> fino al <%= commission.ends %>° anno
+                    <%= commission.duration %> anni
                   </small>
                 </div>
                 <% count += 1 %>

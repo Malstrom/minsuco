@@ -34,18 +34,10 @@ class Attendee < ApplicationRecord
 
   scope :group_by_user, ->(user) { where(race:user.races).group_by_day(:created_at).count }
 
-  def total_revenue
+  def revenue
     sum = 0
     pieces.each do |piece|
-      sum += piece.total_revenue
-    end
-    sum
-  end
-
-  def revenue_by(commission)
-    sum = 0
-    pieces.each do |piece|
-      sum += piece.revenue(commission)
+      sum += piece.revenue
     end
     sum
   end

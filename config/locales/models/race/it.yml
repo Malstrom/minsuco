@@ -25,7 +25,7 @@ it:
         starts_at: Inizia
         ends_at: Finisce
         race_value: Obbiettivo
-        commission: Provvigione
+        commissions: Provvigioni
         compensation_start_amount: Fisso per pezzo
     race:
       enum:

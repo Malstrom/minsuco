@@ -1,7 +1,7 @@
 it:
   tooltips:
     pieces:
-      name: "Nome che vuoi dare al a questo pezzo"
+      name: "Dai un nome per ricordarti il pezzo"
       value: "Valore del pezzo"
       duration: "Duarata (su questo dato verrà calcolata la tua provvigione)"
     races:
@@ -47,3 +47,6 @@ it:
       attendees_by_categories: "I partecipanti alle tue gare suddivisi per i rami."
       app_races_by_category: "Tutte le gare create sul portale divise per rami"
       app_attendees_by_category: "Tutte le partecipazioni sul portale divise per rami"
+    rewards:
+      free_open_races: "Permette di creare dove tutte le persone possono partecipare liberamente."
+      private_join:    "Permette di partecipare alla gare di produzione private."

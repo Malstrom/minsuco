@@ -11,7 +11,7 @@ it:
         achieved: archiviate
       modal:
         join:
-          text_help: "Premi il + se vuoi aggiungere un pezzo alla tua partecipazione."
+          text_help: "Premi <em class='icon-plus text-success'></em> se vuoi aggiungere un pezzo alla gara, oppure <em class='icon-close text-danger'></em> se devi rimuovere qualcosa."
     topnavbar:
       notifications:
         more: "Ultime notifiche"

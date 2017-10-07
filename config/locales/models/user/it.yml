@@ -7,6 +7,7 @@ it:
       user: Utente
     attributes:
       user:
+        rui: Codice RUI
         email: Email
         name: Nome utente
         password: Password
@@ -20,13 +21,3 @@ it:
         zip: "Cap"
         phone: "Telefono"
         interest_list: "Gare che ti interessano"
-        fiscal_kinds:
-          broker: "Broker"
-          agent: "Agente"
-          sub_agent: "Sub Agente"
-    enum:
-      statuses:
-        paused: "Ferma"
-        started: "Attiva"
-        draft: "Non pubblicata"
-        achieved: "Archiviata"

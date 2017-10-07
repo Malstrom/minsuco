@@ -24,6 +24,9 @@ it:
         new:
           text: "Nuova gara"
           icon: 'icon-plus'
+        create:
+          text: "Nuova gara"
+          icon: 'icon-plus'
         edit:
           text: "Modifica gara"
           icon: 'fa-pencil'
@@ -44,7 +47,7 @@ it:
           text: "Il mio profilo"
           icon: 'fa-user'
         intent:
-          text: 'Cosa cerchi nella piattaforma?'
+          text: 'Primo accesso'
           icon: 'fa-question'
         plans:
           text: 'Scegli il piano più adatto a te'

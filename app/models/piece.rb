@@ -7,27 +7,22 @@ class Piece < ApplicationRecord
 
   validate :race_value_cap
 
-  def total_revenue
-    sum = 0
-    attendee.race.commissions.each do |commission|
-      sum += revenue(commission)
+  def revenue
+    if commission
+      value / 100 * commission.value
+    else
+      0
     end
-    sum
   end
 
-  def revenue(commission)
-    if duration < commission.ends
-      years = (duration - commission.starts )
-    else
-      years = (commission.ends - commission.starts )
-    end
-    years > 0 ? value / 100 * commission.value * years : 0
+  def commission
+    attendee.race.commissions.find_by_duration(duration)
   end
 
   private
 
   def race_value_cap
-    if attendee.race.value_covered + value > attendee.race.race_value
+    if value.is_a?(Integer) and attendee.race.value_covered + value > attendee.race.race_value
       errors.add(:race_target_cap, I18n.t('activerecord.errors.models.attendee.race_target_cap'))
     end
   end

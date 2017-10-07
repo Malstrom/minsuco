@@ -89,7 +89,7 @@ class User < ApplicationRecord
     sum = 0
     races.each do |race|
       race.attendees.each do |attendee|
-        sum += attendee.total_revenue
+        sum += attendee.revenue
       end
     end
     sum

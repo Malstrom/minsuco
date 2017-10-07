@@ -6,19 +6,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    if params[:category_id] && !params[:category_id].empty?
-      category = Category.find(params[:category_id])
-      @races = Race.by_category(category)
-                   .not_expired.by_recipients(current_user.kind).order('ends_at ASC')
-    elsif params[:commission] && !params[:commission].empty?
-      @races = Race.not_expired.by_recipients(current_user.kind).order "commission #{params[:commission]}"
-    elsif params[:kind] && !params[:kind].empty?
-      @races = Race.not_expired.by_recipients(current_user.kind).order "kind #{params[:commission]}"
-    elsif params[:ends_at] && !params[:ends_at].empty?
-      @races = Race.not_expired.by_recipients(current_user.kind).order "ends_at #{params[:ends_at]}"
-    else
-      @races = Race.not_expired.by_recipients(current_user.kind)
-    end
+    @races = Race.not_expired.by_recipients(current_user.kind)
   end
 
   def user_races
@@ -26,8 +14,12 @@ class RacesController < ApplicationController
     if @scope
       @races = current_user.races.scope_races(@scope)
       if @races.empty?
-        @races = current_user.races
+        @scope = nil
+        @races = @current_user.races
+        flash[:warning] = "Non esistono gare di questa tipologia"
       end
+    else
+      @races = @current_user.races
     end
   end
 
@@ -47,18 +39,7 @@ class RacesController < ApplicationController
   # GET /races/new
   def new
     @race = Race.new
-    @race.description = Faker::Matz.quote
-    @race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
-    @race.race_value = %w[10000 50000 100000 75000 25000].sample
-    @race.compensation_start_amount = %w[0 0 0 0 500 1000].sample
-    @race.kind = %w[open close].sample
-    @race.status = 'started'
-
-    @race.commissions.build(value:3,starts:0, ends:1)
-    @race.commissions.build(value:1.5,starts:1, ends:5)
-    @race.commissions.build(value:1,starts:5, ends:10)
-    @race.commissions.build(value:0.5,starts:10, ends:15)
-    @race.commissions.build(value:0.2,starts:15, ends:20)
+    @race.commissions.build(value:5, duration:1)
   end
 
   #url allow access all users
@@ -137,6 +118,6 @@ class RacesController < ApplicationController
   def race_params
     params.require(:race).permit(:name, :description, :owner, :commission, :compensation_start_amount,
                                  :recipients, :race_value, :category_id, :starts_at, :ends_at, :status, :kind,
-                                 commissions_attributes: [:id, :value, :starts, :ends, :_destroy])
+                                 commissions_attributes: [:id, :value, :duration, :_destroy])
   end
 end

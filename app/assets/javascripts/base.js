@@ -18,3 +18,15 @@
 //= require screenfull/dist/screenfull
 //--- Localize
 //= require jquery-localize-i18n/dist/jquery.localize
+
+$('label').addClass('lead');
+
+
+$('.gradeX').hover(
+  function () {
+    $(this).find('.actions').removeClass('hidden').addClass('visible');
+  },
+  function () {
+    $(this).find('.actions').removeClass('visible').addClass('hidden');
+  }
+);

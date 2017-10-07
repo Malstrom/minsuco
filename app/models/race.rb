@@ -30,8 +30,8 @@ class Race < ApplicationRecord
   #validate  :publishability, on: :update
 
   # name, permalink, price validate by payola sellable. write here for not forget this.
-  validates_presence_of :name, :permalink, :price,
-                        :description, :recipients, :race_value, :category_id, :starts_at, :ends_at, :kind
+  validates_presence_of :name, :permalink, :price, :description, :recipients, :race_value,
+                        :category_id, :starts_at, :ends_at, :kind, :commissions
 
   before_create :set_draft
   before_save   :sanitize_data
@@ -60,7 +60,6 @@ class Race < ApplicationRecord
   scope :scope_races,   ->(scope) { send(scope) if methods.include?(scope.to_sym) }
 
   # scope :group_by_categories,           -> { group(:category).category.name }
-
 
   def set_draft
     self.status ||= :draft

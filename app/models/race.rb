@@ -7,12 +7,10 @@ class Race < ApplicationRecord
   belongs_to :owner, class_name: 'User'
 
   # race have attendees and attendees are users
-  has_many :attendees
+  has_many :attendees, dependent: :destroy
   has_many :users, class_name: 'User', through: :attendees
 
-  has_many :featured_races
-
-  has_many :commissions
+  has_many :commissions, dependent: :destroy
   accepts_nested_attributes_for :commissions, allow_destroy: true
 
   enum kind: %i[open close]

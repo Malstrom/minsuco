@@ -5,51 +5,75 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
+# BASIC
 gem 'rails', '5.1.0'
 gem 'mysql2'
 gem 'puma', '~> 3.7'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+gem "bower-rails", "~> 0.9.2"
+gem 'sass-rails', '~> 5.0.1'  # Use SCSS for stylesheets
+gem 'uglifier', '>= 1.3.0'    # Use Uglifier as compressor for JavaScript assets
+
+gem 'coffee-rails', '~> 4.2'  # Use CoffeeScript for .coffee assets and views
+gem "slim-rails"
+
+gem 'jbuilder', '~> 2.5'      # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
-gem 'sass-rails', '~> 5.0.1'  # Use SCSS for stylesheets
-gem 'uglifier', '>= 1.3.0'    # Use Uglifier as compressor for JavaScript assets
-gem 'coffee-rails', '~> 4.2'  # Use CoffeeScript for .coffee assets and views
-gem 'jbuilder', '~> 2.5'      # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "bower-rails", "~> 0.9.2"
-gem "slim-rails"
-gem 'turbolinks', '~> 5.0.0'
-
-gem 'activerecord-session_store'
-
-# gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
-
+#auth
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-
+#
 gem 'omnicontacts', :git => 'https://github.com/Diego81/omnicontacts.git' # import google contacts
-
-gem 'acts_as_tree'  # category as tree
-gem 'acts-as-taggable-on', '~> 4.0' # for tag categories to users
-
-gem 'sendgrid-ruby' # send email trough sendgrind
-
 gem 'cancancan', '~> 2.0'
+# gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
 
-gem "chartkick"       # simply charts
-gem 'groupdate'       # with chartkick charts are very simply
+#improvement
+gem 'acts-as-taggable-on', '~> 4.0' # for tag categories to users
+gem 'acts_as_tree'  # category as tree
+gem 'paper_trail'   # Track changes to your models' data. Good for auditing or versioning.
+gem 'goldiloader'   # Automatic ActiveRecord eager loading to reduce the number of database queries run by your application.
+gem 'activerecord-session_store'
+
+#view
+gem 'social-share-button'
+gem "nested_form"
+#Charts
+gem "chartkick"
+gem 'groupdate'
 gem 'active_median'
 gem 'hightop'
 
-gem "nested_form"
-
-# gem 'paper_trail'   # Track changes to your models' data. Good for auditing or versioning.
-# gem 'active_admin'  # elegant backends for website administration
-
-gem 'faker'           # fake data
-
+#app_implementation
+gem 'sendgrid-ruby' # send email trough sendgrind
 gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
+gem 'carrierwave'
+gem 'cloudinary'
+
+#tools
+gem 'faker' # fake data
+gem "slack-notifier"
+
+
+
+# new gems to test
+
+# gem 'ransack', github: 'activerecord-hackery/ransack' #search
+# gem 'searchkick #search #elasticsearch
+
+
+# gem "state_machines-activerecord"
+# gem 'aasm'
+# gem 'formulaic', group: :test
+# gem 'globalize' # Rails I18n de-facto standard library for ActiveRecord model/data translation.
+# gem 'active_admin'  # elegant backends for website administration
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -85,25 +109,3 @@ group :test do
   gem 'pickle'
   gem 'action_mailer_cache_delivery'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# new gems to test
-
-# gem 'ransack', github: 'activerecord-hackery/ransack' #search
-# gem 'searchkick #search #elasticsearch
-# gem "slack-notifier"
-
-# gem "state_machines-activerecord"
-# gem 'aasm'
-# gem 'formulaic', group: :test
-
-gem 'social-share-button'
-
-gem 'carrierwave'
-gem 'cloudinary'
-
-# gem 'goldiloader' # Automatic ActiveRecord eager loading to reduce the number of database queries run by your application.
-# gem 'globalize' # Rails I18n de-facto standard library for ActiveRecord model/data translation.
-gem 'metric_fu'

@@ -1,4 +1,6 @@
 class Reward < ApplicationRecord
+  has_paper_trail
+
   belongs_to :user
 
   before_create :set_default_rewards

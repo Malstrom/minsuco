@@ -63,6 +63,7 @@ gem "slack-notifier"
 
 
 
+
 # new gems to test
 
 # gem 'ransack', github: 'activerecord-hackery/ransack' #search

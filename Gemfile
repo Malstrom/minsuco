@@ -59,11 +59,10 @@ gem 'cloudinary'
 
 #tools
 gem 'faker' # fake data
-gem "slack-notifier"
+# gem "slack-notifier"
 
 
-
-
+# gem 'gon'
 # new gems to test
 
 # gem 'ransack', github: 'activerecord-hackery/ransack' #search

@@ -30,6 +30,7 @@ it:
       table: "Tabella provvigioni che il creatore darà il base all'importo con il quale parteciperai alla gara"
       commission_range: "Importo totale che il creatore dovrà al partecipante suddiviso per scaglioni di tempo determinati dal creatore"
       first_year: "Provvigione che il creatore pagare il primo anno."
+      highest_commission: "La povvigione piu alta pagata in questa gara."
     attendees:
       name: "Il nome di riferimento, ad esempio il nome del contraente"
       value: "Inserisci il premio il totale dei soldi che il pezzo vale"

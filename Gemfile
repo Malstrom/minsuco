@@ -104,3 +104,6 @@ gem 'social-share-button'
 gem 'carrierwave'
 gem 'cloudinary'
 
+# gem 'goldiloader' # Automatic ActiveRecord eager loading to reduce the number of database queries run by your application.
+# gem 'globalize' # Rails I18n de-facto standard library for ActiveRecord model/data translation.
+gem 'metric_fu'

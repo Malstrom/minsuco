@@ -72,7 +72,7 @@ end
     race.category = Category.find_by_name(:assicurazioni).children.last.children.sample
     race.race_value = race_values.sample
     race.compensation_start_amount = compensation_start_amounts.sample
-    race.starts_at = rand(DateTime.now - 7.days..DateTime.now + 7.days)
+    race.starts_at = rand(DateTime.now..DateTime.now + 7.days)
     race.ends_at = race.starts_at + rand(30..90).days
     race.kind = %w[open close].sample
     race.status = 'started'
@@ -80,14 +80,13 @@ end
     race.price = 2900
     race.permalink = race.permalink
 
+    race.commissions.build(value: 5,  duration: 1)
+    race.commissions.build(value: 10, duration: 5)
+
     race_saved = race.save
 
     p race.errors.full_messages
   end
-  race.commissions.create(value: 5,  duration: 1)
-  race.commissions.create(value: 10, duration: 5)
-  race.commissions.create(value: 15, duration: 10)
-  race.commissions.create(value: 20, duration: 15)
 end
 
 # --== Generate Sample User Attendees

@@ -70,9 +70,6 @@
         <!-- START widget-->
         <div id="panelChart9" class="panel panel-default panel-demo">
           <div class="panel-heading">
-            <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
-              <em class="fa fa-minus"></em>
-            </a>
             <div class="panel-title">Partecipazioni alle tue gare</div>
           </div>
           <div class="panel-body p0">
@@ -184,11 +181,10 @@
           <div class="list-group-item">
             <div class="media-box">
               <div class="pull-left">
-                     <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-success"></em>
-                        <em class="fa fa-newspaper-o fa-stack-1x fa-inverse text-white"></em>
-                     </span>
-              </div>
+                <%= tooltip_widget(:races,
+                                   race.open? ? :open_race : :close_race  ,
+                                   "nil",
+                                   race.open? ? "fa fa-unlock text-success" : "fa fa-lock text-warning") %>              </div>
               <div class="media-box-body clearfix">
                 <small class="text-muted pull-right ml"><%= distance_of_time_in_words(Time.now, race.ends_at) %></small>
                 <div class="media-box-heading"><a href="#" class="text-success m0"><%= race.category.name.upcase %></a>
@@ -196,8 +192,9 @@
                 <p class="m0">
                   <small>
                     <em>
-                      <%# number_to_percentage race.commissions.first_year.value unless race.commissions.empty? %>
-                      <%= tooltip_widget(:commissions, :first_year) %>
+                      <%= number_to_percentage race.commissions.best.first.value, precision:0 %>
+                      (<%= race.commissions.best.first.duration %> anni)
+                      <%= tooltip_widget(:commissions, :highest_commission) %>
                     </em>
                     /
                     <em>

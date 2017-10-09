@@ -11,26 +11,24 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    *<%= f.label :rui, class:'text-danger mb0' %> <small>(necessario per pubblicare o partecipare alle gare)</small>
-    <%= f.text_field :rui, class: 'form-control'%>
+
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group">
+        *<%= f.label :rui, class:'text-danger mb0' %>
+        <%= f.text_field :rui, class: 'form-control'%>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :kind, class:'mb0'  %>
+        <%= f.select(:kind, User.kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
+      </div>
+    </div>
   </div>
 
+
   <% unless where == :rui_modal %>
-    <div class="form-group">
-      <%= f.label :email, class:'mb0' %>
-      <%= f.text_field :email, class: 'form-control'%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :name, class:'mb0'  %>
-      <%= f.text_field :name, class: 'form-control'%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :kind, class:'mb0'  %>
-      <%= f.select(:kind, User.kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
-    </div>
 
     <div class="form-group">
       <%= f.label :fiscal_kind, class:'mb0'  %>

@@ -1,5 +1,9 @@
 // This is a manifest file that'll be compiled into base.js, which will include all the files
 // listed below.
+//--- Modernizr
+//= require modernizr/modernizr.custom
+//--- jQuery
+//= require jquery/dist/jquery
 //--- Bootstrap
 //= require bootstrap/dist/js/bootstrap
 //--- Storage API
@@ -16,7 +20,6 @@
 //= require jquery-localize-i18n/dist/jquery.localize
 
 $('label').addClass('lead');
-
 
 $('.gradeX').hover(
   function () {

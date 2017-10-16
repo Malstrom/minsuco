@@ -56,10 +56,13 @@ class User < ApplicationRecord
 
   validates_format_of :rui,   :with => /\A[a|b|c|d|ue]{1,2}[0-9]{9,10}/i, on: :update, :if => :rui_changed?
 
+
   # validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }
   # validates_presence_of :name, :fiscal_code,         on: :update, :if => lambda { self.individual? }
 
   validates_associated :plan
+
+  before_save :set_kind, :if => :rui_changed?
 
   after_create_commit :create_default_channels
 
@@ -68,6 +71,19 @@ class User < ApplicationRecord
 
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
   scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
+
+  def set_kind
+    case rui.first.downcase
+      when 'a'
+        self.kind = :broker
+      when 'b'
+        self.kind = :agent
+      when 'c'
+        self.kind = :agent
+      when 'd'
+        self.kind = :agent
+    end
+  end
 
   def total_target
     races.sum(:race_value)

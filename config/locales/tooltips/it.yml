@@ -49,5 +49,5 @@ it:
       app_races_by_category: "Tutte le gare create sul portale divise per rami"
       app_attendees_by_category: "Tutte le partecipazioni sul portale divise per rami"
     rewards:
-      free_open_races: "Permette di creare dove tutte le persone possono partecipare liberamente."
-      private_join:    "Permette di partecipare alla gare di produzione private."
+      free_open_races: "Permette di creare gare a pertecipaziona libera"
+      private_join:    "Permette di partecipare a gare chiuse"

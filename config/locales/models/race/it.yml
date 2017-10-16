@@ -29,6 +29,15 @@ it:
         compensation_start_amount: Fisso per pezzo
     race:
       enum:
+        kinds:
+          open: Aperta
+          close: Chiusa
+        statuses:
+          started: Iniziata
+          paused: Ferma
+          draft: Bozza
+          achieved: Archiviata
+          expired: Scaduta
         recipients:
           for_all: "Per tutti"
           brokers: "Brokers"

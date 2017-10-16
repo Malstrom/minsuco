@@ -11,7 +11,7 @@
         </h4>
       </div>
       <div class="modal-body m0">
-        <p class="lead text-center">Spunta le persone che vorresti invitare a questa gara, una volta finito vai in fondo e clicca su "Invita". Le persone invitate riceveranno una mail con la proposta di partecipare alla tua gara.</p>
+        <p class="lead text-center">Seleziona le persone che vorresti invitare a questa gara, una volta finito vai in fondo e clicca su "Invita". Le persone invitate riceveranno una mail con la proposta di partecipare alla tua gara.</p>
         <div id="allFriends" role="tabpanel" class="tab-pane active">
           <%= render partial: 'races/partials/race/owner_partials/friend_list',
                  :locals => { :friends => current_user.friends, :datatable => 'allFriendsTable' } %>

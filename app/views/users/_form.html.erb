@@ -21,8 +21,9 @@
     </div>
     <div class="col-md-5">
       <div class="form-group">
-        <%= f.label :kind, class:'mb0'  %>
-        <%= f.select(:kind, User.kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control'}) %>
+        <%= f.label "Tipologia", class:'mb0'  %>
+        <br>
+        <p id="userKind" class="lead"><%= current_user.kind.try :humanize %></p>
       </div>
     </div>
   </div>

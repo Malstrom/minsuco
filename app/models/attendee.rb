@@ -5,14 +5,9 @@ class Attendee < ApplicationRecord
   belongs_to :category
 
   has_many :pieces, :dependent => :destroy
-
   accepts_nested_attributes_for :pieces, allow_destroy: true
 
   enum status: [:confirmed, :deny, :waiting, :banned]
-
-  # validates_associated :user, :race
-
-  #validates :pieces, :presence => true
 
   validates :race, :user, presence: true
 

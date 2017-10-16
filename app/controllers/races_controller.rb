@@ -31,7 +31,7 @@ class RacesController < ApplicationController
       @attendee = current_user.attendee(@race)
       unless @attendee
         @attendee = @race.attendees.build
-        # @attendee.pieces.build
+        @attendee.pieces.build
       end
     end
   end

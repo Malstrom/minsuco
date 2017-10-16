@@ -5,24 +5,24 @@
       <% if @race.started? %>
         <div class="label label-info info" data-toggle="tooltip" data-placement="left"
              data-original-title="<%= I18n.t("tooltips.races.#{@race.status}") %>">
-          <%= t("activerecord.enum.statuses.#{@race.status}") %>
+          <%= t("activerecord.race.enum.statuses.#{@race.status}") %>
         </div>
       <% else %>
         <div class="label label-warning info" data-toggle="tooltip" data-placement="left"
              data-original-title="<%= I18n.t("tooltips.races.#{@race.status}") %>">
-          <%= t("activerecord.enum.statuses.#{@race.status}") %>
+          <%= t("activerecord.race.enum.statuses.#{@race.status}") %>
         </div>
       <% end %>
       &nbsp;
       <% if @race.open? %>
         <div class="label label-info info" data-toggle="tooltip" data-placement="top"
-             data-original-title="<%= I18n.t("tooltips.races.public_race") %>" >
-          Pubblica
+             data-original-title="<%= I18n.t("tooltips.races.open_race") %>" >
+          <%= t("activerecord.race.enum.kinds.#{@race.kind}") %>
         </div>
       <% else %>
         <div class="label label-warning info" data-toggle="tooltip" data-placement="top"
-             data-original-title="<%= I18n.t("tooltips.races.private_race") %>">
-          Privata
+             data-original-title="<%= I18n.t("tooltips.races.close_race") %>">
+          <%= t("activerecord.race.enum.kinds.#{@race.kind}") %>
         </div>
       <% end %>
     </div>

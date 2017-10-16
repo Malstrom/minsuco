@@ -36,8 +36,7 @@ class AttendeesController < ApplicationController
         format.html { redirect_to race_path(@attendee.race), notice: I18n.t('flash.attendees.create.notice') }
         format.json { render :show, status: :created, location: @attendee }
       else
-        format.html { redirect_to race_path(@attendee.race),
-                                  alert: @attendee.errors.first[1] }
+        format.html { redirect_to race_path(@attendee.race), alert: @attendee.errors.full_messages.first }
         format.json { render json: @attendee.errors, status: :unprocessable_entity }
       end
     end

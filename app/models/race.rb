@@ -27,7 +27,7 @@ class Race < ApplicationRecord
 
   #validate  :publishability, on: :update
 
-  # name, permalink, price validate by payola sellable. write here for not forget this.
+  # name, permalink, price validate by payola sellable. write here for not forget it.
   validates_presence_of :name, :permalink, :price, :description, :recipients, :race_value,
                         :category_id, :starts_at, :ends_at, :kind, :commissions
 

@@ -29,3 +29,24 @@ $('.gradeX').hover(
     $(this).find('.actions').removeClass('visible').addClass('hidden');
   }
 );
+
+
+$('#user_rui').change(function () {
+  kind = this.value.charAt(0);
+  switch(kind) {
+    case 'a':
+      $('#userKind').html('Agente');
+      break;
+    case 'b':
+      $('#userKind').html('Broker');
+      break;
+    case 'c':
+      $('#userKind').html('Agente');
+      break;
+    case 'd':
+      $('#userKind').html('Agente');
+      break;
+    default:
+      $('#userKind').html('Non valido');
+  }
+});

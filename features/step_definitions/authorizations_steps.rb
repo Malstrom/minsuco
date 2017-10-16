@@ -4,6 +4,8 @@ When(/^I visit edit page of another user$/) do
 end
 
 When(/^I visit edit race page of another user$/) do
-  race = create(:race, owner:create(:user, email:'igormir@te.it'))
+  race = build(:race, owner:create(:user, email:'igormir@te.it'))
+  race.commissions.new
+  race.save
   visit edit_race_path(race)
 end

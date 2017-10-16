@@ -7,10 +7,9 @@ Feature: Join in race
   Scenario: User should join in open race
     Given I logged in having basic account
     When I visit a open race
-    And I join with 1 pieces to join named 'first' with '1000' value for '1' years
+    And I join with 0 pieces to join named 'first' with '1000' value for '1' years
     Then I should see "Partecipazione avvenuta con successo"
 
-  @current
   Scenario: User should not join in open race if he have not rui
     Given I sign up
     When I visit a open race

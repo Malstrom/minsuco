@@ -2,7 +2,9 @@
 When(/^I invite friend "([^"]*)"$/) do |email|
   sleep 1
 
-  find(:id, "emails").attribute(email)
+  find(:xpath,'/html/body/div[1]/section/div/div[2]/div[2]/div[2]/div/div/form/fieldset/div/div/div/input').set(email)
+
+  # find(:id, "emails").attribute(email)
   # find(".bootstrap-tagsinput").set email
 
   click_on "Invia email"
@@ -14,11 +16,12 @@ When(/^I invite all friends from my list$/) do
 end
 
 And(/^I have friend with email "([^"]*)"$/) do |email|
-  create :friend, email: email, user: User.first
+  $friend = create :friend, email: email, user: User.first
 end
 
 When(/^I invite "([^"]*)" from my list$/) do |arg|
   click_on "Lista contatti di google"
-  find("##{arg}_check").click
+  find(:xpath,'//*[@id="1"]').click
+  sleep 0.3
   click_on "Invita amici"
 end

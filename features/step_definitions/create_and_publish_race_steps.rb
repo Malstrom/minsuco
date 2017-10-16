@@ -2,15 +2,23 @@
 When(/^(I|Someone|\d+) create (public|private|\d+) race$/) do |who,kind|
   if who == 'I'
     if kind == 'public'
-      create(:race, name: kind, kind: "open", owner: User.first)
+      race = build(:race, name: kind, kind: "open", owner: User.first)
+      race.commissions.new
+      race.save
     else
-      create(:race, name: kind, kind: "close", owner: User.first)
+      race = build(:race, name: kind, kind: "close", owner: User.first)
+      race.commissions.new
+      race.save
     end
   else
     if kind == 'public'
-      create(:race, name: kind, kind: "open", owner: create(:user))
+      race = build(:race, name: kind, kind: "open", owner: create(:user))
+      race.commissions.new
+      race.save
     else
-      create(:race, name: kind, kind: "close", owner: create(:user))
+      race = build(:race, name: kind, kind: "close", owner: create(:user))
+      race.commissions.new
+      race.save
     end
   end
 end
@@ -20,11 +28,17 @@ Given(/^User (basic|attendee|creator\d+) create (public|private|\d+) race$/) do 
 
   case who
     when 'basic'
-      create(:race, kind: kind, owner: create(:user, plan: Plan.find_by_stripe_id('basic')))
+      race = build(:race, kind: kind, owner: create(:user, plan: Plan.find_by_stripe_id('basic')))
+      race.commissions.new
+      race.save
     when 'creator'
-      create(:race, kind: kind, owner: create(:user, plan: Plan.find_by_stripe_id('pro_creator')))
+      race = build(:race, kind: kind, owner: create(:user, plan: Plan.find_by_stripe_id('pro_creator')))
+      race.commissions.new
+      race.save
     when 'attendee'
-      create(:race, kind: kind, owner: create(:user, plan: Plan.find_by_stripe_id('pro_attendee')))
+      race = build(:race, kind: kind, owner: create(:user, plan: Plan.find_by_stripe_id('pro_attendee')))
+      race.commissions.new
+      race.save
   end
 end
 
@@ -32,15 +46,23 @@ end
 When(/^(I|Someone|\d+) create (public|private|\d+) race with '([^']*)' = '([^']*)'$/) do |who,kind,field,value|
   if who == 'I'
     if kind == 'public'
-      create(:race, name: kind, kind: "open", owner: User.first, "#{field}" => value)
+      race = build(:race, name: kind, kind: "open", owner: User.first, "#{field}" => value)
+      race.commissions.new
+      race.save
     else
-      create(:race, name: kind, kind: "close", owner: User.first, "#{field}" => value)
+      race = build(:race, name: kind, kind: "close", owner: User.first, "#{field}" => value)
+      race.commissions.new
+      race.save
     end
   else
     if kind == 'public'
-      create(:race, name: kind, kind: "open", owner: create(:user), "#{field}" => value)
+      race = build(:race, name: kind, kind: "open", owner: create(:user), "#{field}" => value)
+      race.commissions.new
+      race.save
     else
-      create(:race, name: kind, kind: "close", owner: create(:user), "#{field}" => value)
+      race = build(:race, name: kind, kind: "close", owner: create(:user), "#{field}" => value)
+      race.commissions.new
+      race.save
     end
   end
 end
@@ -65,6 +87,7 @@ end
 When(/^I fill race attribute "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
   visit "/races/new"
 
+  fill_in "race_name", :with => 'race test'
   fill_in "race_description", :with => 'A test race'
   fill_in "race_race_value", :with => '100000'
   fill_in "race_starts_at", :with => Time.now.strftime("%m/%d/%Y")
@@ -138,7 +161,9 @@ Given(/^User "([^"]*)" join in "([^"]*)" race$/) do |user_name, race_name|
 end
 
 And(/^I have create (\d+) open races$/) do |arg|
-  create(:race, kind:'open', owner:User.first)
+  race = build(:race, kind:'open', owner:User.first)
+  race.commissions.new
+  race.save
 end
 
 When(/^I should not change category of race$/) do

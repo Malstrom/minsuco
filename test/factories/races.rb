@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :commission do
+    value 3
+    duration 1
+  end
+
   factory :race do
     name "TestRace"
     description "Test Race description"

@@ -30,25 +30,8 @@ Feature: User settings
     And I visit user plan
     Then I should see "Iscritto al piano Pro creatori"
 
-  Scenario: User should be set intent
-    When I click to "Creare una mia gara e pubblicarla"
-    And I click to "DASHBOARD"
-    Then I should see "Dashboard"
-
   Scenario: User should able to change its theme
     When I click to "theme-options"
     And I click to 'theme-a' element
     And I visit "/"
     Then 'User' attribute 'theme' should 'theme-a'
-
-  Scenario: User should no be insert invalid rui
-    When I fill in user profile "ewkjh4k5j" in "user_rui"
-    Then I should see "Rui non è valido"
-
-  Scenario: User should insert invalid rui
-    When I fill in user profile "a123456789" in "user_rui"
-    Then I should not see "Rui non è valido"
-
-  Scenario: User should insert invalid rui
-    When I fill in user profile "eu123456789" in "user_rui"
-    Then I should not see "Rui non è valido"

@@ -7,7 +7,7 @@ Given(/^I sign up/) do
   find("#agreed").click
   # check('agreed')
 
-  click_on('Sign up')
+  click_on('ENTRA')
 end
 
 Given(/^I logged in having basic account/) do

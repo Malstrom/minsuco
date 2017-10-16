@@ -15,12 +15,12 @@ Feature: Create race
     When I fill race attribute "race_starts_at" with "01/12/1987"
     Then I should see "La gara non puo iniziare prima di oggi"
 
-  Scenario: Basic user should publish close race
+  Scenario: Basic user should publish close race and it be started
     Given I logged in having basic account
     And I have create 1 open races
-
     When I publish race as close
     Then I should see "Gara pubblicata sul portale"
+    And I should see "Iniziata"
 
   Scenario: Basic user should publish open race spending rewards
     Given I logged in having basic account
@@ -28,6 +28,7 @@ Feature: Create race
     When I publish race as open
     Then I should see "Gara pubblicata sul portale"
     And I should have '2' free public race
+    And I should see "Iniziata"
 
   Scenario: Premium attendee user should publish open race spending rewards
     Given I logged in having attendee account
@@ -35,6 +36,7 @@ Feature: Create race
     When I publish race as open
     Then I should see "Gara pubblicata sul portale"
     And I should have '2' free public race
+    And I should see "Iniziata"
 
   Scenario: Premium creator user should publish open race without spending reward
     Given I logged in having creator account
@@ -42,6 +44,7 @@ Feature: Create race
     When I publish race as open
     Then I should see "Gara pubblicata sul portale"
     And I should have '3' free public race
+    And I should see "Iniziata"
 
   Scenario: User without reward should pay and publish open race
     Given I logged in having basic account
@@ -50,6 +53,7 @@ Feature: Create race
     When I publish race as pay
     Then I should see "Gara pubblicata sul portale"
     And I should have '0' free public race
+    And I should see "Iniziata"
 
   Scenario: User should start and stop its races
     Given I logged in having basic account
@@ -58,3 +62,4 @@ Feature: Create race
     And I stop race
     And I start race
     Then I should see "La gara è stata aggiornata"
+    And I should see "Iniziata"

@@ -19,6 +19,9 @@
 //--- Localize
 //= require jquery-localize-i18n/dist/jquery.localize
 
+//= require jquery.filterizr.min.js
+
+
 $('label').addClass('lead');
 
 $('.gradeX').hover(

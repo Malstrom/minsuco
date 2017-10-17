@@ -66,6 +66,3 @@ Feature: Join in race
 
 
 
-
-
-

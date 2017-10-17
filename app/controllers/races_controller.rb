@@ -14,8 +14,6 @@ class RacesController < ApplicationController
     if @scope
       @races = current_user.races.scope_races(@scope)
       if @races.empty?
-        @scope = nil
-        @races = @current_user.races
         flash[:warning] = "Non esistono gare di questa tipologia"
       end
     else

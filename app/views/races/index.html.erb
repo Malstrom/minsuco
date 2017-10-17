@@ -1,9 +1,60 @@
 
-<br class="hidden-lg">
 <div class="row">
+  <div class="col-md-12 text-center">
+    <p class="lead">Filtra per categora</p>
+    <button type="button" class="btn btn-default btn-info" data-filter="all">Mostra tutte</button>
+
+    <div class="btn-group ">
+      <% Category.find_by_name('vita').children.each do |category| %>
+        <button type="button" class="btn btn-default btn-info" data-filter="<%= category.id %>"><%= category.name.humanize %></button>
+      <% end %>
+      <% Category.find_by_name('altro').children.each do |category| %>
+        <button type="button" class="btn btn-default btn-info" data-filter="<%= category.id %>"><%= category.name.humanize %></button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br>
+
+
+
+<div class="row filtr-container">
   <!--Featured races-->
   <%# render partial: "races/partials/races/featured" %>
   <!--ALl Races-->
   <%= render partial: "races/partials/races/panel_2" %>
 </div>
 
+
+<%= content_for :body_area do %>
+  <script>
+    //Default options
+    var options = {
+      animationDuration: 0.5, //in seconds
+      filter: 'all', //Initial filter
+      callbacks: {
+        onFilteringStart: function() { },
+        onFilteringEnd: function() { },
+        onShufflingStart: function() { },
+        onShufflingEnd: function() { },
+        onSortingStart: function() { },
+        onSortingEnd: function() { }
+      },
+//      delay: 0, //Transition delay in ms
+//      delayMode: 'progressive', //'progressive' or 'alternate'
+//      easing: 'ease-out',
+      filterOutCss: { //Filtering out animation
+        opacity: 0,
+        transform: 'scale(0.5)'
+      },
+      layout: 'sameSize', //See layouts
+      selector: '.filtr-container',
+      setupControls: true
+    };
+    //You can override any of these options and then call...
+    var filterizd = $('.filtr-container').filterizr(options);
+    //If you have already instantiated your Filterizr then call...
+    filterizd.filterizr('setOptions', options);
+
+  </script>
+<% end %>

@@ -1,5 +1,5 @@
 <% @races.each do |race| %>
-<div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-6 filtr-item" data-category="<%= race.category.id %>" data-sort="<%= race.id %>">
   <div class="panel b text-center">
     <div style="margin-right: 4px; margin-top: 4px;">
       <%= tooltip_widget(:races, :panel_help, 'pull-right') %>

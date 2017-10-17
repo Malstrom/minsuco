@@ -4,7 +4,7 @@
     <p class="lead">Filtra per categora</p>
     <button type="button" class="btn btn-default btn-info" data-filter="all">Mostra tutte</button>
 
-    <div class="btn-group ">
+    <div class="btn-group">
       <% Category.find_by_name('vita').children.each do |category| %>
         <button type="button" class="btn btn-default btn-info" data-filter="<%= category.id %>"><%= category.name.humanize %></button>
       <% end %>
@@ -13,9 +13,23 @@
       <% end %>
     </div>
   </div>
+
+  <!--<div class="col-md-12 text-center">-->
+    <!--<br>-->
+    <!--<p class="lead">Ordina per</p>-->
+    <!--<select class="aoyue-select animated zoomIn" data-sortOrder>-->
+      <!--   <option value="ends"> Scadenza </option>-->
+      <!--   <option value="commission"> Provvigione </option>-->
+    <!--</select>-->
+    <!--<br>-->
+    <!--<br>-->
+    <!--<div class="btn-group">-->
+      <!--<button type="button" class="btn btn-default btn-info" data-sortasc>ASC</button>-->
+      <!--<button type="button" class="btn btn-default btn-info" data-sortdesc>DESC</button>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
 <br>
-
 
 
 <div class="row filtr-container">
@@ -55,6 +69,7 @@
     var filterizd = $('.filtr-container').filterizr(options);
     //If you have already instantiated your Filterizr then call...
     filterizd.filterizr('setOptions', options);
+    filterizd.filterizr('sort', 'ends', 'commission');
 
   </script>
 <% end %>

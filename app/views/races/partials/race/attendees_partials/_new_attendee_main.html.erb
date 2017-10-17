@@ -34,8 +34,8 @@
        <div class="col-lg-offset-1 col-lg-10">
         <br>
         <% if current_user.joined?(@race) %>
-          <img src="<%= @race.owner.image %>" class="img-circle thumb64">
-          <p class="h4 text-bold mb0"><%= @race.owner.name %></p>
+           <%= image_profile_widget(@race.owner.id) %>
+           <p class="h4 text-bold mb0"><%= @race.owner.name %></p>
           <p><%= @race.owner.email %></p>
           <p><%= @race.owner.phone %></p>
           <p><%= @race.owner.city %></p>

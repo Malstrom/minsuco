@@ -45,7 +45,7 @@ class AttendeesController < ApplicationController
   # PATCH/PUT /attendees/1
   # PATCH/PUT /attendees/1.json
   def update
-    if @attendee.update(attendee_params)
+    if @attendee.update!(attendee_params)
       flash[:notice] = I18n.t('flash.attendees.update.notice')
     else
       flash[:alert] = I18n.t('flash.attendees.update.alert')

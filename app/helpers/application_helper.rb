@@ -81,10 +81,13 @@ module ApplicationHelper
 
   def image_profile_widget(id)
     user = User.find(id)
-    if user.image
-      user.image
+    if user[:image]
+      html = <<-HTML
+      <img src="#{ image_path(user.image) }" alt="Avatar" width="100" height="100" class="img-thumbnail img-circle" />
+      HTML
+      html.html_safe
     else
-      image_path('default_profile.png')
+      image_tag("default_profile.png", alt:"Avatar", width: '60', height:"60", class:"img-thumbnail img-circle")
     end
   end
 end

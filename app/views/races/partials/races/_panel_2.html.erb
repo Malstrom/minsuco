@@ -1,5 +1,10 @@
 <% @races.each do |race| %>
-<div class="col-lg-4 col-md-6 filtr-item" data-category="<%= race.category.id %>" data-sort="<%= race.id %>">
+<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 filtr-item"
+     data-category="<%= race.category.id %>"
+     data-sort="<%= race.id %>"
+     data-ends="<%= race.ends_at.to_i %>"
+     data-commission="<%= race.commissions.best.first.value %>"
+>
   <div class="panel b text-center">
     <div style="margin-right: 4px; margin-top: 4px;">
       <%= tooltip_widget(:races, :panel_help, 'pull-right') %>
@@ -9,7 +14,7 @@
                          race.open? ? :open_race : :close_race  ,
                          "nil",
                          race.open? ? "fa fa-unlock text-success fa-3x" : "fa fa-lock text-warning fa-3x") %>
-      <h2 class="h2">
+      <h2 class="h3 m0">
         <small><%= tooltip_widget(:races, :category, 'fa-code-fork') %></small>
         &nbsp;
         <%= race.category.name.humanize %> |  <%= number_to_currency race.remaining_value, precision:0  %>

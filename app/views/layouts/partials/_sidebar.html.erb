@@ -10,13 +10,8 @@
                   <!-- User picture-->
                   <div class="user-block-picture">
                      <div class="user-block-status">
-                       <% if current_user.image  %>
-                         <img src="<%= image_path(current_user.image)  %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
-                         <div class="circle circle-success circle-lg"></div>
-                       <% else %>
-                         <img src="<%= image_path("default_profile.png")%>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle icon-user" />
-                         <div class="circle circle-success circle-lg"></div>
-                       <% end %>
+                       <%= image_profile_widget(current_user.id) %>
+                       <div class="circle circle-success circle-lg"></div>
                      </div>
                   </div>
                   <!-- Name and Job-->

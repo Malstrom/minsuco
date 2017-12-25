@@ -72,6 +72,13 @@ class User < ApplicationRecord
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
   scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
 
+  def reward_notification
+    Event.create(thing_type: 'User', thing_id:id, message:"init_reward_open_race", who_did: "minsuco",
+                 channel: personal_channel, notifiable: true, read: false)
+    Event.create(thing_type: 'User', thing_id:id, message:"init_reward_private_join", who_did: "minsuco",
+                 channel: personal_channel, notifiable: true, read: false)
+  end
+
   def set_kind
     case rui.first.downcase
       when 'a'

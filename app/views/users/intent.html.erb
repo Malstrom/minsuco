@@ -1,75 +1,41 @@
 <div class="row">
-  <div class="col-lg-8 col-lg-offset-2">
-    <div class="panel b">
+  <div class="panel b col-lg-6 col-lg-offset-3">
       <h1 class="text-center">
-        Benvenuto!!!
+        Benvenuto.
       </h1>
-      <p class="lead text-center">
-        Per ringraziarti, abbiamo deciso di farti due regali.
+      <p class="lead text-center margin-10">
+        Ci sei quasi, per poter pubblicare gare sul portale o partecipare alle gare avrai bisogno di inserire il tuo rui tra le tue informazioni personali, se sei già pronto inseriscilo qui sotto.
       </p>
-      <div>
-        <div class="row">
-          <div class="col-md-offset-3 col-md-3">
-            <!-- START widget-->
-            <div class="panel current-bg">
-                <div class="panel-body text-center m0 p0">
-                  <div class="text-lg m0">3</div>
-                  <p>Gare aperte</p>
-                  <%= tooltip_widget(:rewards, :free_open_races, 'text-white')%>
-                </div>
-            </div>
-            <!-- END widget-->
-          </div>
-          <div class="col-md-3">
-            <!-- START widget-->
-            <div class="panel current-bg m0 p0">
-              <div class="panel-body text-center m0 p0">
-                <div class="text-lg m0">3</div>
-                <p>Partecipazioni private</p>
-                <%= tooltip_widget(:rewards, :free_open_races, 'text-white')%>
-              </div>
-            </div>
-            <!-- END widget-->
-          </div>
-
-        </div>
-      </div>
       <p class="lead text-center">
-        Per usare la piattaforma è necessario avere il proprio codice RUI <br> <small>(Senza rui non è possibile ne pubblicare ne partecipare ad una gara di produzione)</small>
       </p>
-      <div class="row">
-        <div class="col-lg-8 col-md-offset-3">
-          <%= form_for current_user, html:{class:"form-inline", id:"intent"} do |f| %>
-            <div class="form-group">
-              <%= f.text_field :rui, class: 'form-control input-lg'%>
-            </div>
-            <div class="form-group" style="margin-left: 20px;margin-right: 20px;margin-top: 20px;">
+      <div class="col-lg-6 col-lg-offset-3">
+        <%= form_for current_user, html:{class:"form-inline", id:"intent"} do |f| %>
 
-              <p id="userKind" class="lead"><%= current_user.kind.try :humanize %></p>
-            </div>
-            <div class="form-group">
-              <button id="save" class="btn btn-lg btn-primary" type="button">Salva codice rui</button>
-            </div>
-            <div id="errors"></div>
-          <% end %>
-        </div>
+          <div class="form-group">
+            <%= f.text_field :rui, class: 'form-control input-lg'%>
+            <small>Richiedere il codice RUI ci permette di avere una piattaforma piu controllata e sicura.</small>
+          </div>
+          <br>
+          <br>
+          <div class="form-group text-center">
+            <button id="save_and_create" class="btn btn-lg btn-primary" type="button">Crea subito una gara di produzione</button>
+            <br> o
+            <br>
+            <button id="save_and_search" class="btn btn-lg btn-primary btn-outline" type="button">Partecipare a gare di altri</button>
+            <br>
+            <br>
+          </div>
+          <div id="errors"></div>
+        <% end %>
       </div>
       <br>
-      <div class="row text-center">
-        <p class="lead">Ora decidi cosa vuoi fare</p>
-          <%= link_to 'VINCERE LE MIE GARE', new_race_path(intent:'creator'), class: "btn btn-primary btn-lg"  %>
-          <%= link_to 'PROVVIGIONI ALTE', races_path(intent:'attendee'), class: "btn btn-primary btn-lg"  %>
-      </div>
-
-      <br>
-    </div>
   </div>
 </div>
 
 <% content_for :body_area do %>
 
   <script>
-      $('#save').click(function(){
+      $('#save_and_create').click(function(){
       data = $('form').serialize();
       $.ajax({
         url: "/users/<%= current_user.id %>",
@@ -78,6 +44,7 @@
         dataType: "json",
         success: function(){
           $("#save").text('Salvato!').removeClass('btn-primary').addClass('btn-success');
+          window.location.href = "/races/new";
         },
         error: function(data){
           $("#errors").html("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");
@@ -85,6 +52,24 @@
       });
 
     });
+      $('#save_and_search').click(function(){
+        data = $('form').serialize();
+        $.ajax({
+          url: "/users/<%= current_user.id %>",
+          method: 'patch',
+          data: data,
+          dataType: "json",
+          success: function(){
+            $("#save").text('Salvato!').removeClass('btn-primary').addClass('btn-success');
+            window.location.href = "/races";
+
+          },
+          error: function(data){
+            $("#errors").html("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");
+          }
+        });
+
+      });
   </script>
 <% end %>
 

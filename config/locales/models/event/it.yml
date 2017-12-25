@@ -4,6 +4,8 @@ it:
     leave_from_race: "%{who_did} non partecipa piu ad una tua gara."
     change_status: "%{who_did} ha modificato il suo stato di partecipazione %{status}"
     change_join_value: "%{who_did} cambiato il totale della sua partecipazione"
+    init_reward_open_race: "Hai ricevuto un regalo di benvenutp"
+    init_reward_join_private: "Hai ricevuto un regalo di benvenuto"
   activerecord:
     errors:
       models:

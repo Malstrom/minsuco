@@ -44,7 +44,7 @@ $('#user_rui').change(function () {
       $('#userKind').html('Broker');
       break;
     case 'c':
-      $('#userKind').html('Agente');
+      $('#userKind').html('Sub-agente');
       break;
     case 'd':
       $('#userKind').html('Agente');
@@ -52,4 +52,27 @@ $('#user_rui').change(function () {
     default:
       $('#userKind').html('Non valido');
   }
+});
+
+
+$( document ).ready(function() {
+
+  // hide spinner
+  $(".spinner").hide();
+
+
+  // show spinner on AJAX start
+  $(document).ajaxStart(function(){
+    $(".spinner").show();
+  });
+
+  // hide spinner on AJAX stop
+  $(document).ajaxStop(function(){
+    $(".spinner").hide();
+  });
+
+});
+
+$(document).ajaxStop(function(){
+  $(".spinner").delay(3000).hide(0);
 });

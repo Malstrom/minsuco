@@ -156,11 +156,7 @@
     <div class="panel widget current-bg">
       <div class="panel-body text-center">
         <div class="radial-bar radial-bar-<%= current_user.completeness %> radial-bar radial-bar-<%= color_percentual(current_user.completeness) %> m0">
-          <% if current_user.image  %>
-            <img src="<%= image_path(current_user.image)  %>"/>
-          <% else %>
-            <img src="<%= image_path("default_profile.png")%>"/>
-          <% end %>
+          <%= image_profile_widget(current_user.id) %>
         </div>
         <p>
           <span>Profilo completo al</span><br>

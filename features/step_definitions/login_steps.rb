@@ -20,7 +20,7 @@ Given(/^I logged in having basic account/) do
   login_as($user, :scope => :user)
 
   visit('/')
-  expect(page).to have_content "DASHBOARD"
+  expect(page).to have_content "Dashboard"
 end
 
 Given(/^I logged in having creator account/) do

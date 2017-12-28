@@ -52,6 +52,13 @@ class User < ApplicationRecord
 
   validates_presence_of :email
   validates             :email, uniqueness: true
+
+  validates_format_of :fiscal_code, :with => /^[a-z]{6}[0-9]{2}[a-z][0-9]{2}[a-z][0-9]{3}[a-z]$/i, :multiline => true,
+                      if: Proc.new { |user| user.fiscal_kind == "individual" }
+
+  validates_format_of :fiscal_code, :with => /^[0-9]{11}$/i, :multiline => true,
+                      if: Proc.new { |user| user.fiscal_kind == "company" }
+
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
 
   validates_format_of :rui,   :with => /\A[a|b|c|d|ue]{1,2}[0-9]{9,10}/i, on: :update, :if => :rui_changed?

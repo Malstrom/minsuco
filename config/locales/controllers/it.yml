@@ -46,6 +46,9 @@ it:
         edit:
           text: "Il mio profilo"
           icon: 'fa-user'
+        update:
+          text: "Il mio profilo"
+          icon: 'fa-user'
         intent:
           text: 'Primo accesso'
           icon: 'fa-question'

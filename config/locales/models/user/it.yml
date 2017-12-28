@@ -1,15 +1,13 @@
 it:
-  activerecord:
-    errors:
-      models:
-        user:
-    models:
-      user: Utente
-    attributes:
+  helpers:
+    label:
       user:
         rui: Codice RUI
         email: Email
         name: Nome utente
+        password: Password
+        current_password: Password corrente
+        new_password: Nuova password
         password: Password
         kind: Tipologia agente
         fiscal_kind: "Tipologia utente"

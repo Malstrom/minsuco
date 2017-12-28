@@ -105,25 +105,21 @@
         <fieldset>
           <div class="form-group">
             <div class="row">
-              <div class="col-lg-3 text-center">
-                <em class="fa fa-money fa-2x text-green"></em>
-              </div>
-
-              <div class="col-lg-3 text-center hidden-sm hidden-md hidden-xs">
-                <div class="input-group m-b">
-                <%= commission_form.text_field :value, class:'form-control', required:true %>
-                <span class="input-group-addon">%</span>
+                <div class="col-xs-6 col-lg-3 col-lg-offset-3 text-center">
+                  <div class="input-group m-b">
+                    <%= commission_form.text_field :value, class:'form-control', required:true %>
+                    <span class="input-group-addon">%</span>
+                  </div>
                 </div>
-              </div>
-
-              <div class="col-lg-3 text-center hidden-sm hidden-md hidden-xs">
-                <div class="input-group m-b">
-                  <%= commission_form.number_field :duration, class:'form-control hidden-md hidden-sm hidden-xs', required:true  %>
-
-                  <span class="input-group-addon hidden-md hidden-sm hidden-xs">anni</span>
+                <div class="col-xs-6 col-lg-3 text-center">
+                  <div class="input-group m-b">
+                    <%= commission_form.number_field :duration, class:'form-control', required:true %>
+                    <span class="input-group-addon">anni</span>
+                  </div>
                 </div>
-              </div>
-            <div class="col-lg-1 col-xs-12 text-center">
+            <div class="col-xs-12 col-lg-1 text-center">
+              <br class="hidden-lg hidden-md">
+              <br class="hidden-lg hidden-md">
                 <%= commission_form.link_to_remove "", class:'icon-close text-danger fa-2x no-decoration' %>
             </div>
             </div>

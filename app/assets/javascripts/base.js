@@ -34,7 +34,7 @@ $('.gradeX').hover(
 );
 
 
-$('#user_rui').change(function () {
+$('#user_rui').keypress(function () {
   kind = this.value.charAt(0);
   switch(kind) {
     case 'a':

@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html {redirect_to edit_user_path(@user), notice: I18n.t('flash.users.update.notice')}
-        format.json { render :edit, status: :ok, location: @user }
+        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }

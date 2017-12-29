@@ -34,6 +34,9 @@
        <div class="col-lg-offset-1 col-lg-10">
         <br>
         <% if current_user.joined?(@race) %>
+           <div>
+             <small>Creato da</small>
+           </div>
            <%= image_profile_widget(@race.owner.id) %>
            <p class="h4 text-bold mb0"><%= @race.owner.name %></p>
           <p><%= @race.owner.email %></p>
@@ -60,11 +63,13 @@
    <div class="panel-body bt">
     <div class="row">
       <div class="col-xs-4 br">
-        <em class="fa fa-users fa-fw text-info"></em>
+        <%= tooltip_widget(:races, :attendees,'', 'fa-users fa-fw text-info') %>
+        <!--<em class="fa fa-users fa-fw text-info"></em>-->
         <strong>+<%= @race.attendees.count %></strong>
       </div>
       <div class="col-xs-4 br">
-        <em class="fa fa-barcode fa-fw text-inverse"></em>
+        <%= tooltip_widget(:races, :id,'', 'fa-barcode fa-fw text-inverse') %>
+        <!--<em class="fa fa-barcode fa-fw text-inverse"></em>-->
         <strong><%= @race.permalink %></strong>
       </div>
       <div id="like_widget" class="col-xs-4">

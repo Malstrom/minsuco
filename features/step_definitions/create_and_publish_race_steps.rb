@@ -115,7 +115,7 @@ When(/^I publish race as (open|close|pay|\d+)$/) do |arg1|
     within_frame 'stripe_checkout_app' do
       find_field('Card number').send_keys(4242424242424242)
       find_field('MM / YY').send_keys "01#{DateTime.now.year + 1}"
-      find_field('CVC').send_keys '123'
+      find_field('CVC').send_keys '1234'
 
       find('button[type="submit"]').click
     end

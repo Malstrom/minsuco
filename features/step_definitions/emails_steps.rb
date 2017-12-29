@@ -22,6 +22,6 @@ end
 When(/^I invite "([^"]*)" from my list$/) do |arg|
   click_on "Lista contatti di google"
   find(:xpath,'//*[@id="1"]').click
-  sleep 0.3
+  sleep 0.5
   click_on "Invita amici"
 end

@@ -33,7 +33,7 @@ Given(/^I logged in having creator account/) do
   login_as($user, :scope => :user)
 
   visit('/')
-  expect(page).to have_content "DASHBOARD"
+  expect(page).to have_content "Dashboard"
 end
 
 Given(/^I logged in having attendee account/) do
@@ -46,5 +46,5 @@ Given(/^I logged in having attendee account/) do
   login_as($user, :scope => :user)
 
   visit('/')
-  expect(page).to have_content "DASHBOARD"
+  expect(page).to have_content "Dashboard"
 end

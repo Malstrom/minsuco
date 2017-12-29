@@ -1,8 +1,10 @@
 When(/^I stop race$/) do
+  page.execute_script "window.scrollBy(0,400)"
   find("#stop_button").click
 end
 
 And(/^I start race$/) do
+  page.execute_script "window.scrollBy(0,400)"
   find("#start_button").click
 end
 
@@ -78,7 +80,7 @@ end
 def add_piece(qt = 1, name = "first", value = "10000", duration = "1")
   count = 0
   qt.to_i.times do
-    sleep 0.5
+    sleep 1
     fill_in "attendee_pieces_attributes_0_name", :with => name
     fill_in "attendee_pieces_attributes_0_value", :with => value
     fill_in "attendee_pieces_attributes_0_duration", :with => duration

@@ -1,0 +1,14 @@
+it:
+  routes:
+    plan: abbonamento
+    plans: abbonamenti
+    attendees: partecipanti
+    attendee: partecipante
+    user: utente
+    users: utenti
+    race: gara
+    races: gare
+    new: new
+    edit: modifica
+    sign_in: accesso
+    sign_up: registrazione

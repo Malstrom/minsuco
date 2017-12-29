@@ -4,12 +4,10 @@ Rails.application.routes.draw do
 
   get '/events/:id/readed', to: 'events#readed', as: 'readed'
 
-  get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
 
   mount Payola::Engine => '/payola', as: :payola
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
 
   # get "/invites/:provider/contact_callback" => "invites#index"
@@ -22,42 +20,49 @@ Rails.application.routes.draw do
   # Google
   match '/oauth2callback' => 'friends#import', :via => [:get]
 
-  devise_scope :user do
-    get '/users/sign_out', to: 'devise/sessions#destroy'
-  end
+  localized do
+    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :subscriptions
 
-  resources :users do
-    member do
-      get :plans
-      patch :theme
+    devise_scope :user do
+      get '/users/sign_out', to: 'devise/sessions#destroy'
     end
-    get :races, to: 'races#user_races'
-    get :events, to: 'events#index'
-    resources :attendees
-    resources :friends do
-      collection do
-        get :invite_from_google
-        get :import
-        post :invites
+
+    get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
+
+    resources :users do
+      member do
+        get :plans
+        patch :theme
+      end
+      get :races, to: 'races#user_races'
+      get :events, to: 'events#index'
+      resources :attendees
+      resources :friends do
+        collection do
+          get :invite_from_google
+          get :import
+          post :invites
+        end
       end
     end
+
+    resources :races do
+      # post :races
+      member do
+        get :like
+        get :start
+        get :pause
+        get :public_url
+        get :publish, to: 'races#publish'
+        get :publish_check, to: 'races#publish_check'
+        patch :publish_check, to: 'races#publish_check'
+      end
+      resources :attendees
+    end
+    resources :subscriptions
   end
 
-  resources :races do
-    # post :races
-    member do
-      get :like
-      get :start
-      get :pause
-      get :public_url
-      get :publish, to: 'races#publish'
-      get :publish_check, to: 'races#publish_check'
-      patch :publish_check, to: 'races#publish_check'
-    end
-    resources :attendees
-  end
 
   # Angle routes --- they be removed at the end of 1.0 project
   # defaults to dashboard

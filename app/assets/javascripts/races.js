@@ -61,8 +61,6 @@
 //--- Tags input
 //= require bootstrap-tagsinput/dist/bootstrap-tagsinput.min
 
-// --- Bootstrap Tour
-//= require bootstrap-tour/build/js/bootstrap-tour-standalone.js
 
 $('.datetimepicker').datetimepicker({
   format: 'DD/MM/YYYY',

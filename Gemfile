@@ -55,7 +55,8 @@ gem 'hightop'
 
 #app_implementation
 gem 'sendgrid-ruby' # send email trough sendgrind
-gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
+gem 'payola-payments', git: 'https://github.com/alekseenko/payola'
+# gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
 gem 'carrierwave'
 gem 'cloudinary'
 

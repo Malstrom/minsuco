@@ -18,8 +18,6 @@
 //= require html.sortable/dist/html.sortable.js
 //--- Nestable
 //= require nestable/jquery.nestable.js
-// --- Bootstrap Tour
-//= require bootstrap-tour/build/js/bootstrap-tour-standalone.js
 // --- Sweet Alert
 //= require sweetalert/dist/sweetalert.min.js
 
@@ -45,7 +43,7 @@ $(".setting-color").click(function () {
 });
 
 $('.info')
-  .tooltip({ content: 'Click to close', position: { my: 'left center', at: 'right center' }, items: '*' })
+  // .tooltip({ content: 'Click to close', position: { my: 'left center', at: 'right center' }, items: '*' })
   .tooltip('open')
   .on('mouseout focusout', function(event) {
     event.stopImmediatePropagation();

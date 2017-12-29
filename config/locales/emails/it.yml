@@ -2,7 +2,4 @@ it:
   email:
     invite:
       in_my_race:
-        subject: "vuole invitarti a parteipare alla sua gara di produzione."
-  tooltips:
-    races:
-      remain_value: "Valore della gara ancora dispobile"
+        subject: "vuole invitarti a partecipare alla sua gara di produzione."

@@ -5,6 +5,7 @@ it:
       value: "Valore del pezzo"
       duration: "Duarata (su questo dato verrà calcolata la tua provvigione)"
     races:
+      remain_value: "Valore della gara ancora dispobile"
       likes: "Mi piace"
       attendees: "Numero di partecipanti"
       open_race: "Possono partecipare tutte le persone senza usare nessun bonus ne avere un piano per partecipanti."
@@ -26,6 +27,7 @@ it:
       description: "Descrivi la tua gara in poche parole."
       name: "Dai un nome alla tua gara cosi che potrai facilmente trovarla sucessivamente"
       panel_help: "Questo è un riassunto di una gara creata sul portale. Qui puoi vedere l'obbiettivo rimanente, le provvigoni, e la scadenza della gara."
+      id: "Codice identificativo univoco della gara."
     commissions:
       table: "Tabella provvigioni che il creatore darà il base all'importo con il quale parteciperai alla gara"
       commission_range: "Importo totale che il creatore dovrà al partecipante suddiviso per scaglioni di tempo determinati dal creatore"

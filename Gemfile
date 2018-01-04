@@ -7,7 +7,7 @@ end
 
 
 # BASIC
-gem 'rails', '5.1.0'
+gem 'rails', '5.1.1'
 gem 'mysql2'
 gem 'puma', '~> 3.7'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -55,7 +55,8 @@ gem 'hightop'
 
 #app_implementation
 gem 'sendgrid-ruby' # send email trough sendgrind
-gem 'payola-payments', git: 'https://github.com/alekseenko/payola'
+# gem 'payola-payments', git: 'https://github.com/alekseenko/payola'
+gem 'payola-payments'
 # gem 'payola-payments', git: 'https://github.com/Malstrom/payola.git'
 gem 'carrierwave'
 gem 'cloudinary'

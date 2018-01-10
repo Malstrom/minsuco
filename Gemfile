@@ -47,6 +47,7 @@ gem 'activerecord-session_store'
 #view
 gem 'social-share-button'
 gem "nested_form"
+
 #Charts
 gem "chartkick"
 gem 'groupdate'

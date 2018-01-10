@@ -4,8 +4,8 @@ it:
     plans: abbonamenti
     attendees: partecipanti
     attendee: partecipante
-    user: utente
-    users: utenti
+    user: user
+    users: users
     race: gara
     races: gare
     new: new

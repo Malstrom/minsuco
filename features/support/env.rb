@@ -40,9 +40,9 @@ end
 Capybara.javascript_driver = :chrome
 Capybara.default_max_wait_time = 10
 
-Before '@javascript' do
-  page.driver.browser.manage.window.resize_to(1440,1266)
-end
+# Before '@javascript' do
+#   page.driver.browser.manage.window.resize_to(1440,1266)
+# end
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how

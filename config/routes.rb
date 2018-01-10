@@ -76,7 +76,7 @@ Rails.application.routes.draw do
   get '/api/datatable' => 'api#datatable'
   get '/api/jqgrid' => 'api#jqgrid'
   get '/api/jqgridtree' => 'api#jqgridtree'
-  get '/api/i18n/:locale' => 'api#i18n'
+  # get '/api/i18n/:locale' => 'api#i18n'
   post '/api/xeditable' => 'api#xeditable'
   get '/api/xeditable-groups' => 'api#xeditablegroups'
 

@@ -1,7 +1,6 @@
 
 // Place all the behaviors and hooks related to the matching controller here.
 //--- jQuery UI
-//= require jquery-ui/jquery-ui
 //= require jqueryui-touch-punch/jquery.ui.touch-punch.min
 //--- Moment
 //= require moment/min/moment-with-locales.min

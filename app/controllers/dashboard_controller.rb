@@ -7,10 +7,5 @@ class DashboardController < ApplicationController
 
   def dashboard
     @user = current_user
-
-    unless @user.intent
-      redirect_to user_intent_path @user
-    end
-
   end
 end

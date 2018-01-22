@@ -31,9 +31,9 @@ class User < ApplicationRecord
   mount_uploader :image, AvatarUploader
 
   # TODO: consider remove role and use plan only
-  enum role:        %i[basic pro_attendee pro_creator premium enterprise banned admin]
+  enum role:        %i[basic pro_attendee pro_creator light banned admin]
 
-  enum kind:        %i[broker agent sub_agent]
+  enum kind:        %i[agent broker sub_agent bank external]
   enum fiscal_kind: %i[individual company]
 
   # who user want to do in this app
@@ -61,7 +61,7 @@ class User < ApplicationRecord
 
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
 
-  validates_format_of :rui,   :with => /\A[a|b|c|d|ue]{1,2}[0-9]{9,10}/i, on: :update, :if => :rui_changed?
+  validates_format_of :rui,   :with => /\A[a|b|c|d|e]{1}[0-9]{9}/i, on: :update, :if => :rui_changed?
 
 
   # validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }
@@ -69,7 +69,7 @@ class User < ApplicationRecord
 
   validates_associated :plan
 
-  before_save :set_kind, :if => :rui_changed?
+  before_save :set_kind, :if => :rui_changed?   # set defult kind when there are certain answer
 
   after_create_commit :create_default_channels
 
@@ -89,13 +89,16 @@ class User < ApplicationRecord
   def set_kind
     case rui.first.downcase
       when 'a'
-        self.kind = :broker
+        self.kind = :agent
       when 'b'
-        self.kind = :agent
+        self.kind = :broker
       when 'c'
-        self.kind = :agent
+        self.kind = :sub_agent
       when 'd'
-        self.kind = :agent
+        self.kind = :bank
+        self.fiscal_kind = :company
+      when 'e'
+        self.kind = :external
     end
   end
 

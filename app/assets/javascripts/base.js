@@ -4,6 +4,8 @@
 
 //--- jQuery
 //= require jquery/dist/jquery
+//= require jquery-ui/jquery-ui
+
 //--- Bootstrap
 //= require bootstrap/dist/js/bootstrap
 //--- Storage API
@@ -38,19 +40,22 @@ $('#user_rui').keypress(function () {
   kind = this.value.charAt(0);
   switch(kind) {
     case 'a':
-      $('#userKind').html('Agente');
+      $('#userKind').val('Agente');
       break;
     case 'b':
-      $('#userKind').html('Broker');
+      $('#userKind').val('Broker');
       break;
     case 'c':
-      $('#userKind').html('Sub-agente');
+      $('#userKind').val('Produttori diretti');
       break;
     case 'd':
-      $('#userKind').html('Agente');
+      $('#userKind').val('banche / intermediari finanziari');
+      break;
+    case 'e':
+      $('#userKind').val('ABD esterni');
       break;
     default:
-      $('#userKind').html('Non valido');
+      $('#userKind').val('Non valido');
   }
 });
 

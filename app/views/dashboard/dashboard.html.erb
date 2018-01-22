@@ -218,3 +218,8 @@
   </aside>
   <!-- END dashboard sidebar-->
 </div>
+<% content_for :body_area do %>
+  <% if @user.rui.nil? %>
+    <%= render partial: 'layouts/modals/rui_modal' %>
+  <% end %>
+<% end %>

@@ -53,3 +53,9 @@ it:
     rewards:
       free_open_races: "Permette di creare gare a pertecipaziona libera"
       private_join:    "Permette di partecipare a gare chiuse"
+    plan:
+      free_open_race_join: "Permette di partecipare a gare aperte senza limiti. (le gare aperte di solito sono le piu affidabili visto che il creatore paga per pubblicarle.)"
+      free_close_race_create: "Permette di creare gare chiuse senza limiti (i partecipanti alle gare chiuse risultano più affidabili poiche pagano per partecipare alla tua gara)."
+      one_join_per_month: "Ti permette di partecipare ad una gara chiusa gratis."
+      free_private_race_join: "Permette di partecipare alle gare chiuse senza limiti (i creatori delle gare chiuse di solito mette provvigioni piu alte)."
+      free_open_race_create: "Permette di creare gare aperte senza limiti (le gare aperte sono gare alle quali i partecipanti possono partecipare gratuitamente)."

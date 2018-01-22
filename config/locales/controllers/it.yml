@@ -53,7 +53,7 @@ it:
           text: 'Primo accesso'
           icon: 'fa-question'
         plans:
-          text: 'Scegli il piano più adatto a te'
+          text: 'Abbonamenti'
           icon: 'fa-cubes'
   menu:
     section:

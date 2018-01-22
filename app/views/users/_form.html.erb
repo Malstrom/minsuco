@@ -12,18 +12,18 @@
   <% end %>
 
 
-  <div class="row">
-    <div class="col-md-7">
+  <div class="row" >
+    <div class="col-md-5">
       <div class="form-group">
         *<%= f.label :rui, class:'text-danger mb0' %>
         <%= f.text_field :rui, class: 'form-control'%>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-7">
       <div class="form-group">
-        <%= f.label "Tipologia", class:'mb0'  %>
+        <%= f.label :kind, class:'mb0'  %>
         <br>
-        <p id="userKind" class="lead"><%= current_user.kind.try :humanize %></p>
+        <%= f.text_field :kind, class: 'form-control', id: "userKind", disabled:true %>
       </div>
     </div>
   </div>
@@ -78,7 +78,9 @@
 
     <div class="form-group">
       <%= f.label :phone, class:'mb0'  %>
-      <%= f.text_field :phone, class: 'form-control'%>
+      <input name="user[phone]" id="user_phone" class="form-control" type="text" data-masked="" data-inputmask="'mask': '999-9999999'" placeholder="">
+
+      <!--<%# f.text_field :phone, class: 'form-control'%>-->
     </div>
 
   <% unless where == :rui_modal %>

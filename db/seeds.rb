@@ -46,9 +46,9 @@ end
   user.password = Faker::Internet.password(8)
   user.password_confirmation = user.password
   user.image = Faker::Avatar.image
-  user.role = %w[pro_creator premium].sample
+  user.role = %w[pro_creator].sample
   user.kind = %w[broker agent].sample
-  user.plan = [Plan.find_by_stripe_id('pro_creator'), Plan.find_by_stripe_id('premium')].sample
+  user.plan = Plan.find_by_stripe_id('pro_creator')
   user.rui = 7_774_356_463_777
 
   user.save
@@ -101,7 +101,7 @@ end
   user_attendee.image = Faker::Avatar.image
   user_attendee.role = %w[basic pro_attendee].sample
   user_attendee.kind = %w[broker agent].sample
-  user_attendee.plan = [Plan.find_by_stripe_id('pro_attendee'), Plan.find_by_stripe_id('premium')].sample
+  user_attendee.plan = Plan.find_by_stripe_id('pro_attendee')
   user_attendee.rui = 74_356_634_677_777
 
   user_attendee.save

@@ -10,6 +10,7 @@
               <a href="#tabSetting2" data-toggle="tab" class="list-group-item">Password</a>
               <a href="#tabSetting3" data-toggle="tab" class="list-group-item">Notifiche</a>
               <%= link_to "Abbonamenti", plans_user_path, class:"list-group-item" %>
+              <a href="#tabSetting5" data-toggle="tab" class="list-group-item">Fatture</a>
             </div>
           </div>
         </div>
@@ -25,6 +26,9 @@
         </div>
         <div id="tabSetting3" class="tab-pane">
           <%= render partial: "users/partials/form_notification" %>
+        </div>
+        <div id="tabSetting5" class="tab-pane">
+          <%= render partial: "users/partials/form_billing" %>
         </div>
       </div>
 

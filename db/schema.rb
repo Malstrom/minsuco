@@ -309,7 +309,7 @@ ActiveRecord::Schema.define(version: 20171009144306) do
     t.integer "fiscal_kind"
     t.string "phone"
     t.integer "intent"
-    t.string "theme", default: "theme-g"
+    t.string "theme", default: "theme-e"
     t.string "redirect_path"
     t.string "state"
     t.string "city"

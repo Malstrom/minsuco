@@ -22,8 +22,8 @@ it:
         description: Descrizione
         category: Categoria
         recipients: Destinatari
-        starts_at: Inizia
-        ends_at: Finisce
+        starts_at: Inizio gara
+        ends_at: Fine gara
         race_value: Obbiettivo
         commissions: Provvigioni
         compensation_start_amount: Fisso per pezzo

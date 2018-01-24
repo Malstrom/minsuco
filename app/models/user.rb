@@ -61,7 +61,7 @@ class User < ApplicationRecord
 
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
 
-  validates_format_of :rui,   :with => /\A[a|b|c|d|e]{1}[0-9]{9}/i, on: :update, :if => :rui_changed?
+  validates_format_of :rui,   :with => /[a|b|c|d|e]{1}[0-9]{9}/i, on: :update, :if => :rui_changed?
 
 
   # validates_presence_of :company_name, :fiscal_code, on: :update, :if => lambda { self.company? }

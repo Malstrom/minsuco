@@ -1,4 +1,26 @@
 it:
+  activerecord:
+    attributes:
+      user:
+        roles:
+          basic: "Basic"
+          pro_attendee: "Pro attendee"
+          pro_creator: "Pro creatore"
+          light: "Light"
+          banned:  "Bannato"
+          admin: "Amministratore"
+        kinds:
+          agent: "Agente"
+          broker: "Broker"
+          sub_agent: "Sub-agente"
+          bank: "Banca"
+          external: "Esterni"
+        fiscal_kinds:
+          individual: "Persona fisica"
+          company: "Azienda"
+        intents:
+          creator: "Creatore"
+          attendee: "Partecipante"
   helpers:
     label:
       user:

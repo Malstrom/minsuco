@@ -23,7 +23,7 @@
       <div class="form-group">
         <%= f.label :kind, class:'mb0'  %>
         <br>
-        <%= f.text_field :kind, class: 'form-control', id: "userKind", disabled:true %>
+        <%= f.text_field :kind, class: 'form-control', id: "userKind", disabled:true, value: User.human_enum_name(:kind, user.kind) %>
       </div>
     </div>
   </div>

@@ -1,0 +1,8 @@
+it:
+  enum:
+    user:
+      kinds:
+        agent: "Agente"
+        broker: "Broker"
+        sub_agent: "Sub-agente"
+        bank: "Banca"

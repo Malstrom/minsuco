@@ -48,5 +48,29 @@
       });
 
     });
+
+    $('#user_rui').keypress(function () {
+      kind = this.value.charAt(0);
+      switch(kind) {
+        case 'a':
+          $('#userKind').val('Agente');
+          break;
+        case 'b':
+          $('#userKind').val('Broker');
+          break;
+        case 'c':
+          $('#userKind').val('Produttori diretti');
+          break;
+        case 'd':
+          $('#userKind').val('banche / intermediari finanziari');
+          break;
+        case 'e':
+          $('#userKind').val('ABD esterni');
+          break;
+        default:
+          $('#userKind').val('Non valido');
+      }
+    });
+
   </script>
 <% end %>

@@ -1,0 +1,2 @@
+class RaceMailer < ApplicationMailer
+end

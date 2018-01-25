@@ -4,11 +4,8 @@ Rails.application.routes.draw do
 
   get '/events/:id/readed', to: 'events#readed', as: 'readed'
 
-
   mount Payola::Engine => '/payola', as: :payola
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-
 
   # get "/invites/:provider/contact_callback" => "invites#index"
   # get "/contacts/failure" => "invites#failure"
@@ -21,8 +18,7 @@ Rails.application.routes.draw do
   match '/oauth2callback' => 'friends#import', :via => [:get]
 
   # localized do
-    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
+    devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: 'users/omniauth_callbacks' }
 
     devise_scope :user do
       get '/users/sign_out', to: 'devise/sessions#destroy'

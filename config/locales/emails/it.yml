@@ -1,5 +1,7 @@
 it:
   email:
+    user:
+      welcome: "Benvenuto su MyInsuranceContest"
     invite:
       in_my_race:
-        subject: "vuole invitarti a partecipare alla sua gara di produzione."
+        subject: "Invito a partecipare ad una gara"

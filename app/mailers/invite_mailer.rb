@@ -28,7 +28,7 @@ class InviteMailer < ApplicationMailer
         'templates' => {
           'settings' => {
             'enable' => 1,
-            'template_id' => 'dc5e7367-bf74-4e49-bb2e-88aa5c2522f2'
+            'template_id' => '03201c44-ff3e-4e4e-b05b-e3207331d5b4'
           }
         }
       }

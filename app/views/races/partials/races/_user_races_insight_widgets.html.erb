@@ -114,17 +114,17 @@
             <em class="fa icon-layers fa-5x"></em>
           </div>
           <div class="col-xs-9 text-right">
-            <div class="text-lg"><%= current_user.races.achieved.count %></div>
+            <div class="text-lg"><%= current_user.races.archived.count %></div>
             <p class="m0">Archiviate</p>
           </div>
         </div>
       </div>
-      <a href="<%= user_races_path(current_user, scope: :achieved) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
+      <a href="<%= user_races_path(current_user, scope: :archived) %>" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
         <span class="pull-left">Mostra gare</span>
       </a>
       <!-- END panel-->
     </div>
-    <% if @scope == 'achieved' %>
+    <% if @scope == 'archived' %>
       <div class="text-center visible-lg">
         <em class="fa fa-chevron-down fa-3x"></em>
       </div>

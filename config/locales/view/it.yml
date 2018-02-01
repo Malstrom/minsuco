@@ -8,7 +8,7 @@ it:
         expired: scadute
         open_races: aperte
         close_races: aperte
-        achieved: archiviate
+        archived: archiviate
       modal:
         join:
           text_help: "Premi <em class='icon-plus text-success'></em> se vuoi aggiungere un pezzo alla gara, oppure <em class='icon-close text-danger'></em> se devi rimuovere qualcosa."

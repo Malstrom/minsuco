@@ -36,7 +36,7 @@ it:
           started: Iniziata
           paused: Ferma
           draft: Bozza
-          achieved: Archiviata
+          archived: Archiviata
           expired: Scaduta
         recipients:
           for_all: "Per tutti"

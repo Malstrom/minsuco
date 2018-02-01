@@ -13,7 +13,7 @@ it:
       started: "La gara è visibile sul portale."
       draft: "La gara non è visibile dagli altri utenti."
       paused: "La gara non è visibile sul portale"
-      achieved: "La gara è stata archiviata"
+      archived: "La gara è stata archiviata"
       commission: "Percentuale di provvigione che viene pagata."
       category: "Ramo assicurativo"
       permalink: "Codice identificativo univoco della gara"

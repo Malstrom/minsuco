@@ -17,6 +17,8 @@ class Attendee < ApplicationRecord
 
   after_create :decrement_private_join_rewards, if: proc { |attendee| attendee.race.close? }
 
+  after_create :notify
+
   after_create_commit   :join_in_race_event
   after_destroy_commit	:leave_from_race_event
 
@@ -28,6 +30,10 @@ class Attendee < ApplicationRecord
   scope :scope_attendees,   ->(scope) { send(scope) if methods.include?(scope.to_sym) }
 
   scope :group_by_user, ->(user) { where(race:user.races).group_by_day(:created_at).count }
+
+  def notify
+    AttendeeMailer.attendee_emails(@attendee, "8a76dc3a-44e3-43c0-889a-afccd3db0d3e").deliver_later if status == "started"
+  end
 
   def revenue
     sum = 0

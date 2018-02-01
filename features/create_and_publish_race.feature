@@ -5,10 +5,12 @@ Feature: Create race
   Public race should not be published if user not have Pro attendee plan
   New user should see Race new form after choose self intent
 
+  @current
   Scenario: User should be create race
     Given I logged in having basic account
     When I fill race form
     Then I should see "La gara è stata creata"
+    And "basic_user_test@email.com" should receive an email
 
   Scenario: User should not create race that start in past
     Given I logged in having basic account

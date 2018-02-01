@@ -15,7 +15,7 @@ class Race < ApplicationRecord
 
   enum kind: %i[open close]
 
-  enum status:      %i[started paused draft achieved expired]
+  enum status:      %i[started paused draft archived expired]
   enum recipients:  %i[for_all broker agent sub_agent]
 
   before_validation :initialize_race, on: :create
@@ -29,11 +29,12 @@ class Race < ApplicationRecord
 
   # name, permalink, price validate by payola sellable. write here for not forget it.
   validates_presence_of :name, :permalink, :price, :description, :recipients, :race_value,
-                        :category_id, :starts_at, :ends_at, :kind, :commissions
+                        :category_id, :starts_at, :ends_at, :commissions
 
   before_create :set_draft
   before_save   :sanitize_data
   after_create  :set_redirect_path
+  after_save    :notify
 
   # after_save :set_status
   # before_update :set_status
@@ -44,7 +45,7 @@ class Race < ApplicationRecord
 
   # Use like this "Race.started_races"
   scope :started_races, -> { where status: :started }
-  scope :achieved,      -> { where('status  < ?', :achieved) }
+  scope :archived,      -> { where('status  < ?', :archived) }
   scope :not_expired,   -> { where('ends_at > ?', DateTime.now) }
   scope :expired,       -> { where('ends_at < ?', DateTime.now) }
 
@@ -58,6 +59,13 @@ class Race < ApplicationRecord
   scope :scope_races,   ->(scope) { send(scope) if methods.include?(scope.to_sym) }
 
   # scope :group_by_categories,           -> { group(:category).category.name }
+
+  def notify
+    RaceMailer.owner_emails(self, "6877a455-5b4b-4459-a10e-4bb2bb3762b1").deliver_later if status == "started"
+    RaceMailer.owner_emails(self, "070cadff-f176-486a-955b-8a8ef400a055").deliver_later if status == "paused"
+    RaceMailer.owner_emails(self, "253835dc-ccb2-47c0-9685-f4bb886dd30f").deliver_later if status == "archived"
+    RaceMailer.owner_emails(self, "94214dc0-c905-4c2b-9511-30e5e8bc1dfd").deliver_later if status == "expired"
+  end
 
   def set_draft
     self.status ||= :draft

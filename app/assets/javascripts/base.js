@@ -38,7 +38,7 @@ $('.gradeX').hover(
 
 $('#user_rui').keypress(function () {
   kind = this.value.charAt(0);
-  switch(kind) {
+  switch(kind.toLowerCase()) {
     case 'a':
       $('#userKind').val('Agente');
       break;

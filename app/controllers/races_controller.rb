@@ -6,7 +6,7 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.json
   def index
-    @races = Race.not_expired.by_recipients(current_user.kind)
+    @races = Race.started_races.not_expired.by_recipients(current_user.kind)
   end
 
   def user_races

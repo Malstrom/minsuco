@@ -13,10 +13,9 @@ class Race < ApplicationRecord
   has_many :commissions, dependent: :destroy
   accepts_nested_attributes_for :commissions, allow_destroy: true
 
-  enum kind: %i[open close]
-
-  enum status:      %i[started paused draft archived expired]
-  enum recipients:  %i[for_all broker agent sub_agent]
+  enum kind:        %i[ open    close ]
+  enum status:      %i[ started paused draft archived  expired ]
+  enum recipients:  %i[ for_all broker agent sub_agent ]
 
   before_validation :initialize_race, on: :create
   validate          :start_in_past,   on: :create
@@ -69,6 +68,7 @@ class Race < ApplicationRecord
 
   def set_draft
     self.status ||= :draft
+    self.kind   ||= :close
   end
 
   def decrement_open_race_reward

@@ -11,9 +11,9 @@ class Event < ApplicationRecord
         "icon-user-follow"
       when "leave_from_race"
         "icon-user-unfollow"
-      when init_reward_open_race
+      when "init_reward_open_race"
         "fa fa-gift"
-      when init_reward_join_private
+      when "init_reward_join_private"
         "fa fa-gift"
       else
         "icon-user"

@@ -26,7 +26,7 @@ it:
       each_piece: "Importo che creatore verserà al partecipante per ogni pezzo"
       description: "Descrivi la tua gara in poche parole."
       name: "Dai un nome alla tua gara cosi che potrai facilmente trovarla sucessivamente"
-      panel_help: "Questo è un riassunto di una gara creata sul portale. Qui puoi vedere l'obbiettivo rimanente, le provvigoni, e la scadenza della gara."
+      panel_help: "Questo è un riassunto di una gara creata sul portale. Qui puoi vedere l'obiettivo rimanente, le provvigoni, e la scadenza della gara."
       id: "Codice identificativo univoco della gara."
     commissions:
       table: "Tabella provvigioni che il creatore darà il base all'importo con il quale parteciperai alla gara"

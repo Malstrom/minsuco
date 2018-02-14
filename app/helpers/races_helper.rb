@@ -5,7 +5,7 @@ module RacesHelper
     color = race_complete_color(perc)
 
     html = <<-HTML
-      <div data-toggle="tooltip" data-title="Obbiettivo raggiunto al #{perc}%">
+      <div data-toggle="tooltip" data-title="obiettivo raggiunto al #{perc}%">
          <div class="progress m0">
             <div style="width:#{perc}%"  class="progress-bar progress-bar-striped progress-bar-#{color}"><span>#{perc}%</span></div>
          </div>

@@ -24,7 +24,7 @@ it:
         recipients: Destinatari
         starts_at: Inizio gara
         ends_at: Fine gara
-        race_value: Obbiettivo
+        race_value: obiettivo
         commissions: Provvigioni
         compensation_start_amount: Fisso per pezzo
     race:

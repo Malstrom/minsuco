@@ -43,7 +43,7 @@ Feature: Join in race
     Given I logged in having basic account
     When I visit a open race
     And I join with 1 pieces to join named 'first' with '110000' value for '1' years
-    Then I should see "Partecipazione fallita! La somma dei tuoi pezzi supera quella dell'obbiettivo della gara."
+    Then I should see "Partecipazione fallita! La somma dei tuoi pezzi supera quella dell'obiettivo della gara."
 
   Scenario: User should update its join
     Given I logged in having basic account

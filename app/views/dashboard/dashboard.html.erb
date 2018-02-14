@@ -54,7 +54,7 @@
         </div>
         <div class="col-xs-8 pv-lg">
           <div class="h2 mt0"><%= number_to_currency current_user.total_commissions, precision:0 %></div>
-          <div class="text-uppercase">Provvigioni</div>
+          <div class="text-uppercase">Provvigioni passive</div>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@
         <div class="panel widget">
           <div class="panel-body">
             <div class="clearfix">
-              <h3 class="pull-left text-muted mt0">Partecipanti su </h3>
+              <h3 class="pull-left text-muted mt0">Partecipanti sul portale </h3>
               <%= tooltip_widget(:charts, :app_attendees_by_category, "fa-2x pull-right") %>
             </div>
             <div class="panel-body p0">
@@ -173,6 +173,13 @@
       </div>
       <!-- START list group-->
       <div class="list-group">
+        <div class="list-group-item">
+          <div class="media-box">
+            <div class="media-box-body clearfix">
+              <small class="text-muted pull-right ml">Scadenza</small>
+            </div>
+          </div>
+        </div>
         <% Race.last(10).reverse.each do |race| %>
           <div class="list-group-item">
             <div class="media-box">
@@ -183,10 +190,9 @@
                                    race.open? ? "fa fa-unlock text-success" : "fa fa-lock text-warning") %>              </div>
               <div class="media-box-body clearfix">
                 <small class="text-muted pull-right ml"><%= distance_of_time_in_words(Time.now, race.ends_at) %></small>
-                <div class="media-box-heading"><a href="#" class="text-success m0"><%= race.category.name.upcase %></a>
+                <div class="media-box-heading"><a href="#" class="text-success m0 text-bold"><%= race.category.name.upcase %></a>
                 </div>
-                <p class="m0">
-                  <small>
+                <p class="m0 ">
                     <em>
                       <%= number_to_percentage race.commissions.best.first.value, precision:0 %>
                       (<%= race.commissions.best.first.duration %> anni)
@@ -197,7 +203,6 @@
                       <%= number_to_currency race.remaining_value, precision:0 %>
                       <%= tooltip_widget(:races, :remaining_value) %>
                     </em>
-                  </small>
                 </p>
               </div>
             </div>
@@ -208,13 +213,41 @@
       <!-- END list group-->
       <!-- START panel footer-->
       <div class="panel-footer clearfix">
-        <a href="#" class="pull-left">
-          <small>Load more</small>
-        </a>
+        <!--<a href="#" class="pull-left">-->
+          <!--<small>Load more</small>-->
+        <!--</a>-->
       </div>
       <!-- END panel-footer-->
     </div>
     <!-- END messages and activity-->
+    <div class="panel widget">
+      <div class="row row-table row-flush">
+        <div class="col-xs-12 align-middle bg-info">
+          <div class="text-center">
+            <div class="text-lg mt0">Banner Adv</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel widget">
+      <div class="row row-table row-flush">
+        <div class="col-xs-12 align-middle bg-info">
+          <div class="text-center">
+            <div class="text-lg mt0">Promo</div><br>
+            <div class="text-lg mt0">space</div><br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel widget">
+      <div class="row row-table row-flush">
+        <div class="col-xs-12 align-middle bg-info">
+          <div class="text-center">
+            <div class="text-lg mt0">Banner Adv</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </aside>
   <!-- END dashboard sidebar-->
 </div>

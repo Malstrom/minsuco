@@ -82,7 +82,7 @@
         <li class="disabled <%= 'active' if controller?('races') && action?('private_net') %>"
             data-toggle="tooltip" data-placement="top"
             data-original-title="<%= I18n.t("tooltips.sidebar.private_net") %>">
-          <%= link_to(root_path) do %>
+          <%= link_to(private_network_races_path) do %>
             <em class="fa fa-road"></em>
             <span data-localize="sidebar.nav.race.INDEX">RETE VENDITA
             </span>

@@ -21,6 +21,11 @@ class RacesController < ApplicationController
     end
   end
 
+
+  # temporarely here under costruction feature
+  def private_network
+  end
+
   # GET /races/1
   # GET /races/1.json
   def show
@@ -42,7 +47,6 @@ class RacesController < ApplicationController
 
   #url allow access all users
   def public_url
-
   end
 
   def publish; end

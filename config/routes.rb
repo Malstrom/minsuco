@@ -45,6 +45,9 @@ Rails.application.routes.draw do
 
     resources :races do
       # post :races
+      collection do
+        get :private_network
+      end
       member do
         get :like
         get :start

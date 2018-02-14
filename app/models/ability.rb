@@ -22,6 +22,7 @@ class Ability
     can :update, Race, owner:user
     can :like, Race
     can :public_url, Race
+    can :private_network, Race
 
     #attendee
     can :read, Attendee, user:user

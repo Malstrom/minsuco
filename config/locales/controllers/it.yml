@@ -36,6 +36,9 @@ it:
         publish:
           text: "Pubblica gara"
           icon: 'fa-check'
+        private_network:
+          text: "Rete Vendita"
+          icon: 'icon-share'
     attendees:
       action:
         index:

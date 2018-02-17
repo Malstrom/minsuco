@@ -4,6 +4,42 @@
   </div>
   <div class="col-md-4 col-lg-offset-2">
     <!-- Team Panel-->
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <div class="pull-right">
+          <!--<div class="label label-success">29€</div>-->
+        </div>
+        <div class="panel-title text-center">Gara chiusa</div>
+      </div>
+      <div class="panel-body bt  text-center">
+        <em class="fa fa-group fa-5x text-warning"></em>
+      </div>
+      <div class="panel-body bt">
+        <p class="text-center">
+          Puoi creare quante gare chiuse vuoi ma le persone per partecipare a queste gare devono pagare un costo di entrata pari 29€.
+          <br>
+          <br>
+        </p>
+      </div>
+      <br>
+      <div class="panel-body bt">
+        <div class="row">
+          <div class="col-md-8">Costo di pubblicazione</div>
+          <div class="col-md-4 text-right">0€</div>
+        </div>
+      </div>
+
+      <div class="panel-footer text-center">
+        <%= form_for @race, url: publish_check_race_path, method:'patch', class:"form-inline" do |f| %>
+          <%= f.hidden_field :kind, value: :close %>
+          <%= f.submit "Pubblica la gara come chiusa", class: "btn btn-warning btn-oval", id:"publish_private" %>
+        <% end %>
+      </div>
+    </div>
+    <!-- end Team Panel-->
+  </div>
+  <div class="col-md-4">
+    <!-- Team Panel-->
     <div class="panel panel-info">
       <div class="panel-heading">
         <div class="panel-title text-center">Gara aperta</div>
@@ -50,44 +86,6 @@
       </div>
     </div>
     </div>
-
-    <!-- end Team Panel-->
-  <div class="col-md-4">
-    <!-- Team Panel-->
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <div class="pull-right">
-          <!--<div class="label label-success">29€</div>-->
-        </div>
-        <div class="panel-title text-center">Gara chiusa</div>
-      </div>
-      <div class="panel-body bt  text-center">
-        <em class="fa fa-group fa-5x text-warning"></em>
-      </div>
-      <div class="panel-body bt">
-        <p class="text-center">
-          Puoi creare quante gare chiuse vuoi ma le persone per partecipare a queste gare devono pagare un costo di entrata pari 29€.
-          <br>
-          <br>
-        </p>
-      </div>
-      <br>
-      <div class="panel-body bt">
-        <div class="row">
-          <div class="col-md-8">Costo di pubblicazione</div>
-          <div class="col-md-4 text-right">0€</div>
-        </div>
-      </div>
-
-      <div class="panel-footer text-center">
-        <%= form_for @race, url: publish_check_race_path, method:'patch', class:"form-inline" do |f| %>
-          <%= f.hidden_field :kind, value: :close %>
-          <%= f.submit "Pubblica la gara come chiusa", class: "btn btn-warning btn-oval", id:"publish_private" %>
-        <% end %>
-      </div>
-    </div>
-    <!-- end Team Panel-->
-  </div>
 </div>
 
 <% unless @race.owner.valid_attribute?(:rui) %>

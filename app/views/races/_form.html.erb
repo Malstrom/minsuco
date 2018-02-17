@@ -1,7 +1,7 @@
 
   <% if @race.errors.any? %>
     <div id="error_explanation">
-      <h2 class="text-center">Ci sono <%= pluralize(@race.errors.count, "errori") %>, iprova </h2>
+      <h2 class="text-center">Ci sono <%= pluralize(@race.errors.count, "errori") %>, riprova </h2>
 
       <ul>
         <% @race.errors.full_messages.each do |message| %>
@@ -91,59 +91,58 @@
         </div>
         <div class="col-lg-4">
           <div class="input-group m-b">
-            <span class="input-group-addon">€</span>
-            <%= f.text_field :race_value, class:'form-control', required:true %>
-            <span class="input-group-addon">.00</span>
+            <!--<span class="input-group-addon">€</span>-->
+            <%= f.text_field :race_value, class:'form-control money', required:true %>
+            <!--<span class="input-group-addon">.00</span>-->
           </div>
         </div>
       </div>
     </fieldset>
 
-    <br><h5 class="text-center">Tabella provvigionale</h5><br><br>
 
-    <%= f.fields_for :commissions do |commission_form| %>
-        <fieldset>
+    <br><h5 class="text-center">Indica le provvigioni che vuoi riconoscere ai partecipanti</h5><br>
+      <fieldset>
+        <%= f.fields_for :commissions do |commission_form| %>
           <div class="form-group">
             <div class="row">
-                <div class="col-xs-6 col-lg-3 col-lg-offset-3 text-center">
-                  <div class="input-group m-b">
-                    <%= commission_form.text_field :value, class:'form-control', required:true %>
-                    <span class="input-group-addon">%</span>
-                  </div>
+              <div class="col-xs-5 col-lg-3 col-lg-offset-3 text-center">
+                <div class="input-group m-b">
+                  <%= commission_form.number_field :value, class:'form-control', required:true, step: :any %>
+                  <span class="input-group-addon">%</span>
                 </div>
-                <div class="col-xs-6 col-lg-3 text-center">
-                  <div class="input-group m-b">
-                    <%= commission_form.number_field :duration, class:'form-control', required:true %>
-                    <span class="input-group-addon">anni</span>
-                  </div>
+              </div>
+              <div class="col-xs-5 col-lg-3 text-center">
+                <div class="input-group m-b">
+                  <%= commission_form.number_field :duration, class:'form-control', required:true %>
+                  <span class="input-group-addon">anni</span>
                 </div>
-            <div class="col-xs-12 col-lg-1 text-center">
-              <br class="hidden-lg hidden-md">
-              <br class="hidden-lg hidden-md">
+              </div>
+              <div class="col-xs-1 col-lg-1 text-center">
                 <%= commission_form.link_to_remove "", class:'icon-close text-danger fa-2x no-decoration' %>
-            </div>
+              </div>
+              <br><br>
             </div>
           </div>
-        </fieldset>
-    <% end %>
-      <p class="text-center">
-        <%= f.link_to_add "", :commissions, class:'icon-plus text-success fa-2x no-decoration', id:"add_commission" %>
-      </p>
+        <% end %>
+        <p class="text-center">
+          <%= f.link_to_add "", :commissions, class:'icon-plus text-success fa-2x no-decoration', id:"add_commission" %>
+        </p>
+      </fieldset>
 
   <% end %>
   <br><h4>Dati aggiuntivi <small class="text-muted">(Opzionale)</small></h4><br><br>
 
     <fieldset>
       <div class="form-group">
-        <div class="col-lg-3 control-label">
+        <div class="col-lg-5 control-label">
           <%= f.label :compensation_start_amount %>
           <%= tooltip_widget(:races, :compensation_start_amount) %>
         </div>
         <div class="col-lg-4">
           <div class="input-group m-b">
-            <span class="input-group-addon">€</span>
-            <%= f.text_field :compensation_start_amount, class:'form-control', id:'race_value'%>
-            <span class="input-group-addon">.00</span>
+            <!--<span class="input-group-addon">€</span>-->
+            <%= f.text_field :compensation_start_amount, class:'form-control money', id:'race_value'%>
+            <!--<span class="input-group-addon">.00</span>-->
           </div>
         </div>
       </div>
@@ -165,3 +164,7 @@
 
 </div>
 <% end %>
+
+  <script>
+
+  </script>

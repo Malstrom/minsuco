@@ -24,6 +24,8 @@
 
 
 
+
+
 Chartkick.configure({language: "it"});
 ////= require cable
 

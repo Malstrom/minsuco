@@ -22,7 +22,9 @@
 //= require jquery-localize-i18n/dist/jquery.localize
 
 //= require jquery.filterizr.min.js
+//= require jquery.maskMoney.min.js
 
+$(".money").maskMoney({thousands:',', decimal:'.', allowZero:true, suffix: ' €'});
 
 $('label').addClass('lead');
 

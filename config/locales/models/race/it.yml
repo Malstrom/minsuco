@@ -26,7 +26,7 @@ it:
         ends_at: Fine gara
         race_value: obiettivo
         commissions: Provvigioni
-        compensation_start_amount: Fisso per pezzo
+        compensation_start_amount: Bonus extra per ogni contratto
     race:
       enum:
         kinds:

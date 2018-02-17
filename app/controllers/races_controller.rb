@@ -42,7 +42,12 @@ class RacesController < ApplicationController
   # GET /races/new
   def new
     @race = Race.new
-    @race.commissions.build(value:5, duration:1)
+    @race.commissions.build(value:1, duration:1)
+    @race.commissions.build(value:0, duration:2)
+    @race.commissions.build(value:0, duration:3)
+    @race.commissions.build(value:0, duration:4)
+    @race.commissions.build(value:0, duration:5)
+    @race.commissions.build(value:0, duration:6)
   end
 
   #url allow access all users

@@ -6,8 +6,6 @@
 //= require chosen_v1.2.0/chosen.jquery.min
 //--- Slider ctrl
 //= require seiyria-bootstrap-slider/dist/bootstrap-slider.min
-//--- Input Mask
-//= require jquery.inputmask/dist/jquery.inputmask.bundle
 //--- Wysiwyg
 //= require bootstrap-wysiwyg/bootstrap-wysiwyg
 //= require bootstrap-wysiwyg/external/jquery.hotkeys

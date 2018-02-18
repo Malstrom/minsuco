@@ -39,5 +39,5 @@ it:
         address: "Indirizzo"
         address_num: "Numero"
         zip: "Cap"
-        phone: "Telefono"
+        phone: "Telefono mobile"
         interest_list: "Gare che ti interessano"

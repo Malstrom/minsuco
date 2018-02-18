@@ -24,6 +24,9 @@
 //= require jquery.filterizr.min.js
 //= require jquery.maskMoney.min.js
 
+//--- Input Mask
+//= require jquery.inputmask/dist/jquery.inputmask.bundle
+
 $(".money").maskMoney({thousands:',', decimal:'.', allowZero:true, suffix: ' €'});
 
 $('label').addClass('lead');

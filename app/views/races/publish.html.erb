@@ -59,9 +59,13 @@
       <br>
       <div class="panel-body bt">
         <div class="row">
-          <div class="col-md-8">Gara aperte gratuite</div>
+          <div class="col-md-8">Costo di pubblicazione</div>
             <div class="col-md-4 text-right">
-              <%= @race.owner.reward.open_races.to_i %>
+              <% if @race.payed? or current_user.has_reward?('open') %>
+                0 €
+              <% else %>
+                29 €
+              <% end %>
             </div>
         </div>
       </div>
@@ -70,7 +74,8 @@
           <%= form_for @race, url: publish_check_race_path, method:'patch', class:"form-inline" do |f| %>
             <%= f.hidden_field :kind, value: :open %>
             <%= f.submit "Pubblica come gara aperta", class: "btn btn-info btn-oval", id:"publish_public" %>
-          <% end %>
+            <%= @race.owner.reward.open_races.to_i %> gare gratuite.
+      <% end %>
         <% elsif !current_user.billable? %>
           <p class="text-danger">
             Completa il tuo profilo personale prima.

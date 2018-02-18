@@ -13,6 +13,11 @@
  *= require dropify/dist/css/dropify.min
  */
 
+.upcase {
+  text-transform: uppercase;
+}
+
+
 hr.style-eight {
   overflow: visible; /* For IE */
   padding: 0;

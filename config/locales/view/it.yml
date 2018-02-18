@@ -11,7 +11,7 @@ it:
         archived: archiviate
       modal:
         join:
-          text_help: "Premi <em class='icon-plus text-success'></em> se vuoi aggiungere un pezzo alla gara, oppure <em class='icon-close text-danger'></em> se devi rimuovere qualcosa."
+          text_help: "Premi <em class='icon-plus text-success'></em> se vuoi aggiungere un contratto, oppure <em class='icon-close text-danger'></em> se vuoi rimuoverlo."
           text_help_no_pieces: "Premi <em class='icon-close text-danger'></em> se vuoi solo partecipare senza aggiungere nessun importo. Potrai sempre farlo successivamente."
     topnavbar:
       notifications:

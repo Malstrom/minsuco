@@ -22,7 +22,7 @@
           <%= tooltip_widget(:races, :name) %>
         </div>
         <div class="col-sm-9">
-          <%= f.text_field :name, class:'form-control', required:true, rows: "5" %>
+          <%= f.text_field :name, class:'form-control upcase', required:true, rows: "5" %>
         </div>
       </div>
     </fieldset>
@@ -33,7 +33,7 @@
         <%= tooltip_widget(:races, :description) %>
       </div>
       <div class="col-sm-9">
-        <%= f.text_area :description, class:'form-control', rows: "5"%>
+        <%= f.text_area :description, class:'form-control upcase', rows: "5"%>
       </div>
     </div>
   </fieldset>

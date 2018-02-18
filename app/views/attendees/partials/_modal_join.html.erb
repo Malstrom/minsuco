@@ -32,9 +32,10 @@
               <div class="col-lg-4" >
                 <fieldset>
                   <div class="form-group text-center">
-                    <%= pieces_form.label "MEMO", class: 'col-sm-12 control-label'%>
+                    <%= pieces_form.label "MEMO", class: 'col-sm-12 control-label',
+                                          data:{"toggle": "tooltip", "placement": "top", "original-title": "Inserisci un nome per ricordarti il nome cliente"}%>
                       <div class="">
-                        <%= pieces_form.text_field :name, class: 'form-control input-sm'%>
+                        <%= pieces_form.text_field :name, class: 'form-control input-sm upcase'%>
                       </div>
                   </div>
                 </fieldset>
@@ -45,7 +46,7 @@
                     <%= pieces_form.label :value, class: 'col-sm-12 control-label' %>
                       <div class="input-group">
                         <span class="input-group-addon">€</span>
-                        <%= pieces_form.text_field :value, class: 'form-control input-sm' %>
+                        <%= pieces_form.text_field :value, class: 'form-control input-sm'%>
                         <span class="input-group-addon">.00</span>
                       </div>
                   </div>

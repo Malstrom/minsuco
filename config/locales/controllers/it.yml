@@ -19,7 +19,7 @@ it:
           text: "Gare create"
           icon: 'fa-road'
         show:
-          text: "Dettagli della gara"
+          text: "Dettagli della mia gara"
           icon: 'fa-eye'
         new:
           text: "Nuova gara"

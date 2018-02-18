@@ -1,14 +1,14 @@
 <div class="panel widget">
   <div class="row row-table">
     <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info h3">
-      <div class="h2 m0"><%= number_to_currency current_user.attendee(@race).total_revenue, precision:0, unit:'€' %></div>
+      <div class="h2 m0"><%= number_to_currency current_user.attendee(@race).total_revenue, precision:2, unit:'€' %></div>
       <small class="">Calcolo provvigioni</small>
     </div>
     <% count = 0 %>
     <% @race.commissions.each do |commission| %>
       <div class="col-md-2 col-sm-3 col-xs-6 text-center pv br <%= "hidden-sm" if count > 2 %> <%= "hidden-xs" if count > 0 %>">
         <div class="h2 m0">
-          <%= number_to_currency current_user.attendee(@race).revenue_by(commission), precision:0, unit:'€' %>
+          <%= number_to_currency current_user.attendee(@race).revenue_by(commission), precision:2, unit:'€' %>
         </div>
         <div class="text-muted">
           <%=  %>° anno

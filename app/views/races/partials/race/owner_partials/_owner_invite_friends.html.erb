@@ -1,7 +1,7 @@
 <!--<h3>Invita <small class="text-muted">le persone che conosci.</small></h3>-->
 <div class="panel current-bg">
   <div class="panel-body">
-    <p class="text-center">Inserisci le mail delle persone che conosci qui sotto</p>
+    <p class="text-center">Invita le persone che potrebbero partecipare alla tua gara.</p>
     <div>
       <%= form_tag invites_user_friends_path(current_user) do |f| %>
         <%= hidden_field_tag :race_id, @race.id %>
@@ -17,8 +17,7 @@
           </div>
         </fieldset>
       <% end %>
-      <p class="text-center">oppure</p>
-      <p class="text-center">invita le persone che potrebbero essere interessate direttamente dalla tua lista di contatti di google.</p>
+      <p class="text-center">oppure invita i tuoi amici tramite google contacts.</p>
       <div class="text-center">
         <% if current_user.friends.empty? %>
           <%= link_to invite_from_google_user_friends_path(current_user,race_id:@race.id,friend_modal:'true'), class: "btn btn-labeled btn-danger btn-lg" do %>

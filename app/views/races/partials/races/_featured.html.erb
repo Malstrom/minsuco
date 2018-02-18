@@ -31,7 +31,7 @@
           <td>
             <strong>Valore gara</strong>
           </td>
-          <td><%= number_to_currency(race.race_value, unit:'€', precision: 0) %></td>
+          <td><%= number_to_currency(race.race_value, unit:'€', precision: 2) %></td>
         </tr>
         <tr>
         <tr>
@@ -45,7 +45,7 @@
           <td>
             <strong>Premio fisso per pezzo</strong>
           </td>
-          <td><%= number_to_currency(race.compensation_start_amount, unit:'€', precision: 0) %></td>
+          <td><%= number_to_currency(race.compensation_start_amount, unit:'€', precision: 2) %></td>
         </tr>
         <tr>
           <td>

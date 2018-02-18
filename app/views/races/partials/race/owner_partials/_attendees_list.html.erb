@@ -48,7 +48,7 @@
             <%= link_to '', race_attendee_path(@race,attendee), class: 'btn btn-info btn-xs fa fa-info' %>
           </td>
           <td>
-              <%= number_to_currency attendee.target_covered, unit:"€" %>
+              <%= number_to_currency attendee.target_covered, precision:2, unit:"€" %>
           </td>
           <td class="text-center">
             <%= form_for([@race, attendee], method: :put, html:{class: 'inline'}) do |f| %>

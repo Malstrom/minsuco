@@ -38,7 +38,7 @@
           <div class="row row-table row-flush">
             <div class="col-xs-12">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= number_to_currency @race.race_value, precision:0 %></h4>
+                <h4 class="mt0"><%= number_to_currency @race.race_value, precision:2 %></h4>
                 <p class="mb0 text-muted">obiettivo</p>
               </div>
             </div>
@@ -48,7 +48,7 @@
           <div class="row row-table row-flush">
             <div class="col-xs-12">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= number_to_currency @race.value_covered, precision:0 %></h4>
+                <h4 class="mt0"><%= number_to_currency @race.value_covered, precision:2 %></h4>
                 <p class="mb0 text-muted">obiettivo raggiunto</p>
               </div>
             </div>
@@ -58,7 +58,7 @@
           <div class="row row-table row-flush">
             <div class="col-xs-12">
               <div class="panel-body text-center">
-                <h4 class="mt0"><%= number_to_currency @race.race_value - @race.value_covered, precision:0 %></h4>
+                <h4 class="mt0"><%= number_to_currency @race.race_value - @race.value_covered, precision:2 %></h4>
                 <p class="mb0 text-muted">obiettivo rimanente</p>
               </div>
             </div>

@@ -18,7 +18,7 @@
               <h2 class="h2">
                 <span><%= tooltip_widget(:races, :category, 'fa-code-fork') %></span>
                 &nbsp;
-                <%= @race.category.name.humanize %> |  <%= number_to_currency @race.remaining_value, precision:0  %>
+                <%= @race.category.name.humanize %> |  <%= number_to_currency @race.remaining_value, precision:2  %>
                 &nbsp;
                 <span><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></span>
               </h2>

@@ -1,4 +1,3 @@
-<h3>Pannello di controllo</h3>
 <div class="panel b text-center">
   <div class="panel-body">
     <div class="row">
@@ -11,23 +10,23 @@
           <%= form_for @race, :html => { :style => 'display:inline'} do |f| %>
             <% if @race.status == 'started' %>
               <%= f.hidden_field :status, :value => "paused" %>
-              <button id="stop_button" type="submit" class="btn btn-warning btn-pill-left btn-lg">
+              <button id="stop_button" type="submit" class="btn btn-warning btn-pill-left btn-xl">
                 <em class="fa fa-pause fa-fw text-muted text-white"></em>
                 <span>Ferma</span>
               </button>
             <% else %>
               <%= f.hidden_field :status, :value => "started" %>
-              <button id="start_button" type="submit" class="btn btn-success btn-pill-left btn-lg">
+              <button id="start_button" type="submit" class="btn btn-success btn-pill-left btn-xl">
                 <em class="fa fa-play fa-fw text-muted text-white"></em>
                 <span>Inizia</span>
               </button>
             <% end %>
           <% end %>
-          <%= link_to edit_race_path(@race), class: "btn btn-info btn-pill-right btn-lg" do %>
+          <%= link_to edit_race_path(@race), class: "btn btn-info btn-pill-right btn-xl" do %>
             <span>Modifica gara</span>
           <% end %>
         </div>
-        <br><br><br>
+        <br><br><br><br>
         <div class="col-sm-12">
           <% if @race.open? %>
             <%= link_to publish_race_path(@race), class: "btn btn-warning btn-oval" do %>

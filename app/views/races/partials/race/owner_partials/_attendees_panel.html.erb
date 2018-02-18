@@ -26,7 +26,9 @@
               <img src="<%= image_path("default_profile.png")%>" alt="" class="img-circle thumb64">
             <% end %>
             <p class="h4 text-bold mb0"><%= attendee.user.name %></p>
-            <p>Rome, Italy</p>
+            <p><%= attendee.user.phone %></p>
+            <p><%= attendee.user.city %></p>
+            <p><%= attendee.user.rui %></p>
             <button type="button" id="btnPieces" data-toggle="modal" data-target="#piecesModal_<%= attendee.id %>" class="btn btn-info btn-oval">
               Provvigioni
             </button>
@@ -36,11 +38,11 @@
             <div class="row">
               <div class="col-xs-4 br p0">
                 <em class="fa fa-euro fa-fw text-primary"></em><br>
-                <strong><%= number_to_currency attendee.target_covered, precision:0 %></strong>
+                <strong><%= number_to_currency attendee.target_covered, precision:2 %></strong>
               </div>
               <div class="col-xs-4 br p0">
                 <em class="fa icon-wallet fa-fw text-primary"></em><br>
-                <strong><%= number_to_currency attendee.revenue, precision:0 %></strong>
+                <strong><%= number_to_currency attendee.revenue, precision:2 %></strong>
               </div>
               <div class="col-xs-4 p0">
                 <em class="fa fa-ticket fa-fw text-primary"></em><br>

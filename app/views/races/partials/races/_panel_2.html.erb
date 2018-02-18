@@ -17,7 +17,7 @@
       <h2 class="h3 m0">
         <small><%= tooltip_widget(:races, :category, 'fa-code-fork') %></small>
         &nbsp;
-        <%= race.category.name.humanize %> |  <%= number_to_currency race.remaining_value, precision:0  %>
+        <%= race.category.name.humanize %> |  <%= number_to_currency race.remaining_value, precision:2  %>
         &nbsp;
         <small><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></small>
       </h2>
@@ -70,7 +70,7 @@
         </div>
         <div class="col-xs-4 br">
           <%= tooltip_widget(:races, :compensation_start_amount, 'fa-puzzle-piece fa-fw text-info') %>
-          <strong><%= number_to_currency race.compensation_start_amount, precision: 0%></strong>
+          <strong><%= number_to_currency race.compensation_start_amount, precision: 2 %></strong>
         </div>
         <div class="col-xs-4">
           <%= tooltip_widget(:races, :likes, 'fa-thumbs-o-up fa-fw text-primary') %>

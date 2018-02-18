@@ -9,13 +9,13 @@
     <div class="panel-body">
       <p class="text-center">ENTRA E COMINCIA A VINCERE LE TUE GARE ASSICURATIVE.</p>
 
-      <div class="text-center row">
+      <div class="row">
         <%- if devise_mapping.omniauthable? %>
 
           <%- resource_class.omniauth_providers.reverse.each do |provider| %>
-            <div class="col-md-12" style="padding-bottom: 10px">
+            <div class="col-md-12 col-md-offset-2"  style="padding-bottom: 10px">
             <% if OmniAuth::Utils.camelize(provider) == 'Facebook' %>
-              <%= link_to(omniauth_authorize_path(resource_name, provider), class: "btn btn-labeled btn-info btn-facebook") do  %>
+              <%= link_to(omniauth_authorize_path(resource_name, provider), class: "btn btn-labeled btn-info btn-facebook btn-lg") do  %>
                 <span class="btn-label"><i class="fa fa-facebook"></i></span>
                 <%= "Login con Facebook"  %>
               <% end %>
@@ -30,9 +30,12 @@
 
         <% end -%>
       </div>
-
-      <p class="text-center pv">Il tuo account è privato non pubblicheremo mai nulla senza il tuo consenso.</p>
-
+        <small class="text-center">
+          Eseguendo un login con social, accetti le nostre <a href="#">condizioni</a> e confermi di aver letto la nostra Normativa sui dati,
+          inclusa la Normativa sull'uso dei cookie.
+        </small>
+      <br>
+      <br>
 
       <p class="text-center">oppure</p>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class:'mb-lg'}) do |f| %>

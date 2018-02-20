@@ -54,9 +54,11 @@ class FriendsController < ApplicationController
     @google_contacts = request.env['omnicontacts.contacts']
 
     unless @google_contacts.nil?
+      friends = []
       @google_contacts.each do |contact|
-        @user.friends.create(name:contact[:name], email:contact[:email]) if contact[:email]
+        friends << @user.friends.build(name:contact[:name], email:contact[:email]) if contact[:email]
       end
+      Friend.import friends    # or use import!
     end
 
     @contacts = @user.friends

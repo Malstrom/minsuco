@@ -58,6 +58,8 @@ GEM
       activemodel (= 5.1.1)
       activesupport (= 5.1.1)
       arel (~> 8.0)
+    activerecord-import (0.22.0)
+      activerecord (>= 3.2)
     activerecord-session_store (1.1.0)
       actionpack (>= 4.0, < 5.2)
       activerecord (>= 4.0, < 5.2)
@@ -408,6 +410,7 @@ PLATFORMS
 DEPENDENCIES
   action_mailer_cache_delivery
   active_median
+  activerecord-import
   activerecord-session_store
   acts-as-taggable-on (~> 4.0)
   acts_as_tree

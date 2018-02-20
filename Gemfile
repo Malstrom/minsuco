@@ -43,6 +43,7 @@ gem 'acts_as_tree'  # category as tree
 gem 'paper_trail'   # Track changes to your models' data. Good for auditing or versioning.
 gem 'goldiloader'   # Automatic ActiveRecord eager loading to reduce the number of database queries run by your application.
 gem 'activerecord-session_store'
+gem 'activerecord-import' #to solve n+1 sql insert.
 
 #view
 gem 'social-share-button'

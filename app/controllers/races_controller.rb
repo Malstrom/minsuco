@@ -63,6 +63,7 @@ class RacesController < ApplicationController
   # POST /races.json
   def create
     @race = current_user.races.build(race_params)
+    @race.race_value = params[:race][:race_value].tr('^0-9', '').first(-2)
     respond_to do |format|
       if @race.save
         format.html { redirect_to publish_race_path(@race), notice: I18n.t('flash.races.create.notice') }

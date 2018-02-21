@@ -21,11 +21,6 @@
 // --- Sweet Alert
 //= require sweetalert/dist/sweetalert.min.js
 
-
-
-
-
-
 Chartkick.configure({language: "it"});
 ////= require cable
 

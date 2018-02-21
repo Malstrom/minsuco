@@ -27,7 +27,7 @@
 //--- Input Mask
 //= require jquery.inputmask/dist/jquery.inputmask.bundle
 
-$(".money").maskMoney({thousands:',', decimal:'.', allowZero:true, suffix: ' €'});
+$(".money").maskMoney({thousands:',', decimal:'.', suffix: ' €', precision: 2, affixesStay:false});
 
 $('label').addClass('lead');
 
@@ -39,7 +39,6 @@ $('.gradeX').hover(
     $(this).find('.actions').removeClass('visible').addClass('hidden');
   }
 );
-
 
 $('#user_rui').keypress(function () {
   kind = this.value.charAt(0);

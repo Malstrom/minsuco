@@ -5,7 +5,7 @@ it:
     attendees: partecipanti
     attendee: partecipante
     user: user
-    users: users
+    users: utenti
     race: gara
     races: gare
     new: new

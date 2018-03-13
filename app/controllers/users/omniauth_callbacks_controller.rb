@@ -25,6 +25,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+
+  def i_arena
+  end
+
   def failure
     redirect_to root_path
   end

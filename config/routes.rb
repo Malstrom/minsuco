@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   # Google
   match '/oauth2callback' => 'friends#import', :via => [:get]
 
-  # localized do
+  localized do
     devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: 'users/omniauth_callbacks' }
+  end
+
 
     devise_scope :user do
       get '/users/sign_out', to: 'devise/sessions#destroy'
@@ -60,7 +62,6 @@ Rails.application.routes.draw do
       resources :attendees
     end
     resources :subscriptions
-  # end
 
 
   # Angle routes --- they be removed at the end of 1.0 project

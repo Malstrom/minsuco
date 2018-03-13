@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!, :except => [:public_url]
   before_action :load_notifications, :set_intent
+  before_action :set_current_locale
 
   # before_action :save_url_in_history, except: [:history_back, :create, :destroy, :update]
   # after_action  :remove_last_from_history, only: :history_back
@@ -59,6 +60,10 @@ class ApplicationController < ActionController::Base
   # set notifications for users
   def load_notifications
     @events = current_user.unread_events if current_user
+  end
+
+  def set_current_locale
+    request.env['app.current_locale'] = I18n.locale.to_s
   end
 
   # save navigation history of users

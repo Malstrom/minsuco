@@ -24,8 +24,15 @@
 //= require jquery.filterizr.min.js
 //= require jquery.maskMoney.min.js
 
+
+
 //--- Input Mask
 //= require jquery.inputmask/dist/jquery.inputmask.bundle
+
+
+
+
+
 
 $(".money").maskMoney({thousands:',', decimal:'.', suffix: ' €', precision: 2, affixesStay:false});
 

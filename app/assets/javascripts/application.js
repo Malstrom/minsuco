@@ -1,7 +1,7 @@
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
-
+//
 //= require jquery_nested_form
 
 //= require payola
@@ -20,6 +20,31 @@
 //= require nestable/jquery.nestable.js
 // --- Sweet Alert
 //= require sweetalert/dist/sweetalert.min.js
+
+
+//= require enjoyhint/enjoyhint
+
+
+//initialize instance
+var enjoyhint_instance = new EnjoyHint({});
+
+//simple config.
+//Only one step - highlighting(with description) "New" button
+//hide EnjoyHint after a click on the button.
+var enjoyhint_script_steps = [
+  {
+    'click .fa-rocket' : 'Questi sono i tuoi progressi'
+  },
+  {
+    'click .some_panel' : 'Click on this panel'
+  }
+];
+
+//set script config
+enjoyhint_instance.set(enjoyhint_script_steps);
+
+//run Enjoyhint script
+enjoyhint_instance.run();
 
 Chartkick.configure({language: "it"});
 ////= require cable

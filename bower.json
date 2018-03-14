@@ -1,6 +1,7 @@
 {
   "name": "angle",
   "version": "0.0.0",
+  "directory": "./vendor/assets/bower_components",
   "authors": [
     "@themicon_co"
   ],
@@ -44,7 +45,6 @@
     "fullcalendar": "3.3.1",
     "animate.css": "3.5.2",
     "fastclick": "1.0.6",
-//    "modernizr": "https://modernizr.com/download?backgroundsize-bgpositionshorthand-bgpositionxy-bgrepeatspace_bgrepeatround-bgsizecover-borderradius-cssanimations-csscalc-csstransforms-csstransforms3d-csstransitions-flexboxtweener-fontface-inlinesvg-localstorage-multiplebgs-preserve3d-sessionstorage-smil-svgclippaths-svgfilters-svgforeignobject-todataurljpeg_todataurlpng_todataurlwebp-setclasses&q=background.zip",
     "animo.js": "ThrivingKings/animo.js#1.0.2",
     "whirl": "1.0.0",
     "skycons": "darkskyapp/skycons",

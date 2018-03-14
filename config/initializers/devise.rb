@@ -258,6 +258,8 @@ Devise.setup do |config|
 
   config.omniauth :google_oauth2, '1087195332078-bat7rqbbhden22h241b66bouolkmhgbs.apps.googleusercontent.com', 'DMcHo-Hdko0ipMgR3nDGhr-j'
 
+  config.omniauth :iarena, ENV['DOORKEEPER_APP_ID'], ENV['DOORKEEPER_APP_SECRET']
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

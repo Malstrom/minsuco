@@ -25,8 +25,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-
   def i_arena
+    #raise request.env["omniauth.auth"].to_yaml
   end
 
   def failure

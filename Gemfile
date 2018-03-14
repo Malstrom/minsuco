@@ -30,8 +30,10 @@ gem 'jbuilder', '~> 2.5'      # Build JSON APIs with ease. Read more: https://gi
 
 #auth
 gem 'devise'
+gem "omniauth"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+
 #
 gem 'omnicontacts', :git => 'https://github.com/Diego81/omnicontacts.git' # import google contacts
 gem 'cancancan', '~> 2.0'

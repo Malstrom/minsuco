@@ -44,7 +44,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  devise :omniauthable, omniauth_providers: %i[facebook google_oauth2]
+  devise :omniauthable, omniauth_providers: %i[facebook google_oauth2 iarena]
 
   # after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_plan,    if: :new_record?

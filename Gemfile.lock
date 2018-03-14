@@ -437,6 +437,7 @@ DEPENDENCIES
   meta_request
   mysql2
   nested_form
+  omniauth
   omniauth-facebook
   omniauth-google-oauth2
   omnicontacts!

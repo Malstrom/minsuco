@@ -17,51 +17,58 @@ Rails.application.routes.draw do
   # Google
   match '/oauth2callback' => 'friends#import', :via => [:get]
 
-  localized do
+  # localized do
     devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: 'users/omniauth_callbacks' }
+  # end
+
+  devise_scope :user do
+    get '/users/sign_out', to: 'devise/sessions#destroy'
+  end
+
+  namespace :api do
+    namespace :v1 do
+      # another api routes
+      get '/me' => "credentials#me"
+    end
   end
 
 
-    devise_scope :user do
-      get '/users/sign_out', to: 'devise/sessions#destroy'
+  get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
+
+  resources :users do
+    member do
+      get :plans
+      patch :theme
     end
-
-    get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
-
-    resources :users do
-      member do
-        get :plans
-        patch :theme
-      end
-      get :races, to: 'races#user_races'
-      get :events, to: 'events#index'
-      resources :attendees
-      resources :friends do
-        collection do
-          get :invite_from_google
-          get :import
-          post :invites
-        end
-      end
-    end
-
-    resources :races do
-      # post :races
+    get :races, to: 'races#user_races'
+    get :events, to: 'events#index'
+    resources :attendees
+    resources :friends do
       collection do
-        get :private_network
+        get :invite_from_google
+        get :import
+        post :invites
       end
-      member do
-        get :like
-        get :start
-        get :pause
-        get :public_url
-        get :publish, to: 'races#publish'
-        get :publish_check, to: 'races#publish_check'
-        patch :publish_check, to: 'races#publish_check'
-      end
-      resources :attendees
     end
-    resources :subscriptions
+  end
+
+  resources :races do
+    # post :races
+    collection do
+      get :private_network
+    end
+    member do
+      get :like
+      get :start
+      get :pause
+      get :public_url
+      get :publish, to: 'races#publish'
+      get :publish_check, to: 'races#publish_check'
+      patch :publish_check, to: 'races#publish_check'
+    end
+    resources :attendees
+  end
+  resources :subscriptions
 
 
   # Angle routes --- they be removed at the end of 1.0 project
@@ -71,14 +78,6 @@ Rails.application.routes.draw do
 
   get 'dashboard/dashboard'
 
-  # api routes
-  get '/api/documentation' => 'api#documentation'
-  get '/api/datatable' => 'api#datatable'
-  get '/api/jqgrid' => 'api#jqgrid'
-  get '/api/jqgridtree' => 'api#jqgridtree'
-  # get '/api/i18n/:locale' => 'api#i18n'
-  post '/api/xeditable' => 'api#xeditable'
-  get '/api/xeditable-groups' => 'api#xeditablegroups'
 
   # the rest goes to root
   get '*path' => redirect('/')

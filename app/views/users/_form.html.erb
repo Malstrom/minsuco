@@ -17,13 +17,13 @@
   </div>
 
   <div class="row" >
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="form-group">
         <%= f.label :rui, class:'mb0' %>
-        <input class="form-control" type="text" name="user[rui]" id="user_rui" data-masked="" data-inputmask="'mask': 'a-999999999'">
+        <input class="form-control" type="text" value="<%= user.rui %>" name="user[rui]" id="user_rui" data-masked="" data-inputmask="'mask': 'a-999999999'">
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-5">
       <div class="form-group">
         <%= f.label :kind, class:'mb0'  %>
         <br>

@@ -15,6 +15,7 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', id: "maincss" %>
 
+
   <!-- =============== Theme purple ===============-->
   <%= stylesheet_link_tag "angle/themes/#{current_user.theme}", id: "autoloaded-stylesheet" %>
 
@@ -22,7 +23,11 @@
 
   <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
 
+
+
   <%= csrf_meta_tags %>
+
+
 </head>
 
 <body class="layout-fixed">

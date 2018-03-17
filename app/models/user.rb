@@ -50,6 +50,8 @@ class User < ApplicationRecord
   after_initialize :set_default_plan,    if: :new_record?
   after_initialize :set_default_rewards, if: :new_record?
 
+  before_validation :sanitize_rui, on: :update #need for remove '-' when add mask on field
+
   validates_presence_of :email
   validates             :email, uniqueness: true
 
@@ -78,6 +80,11 @@ class User < ApplicationRecord
 
   scope :who_receive_notifications_via_mail, -> { joins(:channel_subscriptions).where('channel_subscriptions.email_muted = ?', false) }
   scope :who_receive_notifications_via_app,  -> { joins(:channel_subscriptions).where('channel_subscriptions.in_app_muted = ?', false) }
+
+
+  def sanitize_rui
+    self.rui.gsub!('-','') if self.rui
+  end
 
   def reward_notification
     Event.create(thing_type: 'User', thing_id:id, message:"init_reward_open_race", who_did: "minsuco",

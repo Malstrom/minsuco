@@ -25,7 +25,7 @@
          <!-- END user info-->
          <!-- Iterates over all sidebar items-->
         <li class="new_race_btn">
-          <%= link_to(new_race_path, class:'new_race_btn') do %>
+          <%= link_to(new_race_path, class:'new_race_btn', id:'new_race_btna') do %>
             <em class="icon-plus"></em>
             <span data-localize="sidebar.nav.race.INDEX">
               <%= t("controller.races.action.new.text").upcase %>
@@ -38,14 +38,14 @@
          </li>
 
         <li id="btnDashboard" class="<%= 'active' if controller?('dashboard') && action?('dashboard') %>">
-          <a href="/dashboard/dashboard" title="Dashboard v1">
+          <a href="/dashboard/dashboard" id="dashboard">
             <em class="icon-speedometer"></em>
             <span><%= t("controller.dashboard.action.dashboard.text").upcase %></span>
           </a>
         </li>
 
         <li id="btnIndexRaces" class="<%= 'active' if controller?('races') && action?('index') %>">
-          <%= link_to(races_path) do %>
+          <%= link_to(races_path, id: "races") do %>
             <em class="fa fa-bullseye"></em>
             <span data-localize="sidebar.nav.race.INDEX">
               <%= t("controller.races.action.index.text").upcase %>
@@ -60,7 +60,7 @@
         <li class="<%= 'active' if controller?('races') && action?('user_races') %>"
             data-toggle="tooltip" data-placement="top"
             data-original-title="<%= I18n.t("tooltips.sidebar.user_races") %>">
-          <%= link_to(user_races_path current_user) do %>
+          <%= link_to(user_races_path(current_user), id:'user_races') do %>
             <em class="fa fa-road"></em>
             <span data-localize="sidebar.nav.race.INDEX">
               <%= t("controller.races.action.user_races.text").upcase %>
@@ -71,7 +71,7 @@
         <li class="<%= 'active' if controller?('attendees') && action?('index') %>"
             data-toggle="tooltip" data-placement="top"
             data-original-title="<%= I18n.t("tooltips.sidebar.race_attendees") %>">
-          <%= link_to(user_attendees_path(current_user)) do %>
+          <%= link_to(user_attendees_path(current_user), id:'attendee_races') do %>
             <em class="fa fa-car"></em>
             <span data-localize="sidebar.nav.race.INDEX">
               <%= t("controller.attendees.action.index.text").upcase %>
@@ -93,7 +93,7 @@
           <span><%= t("menu.section.other.text").upcase %></span>
         </li>
         <li class="<%= 'active' if controller?('users') && action?('edit') %>">
-          <%= link_to(edit_user_path(current_user)) do %>
+          <%= link_to(edit_user_path(current_user), id:"setting") do %>
             <em class="fa fa-user"></em>
             <span data-localize="sidebar.nav.race.INDEX">
               <%= t("controller.users.action.edit.text").upcase %>

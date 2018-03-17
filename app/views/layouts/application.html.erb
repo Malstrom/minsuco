@@ -14,6 +14,8 @@
   <!-- =============== APP STYLES ===============-->
 
   <%= stylesheet_link_tag 'application', media: 'all', id: "maincss" %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css' %>
+  <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
 
 
   <!-- =============== Theme purple ===============-->
@@ -22,8 +24,6 @@
   <%= javascript_include_tag "chartkick.js" %>
 
   <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-
-
 
   <%= csrf_meta_tags %>
 
@@ -72,5 +72,6 @@
 <%= javascript_include_tag 'application' %>
 
 <%= yield :body_area %>
+
 </body>
 </html>

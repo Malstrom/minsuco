@@ -41,6 +41,7 @@
         dataType: "json",
         success: function(){
           $("#userDataModal").modal('hide');
+          enjoyhint_instance.run();
         },
         error: function(data){
           $("#errors").html("<p class='text-danger'>"+ Object.keys(data.responseJSON) + " " + data.responseJSON.rui +"</p>");

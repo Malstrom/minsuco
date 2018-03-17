@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-lg-3 col-sm-6">
     <!-- START widget-->
-    <div class="panel widget bg-primary">
+    <div class="panel widget bg-primary" id="obbiettivi_totali">
       <div class="row row-table">
         <div class="col-xs-4 text-center bg-primary-dark pv-lg">
           <em class="fa fa-rocket fa-3x"></em>
@@ -17,7 +17,7 @@
   </div>
   <div class="col-lg-3 col-sm-6">
     <!-- START widget-->
-    <div class="panel widget bg-green">
+    <div class="panel widget bg-green" id="obbiettivi_raggiunti">
       <div class="row row-table">
         <div class="col-xs-4 text-center bg-green-dark pv-lg">
           <em class="fa fa-flag-checkered fa-3x"></em>
@@ -32,7 +32,7 @@
   </div>
   <div class="col-lg-3 col-md-6 col-sm-12">
     <!-- START widget-->
-    <div class="panel widget bg-warning">
+    <div class="panel widget bg-warning" id="obbiettivi_rimanenti">
       <div class="row row-table">
         <div class="col-xs-4 text-center bg-warning-dark pv-lg">
           <em class="fa fa-flag-o fa-3x"></em>
@@ -47,7 +47,7 @@
   </div>
   <div class="col-lg-3 col-md-6 col-sm-12">
     <!-- START widget-->
-    <div class="panel widget bg-info">
+    <div class="panel widget bg-info" id="provvigioni_passive">
       <div class="row row-table">
         <div class="col-xs-4 text-center bg-info-dark pv-lg">
           <em class="fa fa-pie-chart fa-3x"></em>
@@ -251,8 +251,14 @@
   </aside>
   <!-- END dashboard sidebar-->
 </div>
+
+
+
 <% content_for :body_area do %>
   <% if @user.rui.nil? %>
     <%= render partial: 'layouts/modals/rui_modal' %>
+  <% end %>
+  <% if @user.tour %>
+    <%= render partial: 'layouts/tours/dashboard' %>
   <% end %>
 <% end %>

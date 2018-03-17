@@ -21,7 +21,8 @@
 // --- Sweet Alert
 //= require sweetalert/dist/sweetalert.min.js
 
-
+// --- enjoyhint
+//= require enjoyhint/enjoyhint
 
 
 Chartkick.configure({language: "it"});

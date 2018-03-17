@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:show, :edit, :update, :intent]
 
+  protect_from_forgery except: [:stop_tour, :active_tour]
 
   # GET /users/1
   # GET /users/1.json
@@ -36,6 +37,14 @@ class UsersController < ApplicationController
 
   def theme
     current_user.update_attribute(:theme, params[:theme])
+  end
+
+  def stop_tour
+    current_user.update_attribute(:tour, false)
+  end
+
+  def active_tour
+    current_user.update_attribute(:tour, true)
   end
 
   private

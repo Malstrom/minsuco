@@ -54,7 +54,7 @@ module Angle
     config.assets.precompile += [
                                  # Scripts
                                  'charts.js',
-                                 'dashboard.js',
+                                 '_dashboard.html.erb',
                                  'documentation.js',
                                  'elements.js',
                                  'extras.js',

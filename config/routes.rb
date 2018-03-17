@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     member do
       get :plans
       patch :theme
+      patch :stop_tour
+      patch :active_tour
     end
     get :races, to: 'races#user_races'
     get :events, to: 'events#index'
@@ -77,7 +79,6 @@ Rails.application.routes.draw do
   root to: redirect('dashboard/dashboard')
 
   get 'dashboard/dashboard'
-
 
   # the rest goes to root
   get '*path' => redirect('/')

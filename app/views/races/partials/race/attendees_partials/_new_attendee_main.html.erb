@@ -1,18 +1,18 @@
  <div class="panel b text-center">
    <div class="panel-body">
      <div>
-      <%= tooltip_widget(:races, :panel_help, 'pull-right') %>
+      <%= tooltip_widget(:races, :panel_help, 'pull-right', 'fa-info-circle', 'left') %>
     </div>
      <div class="row">
        <div class="col-lg-12">
 
         <%= tooltip_widget(:races,
                            @race.open? ? :open_race : :close_race  ,
-                           @race.open? ? "icon-lock-open  text-success fa-3x" : "icon-lock  text-warning fa-3x") %>
+                           @race.open? ? "icon-lock-open  text-success fa-3x" : "icon-lock  text-warning fa-3x")%>
         <h2 class="h2">
           <span><%= tooltip_widget(:races, :category, 'fa-code-fork') %></span>
           &nbsp;
-          <%= @race.category.name.humanize %> |  <%= number_to_currency @race.remaining_value, precision:2  %>
+          <%= @race.category.name.humanize %> | <%= number_to_currency @race.remaining_value, precision:2  %>
           &nbsp;
           <span><%= tooltip_widget(:races, :remaining_value, 'fa-money') %></span>
         </h2>

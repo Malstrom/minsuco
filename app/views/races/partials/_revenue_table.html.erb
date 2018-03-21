@@ -4,22 +4,16 @@
     <th class="">
       Nome cliente
     </th>
-    <% @race.commissions.each do |commission| %>
-      <th class="">
-        <%= commission.duration %> anni
-      </th>
-    <% end %>
+    <th class="">
+      Provvigione
+    </th>
+    <th class="">
+      Durata
+    </th>
   </tr>
   </thead>
   <tbody>
   <tr class="bg-gray">
-    <th class=" lead">
-    </th>
-    <% @race.commissions.each do |commission| %>
-      <td class="lead">
-        <%= number_to_percentage commission.value %>
-      </td>
-    <% end %>
   </tr>
   <% if user.joined?(@race) %>
     <% user.attendee(@race).pieces.each do |piece| %>
@@ -28,11 +22,11 @@
           <%= piece.name.try(:humanize) %>
         </th>
         <% @race.commissions.each do |commission| %>
-          <td class="lead <%= "bg-green-light" if piece.commission == commission %>">
-            <% if piece.commission == commission %>
-              <%= number_to_currency piece.revenue, precision:2, unit:'€' %>
-              <small>(<%= piece.duration %> anni)</small>
-            <% end %>
+          <td class="lead">
+            <%= number_to_currency piece.revenue, precision:2, unit:'€' %>
+          </td>
+          <td class="lead">
+            <%= piece.duration %>
           </td>
         <% end %>
         <br>

@@ -1,11 +1,11 @@
 {
-  "name": "angle",
+  "name": "minsuco",
   "version": "0.0.0",
   "directory": "./vendor/assets/bower_components",
   "authors": [
-    "@themicon_co"
+    "Igor Mironenko"
   ],
-  "description": "Angle - Bootstrap Admin App + Rails",
+  "description": "Insurance contest",
   "main": "index.html",
   "keywords": [
     "bootstrap",
@@ -18,7 +18,12 @@
   "homepage": "http://themicon.co",
   "private": true,
   "ignore": [
-    "**/.*"
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower_components",
+    "test",
+    "tests"
   ],
   "dependencies": {
     "muuri": "0.4.1",

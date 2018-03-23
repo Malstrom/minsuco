@@ -44,4 +44,11 @@
 //= require dropify/dist/js/dropify.min
 
 
-$('.dropify').dropify();
+$('.dropify').dropify({
+  messages: {
+    'default': 'Clicca o sposta qui la tua immagine del profilo',
+    'replace': 'Clicca o sposta qui la tua immagine del profilo',
+    'remove':  'Rimuovi',
+    'error':   'Ooops, qualcosa è andato storto, riprova!.'
+  }
+});

@@ -88,7 +88,8 @@
     "dataTables.fontAwesome": "https://cdn.datatables.net/plug-ins/1.10.10/integration/font-awesome/dataTables.fontAwesome.css",
     "rickshaw": "1.6.0",
     "datatables-buttons": "1.2.4",
-    "datatables-responsive": "2.1.1"
+    "datatables-responsive": "2.1.1",
+    "enjoyhint": "^3.1.0"
   },
   "resolutions": {
     "jquery": "~2.1.3"

@@ -81,18 +81,18 @@
       </div>
     </fieldset>
 
-    <br><h4>Guadagni</h4><br><br>
-
     <fieldset>
       <div class="form-group">
         <div class="col-lg-3 control-label">
-          <%= f.label :race_value %>
           <%= tooltip_widget(:races, :race_value) %>
+
+          <%= f.label :race_value%>
         </div>
         <div class="col-lg-4">
           <div class="input-group m-b">
             <!--<span class="input-group-addon">€</span>-->
             <%= f.text_field :race_value, class:'form-control money', required:true %>
+
             <!--<span class="input-group-addon">.00</span>-->
           </div>
         </div>
@@ -118,7 +118,7 @@
                 </div>
               </div>
               <div class="col-xs-1 col-lg-1 text-center">
-                <%= commission_form.link_to_remove "", class:'icon-close text-danger fa-2x no-decoration' %>
+                <%= commission_form.link_to_remove "", class:'icon-close text-danger fa-2x no-decoration align-icon-to-commission' %>
               </div>
               <br><br>
             </div>
@@ -130,8 +130,6 @@
       </fieldset>
 
   <% end %>
-  <br><h4>Dati aggiuntivi <small class="text-muted">(Opzionale)</small></h4><br><br>
-
     <fieldset>
       <div class="form-group">
         <div class="col-lg-5 control-label">
@@ -161,10 +159,5 @@
         </div>
       </fieldset>
     <% end %>
-
 </div>
 <% end %>
-
-  <script>
-
-  </script>

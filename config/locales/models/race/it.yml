@@ -24,7 +24,7 @@ it:
         recipients: Destinatari
         starts_at: Inizio gara
         ends_at: Fine gara
-        race_value: obiettivo
+        race_value: Obiettivo
         commissions: Provvigioni
         compensation_start_amount: Bonus extra per ogni contratto
     race:

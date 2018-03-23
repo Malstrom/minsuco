@@ -37,8 +37,6 @@
 
 $(".money").maskMoney({thousands:',', decimal:'.', suffix: ' €', precision: 2, affixesStay:false});
 
-$('label').addClass('lead');
-
 $('.gradeX').hover(
   function () {
     $(this).find('.actions').removeClass('hidden').addClass('visible');

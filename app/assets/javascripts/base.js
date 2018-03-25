@@ -2,7 +2,6 @@
 // listed below.
 //--- Modernizr
 
-
 //--- jQuery
 //= require jquery/dist/jquery
 //= require jquery-ui/jquery-ui
@@ -25,15 +24,25 @@
 //= require jquery.filterizr.min.js
 //= require jquery.maskMoney.min.js
 
-
-
 //--- Input Mask
 //= require jquery.inputmask/dist/jquery.inputmask.bundle
+//
+// --- loader spinner
+//= require gasparesganga-jquery-loading-overlay
 
+// Show full page LoadingOverlay
+$('#googleImport').click(function () {
+  $.LoadingOverlay("show");
+});
 
+$('#friends_modal').isvisible(function() {
+  $.LoadingOverlay("hide");
+});
 
-
-
+// Hide it after 3 seconds
+setTimeout(function(){
+  $.LoadingOverlay("hide");
+}, 10000);
 
 $(".money").maskMoney({thousands:',', decimal:'.', suffix: ' €', precision: 2, affixesStay:false});
 

@@ -1,0 +1,126 @@
+<%= form_for user, html: {class:"form-horizontal"} do |f| %>
+
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2 class="text-center"><%= pluralize(user.errors.count, "errori") %> Riprova </h2>
+      <% user.errors.full_messages.each do |message| %>
+        <div role="alert" class="alert alert-danger">
+          <strong>Ops!</strong> <%= message %>.
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class=" col-md-8">
+      <%= f.hidden_field(:image_cache)  %>
+      <%= f.file_field(:image, id:"input-file-now", "class" => "dropify", "data-default-file" => @user.image, style:"")%>
+    </div>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :name, class:'col-md-4 control-label'  %>
+    <div class="col-lg-8">
+      <%= f.text_field :name, class: 'form-control input-lg input-lg', placeholder:"Mario Rossi"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :rui, class:'col-md-4 control-label' %>
+    <div class="col-lg-8">
+      <input class="form-control input-lg" type="text" value="<%= user.rui %>" name="user[rui]" id="user_rui" data-masked="" data-inputmask="'mask': 'a-999999999'">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :kind, class:'col-md-4 control-label'  %>
+    <div class="col-lg-8">
+      <%= f.text_field :kind, class: 'form-control input-lg', id: "userKind", disabled:true, value: User.human_enum_name(:kind, user.kind) %>
+    </div>
+  </div>
+
+
+  <% unless where == :rui_modal %>
+
+    <div class="form-group">
+      <%= f.label :fiscal_kind, class:'col-md-4 control-label'  %>
+      <div class="col-lg-8">
+        <%= f.select(:fiscal_kind, User.fiscal_kinds.keys.map {|kind| [kind.titleize,kind]}, {},{:class=>'chosen-select form-control input-lg'}) %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :company_name, class:'col-md-4 control-label'  %>
+      <div class="col-lg-8">
+        <%= f.text_field :company_name, class: 'form-control input-lg', placeholder:"Ajax Assicurazioni"%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :fiscal_code, class:'col-md-4 control-label'  %>
+      <div class="col-lg-8">
+        <%= f.text_field :fiscal_code, class: 'form-control input-lg', placeholder:"TRIMNP00P43Z765A"%>
+      </div>
+    </div>
+
+
+      <div class="form-group">
+        <%= f.label :city, class:'col-md-4 control-label'  %>
+        <div class="col-lg-8">
+          <%= f.text_field :city, class: 'form-control input-lg', placeholder:"Milano"%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :zip, class:'col-md-4 control-label'  %>
+        <div class="col-lg-8">
+          <%= f.text_field :zip, class: 'form-control input-lg'%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :address, class:'col-md-4 control-label'  %>
+        <div class="col-lg-8">
+          <%= f.text_field :address, class: 'form-control input-lg'%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :address_num, class:'col-md-4 control-label'  %>
+        <div class="col-lg-8">
+          <%= f.text_field :address_num, class: 'form-control input-lg'%>
+        </div>
+      </div>
+
+
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :phone, class:'col-md-4 control-label'  %>
+    <div class="col-lg-8">
+      <input name="user[phone]" id="user_phone" class="form-control input-lg" type="text" data-masked="" data-inputmask="'mask': '(+3\\9) 999-9999999'" placeholder="">
+    </div>
+  </div>
+
+  <% unless where == :rui_modal %>
+    <div class="form-group">
+      <%= f.label :interest_list, class:'col-md-4 control-label'  %>
+      <div class="col-lg-8">
+        <%= f.grouped_collection_select(:interest_list, Category.find_by_name('assicurazioni').children,
+                                        :children, :name, :id ,:name,
+                                        {},
+                                        {:class=>'form-control input-lg',
+                                         :multiple => true,
+                                         :id => 'select2-3'}) -%>
+      </div>
+    </div>
+    <%= f.submit "Aggiorna informazioni", class:"btn btn-info" %>
+  <% end %>
+
+
+  <p>
+    <small class="text-muted">
+      Non è possibile ne creare ne partecipare a nessuna gara se non si inserisce il proprio RUI.
+    </small>
+    <br>
+  </p>
+<% end %>

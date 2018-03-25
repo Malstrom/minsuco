@@ -20,7 +20,7 @@
       <p class="text-center">oppure invita i tuoi amici tramite google contacts.</p>
       <div class="text-center">
         <% if current_user.friends.empty? %>
-          <%= link_to invite_from_google_user_friends_path(current_user,race_id:@race.id,friend_modal:'true'), class: "btn btn-labeled btn-danger btn-lg" do %>
+          <%= link_to invite_from_google_user_friends_path(current_user,race_id:@race.id,friend_modal:'true'), id: "googleImport", class: "btn btn-labeled btn-danger btn-lg" do %>
             <span class="btn-label"><i class="fa fa-google"></i></span>
             Importa da google
           <% end %>

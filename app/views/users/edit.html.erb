@@ -1,22 +1,22 @@
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="row">
         <div class="col-md-12">
           <div class="panel b">
             <div class="panel-heading bg-gray-lighter text-bold">IMPOSTAZIONI</div>
             <div class="list-group">
-              <a href="#tabSetting1" data-toggle="tab" class="list-group-item">Generale</a>
-              <a href="#tabSetting2" data-toggle="tab" class="list-group-item">Password</a>
-              <a href="#tabSetting3" data-toggle="tab" class="list-group-item">Notifiche</a>
-              <%= link_to "Abbonamenti", plans_user_path, class:"list-group-item" %>
-              <a href="#tabSetting5" data-toggle="tab" class="list-group-item">Fatture</a>
+              <a href="#tabSetting1" data-toggle="tab" class="list-group-item setting-line-item">Generale</a>
+              <a href="#tabSetting2" data-toggle="tab" class="list-group-item setting-line-item">Password</a>
+              <a href="#tabSetting3" data-toggle="tab" class="list-group-item setting-line-item">Notifiche</a>
+              <%= link_to "Abbonamenti", plans_user_path, class:"list-group-item setting-line-item" %>
+              <a href="#tabSetting5" data-toggle="tab" class="list-group-item setting-line-item">Fatture</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-8">
       <div class="tab-content p0 b0">
         <div id="tabSetting1" class="tab-pane active">
           <%= render 'users/partials/form_account' %>
@@ -29,24 +29,6 @@
         </div>
         <div id="tabSetting5" class="tab-pane">
           <%= render partial: "users/partials/form_billing" %>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-md-4">
-      <div class="col-md-12">
-        <div class="panel">
-          <div class="panel-body">
-            <%= form_for @user do |f| %>
-              <%= f.hidden_field(:image_cache)  %>
-              <%= f.file_field(:image, id:"input-file-now", "class" => "dropify", "data-default-file" => @user.image, style:"")%>
-              <br>
-              <div class="text-center">
-                <%= f.submit 'Aggiorna foto', class:"btn btn-success" %>
-              </div>
-            <% end %>
-
-          </div>
         </div>
       </div>
     </div>

@@ -1,31 +1,54 @@
 <!-- Aside panel-->
 <div class="panel b">
-  <table class="table bb">
+  <table class="table bb table-bordered">
     <tbody>
     <tr>
       <td>
         <strong>Ramo rischio</strong>
       </td>
       <td><%= @race.category.name.capitalize %></td>
+      <td></td>
     </tr>
     <tr>
       <td>
         <strong>Destinatari</strong>
       </td>
       <td><%= t("activerecord.race.enum.recipients.#{@race.recipients}") %></td>
+      <td></td>
     </tr>
     <tr>
       <td>
         <strong>Fisso per pezzo</strong>
       </td>
       <td><%= number_to_currency @race.compensation_start_amount, unit: '€', precision: 0 %></td>
+      <td></td>
+
     </tr>
     <tr>
       <td>
         <strong>Iniziata / Termina</strong>
       </td>
       <td><%= @race.starts_at.strftime('%d/%m/%Y') %> - <%= @race.ends_at.strftime('%d/%m/%Y') %></td>
+      <td></td>
     </tr>
+    <tr>
+      <td>
+        <strong>Provvigione/i</strong>
+      </td>
+      <td><strong>periodo(anni)</strong></td>
+      <td><strong>%</strong></td>
+    </tr>
+    <% @race.commissions.each_with_index do |commission, index| %>
+      <tr>
+        <td></td>
+        <td>
+          <%= commission.duration %>
+        </td>
+        <td>
+          <%= commission.value %>
+        </td>
+      </tr>
+    <% end %>
     </tbody>
   </table>
 </div>

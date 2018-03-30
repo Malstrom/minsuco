@@ -276,6 +276,7 @@ class User < ApplicationRecord
 
 
   def self.from_i_arena(auth)
+    raise
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first_or_initialize
     authorization.token = auth.credentials.token
     if authorization.user.blank?

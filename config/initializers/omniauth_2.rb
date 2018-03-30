@@ -7,8 +7,8 @@ module OmniAuth
       option :iarena, :doorkeeper
 
       option :client_options, {
-          :site => "https://www.insurance-arena.com",
-          :authorize_url => "/oauth/authorize",
+          :site => "http://iarenatesting.azurewebsites.net",
+          :authorize_url => "/Admin/Login/LoginExternal",
       }
 
       uid { raw_info["id"] }

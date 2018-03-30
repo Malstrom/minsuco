@@ -35,7 +35,7 @@ $('#googleImport').click(function () {
   $.LoadingOverlay("show");
 });
 
-$('#friends_modal').isvisible(function() {
+$('#friends_modal').visible(function() {
   $.LoadingOverlay("hide");
 });
 

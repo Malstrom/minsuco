@@ -24,7 +24,7 @@
       if(onload !== undefined) {
         setTimeout(function(){
           notifyNow($this);
-        }, 800);
+        }, 300);
       }
 
       $this.on('click', function (e) {

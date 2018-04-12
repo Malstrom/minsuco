@@ -5,47 +5,24 @@
       <p>
         <span>Storico fatture</span>
       </p>
-
       <ul class="list-group">
         <li class="list-group-item clearfix">
           <p>Non ci sono fatture</p>
         </li>
-        <!--<li class="list-group-item clearfix">-->
-          <!--<div class="pull-left mr">-->
-            <!--<img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />-->
-          <!--</div>-->
-          <!--<div class="pull-right">-->
-            <!--<button type="button" class="btn btn-default">-->
-              <!--<strong>Revoke</strong>-->
-            <!--</button>-->
-          <!--</div>-->
-          <!--<p class="text-bold mb0">Application #1</p>-->
-          <!--<small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>-->
-        <!--</li>-->
-        <!--<li class="list-group-item clearfix">-->
-          <!--<div class="pull-left mr">-->
-            <!--<img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />-->
-          <!--</div>-->
-          <!--<div class="pull-right">-->
-            <!--<button type="button" class="btn btn-default">-->
-              <!--<strong>Revoke</strong>-->
-            <!--</button>-->
-          <!--</div>-->
-          <!--<p class="text-bold mb0">Application #2</p>-->
-          <!--<small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>-->
-        <!--</li>-->
-        <!--<li class="list-group-item clearfix">-->
-          <!--<div class="pull-left mr">-->
-            <!--<img src="<%= image_path('angle/dummy.png') %>" alt="App" class="img-responsive thumb48" />-->
-          <!--</div>-->
-          <!--<div class="pull-right">-->
-            <!--<button type="button" class="btn btn-default">-->
-              <!--<strong>Revoke</strong>-->
-            <!--</button>-->
-          <!--</div>-->
-          <!--<p class="text-bold mb0">Application #3</p>-->
-          <!--<small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>-->
-        <!--</li>-->
+        <% @invoices.each do |invoice| %>
+          <li class="list-group-item clearfix">
+            <div class="pull-left mr">
+              <em class="fa fa-file-pdf-o"></em>
+            </div>
+            <div class="pull-right">
+              <button type="button" class="btn btn-danger">
+                <strong>PDF</strong>
+              </button>
+            </div>
+            <p class="text-bold mb0"><%= invoice.id %></p>
+            <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

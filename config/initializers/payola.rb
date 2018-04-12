@@ -29,6 +29,9 @@ Payola.configure do |payola|
   payola.subscribe('payola.subscription.active') do |sub|
     user = User.find_by(email: sub.email)
     user.update_attribute(:plan, Plan.find(sub.plan_id))
+
+    sub.owner = user
+    sub.save!
   end
 
 

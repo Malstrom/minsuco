@@ -22,3 +22,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   provider :iarena, 'i-arena', '5cc07c32-6985-iarena2018-995f-9e46511c000c', {:provider_ignores_state => true}
 end
+#
+#
+# OmniAuth.config.on_failure = Proc.new { |env|
+#   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+# }

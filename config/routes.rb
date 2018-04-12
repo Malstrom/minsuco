@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :plans
+      get :pdf
       patch :theme
       patch :stop_tour
       patch :active_tour

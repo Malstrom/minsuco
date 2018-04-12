@@ -281,23 +281,44 @@ class User < ApplicationRecord
 
 
   def self.from_i_arena(auth)
+
     authorization = Authorization.where(provider: "i-arena").first_or_initialize
-    authorization.token = auth.credentials.token
+
+    authorization.token = '5cc07c32-6985-iarena2018-995f-9e46511c000c'
+
     if authorization.user.blank?
-      user = User.where('email = ?', auth['info']['email']).first
+      user = User.where('email = ?', 'test@gdd.it').first
       if user.blank?
         user = User.new
         user.password = Devise.friendly_token[0, 10]
-        user.email = auth.info.email
-        user.name = auth.info.name   # assuming the user model has a name
+        user.email = 'test@gdd.it'
+        user.name = 'iarena_user'   # assuming the user model has a name
         # user.image = open(auth.info.image)
-
         user.save
       end
-      user.image = auth.info.image
+      # user.image = auth.info.image
       user.save
       authorization.user_id = user.id
     end
+
+
+    #authorization.token = auth.credentials.token
+    # if authorization.user.blank?
+    #   user = User.where('email = ?', auth['info']['email']).first
+    #   if user.blank?
+    #     user = User.new
+    #     user.password = Devise.friendly_token[0, 10]
+    #     user.email = auth.info.email
+    #     user.name = auth.info.name   # assuming the user model has a name
+    #     # user.image = open(auth.info.image)
+    #
+    #     user.save
+    #   end
+    #   user.image = auth.info.image
+    #   user.save
+    #   authorization.user_id = user.id
+    # end
+
     authorization.save
     authorization.user
   end

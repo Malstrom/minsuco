@@ -12,6 +12,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @invoices =  @user.get_invoices
+
   end
 
   # PATCH/PUT /users/1
@@ -45,6 +47,11 @@ class UsersController < ApplicationController
 
   def active_tour
     current_user.update_attribute(:tour, true)
+  end
+
+  def pdf
+    invoice_id = params[:invoice_id]
+
   end
 
   private

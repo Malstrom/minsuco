@@ -3,9 +3,14 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on :interests
 
+
+  #payola relations
+  has_many :subscriptions, class_name: "Payola::Subscription", foreign_key: :owner_id
+  has_many :sales, class_name: "Payola::Sale", foreign_key: :owner_id
+
   # many to one plan with one subscription on it
   belongs_to :plan
-  has_one :subscription, ->(_sub) { where.not(stripe_id: nil) }, class_name: 'Payola::Subscription', foreign_key: :owner_idx
+  # has_one :subscription, ->(_sub) { where.not(stripe_id: nil) }, class_name: 'Payola::Subscription', foreign_key: :owner_id
 
   # many to many with races using attendee
   has_many      :attendees
@@ -295,5 +300,11 @@ class User < ApplicationRecord
     end
     authorization.save
     authorization.user
+  end
+
+  def get_invoices
+    Stripe.api_key = Rails.application.secrets.stripe_api_key
+    #Stripe::Charge.retrieve("ch_1CFieq2eZvKYlo2CKsPKBeR0")
+    Stripe::Invoice.all(:customer => subscriptions.first.stripe_customer_id)
   end
 end

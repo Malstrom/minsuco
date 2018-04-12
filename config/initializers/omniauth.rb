@@ -1,7 +1,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   # OmniAuth.config.test_mode = true
-  #
-  #
+
+
   # omniauth_hash = { 'provider' => 'i-arena',
   #                   'uid' => '12345',
   #                   'info' => {

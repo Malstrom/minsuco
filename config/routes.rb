@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  use_doorkeeper
   get '/history-back', to: 'application#history_back', as: 'history_back'
 
   get '/events/:id/readed', to: 'events#readed', as: 'readed'

@@ -3,15 +3,6 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on :interests
 
-  has_many :access_grants, class_name: "Doorkeeper::AccessGrant",
-           foreign_key: :resource_owner_id,
-           dependent: :destroy # or :destroy if you need callbacks
-
-  has_many :access_tokens, class_name: "Doorkeeper::AccessToken",
-           foreign_key: :resource_owner_id,
-           dependent: :destroy # or :destroy if you need callbacks
-
-
   #payola relations
   has_many :subscriptions, class_name: "Payola::Subscription", foreign_key: :owner_id
   has_many :sales, class_name: "Payola::Sale", foreign_key: :owner_id

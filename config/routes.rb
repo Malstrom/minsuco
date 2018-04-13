@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  use_doorkeeper
   get '/history-back', to: 'application#history_back', as: 'history_back'
 
   get '/events/:id/readed', to: 'events#readed', as: 'readed'
@@ -32,7 +30,6 @@ Rails.application.routes.draw do
       get '/me' => "credentials#me"
     end
   end
-
 
   get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
 

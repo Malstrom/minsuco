@@ -14,8 +14,8 @@ module OmniAuth
 
       option :client_options, {
           :site => "http://localhost:58736",
-          :authorize_url => "/Admin/Login/LoginExternal",
-          :token_url => '/Admin/Login/GetToken'
+          :authorize_url => "http://localhost:58736/Admin/Login/LoginExternal",
+          :token_url => 'http://localhost:58736/Admin/Login/GetToken'
       }
 
       uid { raw_info["id"] }

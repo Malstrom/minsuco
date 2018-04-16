@@ -33,7 +33,7 @@ gem 'devise'
 gem "omniauth"
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'doorkeeper'
+# gem 'doorkeeper'
 
 #
 gem 'omnicontacts', :git => 'https://github.com/Diego81/omnicontacts.git' # import google contacts

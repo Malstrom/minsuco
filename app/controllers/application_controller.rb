@@ -11,8 +11,6 @@ class ApplicationController < ActionController::Base
   before_action :load_notifications, :set_intent
   before_action :set_current_locale
 
-  before_action :auth_from_arena
-
   # before_action :save_url_in_history, except: [:history_back, :create, :destroy, :update]
   # after_action  :remove_last_from_history, only: :history_back
 

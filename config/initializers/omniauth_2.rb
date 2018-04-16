@@ -5,18 +5,18 @@ module OmniAuth
     class Iarena < OmniAuth::Strategies::OAuth2
       # change the class name and the :name option to match your application name
       option :name, :iarena
-      #
-      # option :client_options, {
-      #     :site => "http://iarenatesting.azurewebsites.net",
-      #     :authorize_url => "/Admin/Login/LoginExternal",
-      #     :token_url => '/Admin/Login/GetToken'
-      # }
 
       option :client_options, {
-          :site => "http://localhost:58736",
-          :authorize_url => "http://localhost:58736/Admin/Login/LoginExternal",
-          :token_url => 'http://localhost:58736/Admin/Login/GetToken'
+          :site => "http://iarenatesting.azurewebsites.net",
+          :authorize_url => "/Admin/Login/LoginExternal",
+          :token_url => '/Admin/Login/GetToken'
       }
+
+      # option :client_options, {
+      #     :site => "http://localhost:58736",
+      #     :authorize_url => "http://localhost:58736/Admin/Login/LoginExternal",
+      #     :token_url => 'http://localhost:58736/Admin/Login/GetToken'
+      # }
 
       uid { raw_info["id"] }
 

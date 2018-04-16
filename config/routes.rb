@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  use_doorkeeper
 
   get '/history-back', to: 'application#history_back', as: 'history_back'
 

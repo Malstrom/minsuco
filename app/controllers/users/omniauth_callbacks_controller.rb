@@ -26,7 +26,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def iarena
-    raise
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.from_i_arena(request.env['omniauth.auth'])
 

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+\  use_doorkeeper
+
   get '/history-back', to: 'application#history_back', as: 'history_back'
 
   get '/events/:id/readed', to: 'events#readed', as: 'readed'
@@ -81,6 +83,14 @@ Rails.application.routes.draw do
 
   # the rest goes to root
   get '*path' => redirect('/')
+
+
+  namespace :api do
+    namespace :v1 do
+      # another api routes
+      get '/me' => "credentials#me"
+    end
+  end
 
   # mount ActionCable.server => '/cable'
 end

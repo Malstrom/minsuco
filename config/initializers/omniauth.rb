@@ -1,7 +1,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   # OmniAuth.config.test_mode = true
-
-
+  #
+  #
   # omniauth_hash = { 'provider' => 'i-arena',
   #                   'uid' => '12345',
   #                   'info' => {
@@ -18,9 +18,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   # }
   #
   # OmniAuth.config.add_mock(:iarena, omniauth_hash)
-
-
-  provider :iarena, 'i-arena', '5cc07c32-6985-iarena2018-995f-9e46511c000c', {:provider_ignores_state => true}
+  #
+  #
+  # provider :iarena, 'i-arena', '5cc07c32-6985-iarena2018-995f-9e46511c000c', {:provider_ignores_state => true}
 end
 #
 #

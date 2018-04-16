@@ -9,6 +9,7 @@ module OmniAuth
       option :client_options, {
           :site => "http://iarenatesting.azurewebsites.net",
           :authorize_url => "/Admin/Login/LoginExternal",
+          :token_url => '/Admin/Login/GetToken'
       }
 
       uid { raw_info["id"] }

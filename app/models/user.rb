@@ -316,6 +316,10 @@ class User < ApplicationRecord
   def get_invoices
     Stripe.api_key = Rails.application.secrets.stripe_api_key
     #Stripe::Charge.retrieve("ch_1CFieq2eZvKYlo2CKsPKBeR0")
-    Stripe::Invoice.all(:customer => subscriptions.first.stripe_customer_id)
+    if subscriptions.first
+      Stripe::Invoice.all(:customer => subscriptions.first.stripe_customer_id)
+    else
+      Array.new
+    end
   end
 end

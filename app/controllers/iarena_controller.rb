@@ -19,7 +19,7 @@ class IarenaController < ApplicationController
     if @user.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Iarena'
       sign_in :user, @user
-      # redirect_to root_path
+      redirect_to root_path
     else
       session['devise.iarena_data'] = request.env['omniauth.auth'].except(:extra) # Removing extra as it can overflow some session stores
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")

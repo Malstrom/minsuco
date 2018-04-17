@@ -93,7 +93,7 @@
           </p>
         </div>
         <div class="panel-body text-center">
-          <% if @user.plan == Plan.where(stripe_id: 'pro_creator').first %>
+          <% if @user.plan == Plan.where(stripe_id: 'light').first %>
             <p class="lead">
               Iscritto al piano Pro creatori
             </p>

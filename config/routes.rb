@@ -25,14 +25,11 @@ Rails.application.routes.draw do
     get '/users/sign_out', to: 'devise/sessions#destroy'
   end
 
-  namespace :api do
-    namespace :v1 do
-      # another api routes
-      get '/me' => "credentials#me"
-    end
-  end
-
   get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
+
+  # iarena authorization
+  get  'authorize_from_iarena', to: 'iarena#authorize', as: 'iarena_authorize'
+  post 'sign_up_from_iarena',   to: 'iarena#sign_up',   as: 'iarena_sign_up'
 
   resources :users do
     member do

@@ -287,12 +287,25 @@ class User < ApplicationRecord
       if user.blank?
         user = User.new
         user.password = Devise.friendly_token[0, 10]
-        user.email = auth.info.email
-        user.name = auth.info.name
-        user.rui = auth.info.rui
-        user.save
+        user.email    = auth.info.email
+        user.name     = auth.info.name
+        user.rui      = auth.info.rui
       end
-      user.image = auth.info.image
+
+      # various data
+      user.intent       = auth.extra.raw_info.intent
+      user.image        = auth.extra.raw_info.image
+
+      # fiscal data
+      user.company_name = auth.extra.raw_info.company_name
+      user.fiscal_kind  = auth.extra.raw_info.fiscal_kind
+      user.fiscal_code  = auth.extra.raw_info.fiscal_code
+      # location data
+      user.city         = auth.extra.raw_info.city
+      user.address      = auth.extra.raw_info.address
+      user.address_num  = auth.extra.raw_info.address_num
+      user.zip          = auth.extra.raw_info.zip
+
       user.save
       authorization.user_id = user.id
     end

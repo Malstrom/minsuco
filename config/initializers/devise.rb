@@ -258,7 +258,7 @@ Devise.setup do |config|
 
   config.omniauth :google_oauth2, '1087195332078-bat7rqbbhden22h241b66bouolkmhgbs.apps.googleusercontent.com', 'DMcHo-Hdko0ipMgR3nDGhr-j', skip_jwt: true
 
-  config.omniauth :iarena, 'i-arena', "5cc07c32-6985-iarena2018-995f-9e46511c000c", {:provider_ignores_state => true}
+  # config.omniauth :iarena, 'i-arena', "5cc07c32-6985-iarena2018-995f-9e46511c000c", {:provider_ignores_state => true}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

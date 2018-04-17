@@ -48,7 +48,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  devise :omniauthable, omniauth_providers: %i[facebook google_oauth2 iarena]
+  devise :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   # after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_plan,    if: :new_record?
@@ -283,14 +283,13 @@ class User < ApplicationRecord
     authorization = Authorization.where(provider: "i-arena").first_or_initialize
     authorization.token = auth.credentials.token
     if authorization.user.blank?
-      user = User.where('email = ?', auth['info']['email']).first
+      user = User.where('email = ?', auth.info.email).first
       if user.blank?
         user = User.new
         user.password = Devise.friendly_token[0, 10]
         user.email = auth.info.email
-        user.name = auth.info.name   # assuming the user model has a name
-        # user.image = open(auth.info.image)
-
+        user.name = auth.info.name
+        user.rui = auth.info.rui
         user.save
       end
       user.image = auth.info.image

@@ -9,9 +9,9 @@ class IarenaController < ApplicationController
     auth = JSON.parse(params.to_json, object_class: OpenStruct)
 
     #token verifying
-    unless auth.credentials.token == Rails.application.secrets.iarena_token
-      redirect_to new_user_registration_url, alert: "Richiesta ricevuta da fonte non autorizzata"
-    end
+    # unless auth.credentials.token == Rails.application.secrets.iarena_token
+    #   redirect_to new_user_registration_url, alert: "Richiesta ricevuta da fonte non autorizzata"
+    # end
 
     #save_user
     @user = User.from_i_arena(auth)

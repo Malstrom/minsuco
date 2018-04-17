@@ -19,7 +19,9 @@
                 <strong>PDF</strong>
               </button>
             </div>
-            <p class="text-bold mb0"><%= invoice.id %></p>
+            <p class="text-bold mb0">
+              <%= Time.at(invoice.date).strftime("%d-%m-%Y")  %>
+            </p>
             <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
           </li>
         <% end %>

@@ -10,6 +10,12 @@
       <p class="text-center">ENTRA E COMINCIA A VINCERE LE TUE GARE ASSICURATIVE.</p>
 
       <div class="row">
+        <div class="col-md-12 col-md-offset-1"  style="padding-bottom: 10px">
+          <%= link_to(iarena_authorize_path, class: "btn btn-labeled btn-info btn-xl oauth") do  %>
+            <span class="btn-label" style="left: -28px;"><i class="fa fa-google"></i></span>
+            <%= "Login con I-arena"  %>
+          <% end %>
+        </div>
         <%- if devise_mapping.omniauthable? %>
           <%- resource_class.omniauth_providers.reverse.each do |provider| %>
             <div class="col-md-12 col-md-offset-1"  style="padding-bottom: 10px">
@@ -23,12 +29,6 @@
                 <span class="btn-label" style="left: -28px;"><i class="fa fa-google"></i></span>
                 <%= "Login con Google"  %>
               <% end %>
-            <% elsif OmniAuth::Utils.camelize(provider) == 'Iarena' %>
-                <%= link_to(omniauth_authorize_path(resource_name, provider), class: "btn btn-labeled btn-info btn-xl oauth") do  %>
-                <span class="btn-label" style="left: -28px;"><i class="fa fa-google"></i></span>
-                <%= "Login con I-arena"  %>
-              <% end %>
-
             <% end %>
             </div>
           <% end -%>

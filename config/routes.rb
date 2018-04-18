@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   # iarena sign_in
   get  'authorize_from_iarena', to: 'iarena#authorize',      as: 'iarena_authorize'
-  post 'sign_up_from_iarena',   to: 'iarena#sign_up',        as: 'iarena_sign_up'
+  get 'sign_up_from_iarena',   to: 'iarena#sign_up',        as: 'iarena_sign_up'
   # iarena invoice
   get  'pdf',                   to: 'iarena#pdf',            as: 'iarena_pdf'
   post 'insert',                to: 'iarena#invoice_insert', as: 'iarena_invoice_insert'

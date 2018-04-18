@@ -11,7 +11,7 @@ class Ability
     alias_action :user_races, :to => :read_created_races
     alias_action :publish, :publish_check, :to => :publish_race
 
-    # #user
+    #user
     can :manage, User,id: user.id
 
     #race

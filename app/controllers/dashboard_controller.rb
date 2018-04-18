@@ -9,3 +9,5 @@ class DashboardController < ApplicationController
     @user = current_user
   end
 end
+
+

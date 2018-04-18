@@ -13,7 +13,7 @@ class IarenaController < ApplicationController
     #   redirect_to new_user_registration_url, alert: "Richiesta ricevuta da fonte non autorizzata"
     # end
 
-    @user = User.from_i_arena(auth)
+    @user = User.from_i_arena(request.env['iarena'])
 
     if @user.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Iarena'

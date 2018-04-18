@@ -18,6 +18,7 @@ class IarenaController < ApplicationController
     if @user.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Iarena'
       sign_in(@user, scope: :user)
+      raise 'igor funziona'
       redirect_to root_path
     else
       raise 'igor non funziona'

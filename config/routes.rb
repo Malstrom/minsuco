@@ -27,14 +27,16 @@ Rails.application.routes.draw do
 
   get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
 
-  # iarena authorization
-  get  'authorize_from_iarena', to: 'iarena#authorize', as: 'iarena_authorize'
-  post 'sign_up_from_iarena',   to: 'iarena#sign_up',   as: 'iarena_sign_up'
+  # iarena sign_in
+  get  'authorize_from_iarena', to: 'iarena#authorize',      as: 'iarena_authorize'
+  post 'sign_up_from_iarena',   to: 'iarena#sign_up',        as: 'iarena_sign_up'
+  # iarena invoice
+  get  'pdf',                   to: 'iarena#pdf',            as: 'iarena_pdf'
+  post 'insert',                to: 'iarena#invoice_insert', as: 'iarena_invoice_insert'
 
   resources :users do
     member do
       get :plans
-      get :pdf
       patch :theme
       patch :stop_tour
       patch :active_tour

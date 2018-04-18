@@ -20,7 +20,7 @@
           <% @invoices.each do |invoice| %>
             <tr>
               <td>
-                <%= link_to pdf_user_path(invoice) do %>
+                <%= link_to iarena_pdf_path(invoice) do %>
                   <%= Time.at(invoice.date).strftime("%d-%m-%Y")%>
                 <% end %>
               </td>

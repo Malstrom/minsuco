@@ -49,11 +49,6 @@ class UsersController < ApplicationController
     current_user.update_attribute(:tour, true)
   end
 
-  def pdf
-    invoice_id = params[:invoice_id]
-
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.

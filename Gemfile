@@ -70,6 +70,8 @@ gem 'cloudinary'
 gem 'faker' # fake data
 
 gem 'wrenchmode-rack' #
+
+#gem 'runtimeerror_notifier' #Track and manage your runtime errors directly in Github
 # gem "slack-notifier"
 
 

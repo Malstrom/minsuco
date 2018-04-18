@@ -13,8 +13,6 @@ class IarenaController < ApplicationController
     #   redirect_to new_user_registration_url, alert: "Richiesta ricevuta da fonte non autorizzata"
     # end
 
-    auth = auth._json
-
     @user = User.from_i_arena(auth)
 
     if @user.persisted?

@@ -68,6 +68,8 @@ gem 'cloudinary'
 
 #tools
 gem 'faker' # fake data
+
+gem 'wrenchmode-rack' #
 # gem "slack-notifier"
 
 

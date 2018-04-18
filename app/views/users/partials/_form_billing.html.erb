@@ -2,30 +2,41 @@
   <div class="panel b">
     <div class="panel-heading bg-gray-lighter text-bold">Fatture</div>
     <div class="panel-body">
-      <p>
-        <span>Storico fatture</span>
-      </p>
-      <ul class="list-group">
-        <li class="list-group-item clearfix">
-          <p>Non ci sono fatture</p>
-        </li>
-        <% @invoices.each do |invoice| %>
-          <li class="list-group-item clearfix">
-            <div class="pull-left mr">
-              <em class="fa fa-file-pdf-o"></em>
-            </div>
-            <div class="pull-right">
-              <button type="button" class="btn btn-danger">
-                <strong>PDF</strong>
-              </button>
-            </div>
-            <p class="text-bold mb0">
-              <%= Time.at(invoice.date).strftime("%d-%m-%Y")  %>
-            </p>
-            <small>Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.</small>
-          </li>
-        <% end %>
-      </ul>
+
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Data</th>
+            <th>Descrizione</th>
+            <th>Periodo di servizio</th>
+            <!--<th>Metodo di pagamento</th>-->
+            <th>Totale parziale</th>
+            <th>Totale pagato</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @invoices.each do |invoice| %>
+            <tr>
+              <td>
+                <%= link_to pdf_user_path(invoice) do %>
+                  <%= Time.at(invoice.date).strftime("%d-%m-%Y")%>
+                <% end %>
+              </td>
+              <td><%= t("activerecord.attributes.user.roles.#{invoice.lines.data.first.plan.id}")  %></td>
+              <!--<td><%=  %></td>-->
+              <td><%= Time.at(invoice.lines.data.first.period.start).strftime("%d-%m-%Y") + " - " + Time.at(invoice.lines.data.first.period.end).strftime("%d-%m-%Y") %></td>
+              <td><%= number_to_currency( invoice.amount_due / 100)%></td>
+              <td><%= number_to_currency( invoice.amount_paid / 100)%></td>
+            </tr>
+          <%# invoice.to_json %>
+          <% end %>
+
+
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

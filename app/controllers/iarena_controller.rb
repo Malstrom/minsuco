@@ -24,11 +24,9 @@ class IarenaController < ApplicationController
     end
   end
 
-
   def insert_invoice
     invoice_id = params[:invoice_id]
   end
-
 
   #get invoice pdf from insurance arena
   def pdf

@@ -5,17 +5,13 @@ class IarenaController < ApplicationController
   end
 
   def iarena_sign_up
-
-    # request.headers["iarena"]
     # create ruby object from json
     auth = JSON.parse(params.to_json, object_class: OpenStruct)
-    #auth = JSON.parse(request.headers["iarena"], object_class: OpenStruct)
-     #JSON.parse(request.headers["iarena"])
 
-    #token verifying
-    # unless auth.credentials.token == Rails.application.secrets.iarena_token
-    #   redirect_to new_user_registration_url, alert: "Richiesta ricevuta da fonte non autorizzata"
-    # end
+    # token verifying
+    unless auth.credentials.token == Rails.application.secrets.iarena_token
+      redirect_to new_user_registration_url, alert: "Richiesta ricevuta da fonte non autorizzata"
+    end
 
     @user = User.from_i_arena(auth)
 

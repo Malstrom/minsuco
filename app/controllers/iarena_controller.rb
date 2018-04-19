@@ -35,7 +35,6 @@ class IarenaController < ApplicationController
     @user = User.find_by_email(user_email)
 
     if @user
-      raise
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Iarena'
       sign_in_and_redirect @user, event: :authentication
     else

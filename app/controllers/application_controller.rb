@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
 
   before_action :set_paper_trail_whodunnit
-  before_action :authenticate_user!, :except => [:public_url, :sign_up, :authorize]
+  before_action :authenticate_user!, :except => [:public_url, :iarena_sign_up, :authorize, :iarena_sign_in]
   before_action :load_notifications, :set_intent
   before_action :set_current_locale
 

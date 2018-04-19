@@ -28,8 +28,10 @@ Rails.application.routes.draw do
   get 'users/:id/intent', to: 'users#intent', as: 'user_intent'
 
   # iarena sign_in
-  get  'authorize_from_iarena', to: 'iarena#authorize',      as: 'iarena_authorize'
-  get 'sign_up_from_iarena',   to: 'iarena#sign_up',        as: 'iarena_sign_up'
+  get  'iarena/authorize',  to: 'iarena#authorize',      as: 'iarena_authorize'
+  get  'iarena/sign_in',    to: 'iarena#iarena_sign_in', as: 'iarena_sign_in'
+  post 'iarena/sign_up',    to: 'iarena#iarena_sign_up', as: 'iarena_sign_up'
+
   # iarena invoice
   get  'pdf',                   to: 'iarena#pdf',            as: 'iarena_pdf'
   post 'insert',                to: 'iarena#invoice_insert', as: 'iarena_invoice_insert'

@@ -4,13 +4,12 @@ class IarenaController < ApplicationController
     redirect_to Rails.application.secrets.iarena_authorization_url
   end
 
-  def sign_up
+  def iarena_sign_up
 
     # request.headers["iarena"]
     # create ruby object from json
-    # auth = JSON.parse(request.headers["iarena"], object_class: OpenStruct)
-
-    auth = JSON.parse(request.headers["iarena"], object_class: OpenStruct)
+    auth = JSON.parse(params.to_json, object_class: OpenStruct)
+    #auth = JSON.parse(request.headers["iarena"], object_class: OpenStruct)
      #JSON.parse(request.headers["iarena"])
 
     #token verifying
@@ -20,7 +19,22 @@ class IarenaController < ApplicationController
 
     @user = User.from_i_arena(auth)
 
-    if @user.persisted?
+    # raise Rails.application.secrets.key_encrypt
+    crypt = ActiveSupport::MessageEncryptor.new(ENV['secret'])
+    encrypted_data = crypt.encrypt_and_sign(@user.email)
+
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!", :code => encrypted_data }
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
+  end
+
+  def iarena_sign_in
+    crypt = ActiveSupport::MessageEncryptor.new(ENV['secret'])
+    user_email = crypt.decrypt_and_verify(params[:code])
+    @user = User.find_by_email(user_email)
+
+    if @user
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Iarena'
       sign_in_and_redirect @user, event: :authentication
     else

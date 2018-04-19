@@ -293,18 +293,18 @@ class User < ApplicationRecord
       end
 
       # various data
-      # user.intent       = auth.extra.raw_info.intent.to_i if auth.extra.raw_info.intent
-      # user.image        = auth.extra.raw_info.image
-      #
+      user.intent       = auth.extra.raw_info.intent.to_i if auth.extra.raw_info.intent
+      user.image        = auth.extra.raw_info.image
+
       # # fiscal data
-      # user.company_name = auth.extra.raw_info.company_name
-      # # user.fiscal_kind  = auth.extra.raw_info.fiscal_kind
-      # user.fiscal_code  = auth.extra.raw_info.fiscal_code
+      user.company_name = auth.extra.raw_info.company_name
+      # user.fiscal_kind  = auth.extra.raw_info.fiscal_kind
+      user.fiscal_code  = auth.extra.raw_info.fiscal_code
       # # location data
-      # user.city         = auth.extra.raw_info.city
-      # user.address      = auth.extra.raw_info.address
-      # user.address_num  = auth.extra.raw_info.address_num
-      # user.zip          = auth.extra.raw_info.zip
+      user.city         = auth.extra.raw_info.city
+      user.address      = auth.extra.raw_info.address
+      user.address_num  = auth.extra.raw_info.address_num
+      user.zip          = auth.extra.raw_info.zip
 
       user.save
       authorization.user_id = user.id

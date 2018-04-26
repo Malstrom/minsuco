@@ -5,239 +5,49 @@
   </div>
   <!-- START PLAN TABLE-->
   <div class="row">
-    <!-- PLAN-->
-    <div class="col-md-3">
-      <div class="panel b">
-        <div class="panel-body text-center bb">
-          <div class="text-bold">Basic</div>
-          <h3 class="mv-lg"><sup></sup>
-            <span class="text-lg">Free</span>
-            <span class="text-xs"></span>
-          </h3>
-        </div>
-        <div class="panel-body">
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Partecipare a gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_join) %>
 
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Creare gare private</span>
-            <%= tooltip_widget(:plan, :free_close_race_create) %>
 
-          </p>
-          <p>
-            <em class="fa fa-times fa-fw text-danger mr"></em>
-            <span>Partecipare 1 gara chiusa/mese</span>
-            <%= tooltip_widget(:plan, :one_join_per_month) %>
-
-          </p>
-          <p>
-            <em class="fa fa-exclamation fa-fw text-warning mr"></em>
-            <span>Partecipare a gare chiuse</span>
-            <%= tooltip_widget(:plan, :free_private_race_join) %>
-
-          </p>
-          <p>
-            <em class="fa fa-exclamation fa-fw text-warning mr"></em>
-            <span>Crea gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_create) %>
-          </p>
-        </div>
-        <div class="panel-body text-center">
-          <p class="lead">Free</p>
+    <% Plan.order(amount: :asc).all.each do |plan| %>
+      <!-- PLAN-->
+      <div class="col-md-3">
+        <div class="panel b">
+          <div class="panel-body text-center bb">
+            <div class="text-bold">
+              <%= t("activerecord.attributes.user.roles.#{plan.stripe_id}") %>
+            </div>
+            <h3 class="mv-lg"><sup>€</sup>
+              <span class="text-lg"><%= plan.amount / 100 %> </span>
+              <span class="text-xs">/mese</span>
+            </h3>
+          </div>
+          <%= render "users/partials/plan_#{plan.stripe_id}_account" %>
+          <div class="panel-body text-center">
+            <% if plan.stripe_id == 'basic' %>
+              <p class="text-muted">Gratis</p>
+            <% else%>
+              <% if !@user.billable? %>
+                <p class="text-danger">
+                  Completa il tuo profilo personale prima.
+                  <br>
+                  <%= link_to 'Vai al mio profilo', edit_user_path(current_user) %>
+                </p>
+              <% else %>
+                <% if @user.already_subscribed_to?(plan.stripe_id) %>
+                  <%= render 'payola/subscriptions/cancel', subscription: @user.subscription,
+                             button_text: "Cancella iscrizione"
+                  %>
+                <% else %>
+                  <%= render 'payola/subscriptions/checkout', plan: plan,
+                             email:current_user.email,
+                             button_text: "Abbonati con un click!"
+                  %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- PLAN-->
-    <div class="col-md-3">
-      <div class="panel b">
-        <div class="panel-body text-center bb">
-          <div class="text-bold">Light (per partecipanti)</div>
-          <h3 class="mv-lg"><sup>€</sup>
-            <span class="text-lg">4</span>
-            <span class="text-xs">/mese</span>
-          </h3>
-        </div>
-        <div class="panel-body">
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Partecipare a gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_join) %>
-
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Creare gare private</span>
-            <%= tooltip_widget(:plan, :free_close_race_create) %>
-
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Partecipare 1 gara chiusa/mese</span>
-            <%= tooltip_widget(:plan, :one_join_per_month) %>
-
-          </p>
-          <p>
-            <em class="fa fa-exclamation fa-fw text-warning mr"></em>
-            <span>Partecipare a gare chiuse</span>
-            <%= tooltip_widget(:plan, :free_private_race_join) %>
-
-          </p>
-          <p>
-            <em class="fa fa-exclamation fa-fw text-warning mr"></em>
-            <span>Crea gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_create) %>
-          </p>
-        </div>
-        <div class="panel-body text-center">
-          <% if @user.plan == Plan.where(stripe_id: 'light').first %>
-            <p class="lead">
-              Iscritto al piano Pro creatori
-            </p>
-          <% elsif !@user.billable? %>
-            <p class="text-danger">
-              Completa il tuo profilo personale prima.
-              <br>
-              <%= link_to 'Vai al mio profilo', edit_user_path(current_user) %>
-            </p>
-          <% else %>
-            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'light').first,
-                       email:current_user.email,
-                       button_text: "Paga con un click!"
-            %>
-            <br>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <!-- PLAN-->
-    <div class="col-md-3">
-      <div class="panel b">
-        <div class="panel-body text-center bg-green">
-          <div class="text-bold">PARTECIPANTE</div>
-          <h3 class="mv-lg"><sup>€</sup>
-            <span class="text-lg">9</span>
-            <span class="text-xs">/mese</span>
-          </h3>
-        </div>
-        <div class="panel-body">
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Partecipare a gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_join) %>
-
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Creare gare private</span>
-            <%= tooltip_widget(:plan, :free_close_race_create) %>
-
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Partecipare 1 gara chiusa/mese</span>
-            <%= tooltip_widget(:plan, :one_join_per_month) %>
-
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Partecipare a gare chiuse</span>
-            <%= tooltip_widget(:plan, :free_private_race_join) %>
-
-          </p>
-          <p>
-            <em class="fa fa-exclamation fa-fw text-warning mr"></em>
-            <span>Crea gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_create) %>
-          </p>
-        </div>
-        <div class="panel-body text-center">
-          <% if current_user.plan == Plan.where(stripe_id: 'pro_attendee').first %>
-            <p class="lead">
-              Iscritto al piano Pro partecipanti
-            </p>
-          <% elsif !@user.billable? %>
-            <p class="text-danger">
-              Completa il tuo profilo personale prima.
-            </p>
-            <%= link_to 'Vai al mio profilo', edit_user_path(current_user) %>
-          <% else %>
-            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_attendee').first,
-                       email:current_user.email,
-                       button_text: "Paga con un click!"
-            %>
-            <br>
-          <% end %>
-
-        </div>
-      </div>
-    </div>
-    <!-- PLAN-->
-    <div class="col-md-3">
-      <div class="panel b">
-        <div class="panel-body text-center bb">
-          <div class="text-bold">CREATORE</div>
-          <h3 class="mv-lg"><sup>€</sup>
-            <span class="text-lg">29</span>
-            <span class="text-xs">/mese</span>
-          </h3>
-        </div>
-        <div class="panel-body">
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Partecipare a gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_join) %>
-
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Creare gare private</span>
-            <%= tooltip_widget(:plan, :free_close_race_create) %>
-
-          </p>
-          <p>
-            <em class="fa fa-times fa-fw text-danger mr"></em>
-            <span>Partecipare 1 gara chiusa/mese</span>
-            <%= tooltip_widget(:plan, :one_join_per_month) %>
-
-          </p>
-          <p>
-            <em class="fa fa-exclamation fa-fw text-warning mr"></em>
-            <span>Partecipare a gare chiuse</span>
-            <%= tooltip_widget(:plan, :free_private_race_join) %>
-
-          </p>
-          <p>
-            <em class="fa fa-check fa-fw text-green mr"></em>
-            <span>Crea gare aperte</span>
-            <%= tooltip_widget(:plan, :free_open_race_create) %>
-          </p>
-        </div>
-        <div class="panel-body text-center">
-          <% if @user.plan == Plan.where(stripe_id: 'pro_creator').first %>
-            <p class="lead">
-              Iscritto al piano Pro creatori
-            </p>
-          <% elsif !@user.billable? %>
-            <p class="text-danger">
-              Completa il tuo profilo personale prima.
-              <br>
-              <%= link_to 'Vai al mio profilo', edit_user_path(current_user) %>
-            </p>
-          <% else %>
-            <%= render 'payola/subscriptions/checkout', plan: Plan.where(stripe_id: 'pro_creator').first,
-                       email:current_user.email,
-                       button_text: "Paga con un click!"
-            %>
-            <br>
-          <% end %>
-
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
   <p class="text-center text-muted">
     <small>* i prezzi sono IVA esclusa, servizio soggetto a condizioni e termini d'uso.</small>

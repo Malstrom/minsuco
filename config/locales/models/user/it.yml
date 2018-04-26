@@ -4,8 +4,8 @@ it:
       user:
         roles:
           basic: "Basic"
-          pro_attendee: "Pro attendee"
-          pro_creator: "Pro creatore"
+          pro_attendee: "Pro Partecipante"
+          pro_creator: "Pro Creatore"
           light: "Light"
           banned:  "Bannato"
           admin: "Amministratore"

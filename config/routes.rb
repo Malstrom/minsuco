@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   post 'iarena/sign_up',    to: 'iarena#iarena_sign_up', as: 'iarena_sign_up'
 
   # iarena invoice
-  get  'pdf',                   to: 'iarena#pdf',            as: 'iarena_pdf'
-  post 'insert',                to: 'iarena#invoice_insert', as: 'iarena_invoice_insert'
+  get  'iarena/pdf',   to: 'iarena#pdf',            as: 'iarena_pdf'
+  post 'iarena/insert',to: 'iarena#insert_invoice', as: 'iarena_insert_invoice'
 
   resources :users do
     member do

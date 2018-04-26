@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
 
   before_action :set_paper_trail_whodunnit
-  before_action :authenticate_user!, :except => [:public_url, :iarena_sign_up, :authorize, :iarena_sign_in]
+  before_action :authenticate_user!, :except => [:public_url, :iarena_sign_up, :authorize, :iarena_sign_in, :insert_invoice]
   before_action :load_notifications, :set_intent
   before_action :set_current_locale
 
@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
       format.html { redirect_to main_app.root_url }
       format.js   { head :forbidden, content_type: 'text/html' }
     end
+  end
+
+  def payola_can_modify_subscription?(subscription)
+    subscription.owner == current_user
   end
 
   # def history_back

@@ -40,12 +40,40 @@ class IarenaController < ApplicationController
   end
 
   def insert_invoice
-    invoice_id = params[:invoice_id]
+    #create ruby object
+    e = JSON.parse(params.to_json, object_class: OpenStruct)
+
+    #find user by customer_id arrived from e
+    user  = Payola::Subscription.find_by_stripe_customer_id(e.data.object.customer).owner
+
+    uri = URI('http://iarenatesting.azurewebsites.net/Admin/ExternalInvoice/InvoiceInsert')
+    req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+
+
+    req.body = {
+        AddressStreet:        "#{user.address} #{user.address_num} #{user.city}",
+        AddressRegion:        "#{user.zip}",
+        Amount:               e.data.object.total,
+        ContractDescription:  "Abbonamento mensile " + t("activerecord.attributes.user.roles.#{e.data.object.plan.id}")  ,
+        InvoiceTax:           e.data.object.tax,
+        IdTransaction:        e.data.object.id,
+        IdUser:               "#{user.id}",
+        PaymentType:          "stripe",
+        Vat:                  user.fiscal_code,
+        Denomination:         "#{user.name} #{user.fiscal_code}",
+        InvoiceDate:          e.data.object.date,
+        PeriodEndDate:        e.data.object.period_end,
+        PeriodStartDate:      e.data.object.period_start
+    }.to_json
+
+    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.request(req)
+    end
   end
 
   #get invoice pdf from insurance arena
   def pdf
-    invoice_id = params[:invoice_id]
+    redirect_to "http://iarenatesting.azurewebsites.net/Admin/ExternalInvoice/DownloadPdf?idTransaction=#{params[:invoice_id]}&lang=it"
   end
 
 end

@@ -20,7 +20,7 @@
           <% @invoices.each do |invoice| %>
             <tr>
               <td>
-                <%= link_to iarena_pdf_path(invoice) do %>
+                <%= link_to iarena_pdf_path(invoice_id: invoice.id) do %>
                   <%= Time.at(invoice.date).strftime("%d-%m-%Y")%>
                 <% end %>
               </td>
@@ -30,7 +30,7 @@
               <td><%= number_to_currency( invoice.amount_due / 100)%></td>
               <td><%= number_to_currency( invoice.amount_paid / 100)%></td>
             </tr>
-          <%# invoice.to_json %>
+          <%# raise invoice.to_json %>
           <% end %>
 
 

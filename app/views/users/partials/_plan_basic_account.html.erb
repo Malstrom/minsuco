@@ -1,0 +1,31 @@
+<div class="panel-body">
+  <p>
+    <em class="fa fa-check fa-fw text-green mr"></em>
+    <span>Partecipare a gare aperte</span>
+    <%= tooltip_widget(:plan, :free_open_race_join) %>
+
+  </p>
+  <p>
+    <em class="fa fa-check fa-fw text-green mr"></em>
+    <span>Creare gare private</span>
+    <%= tooltip_widget(:plan, :free_close_race_create) %>
+
+  </p>
+  <p>
+    <em class="fa fa-times fa-fw text-danger mr"></em>
+    <span>Partecipare 1 gara chiusa/mese</span>
+    <%= tooltip_widget(:plan, :one_join_per_month) %>
+
+  </p>
+  <p>
+    <em class="fa fa-exclamation fa-fw text-warning mr"></em>
+    <span>Partecipare a gare chiuse</span>
+    <%= tooltip_widget(:plan, :free_private_race_join) %>
+
+  </p>
+  <p>
+    <em class="fa fa-exclamation fa-fw text-warning mr"></em>
+    <span>Crea gare aperte</span>
+    <%= tooltip_widget(:plan, :free_open_race_create) %>
+  </p>
+</div>

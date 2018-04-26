@@ -1,5 +1,11 @@
 Rails.application.configure do
-  ENV['secret'] = SecureRandom.random_bytes(32)
+
+  begin
+    ENV['secret'] = SecureRandom.random_bytes(32)
+  rescue ArgumentError
+    retry
+  end
+
 
   # Settings specified here will take precedence over those in config/application.rb.
 

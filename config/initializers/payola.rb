@@ -1,44 +1,20 @@
-Payola.configure do |payola|
-  payola.secret_key = Rails.application.secrets.stripe_api_key
-  payola.publishable_key = Rails.application.secrets.stripe_publishable_key
+StripeEvent.signing_secret = Rails.application.secrets.stripe_signing_secret
 
-  payola.default_currency = 'eur'
+Payola.configure do |config|
+  config.secret_key = Rails.application.secrets.stripe_api_key
+  config.publishable_key = Rails.application.secrets.stripe_publishable_key
 
-  # before execute charge.
-  # payola.charge_verifier = lambda do |sale, custom_data|
-  #   if sale.product_type == 'Race'
-  #     race = Race.find(sale.product_id)
-  #     race.update_attribute(:status, 'started')
-  #     race.update_attribute(:kind, 'open')
-  #   end
-  # end
+  config.default_currency = 'eur'
 
-
-  #
-  # payola.subscribe 'payola.sale.finished' do |sale|
-  # end
-
-  #
-  # payola.subscribe 'payola.race.sale.failed' do |sale|
-  #   race = Race.find(sale.product_id)
-  #   flash[:success] = "Pagamento fallito, prego riprova. #{sale.error}"
-  #   raise 'Abbiamo avuto un problema nel pagamento'
-  # end
-  #
-
-  payola.subscribe('payola.subscription.active') do |sub|
+  config.subscribe('payola.subscription.active') do |sub|
     user = User.find_by(email: sub.email)
     user.update_attribute(:plan, Plan.find(sub.plan_id))
+    #
+    # if sub.is_a?(Payola::Subscription) && user.subscription.state == "active"
+    #   raise "Error: This user already has an active <plan_class>."
+    # end
 
     sub.owner = user
     sub.save!
   end
-
-
-  # Payola.subscribe 'customer.subscription.deleted' do |event|
-  #   sale = Sale.find_by(stripe_id: event.data.object.id)
-  #   user = User.find_by(email: sale.email)
-  #   UserMailer.expire_email(user).deliver
-  #   user.destroy
-  # end
 end

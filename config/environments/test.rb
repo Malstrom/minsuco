@@ -1,4 +1,13 @@
 Rails.application.configure do
+
+  begin
+    ENV['secret'] = SecureRandom.random_bytes(32)
+  rescue ArgumentError
+    retry
+  end
+
+  ENV['iarenaurl'] = "http://iarenatesting.azurewebsites.net"
+
   # Settings specified here will take precedence over those in config/application.rb.
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that

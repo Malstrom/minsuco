@@ -46,7 +46,9 @@ class IarenaController < ApplicationController
     #find user by customer_id arrived from e
     user  = Payola::Subscription.find_by_stripe_customer_id(e.data.object.customer).owner
 
-    uri = URI('http://iarenatesting.azurewebsites.net/Admin/ExternalInvoice/InvoiceInsert')
+    # uri = URI('http://iarenatesting.azurewebsites.net/Admin/ExternalInvoice/InvoiceInsert')
+
+    uri = URI("#{ENV['iarenaurl']}/Admin/ExternalInvoice/InvoiceInsert")
     req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
 
 
@@ -54,7 +56,7 @@ class IarenaController < ApplicationController
         AddressStreet:        "#{user.address} #{user.address_num} #{user.city}",
         AddressRegion:        "#{user.zip}",
         Amount:               e.data.object.total,
-        ContractDescription:  "Abbonamento mensile " + t("activerecord.attributes.user.roles.#{e.data.object.plan.id}")  ,
+        ContractDescription:  "Abbonamento mensile " + t("activerecord.attributes.user.roles.#{e.data.object.plan.id}"),
         InvoiceTax:           e.data.object.tax,
         IdTransaction:        e.data.object.id,
         IdUser:               "#{user.id}",
@@ -73,7 +75,7 @@ class IarenaController < ApplicationController
 
   #get invoice pdf from insurance arena
   def pdf
-    redirect_to "http://iarenatesting.azurewebsites.net/Admin/ExternalInvoice/DownloadPdf?idTransaction=#{params[:invoice_id]}&lang=it"
+    redirect_to "#{ENV['iarenaurl']}/Admin/ExternalInvoice/DownloadPdf?idTransaction=#{params[:invoice_id]}&lang=it"
   end
 
 end

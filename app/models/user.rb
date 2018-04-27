@@ -4,14 +4,14 @@ class User < ApplicationRecord
   acts_as_taggable_on :interests
 
   #payola relations, subscription are related with plan!
-  has_one :subscription, class_name: "Payola::Subscription", foreign_key: :owner_id
-  has_many :sales, class_name: "Payola::Sale", foreign_key: :owner_id
+  has_one :subscription, class_name: "Payola::Subscription", foreign_key: :owner_id, dependent: :destroy
+  has_many :sales, class_name: "Payola::Sale", foreign_key: :owner_id, dependent: :destroy
 
   # many to one plan with one subscription on it
   belongs_to :plan
 
   # many to many with races using attendee
-  has_many      :attendees
+  has_many      :attendees, dependent: :destroy
   has_many      :races, class_name: 'Race', through: :attendees
   has_many      :races, foreign_key: 'owner_id', dependent: :destroy
 
@@ -31,6 +31,7 @@ class User < ApplicationRecord
   # rewards for using free application
   has_one :reward, dependent: :destroy
 
+  #carriewave implementation
   mount_uploader :image, AvatarUploader
 
   # TODO: consider remove role and use plan only

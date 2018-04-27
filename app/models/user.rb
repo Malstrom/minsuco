@@ -297,7 +297,7 @@ class User < ApplicationRecord
 
       # various data
       user.intent       = auth.extra.raw_info.intent.to_i if auth.extra.raw_info.intent
-      user.image        = "#{ENV['iarenaurl']}#{auth.extra.raw_info.image}"
+      user.image        = open("#{ENV['iarenaurl']}#{auth.extra.raw_info.image}")
 
       # # fiscal data
       user.company_name = auth.extra.raw_info.company_name

@@ -19,6 +19,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @invoices =  @user.get_invoices
+
     respond_to do |format|
       if @user.update(user_params)
         format.html {redirect_to edit_user_path(@user), notice: I18n.t('flash.users.update.notice')}

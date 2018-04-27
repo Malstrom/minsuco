@@ -3,7 +3,6 @@ Feature: Commission
   Owner should see commission of race attendees
   Attendee should see its commission
 
-  @current
   Scenario: User should see correct revenue of its piece
     Given I logged in having attendee account
     And Exists a race "test_race" with duration "10" years and "10"% revenue

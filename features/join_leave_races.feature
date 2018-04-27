@@ -4,7 +4,6 @@ Feature: Join in race
   User with pro attendee plan should partecipate to unlimited races
   creator should not join to race without rewards
 
-  @current
   Scenario: User should join in open race
     Given I logged in having basic account
     When I visit a open race

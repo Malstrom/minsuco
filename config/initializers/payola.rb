@@ -9,10 +9,6 @@ Payola.configure do |config|
   config.subscribe('payola.subscription.active') do |sub|
     user = User.find_by(email: sub.email)
     user.update_attribute(:plan, Plan.find(sub.plan_id))
-    #
-    # if sub.is_a?(Payola::Subscription) && user.subscription.state == "active"
-    #   raise "Error: This user already has an active <plan_class>."
-    # end
 
     sub.owner = user
     sub.save!

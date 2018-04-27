@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_one :subscription, class_name: "Payola::Subscription", foreign_key: :owner_id
   has_many :sales, class_name: "Payola::Sale", foreign_key: :owner_id
 
+  # many to one plan with one subscription on it
+  belongs_to :plan
+
   # many to many with races using attendee
   has_many      :attendees
   has_many      :races, class_name: 'Race', through: :attendees

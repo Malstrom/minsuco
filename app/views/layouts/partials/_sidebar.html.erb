@@ -6,6 +6,7 @@
          <!-- START user info-->
          <li class="has-user-block">
             <div id="user-block" class="">
+              <a href="/users/<%= current_user.id %>/edit" style="text-decoration: none;">
                <div class="item user-block">
                   <!-- User picture-->
                   <div class="user-block-picture">
@@ -17,9 +18,10 @@
                   <!-- Name and Job-->
                   <div class="user-block-info">
                      <span class="user-block-name"><%= current_user.name if current_user %></span>
-                     <span class="user-block-role"> <%= User.human_enum_name(:kind, current_user.kind) %></span>
+                     <span class="user-block-role"> <%= t "activerecord.attributes.user.roles.#{current_user.plan.stripe_id}" %></span>
                   </div>
                </div>
+              </a>
             </div>
          </li>
          <!-- END user info-->

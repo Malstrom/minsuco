@@ -97,6 +97,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.action_mailer.default_url_options = { :host => 'https://minsuco-production.herokuapp.com' }
 
   config.middleware.use Wrenchmode::Rack, jwt: "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJQcm9qZWN0OjMxNSIsImV4cCI6MTUyNjYxNTcyMCwiaWF0IjoxNTI0MDIzNzIwLCJpc3MiOiJXcmVuY2htb2RlIiwianRpIjoiNjRlMGE5NzgtMjU1ZS00MzAzLWFhOTAtYTk3ZTVmNDk0NjQzIiwicGVtIjp7fSwic3ViIjoiUHJvamVjdDozMTUiLCJ0eXAiOiJ0b2tlbiJ9.9QY82Z2KTdrSptMxCaWikUoEsjoCX3CJZRN0zUQ_9c_R9rE5RwfWsWcyR2YEUDW2NWuR-NhFe7uA8kHms6fFpQ"
 end

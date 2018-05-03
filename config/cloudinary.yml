@@ -6,3 +6,7 @@ development:
   cloud_name: "hvy8rylge"
   api_key: "532261557232426"
   api_secret: "9ZZ5-PxaZLAtSLJ1jPGP-8UE-AI"
+production:
+  cloud_name: "htvfovpc8"
+  api_key: "584286372317389"
+  api_secret: "kHLUV9Wxm37nj3P_blZeuIgykRQ"

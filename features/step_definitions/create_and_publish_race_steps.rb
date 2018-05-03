@@ -108,7 +108,7 @@ When(/^I publish race as (open|close|pay|\d+)$/) do |arg1|
   if arg1 == 'close'
     click_on('Pubblica la gara come chiusa')
   elsif arg1 == 'open'
-    click_on('Pubblica')
+    click_on('Pubblica come gara aperta')
   elsif arg1 == 'pay'
     click_on('Paga e pubblica')
 

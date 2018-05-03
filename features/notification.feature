@@ -10,4 +10,4 @@ Feature: Notifications
     Given I logged in having basic account
     When I join in race of 'creator' user
     Then creator should see notification "ha partecipato ad una tua gara"
-    And creator should see "Dettagli della gara" page when click to "readed_join_in_race"
+    And creator should see "Dettagli della mia gara" page when click to "readed_join_in_race"

@@ -4,7 +4,7 @@ Given(/^I sign up/) do
   # find('Id or class here').set('some text')
   fill_in('email', with: 'new_user@test.com')
   fill_in('password', with: '1234567')
-  find("#agreed").click
+  #find("#agreed").click
   # check('agreed')
 
   click_on('ENTRA')
@@ -15,9 +15,12 @@ Given(/^I logged in having basic account/) do
                  plan: Plan.find_by_stripe_id('basic'),
                  email:'basic_user_test@email.com',
                  password: "test_password",
-                 intent: :attendee)
+                 intent: :attendee,
+                 tour:false)
 
+  sleep 1
   login_as($user, :scope => :user)
+  sleep 1
 
   visit('/')
   expect(page).to have_content "Dashboard"
@@ -28,7 +31,8 @@ Given(/^I logged in having creator account/) do
                  plan: Plan.find_by_stripe_id('pro_creator'),
                  email:'creator_user_test@email.com',
                  intent: :creator,
-                 password: "test_password")
+                 password: "test_password",
+                 tour:false)
 
   login_as($user, :scope => :user)
 
@@ -41,7 +45,8 @@ Given(/^I logged in having attendee account/) do
                  plan: Plan.find_by_stripe_id('pro_attendee'),
                  email:'attendee_user_test@email.com',
                  intent: :attendee,
-                 password: "test_password")
+                 password: "test_password",
+                 tour:false)
 
   login_as($user, :scope => :user)
 

@@ -8,9 +8,6 @@ require 'active_support/core_ext'
 require "action_mailer"
 require 'email_spec' # add this line if you use spork
 require 'email_spec/cucumber'
-
-
-
 require 'simplecov'
 SimpleCov.start 'rails'
 
@@ -24,8 +21,6 @@ require 'cucumber/rails'
 include Warden::Test::Helpers
 
 World(FactoryGirl::Syntax::Methods)
-
-
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

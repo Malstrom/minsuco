@@ -5,6 +5,7 @@ Given /^a user named "([^"]*)" is online$/ do |name|
 end
 
 Then /^([^I]+) should see notification "([^"]*)"$/ do |name, text|
+  sleep 1
   using_session(name) do
     step %{I click on notifications}
     step %{I should see "#{text}"}

@@ -34,3 +34,4 @@ Then /^([^I]+) should "([^"]*)" join race "([^"]*)"/ do |user, status, race_name
     step %{I should see "Partecipazione aggiornata"}
   end
 end
+

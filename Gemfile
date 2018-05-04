@@ -54,7 +54,7 @@ gem "nested_form"
 
 #Charts
 gem "chartkick"
-gem "groupdate", github: "ankane/groupdate", branch: "debug_time_zone_support"
+gem "groupdate", github: "ankane/groupdate", branch: "mysql_adapter"
 # gem 'groupdate'
 gem 'active_median'
 gem 'hightop'

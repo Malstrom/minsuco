@@ -11,9 +11,6 @@ class ApplicationController < ActionController::Base
   before_action :load_notifications, :set_intent
   before_action :set_current_locale
 
-  # before_action :save_url_in_history, except: [:history_back, :create, :destroy, :update]
-  # after_action  :remove_last_from_history, only: :history_back
-
   rescue_from CanCan::AccessDenied do |_exception|
     respond_to do |format|
       flash[:danger] = 'Non sei autorizzato ad accedere a questa pagina'
@@ -26,16 +23,6 @@ class ApplicationController < ActionController::Base
   def payola_can_modify_subscription?(subscription)
     subscription.owner == current_user
   end
-
-  # def history_back
-  #   session[:history].pop # remove current url
-  #   previous_path = session[:history].last
-  #   if previous_path
-  #     redirect_to previous_path
-  #   else
-  #     redirect_to root_path
-  #   end
-  # end
 
   # remove history_back_path after_action
   def remove_last_from_history
@@ -68,15 +55,4 @@ class ApplicationController < ActionController::Base
   def set_current_locale
     request.env['app.current_locale'] = I18n.locale.to_s
   end
-
-  # save navigation history of users
-  # def save_url_in_history
-  #   session[:history] ||= []
-  #
-  #   if request.path != session[:history].last
-  #     unless request.xhr? or params[:action] == 'publish' or params[:action] == 'create' or params[:action] == 'update'
-  #       session[:history] << request.path
-  #     end
-  #   end
-  # end
 end

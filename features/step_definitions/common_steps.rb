@@ -21,6 +21,7 @@ When(/^I visit attendees page$/) do
 end
 
 Then(/^I should see "([^"]*)"$/) do |arg1|
+  sleep 0.5
   expect(page).to have_content arg1
 end
 

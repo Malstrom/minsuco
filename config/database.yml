@@ -55,3 +55,4 @@ staging:
 
 cucumber:
   <<: *test
+

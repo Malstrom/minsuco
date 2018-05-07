@@ -29,6 +29,7 @@ World(FactoryGirl::Syntax::Methods)
 # Capybara.javascript_driver
 
 Capybara.register_driver :chrome do |app|
+  app.timeout = 120
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 

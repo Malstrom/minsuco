@@ -36,6 +36,7 @@ end
 Then(/^I click on notifications$/) do
   visit '/'
   find('#notification').click
+  sleep 0.5
 end
 
 Then(/^I "([^"]*)" join$/) do |arg|

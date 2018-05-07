@@ -21,14 +21,12 @@
         <th class=" lead">
           <%= piece.name.try(:humanize) %>
         </th>
-        <% @race.commissions.each do |commission| %>
           <td class="lead">
             <%= number_to_currency piece.revenue, precision:2, unit:'€' %>
           </td>
           <td class="lead">
             <%= piece.duration %>
           </td>
-        <% end %>
         <br>
       </tr>
     <% end %>

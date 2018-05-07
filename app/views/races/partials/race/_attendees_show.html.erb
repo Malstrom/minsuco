@@ -13,14 +13,14 @@
 <% end %>
 
 <div class="row">
-  <div class="col-lg-offset-2 col-lg-8 mr0 pr0">
+  <div class="col-lg-offset-2 col-lg-8 mr0 pr0 pl0">
     <%= render partial: 'races/partials/race/attendees_partials/new_attendee_main' %>
   </div>
-  <div class="col-xs-12 hidden-lg hidden-xl">
+  <div class="col-xs-12 hidden-lg hidden-xl pull-right">
     <% if current_user.joined?(@race) %>
         <button id="open_join_modal" type="button" data-toggle="modal" data-target="#joinModal" class="btn btn-info btn-pill-left btn-lg ml0 pl0" >
-          <em class="fa fa-plus fa-fw text-muted text-white"></em>
-          <span>AGGIUNGI RIMUOVI PEZZI</span>
+          <em class="fa fa-pencil fa-fw text-muted text-white"></em>
+          <span>Modifica</span>
         </button>
         <%= form_for([@race, current_user.participation(@race)], method: :delete, :html => {:style => 'display:inline;'}) do |f| %>
           <button id="<%= @race.permalink %>" type="submit" class="btn btn-info btn-pill-right btn-danger btn-lg ml0 pl0">

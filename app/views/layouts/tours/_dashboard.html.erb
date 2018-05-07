@@ -1,38 +1,42 @@
 <script>
-  //initialize instance
-  var enjoyhint_instance = new EnjoyHint({
-    onEnd:function(){
-      $.ajax({
-        url: "/users/<%= current_user.id %>/stop_tour",
-        method:'patch'
-      })
-    }
-  });
+  var screensize= $( window ).width();
 
-  //simple config.
-  //Only one step - highlighting(with description) "New" button
-  //hide EnjoyHint after a click on the button.
-  var enjoyhint_script_steps = [
-    {
-      'next .has-user-block' : 'Da qui accedi al tuo profilo, dove puoi modificare i tuoi dati.',
-      "nextButton" : {className: "myNext", text: "AVANTI"},
-      "skipButton" : {className: "mySkip", text: "SALTA"}
-    },
-    {
-      'next #new_race_btna' : 'Clicca qui e crea subito la tua prima gara di produzione.',
-      "nextButton" : {className: "myNext", text: "AVANTI"},
-      "skipButton" : {className: "mySkip", text: "SALTA"}
-    },
-    {
-      'next #races' : 'oppure puoi partecipare a delle gare di produzione già create, trova quella più adatta a te qui. ',
-      "nextButton" : {className: "myNext", text: "AVANTI"},
-      "skipButton" : {className: "mySkip", text: "SALTA"}
-    }
-  ];
+  if (screensize > 768) {
+    //initialize instance
+    var enjoyhint_instance = new EnjoyHint({
+      onEnd:function(){
+        $.ajax({
+          url: "/users/<%= current_user.id %>/stop_tour",
+          method:'patch'
+        })
+      }
+    });
 
-  //set script config
-  enjoyhint_instance.set(enjoyhint_script_steps);
+    //simple config.
+    //Only one step - highlighting(with description) "New" button
+    //hide EnjoyHint after a click on the button.
+    var enjoyhint_script_steps = [
+      {
+        'next .has-user-block' : 'Da qui accedi al tuo profilo, dove puoi modificare i tuoi dati.',
+        "nextButton" : {className: "myNext", text: "AVANTI"},
+        "skipButton" : {className: "mySkip", text: "SALTA"}
+      },
+      {
+        'next #new_race_btna' : 'Clicca qui e crea subito la tua prima gara di produzione.',
+        "nextButton" : {className: "myNext", text: "AVANTI"},
+        "skipButton" : {className: "mySkip", text: "SALTA"}
+      },
+      {
+        'next #races' : 'oppure puoi partecipare a delle gare di produzione già create, trova quella più adatta a te qui. ',
+        "nextButton" : {className: "myNext", text: "AVANTI"},
+        "skipButton" : {className: "mySkip", text: "SALTA"}
+      }
+    ];
 
-  //run Enjoyhint script
-  enjoyhint_instance.run();
+    //set script config
+    enjoyhint_instance.set(enjoyhint_script_steps);
+
+    //run Enjoyhint script
+    enjoyhint_instance.run();
+  }
 </script>

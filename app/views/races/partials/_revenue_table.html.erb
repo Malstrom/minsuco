@@ -1,4 +1,4 @@
-<table class="table table-bordered text-left">
+<table class="table table-bordered ">
   <thead>
   <tr class="bg-gray">
     <th class="">
@@ -8,12 +8,12 @@
       Provvigione
     </th>
     <th class="">
-      Durata
+      Durata (anni)
     </th>
   </tr>
   </thead>
   <tbody>
-  <tr class="bg-gray">
+  <tr class="">
   </tr>
   <% if user.joined?(@race) %>
     <% user.attendee(@race).pieces.each do |piece| %>
@@ -22,7 +22,7 @@
           <%= piece.name.try(:humanize) %>
         </th>
           <td class="lead">
-            <%= number_to_currency piece.revenue, precision:2, unit:'€' %>
+            <%= number_to_currency piece.revenue, precision:2, unit:'€' %> (<%= piece.commission.value %>% di <%= number_to_currency piece.value, precision:2, unit:'€' %>)
           </td>
           <td class="lead">
             <%= piece.duration %>

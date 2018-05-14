@@ -6,6 +6,7 @@ Feature: Notifications
   Background:
     Given a user named "creator" is online
 
+  @current
   Scenario: User should see notification when someone join in its race
     Given I logged in having basic account
     When I join in race of 'creator' user

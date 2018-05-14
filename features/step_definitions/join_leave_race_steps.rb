@@ -10,7 +10,7 @@ end
 
 When(/^I visit a (open|close|\d+) race$/) do |kind|
   race = build(:race, name:kind , kind: kind, owner: create(:user), permalink: kind)
-  race.commissions.new
+  race.commissions.new(value:5, duration:1)
   race.save
   visit race_path(race)
 end

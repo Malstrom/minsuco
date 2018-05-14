@@ -15,7 +15,7 @@ class Piece < ApplicationRecord
   end
 
   def commission
-    attendee.race.commissions.find_by_duration(duration).first
+    attendee.race.commissions.find_by_duration(self.duration).first
   end
 
   private

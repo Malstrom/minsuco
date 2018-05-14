@@ -1,7 +1,7 @@
 class IarenaController < ApplicationController
 
   def authorize
-    redirect_to Rails.application.secrets.iarena_authorization_url
+    redirect_to Rails.application.secrets.iarena_authorization_url + "?caller=#{request.base_url}&token=#{Rails.application.secrets.iarena_token}"
   end
 
   def iarena_sign_up

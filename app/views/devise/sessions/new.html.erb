@@ -11,7 +11,7 @@
 
       <div class="row">
         <div class="col-md-12 col-md-offset-1"  style="padding-bottom: 10px">
-          <%= link_to(iarena_authorize_path(caller:request.base_url, token:Rails.application.secrets.iarena_token), class: "btn btn-labeled btn-info btn-xl oauth") do  %>
+          <%= link_to(iarena_authorize_path, class: "btn btn-labeled btn-info btn-xl oauth") do  %>
             <span class="btn-label" style="left: -28px;"><i class="fa fa-google"></i></span>
             <%= "Login con I-arena" %>
           <% end %>

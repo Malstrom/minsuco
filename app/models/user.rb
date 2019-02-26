@@ -270,8 +270,7 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0, 10]
         user.email = auth.info.email
         user.name = auth.info.name   # assuming the user model has a name
-        user.image = open(auth.info.image)
-
+        user.image = open(auth.info.image) if auth.info.image
         user.save
       end
       user.image = auth.info.image
